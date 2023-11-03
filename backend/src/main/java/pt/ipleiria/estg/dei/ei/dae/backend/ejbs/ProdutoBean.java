@@ -10,6 +10,8 @@ import pt.ipleiria.estg.dei.ei.dae.backend.entities.Produto;
 import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyEntityExistsException;
 import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyEntityNotFoundException;
 
+import java.util.List;
+
 @Stateless
 public class ProdutoBean {
     @PersistenceContext
@@ -69,4 +71,10 @@ public class ProdutoBean {
         entityManager.remove(produto);
     }
 
+    public List<Produto> getAllProducts() {
+        Query query = entityManager.createQuery(
+                "SELECT p FROM Produto p ORDER BY p.nomeProduto"
+        );
+        return query.getResultList();
+    }
 }

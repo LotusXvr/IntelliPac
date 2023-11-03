@@ -5,6 +5,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.FabricanteDeProdutos;
+import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyEntityExistsException;
 
 @Stateless
 public class FabricanteDeProdutosBean {
@@ -20,9 +21,9 @@ public class FabricanteDeProdutosBean {
         return (Long)query.getSingleResult() > 0L;
     }
 
-    public void createFabricanteDeProdutos(String nomeFabricante) {
+    public void createFabricanteDeProdutos(String nomeFabricante) throws MyEntityExistsException {
         if (exists(nomeFabricante)) {
-            throw new IllegalArgumentException("Fabricante com nome " + nomeFabricante + " já existe");
+            throw new MyEntityExistsException("FabricanteDeProdutos with nomeFabricante '" + nomeFabricante + "' already exists");
         }
 
         FabricanteDeProdutos fabricanteDeProdutos = new FabricanteDeProdutos(nomeFabricante);

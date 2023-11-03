@@ -3,10 +3,17 @@ package pt.ipleiria.estg.dei.ei.dae.backend.entities;
 
 import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
-public class Produto {
+@NamedQueries({
+        @NamedQuery(
+                name = "getAllProducts",
+                query = "SELECT p FROM Produto p ORDER BY p.nomeProduto"
+        )
+})
+public class Produto implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
