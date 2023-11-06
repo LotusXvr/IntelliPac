@@ -1,0 +1,17 @@
+[
+  {
+    "id": 1,
+    "idFabricante": 1,
+    "nome": "produto 1"
+  },
+  {
+    "id": 2,
+    "idFabricante": 1,
+    "nome": "produto 2"
+  },
+  {
+    "id": 3,
+    "idFabricante": 1,
+    "nome": "Produto 3"
+  }
+]

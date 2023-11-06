@@ -5,6 +5,8 @@ public class ProdutoDTO {
     private String nome;
     private Long idFabricante; // Referência ao Fabricante de Produtos
 
+    private String nomeFabricante;
+
     public ProdutoDTO() {
     }
 
@@ -13,6 +15,14 @@ public class ProdutoDTO {
         this.nome = nome;
         this.idFabricante = idFabricante;
     }
+
+    public ProdutoDTO(Long id, String nome, Long idFabricante, String nomeFabricante) {
+        this.id = id;
+        this.nome = nome;
+        this.idFabricante = idFabricante;
+        this.nomeFabricante = nomeFabricante;
+    }
+
 
     public Long getId() {
         return id;
@@ -36,6 +46,14 @@ public class ProdutoDTO {
 
     public void setIdFabricante(Long idFabricante) {
         this.idFabricante = idFabricante;
+    }
+
+    public String getNomeFabricante() {
+        return nomeFabricante;
+    }
+
+    public void setNomeFabricante(String nomeFabricante) {
+        this.nomeFabricante = nomeFabricante;
     }
 }
 

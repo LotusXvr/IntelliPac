@@ -1,0 +1,1 @@
+RESTEASY008200: JSON Binding deserialization error: jakarta.json.bind.JsonbException: Internal error: Unexpected char 47 at (line no=3, column no=21, offset=51)

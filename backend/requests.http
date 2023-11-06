@@ -1,0 +1,12 @@
+##### Produtos
+GET http://localhost:8080/intellipac/api/produtos
+Accept: application/json
+###
+POST http://localhost:8080/intellipac/api/produtos
+Content-Type: application/json
+
+{
+  "nome": "Produto (POST)",
+  "idFabricante": 1
+
+}
