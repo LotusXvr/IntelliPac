@@ -4,7 +4,11 @@
     <nuxt-link to="/create">Create a New Product</nuxt-link>
     <h2>Produtos</h2>
     <table>
-      <tr><th>Nome</th><th>Fabricante</th><th>actions</th></tr>
+      <tr>
+        <th>Nome</th>
+        <th>Fabricante</th>
+        <th>actions</th>
+      </tr>
       <tr v-for="produto in produtos">
         <td>{{ produto.nome }}</td>
         <td>{{ produto.nomeFabricante }}</td>
@@ -18,23 +22,26 @@
       </tr>
     </table>
   </div>
-  <button @click.prevent="refresh">Refresh Data</button>
+  <br />
+  <button @click.prevent="refresh">Refresh Data</button> <br />
+  <br />
+  <nuxt-link to="/">Back to Home</nuxt-link>
 </template>
 <script setup>
-const config = useRuntimeConfig()
-const api = config.public.API_URL
-const {data: produtos, error, refresh} = await useFetch(`${api}/produtos`)
+const config = useRuntimeConfig();
+const api = config.public.API_URL;
+const { data: produtos, error, refresh } = await useFetch(`${api}/produtos`);
 
 const deleteProduto = async (id) => {
-try {
-  const response = await fetch(`${api}/produtos/${id}`, {
-    method: 'DELETE'
-  })
-  if (response.ok) {
-    refresh()
+  try {
+    const response = await fetch(`${api}/produtos/${id}`, {
+      method: "DELETE",
+    });
+    if (response.ok) {
+      refresh();
+    }
+  } catch (error) {
+    console.error(error);
   }
-} catch (error) {
-  console.error(error)
-}
-}
+};
 </script>

@@ -5,14 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c16a9ce7-b8ca-4660-a077-28c4d0becec3" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../frontend/intellipac-client/pages/produtos/edit/[id].vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../frontend/intellipac-client/pages/produtos/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/httpRequests/http-requests-log.http" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/httpRequests/http-requests-log.http" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requests.http" beforeDir="false" afterPath="$PROJECT_DIR$/requests.http" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/backend/ws/ProdutoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/backend/ws/ProdutoService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/intellipac-client/pages/create.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/intellipac-client/pages/produtos/create.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/intellipac-client/pages/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/intellipac-client/pages/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/intellipac-client/pages/produtos/edit/[id].vue" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/intellipac-client/pages/produtos/edit/[id].vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/intellipac-client/pages/produtos/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/intellipac-client/pages/produtos/index.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -117,7 +111,7 @@
       <workItem from="1700213020214" duration="249000" />
       <workItem from="1701275640008" duration="237000" />
       <workItem from="1701275943727" duration="3688000" />
-      <workItem from="1702986214133" duration="2882000" />
+      <workItem from="1702986214133" duration="3515000" />
     </task>
     <servers />
   </component>
