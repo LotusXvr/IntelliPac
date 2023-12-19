@@ -1,12 +1,12 @@
 <template>
   <div v-if="produto">
-    <h2 v-once>Edit produto - {{ produto.nome }}</h2>
+    <h2 v-once>Editar produto - {{ produto.nome }}</h2>
 
     <form @submit.prevent="updateProduto">
       <label for="nome">Nome:</label>
       <input v-model.trim="produtoForm.nome" type="text" />
       <span v-if="produtoForm.nome !== null && !isNameValid" class="error">
-        ERROR: {{ formFeedback.nome }}</span
+        ERRO: {{ formFeedback.nome }}</span
       >
       <br />
       <div>
@@ -20,7 +20,7 @@
           v-if="produtoForm.idFabricante !== null && !isFabricanteValid"
           class="error"
         >
-          ERROR: {{ formFeedback.idFabricante }}</span
+          ERRO: {{ formFeedback.idFabricante }}</span
         >
       </div>
       <br />
@@ -77,11 +77,11 @@ const isNameValid = computed(() => {
     return false;
   }
   if (produtoForm.nome.length < 3) {
-    formFeedback.nome = "Name must be at least 3 characters long";
+    formFeedback.nome = "O nome deve ter pelo menos 3 caracteres";
     return false;
   }
   if (produtoForm.nome.length > 20) {
-    formFeedback.nome = "Name must be at most 20 characters long";
+    formFeedback.nome = "O nome deve ter no máximo 20 caracteres";
     return false;
   }
   formFeedback.nome = "";

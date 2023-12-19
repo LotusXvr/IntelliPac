@@ -1,0 +1,17 @@
+[
+  {
+    "id": 1,
+    "nomeFabricante": "fabricante 1",
+    "produtos": []
+  },
+  {
+    "id": 2,
+    "nomeFabricante": "fabricante 2",
+    "produtos": []
+  },
+  {
+    "id": 3,
+    "nomeFabricante": "Fabricante (PUT)",
+    "produtos": []
+  }
+]

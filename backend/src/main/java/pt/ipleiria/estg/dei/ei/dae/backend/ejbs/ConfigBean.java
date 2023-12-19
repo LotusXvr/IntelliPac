@@ -30,10 +30,6 @@ public class ConfigBean {
 
             produtoBean.createProduto("produto 1", 1);
             produtoBean.createProduto("produto 2", 1);
-            /*
-             *  produtoBean.removeProduto(1);
-             *  produtoBean.updateProduto(2, "produto 2 updated", 2);
-             */
 
         } catch (Exception e) {
             logger.severe(e.getMessage());

@@ -1,7 +1,7 @@
 <template>
   <div v-if="error">Error: {{ error.message }}</div>
   <div v-else>
-    <nuxt-link to="/create">Create a New Product</nuxt-link>
+    <nuxt-link to="produtos/create">Criar novo Produto</nuxt-link>
     <h2>Produtos</h2>
     <table>
       <tr>
@@ -13,7 +13,7 @@
         <td>{{ produto.nome }}</td>
         <td>{{ produto.nomeFabricante }}</td>
         <td>
-          <nuxt-link :to="`/produtos/${produto.id}`">Details</nuxt-link>
+          <nuxt-link :to="`/produtos/${produto.id}`">Detalhes</nuxt-link>
           |
           <nuxt-link :to="'/produtos/edit/' + produto.id">Editar</nuxt-link>
           |
@@ -25,7 +25,7 @@
   <br />
   <button @click.prevent="refresh">Refresh Data</button> <br />
   <br />
-  <nuxt-link to="/">Back to Home</nuxt-link>
+  <nuxt-link to="/">Voltar à Home</nuxt-link>
 </template>
 <script setup>
 const config = useRuntimeConfig();
