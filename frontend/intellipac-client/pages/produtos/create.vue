@@ -11,8 +11,8 @@
           {{ fabricante.nomeFabricante }}
         </option>
       </select>
-      <span v-if="produtoForm.fabricanteID !== null && !isFabricanteValid" class="error">
- ERROR: {{ formFeedback.fabricanteID }}</span></div>
+      <span v-if="produtoForm.idFabricante !== null && !isFabricanteValid" class="error">
+ ERROR: {{ formFeedback.idFabricante }}</span></div>
 
     <br />
     <button type="submit" :disabled="!isFormValid">Create Product</button>
@@ -28,12 +28,13 @@
 import { ref, reactive, computed } from 'vue'
 const produtoForm = reactive({
   nome: null,
-  fabricanteID: null
+  idFabricante: null // Alterado de Number para aceitar nulos
 })
+
 
 const formFeedback = reactive({
   nome: '',
-  fabricanteID: ''
+  idFabricante: ''
 })
 
 const config = useRuntimeConfig()
@@ -71,16 +72,21 @@ const isFormValid = computed(() => {
 })
 
 async function create() {
+  // Converte fabricanteID para número
+  produtoForm.idFabricante = Number(produtoForm.fabricanteID);
+
   const requestOptions = {
     method: 'POST',
-    headers: {"Content-Type": "application/json"},
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify(produtoForm)
   }
-  const {error} = await useFetch(`${api}/produtos`, requestOptions)
+
+  const { error } = await useFetch(`${api}/produtos`, requestOptions)
   if (!error.value)
     navigateTo('/')
   message.value = error.value
 }
+
 
 
 </script>

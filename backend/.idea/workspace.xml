@@ -5,14 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c16a9ce7-b8ca-4660-a077-28c4d0becec3" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/backend/ws/FabricanteService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/intellipac-client/pages/produtos/edit/[id].vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/intellipac-client/pages/produtos/index.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/httpRequests/http-requests-log.http" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/httpRequests/http-requests-log.http" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/requests.http" beforeDir="false" afterPath="$PROJECT_DIR$/requests.http" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/backend/ejbs/FabricanteDeProdutosBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/backend/ejbs/FabricanteDeProdutosBean.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/intellipac-client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/intellipac-client/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/intellipac-client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/intellipac-client/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/intellipac-client/pages/create.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/intellipac-client/pages/create.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/backend/ws/ProdutoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/backend/ws/ProdutoService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/intellipac-client/pages/create.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/intellipac-client/pages/produtos/create.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/intellipac-client/pages/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/intellipac-client/pages/index.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,7 +77,7 @@
       <recent name="D:\DAE\IntelliPac\backend" />
     </key>
   </component>
-  <component name="RunManager" selected="HTTP Request.requests | #2">
+  <component name="RunManager" selected="HTTP Request.requests | #3">
     <configuration name="requests | Fabricantes" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/requests.http" index="3" requestIdentifier="Fabricantes" runType="Run single request">
       <method v="2" />
     </configuration>
@@ -87,11 +87,15 @@
     <configuration name="requests | #2" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/requests.http" index="2" requestIdentifier="#2" runType="Run single request">
       <method v="2" />
     </configuration>
+    <configuration name="requests | #3" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/requests.http" index="3" requestIdentifier="#3" runType="Run single request">
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="HTTP Request.requests | #3" />
         <item itemvalue="HTTP Request.requests | #2" />
-        <item itemvalue="HTTP Request.requests | Fabricantes" />
         <item itemvalue="HTTP Request.requests | Produtos" />
+        <item itemvalue="HTTP Request.requests | Fabricantes" />
       </list>
     </recent_temporary>
   </component>
@@ -113,6 +117,7 @@
       <workItem from="1700213020214" duration="249000" />
       <workItem from="1701275640008" duration="237000" />
       <workItem from="1701275943727" duration="3688000" />
+      <workItem from="1702986214133" duration="2882000" />
     </task>
     <servers />
   </component>

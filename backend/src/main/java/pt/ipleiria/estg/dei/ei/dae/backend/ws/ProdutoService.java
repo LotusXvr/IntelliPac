@@ -45,5 +45,23 @@ public class ProdutoService {
         produtoBean.createProduto(produtoDTO.getNome(), produtoDTO.getIdFabricante());
     }
 
+    @PUT
+    @Path("{id}")
+    public void updateProduct(@PathParam("id") long id, ProdutoDTO produtoDTO) throws MyEntityNotFoundException {
+        produtoBean.updateProduto(id, produtoDTO.getNome(), produtoDTO.getIdFabricante());
+    }
+
+    @DELETE
+    @Path("{id}")
+    public void deleteProduct(@PathParam("id") long id) throws MyEntityNotFoundException {
+        produtoBean.removeProduto(id);
+    }
+
+    @GET
+    @Path("{id}")
+    public ProdutoDTO getProductDetails(@PathParam("id") long id) throws MyEntityNotFoundException {
+        return toDTO(produtoBean.findProdutoById(id));
+    }
+
 
 }

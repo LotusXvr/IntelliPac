@@ -11,6 +11,20 @@ Content-Type: application/json
 
 }
 
+###
+PUT http://localhost:8080/intellipac/api/produtos/2
+Content-Type: application/json
+
+{
+  "nome": "Produto (PUT)",
+  "idFabricante": 2
+
+}
+
+###
+DELETE http://localhost:8080/intellipac/api/produtos/2
+Accept: application/json
+
 ##### Fabricantes
 GET http://localhost:8080/intellipac/api/fabricantes
 Accept: application/json
