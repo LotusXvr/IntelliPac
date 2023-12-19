@@ -7,6 +7,10 @@ Content-Type: application/json
 
 {
   "nome": "Produto (POST)",
-  "idFabricante": 1
+  "idFabricante": 2
 
 }
+
+##### Fabricantes
+GET http://localhost:8080/intellipac/api/fabricantes
+Accept: application/json

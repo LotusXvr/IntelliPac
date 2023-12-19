@@ -7,6 +7,8 @@ import jakarta.persistence.Query;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.FabricanteDeProdutos;
 import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyEntityExistsException;
 
+import java.util.List;
+
 @Stateless
 public class FabricanteDeProdutosBean {
     @PersistenceContext
@@ -40,6 +42,11 @@ public class FabricanteDeProdutosBean {
 
     public void removeFabricanteDeProdutos(FabricanteDeProdutos fabricanteDeProdutos) {
         entityManager.remove(entityManager.contains(fabricanteDeProdutos) ? fabricanteDeProdutos : entityManager.merge(fabricanteDeProdutos));
+    }
+
+    public List<FabricanteDeProdutos> getAllFabricantes() {
+        Query query = entityManager.createQuery("SELECT f FROM FabricanteDeProdutos f ORDER BY f.nomeFabricante");
+        return query.getResultList();
     }
 
     // Outros métodos conforme necessário para operações relacionadas a FabricanteDeProdutos
