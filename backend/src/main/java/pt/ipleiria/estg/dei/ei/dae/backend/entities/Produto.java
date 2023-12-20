@@ -2,27 +2,23 @@ package pt.ipleiria.estg.dei.ei.dae.backend.entities;
 
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@NamedQueries({
-        @NamedQuery(
-                name = "getAllProducts",
-                query = "SELECT p FROM Produto p ORDER BY p.nomeProduto"
-        )
-})
 public class Produto implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
     private String nomeProduto;
 
     @ManyToOne
     @JoinColumn(name = "fabricante_id")
+    @NotNull
     private FabricanteDeProdutos fabricante;
 
     @OneToMany(mappedBy = "produtoEmb")
@@ -43,11 +39,11 @@ public class Produto implements Serializable {
         sensoresDispositivos = new ArrayList<>();
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -57,6 +53,10 @@ public class Produto implements Serializable {
 
     public void setNomeProduto(String nomeProduto) {
         this.nomeProduto = nomeProduto;
+    }
+
+    public long getFabricanteId() {
+        return fabricante.getId();
     }
 
     public FabricanteDeProdutos getFabricante() {

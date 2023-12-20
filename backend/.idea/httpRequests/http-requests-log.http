@@ -1,6 +1,366 @@
 GET http://localhost:8080/intellipac/api/fabricantes/1
 Accept: application/json
 Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-12-20T194356.200.json
+
+###
+
+GET http://localhost:8080/intellipac/api/produtos
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-12-20T194353.200.json
+
+###
+
+GET http://localhost:8080/intellipac/api/fabricantes
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-12-20T193826.500.json
+
+###
+
+GET http://localhost:8080/intellipac/api/produtos
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-12-20T193823.200.json
+
+###
+
+GET http://localhost:8080/intellipac/api/produtos
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-12-20T193820.404.html
+
+###
+
+GET http://localhost:8080/intellipac/api/fabricantes/1
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-12-20T193249.500.json
+
+###
+
+GET http://localhost:8080/intellipac/api/produtos
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-12-20T193200.200.json
+
+###
+
+GET http://localhost:8080/intellipac/api/fabricantes
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-12-20T193156.500.json
+
+###
+
+GET http://localhost:8080/intellipac/api/fabricantes/1
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-12-20T193149.500.json
+
+###
+
+GET http://localhost:8080/intellipac/api/fabricantes/1
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-12-20T192944.200.json
+
+###
+
+GET http://localhost:8080/intellipac/api/fabricantes
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-12-20T192942.200.json
+
+###
+
+GET http://localhost:8080/intellipac/api/fabricantes
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-12-20T192848.200.json
+
+###
+
+GET http://localhost:8080/intellipac/api/fabricantes/1
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-12-20T192844.200.json
+
+###
+
+GET http://localhost:8080/intellipac/api/produtos
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-12-20T191959.200.json
+
+###
+
+GET http://localhost:8080/intellipac/api/fabricantes
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-12-20T191749.200.json
+
+###
+
+GET http://localhost:8080/intellipac/api/fabricantes/1
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-12-20T191539.200.json
+
+###
+
+GET http://localhost:8080/intellipac/api/fabricantes
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-12-20T191523.500.json
+
+###
+
+GET http://localhost:8080/intellipac/api/produtos
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-12-20T191520.200.json
+
+###
+
+GET http://localhost:8080/intellipac/api/fabricantes
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-12-20T191441.500.json
+
+###
+
+GET http://localhost:8080/intellipac/api/produtos
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-12-20T191437.200.json
+
+###
+
+GET http://localhost:8080/intellipac/api/fabricantes
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-12-20T191433.500.json
+
+###
+
+GET http://localhost:8080/intellipac/api/fabricantes/1
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-12-20T191430.200.json
+
+###
+
+GET http://localhost:8080/intellipac/api/fabricantes/1
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-12-20T191426.200.json
+
+###
+
+GET http://localhost:8080/intellipac/api/fabricantes
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-12-20T191421.500.json
+
+###
+
+GET http://localhost:8080/intellipac/api/fabricantes/1
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-12-20T190800.500.json
+
+###
+
+GET http://localhost:8080/intellipac/api/fabricantes
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-12-20T190754.500.json
+
+###
+
+GET http://localhost:8080/intellipac/api/produtos
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-12-20T190750.200.json
+
+###
+
+GET http://localhost:8080/intellipac/api/fabricantes
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-12-20T190506.404.html
+
+###
+
+GET http://localhost:8080/intellipac/api/produtos
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-12-20T190500.404.html
+
+###
+
+GET http://localhost:8080/intellipac/api/produtos
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-12-20T190458.404.html
+
+###
+
+GET http://localhost:8080/intellipac/api/fabricantes/1
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-12-20T185900.200.json
+
+###
+
+GET http://localhost:8080/intellipac/api/fabricantes
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-12-20T182615.200.json
+
+###
+
+GET http://localhost:8080/intellipac/api/produtos
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-12-20T182608.200.json
+
+###
+
+GET http://localhost:8080/intellipac/api/fabricantes
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-12-20T174239.200.json
+
+###
+
+GET http://localhost:8080/intellipac/api/produtos
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-12-20T174231.200.json
+
+###
+
+GET http://localhost:8080/intellipac/api/produtos
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-12-20T174225.404.html
+
+###
+
+GET http://localhost:8080/intellipac/api/fabricantes/1
+Accept: application/json
+Connection: Keep-Alive
 User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
 Accept-Encoding: br,deflate,gzip,x-gzip
 
@@ -145,455 +505,6 @@ Accept-Encoding: br,deflate,gzip,x-gzip
 {
   "nome": "Fabricante (POST)"
 }
-
-###
-
-GET http://localhost:8080/intellipac/api/fabricantes
-Accept: application/json
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-12-19T174558.200.json
-
-###
-
-POST http://localhost:8080/intellipac/api/fabricantes
-Content-Type: application/json
-Content-Length: 33
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-  "nome": "Fabricante (POST)"
-}
-
-###
-
-GET http://localhost:8080/intellipac/api/fabricantes
-Accept: application/json
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-12-19T174548.200.json
-
-###
-
-GET http://localhost:8080/intellipac/api/fabricantes
-Accept: application/json
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-12-19T174541.200.json
-
-###
-
-PUT http://localhost:8080/intellipac/api/produtos/2
-Content-Type: application/json
-Content-Length: 51
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-  "nome": "Produto (PUT)",
-  "idFabricante": 2
-
-}
-
-###
-
-PUT http://localhost:8080/intellipac/api/produtos/2
-Content-Type: application/json
-Content-Length: 51
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-  "nome": "Produto (PUT)",
-  "idFabricante": 2
-
-}
-
-###
-
-PUT http://localhost:8080/intellipac/api/produtos/2
-Content-Type: application/json
-Content-Length: 51
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-  "nome": "Produto (PUT)",
-  "idFabricante": 2
-
-}
-
-###
-
-POST http://localhost:8080/intellipac/api/produtos
-Content-Type: application/json
-Content-Length: 52
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-  "nome": "Produto (POST)",
-  "idFabricante": 2
-
-}
-
-###
-
-DELETE http://localhost:8080/intellipac/api/produtos/2
-Accept: application/json
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-###
-
-DELETE http://localhost:8080/intellipac/api/produtos/3
-Accept: application/json
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-12-19T120741.500.json
-
-###
-
-DELETE http://localhost:8080/intellipac/api/produtos/3
-Accept: application/json
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-###
-
-POST http://localhost:8080/intellipac/api/produtos
-Content-Type: application/json
-Content-Length: 52
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-  "nome": "Produto (POST)",
-  "idFabricante": 2
-
-}
-
-###
-
-DELETE http://localhost:8080/intellipac/api/produtos/4
-Accept: application/json
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-12-19T120532.500.json
-
-###
-
-DELETE http://localhost:8080/intellipac/api/produtos/4
-Accept: application/json
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-###
-
-GET http://localhost:8080/intellipac/api/produtos
-Accept: application/json
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-12-19T114559.200.json
-
-###
-
-GET http://localhost:8080/intellipac/api/fabricantes
-Accept: application/json
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-12-19T114555.200.json
-
-###
-
-POST http://localhost:8080/intellipac/api/produtos
-Content-Type: application/json
-Content-Length: 52
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-  "nome": "Produto (POST)",
-  "idFabricante": 2
-
-}
-
-###
-
-POST http://localhost:8080/intellipac/api/produtos
-Content-Type: application/json
-Content-Length: 52
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-  "nome": "Produto (POST)",
-  "idFabricante": 2
-
-}
-
-###
-
-GET http://localhost:8080/intellipac/api/fabricantes
-Accept: application/json
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-11-29T171942.200.json
-
-###
-
-GET http://localhost:8080/intellipac/api/fabricantes
-Accept: application/json
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-11-29T171837.200.json
-
-###
-
-GET http://localhost:8080/intellipac/api/fabricantes
-Accept: application/json
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-11-29T171649.200.json
-
-###
-
-POST http://localhost:8080/intellipac/api/produtos
-Content-Type: application/json
-Content-Length: 52
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-  "nome": "Produto (POST)",
-  "idFabricante": 1
-
-}
-
-<> 2023-11-29T170456.409.json
-
-###
-
-POST http://localhost:8080/intellipac/api/produtos
-Content-Type: application/json
-Content-Length: 52
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-  "nome": "Produto (POST)",
-  "idFabricante": 1
-
-}
-
-###
-
-GET http://localhost:8080/intellipac/api/produtos
-Accept: application/json
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-11-29T164755.200.json
-
-###
-
-GET http://localhost:8080/intellipac/api/produtos
-Accept: application/json
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-11-29T164645.200.json
-
-###
-
-GET http://localhost:8080/intellipac/api/produtos
-Accept: application/json
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-11-29T164640.404.html
-
-###
-
-GET http://localhost:8080/intellipac/api/produtos
-Accept: application/json
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-11-06T145014.200.json
-
-###
-
-POST http://localhost:8080/intellipac/api/produtos
-Content-Type: application/json
-Content-Length: 52
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-  "nome": "Produto (POST)",
-  "idFabricante": 1
-
-}
-
-###
-
-GET http://localhost:8080/intellipac/api/produtos
-Accept: application/json
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-11-06T144810.200.json
-
-###
-
-POST http://localhost:8080/intellipac/api/produtos
-Content-Type: application/json
-Content-Length: 55
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-  "nome": "Nome do Produto 2",
-  "idFabricante": 1
-
-}
-
-###
-
-POST http://localhost:8080/intellipac/api/produtos
-Content-Type: application/json
-Content-Length: 55
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-  "nome": "Nome do Produto 2",
-  "idFabricante": 1
-
-}
-
-###
-
-POST http://localhost:8080/intellipac/api/produtos
-Content-Type: application/json
-Content-Length: 56
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-  "nome": "Nome do Produto 2",
-  "idFabricante": 1
-
-}
-
-###
-
-POST http://localhost:8080/intellipac/api/produtos
-Content-Type: application/json
-Content-Length: 54
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-  "nome": "Nome do Produto",
-  "idFabricante": 1
-
-}
-
-<> 2023-11-06T142607.409.json
-
-###
-
-POST http://localhost:8080/intellipac/api/produtos
-Content-Type: application/json
-Content-Length: 54
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-  "nome": "Nome do Produto",
-  "idFabricante": 1
-
-}
-
-###
-
-POST http://localhost:8080/intellipac/api/produtos
-Content-Type: application/json
-Content-Length: 104
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-  "nome": "Nome do Produto",
-  "idFabricante": 1 // Certifique-se de que este valor não está nulo
-
-}
-
-<> 2023-11-06T142552.500.json
-
-###
-
-POST http://localhost:8080/intellipac/api/produtos
-Content-Type: application/json
-Content-Length: 53
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-  "nomeproduto": "Produto 5",
-  "fabricanteId": 1
-}
-
-<> 2023-11-06T142432.500.json
 
 ###
 

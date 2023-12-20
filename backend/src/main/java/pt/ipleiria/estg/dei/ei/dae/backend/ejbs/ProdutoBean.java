@@ -1,6 +1,7 @@
 package pt.ipleiria.estg.dei.ei.dae.backend.ejbs;
 
 
+import jakarta.ejb.EJB;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -17,6 +18,9 @@ public class ProdutoBean {
     @PersistenceContext
     private EntityManager entityManager;
 
+    @EJB
+    private FabricanteDeProdutosBean fabricanteDeProdutosBean;
+
     public boolean exists(String nomeProduto, long fabricanteId) {
         Query query = entityManager.createQuery(
                 "SELECT COUNT(p.nomeProduto) FROM Produto p WHERE p.nomeProduto = :nomeProduto AND p.fabricante.id = :fabricanteId",
@@ -28,27 +32,38 @@ public class ProdutoBean {
     }
 
 
-    public void createProduto(String nomeProduto, long fabricanteId) throws MyEntityExistsException, MyEntityNotFoundException {
+    public Produto createProduto(String nomeProduto, long fabricanteId) throws MyEntityExistsException, MyEntityNotFoundException {
 
         if(exists(nomeProduto, fabricanteId)) {
             throw new MyEntityExistsException("Produto com nome " + nomeProduto + " já existe");
         }
 
-        FabricanteDeProdutos fabricante = entityManager.find(FabricanteDeProdutos.class, fabricanteId);
+        var fabricante = fabricanteDeProdutosBean.find(fabricanteId);
         if (fabricante == null) {
             throw new MyEntityNotFoundException("Fabricante com id " + fabricanteId + " não existe");
         }
 
-        Produto produto = new Produto(nomeProduto, fabricante);
-        entityManager.persist(produto);
+        Produto produto = null;
+
+        try {
+            produto = new Produto(nomeProduto, fabricante);
+            entityManager.persist(produto);
+        }
+        catch (Exception e) {
+            throw new MyEntityExistsException("Produto com nome " + nomeProduto + " já existe");
+        }
+
+        fabricante.addProduto(produto);
+        return produto;
+
     }
 
-    public Produto findProdutoById(Long id) {
+    public Produto findProduto(long id) {
         return entityManager.find(Produto.class, id);
     }
 
-    public void updateProduto(long id, String nomeProduto, long fabricanteId) throws MyEntityNotFoundException {
-        Produto produto = findProdutoById(id);
+    public void update(long id, String nomeProduto, long fabricanteId) throws MyEntityNotFoundException {
+        Produto produto = findProduto(id);
         if (produto == null) {
             throw new MyEntityNotFoundException("Produto com id " + id + " não existe");
         }
@@ -63,8 +78,8 @@ public class ProdutoBean {
         entityManager.merge(produto);
     }
 
-    public void removeProduto(long id) throws MyEntityNotFoundException {
-        Produto produto = findProdutoById(id);
+    public void remove(long id) throws MyEntityNotFoundException {
+        Produto produto = findProduto(id);
         if (produto == null) {
             throw new MyEntityNotFoundException("Produto com id " + id + " não existe");
         }
@@ -72,9 +87,6 @@ public class ProdutoBean {
     }
 
     public List<Produto> getAllProducts() {
-        Query query = entityManager.createQuery(
-                "SELECT p FROM Produto p ORDER BY p.nomeProduto"
-        );
-        return query.getResultList();
+        return entityManager.createNamedQuery("getAllProducts", Produto.class).getResultList();
     }
 }

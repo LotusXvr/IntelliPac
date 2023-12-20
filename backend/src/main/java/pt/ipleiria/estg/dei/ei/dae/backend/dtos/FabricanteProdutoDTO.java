@@ -1,43 +1,40 @@
 package pt.ipleiria.estg.dei.ei.dae.backend.dtos;
 
-import java.util.ArrayList;
+import pt.ipleiria.estg.dei.ei.dae.backend.entities.Produto;
+
+import java.io.Serializable;
 import java.util.List;
 
-public class FabricanteProdutoDTO{
-    private Long id;
-    private String nomeFabricante;
+public class FabricanteProdutoDTO implements Serializable {
+    private long id;
+    private String nome;
+
     private List<ProdutoDTO> produtos;
 
     public FabricanteProdutoDTO() {
-        this.produtos = new ArrayList<>();
+
     }
 
-    public FabricanteProdutoDTO(Long id, String nomeFabricante, List<ProdutoDTO> produtos) {
+    public FabricanteProdutoDTO(long id, String nome, List<ProdutoDTO> produtos) {
         this.id = id;
-        this.nomeFabricante = nomeFabricante;
+        this.nome = nome;
         this.produtos = produtos;
     }
 
-    public FabricanteProdutoDTO(Long id, String nomeFabricante) {
-        this.id = id;
-        this.nomeFabricante = nomeFabricante;
-        this.produtos = new ArrayList<>();
-    }
-
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
-    public String getNomeFabricante() {
-        return nomeFabricante;
+    public String getNome() {
+        return nome;
     }
 
-    public void setNomeFabricante(String nomeFabricante) {
-        this.nomeFabricante = nomeFabricante;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public List<ProdutoDTO> getProdutos() {

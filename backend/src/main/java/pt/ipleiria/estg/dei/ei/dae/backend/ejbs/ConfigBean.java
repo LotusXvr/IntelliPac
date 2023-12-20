@@ -25,8 +25,8 @@ public class ConfigBean {
         System.out.println("ConfigBean: PostConstruct");
 
         try {
-            fabricanteDeProdutosBean.createFabricanteDeProdutos("fabricante 1");
-            fabricanteDeProdutosBean.createFabricanteDeProdutos("fabricante 2");
+            fabricanteDeProdutosBean.create("fabricante 1");
+            fabricanteDeProdutosBean.create("fabricante 2");
 
             produtoBean.createProduto("produto 1", 1);
             produtoBean.createProduto("produto 2", 1);
