@@ -22,6 +22,7 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
+backend/.idea/*
 backend/.idea/dataSources.local.xml
 backend/.idea/dataSources/375abd3c-dcab-4715-bb52-364ff6f5f583.xml
 backend/.idea/httpRequests/2023-11-06T142432.500.json
