@@ -1,15 +1,12 @@
 <template>
   <div v-if="fabricante">
-    <h2 v-once>Editar fabricante - {{ fabricante.nomeFabricante }}</h2>
+    <h2 v-once>Editar fabricante - {{ fabricante.nome }}</h2>
 
     <form @submit.prevent="updateFabricante">
-      <label for="nomeFabricante">Nome:</label>
-      <input v-model.trim="fabricanteForm.nomeFabricante" type="text" />
-      <span
-        v-if="fabricanteForm.nomeFabricante !== null && !isNameValid"
-        class="error"
-      >
-        ERRO: {{ formFeedback.nomeFabricante }}</span
+      <label for="nome">Nome:</label>
+      <input v-model.trim="fabricanteForm.nome" type="text" />
+      <span v-if="fabricanteForm.nome !== null && !isNameValid" class="error">
+        ERRO: {{ formFeedback.nome }}</span
       >
       <br />
       <button type="submit" :disabled="!isFormValid">Save</button>
@@ -34,11 +31,11 @@ const fabricante = ref(null);
 const messages = ref([]);
 
 const fabricanteForm = reactive({
-  nomeFabricante: null,
+  nome: null,
 });
 
 const formFeedback = reactive({
-  nomeFabricante: "",
+  nome: "",
 });
 
 const fetchFabricante = async () => {
@@ -48,25 +45,25 @@ const fetchFabricante = async () => {
       throw new Error(response.statusText);
     }
     fabricante.value = await response.json();
-    fabricanteForm.nomeFabricante = fabricante.value.nomeFabricante;
+    fabricanteForm.nome = fabricante.value.nome;
   } catch (error) {
     messages.value.push(error.message);
   }
 };
 
 const isNameValid = computed(() => {
-  if (fabricanteForm.nomeFabricante === null) {
+  if (fabricanteForm.nome === null) {
     return false;
   }
-  if (fabricanteForm.nomeFabricante.length < 3) {
-    formFeedback.nomeFabricante = "O nome deve ter pelo menos 3 caracteres";
+  if (fabricanteForm.nome.length < 3) {
+    formFeedback.nome = "O nome deve ter pelo menos 3 caracteres";
     return false;
   }
-  if (fabricanteForm.nomeFabricante.length > 20) {
-    formFeedback.nomeFabricante = "O nome deve ter no máximo 20 caracteres";
+  if (fabricanteForm.nome.length > 20) {
+    formFeedback.nome = "O nome deve ter no máximo 20 caracteres";
     return false;
   }
-  formFeedback.nomeFabricante = "";
+  formFeedback.nome = "";
   return true;
 });
 

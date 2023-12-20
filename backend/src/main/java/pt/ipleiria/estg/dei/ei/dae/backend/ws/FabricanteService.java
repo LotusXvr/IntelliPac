@@ -32,7 +32,8 @@ public class FabricanteService {
 private ProdutoDTO toDTOProducts(Produto produto) {
         return new ProdutoDTO(
                 produto.getId(),
-                produto.getNomeProduto()
+                produto.getNomeProduto(),
+                produto.getFabricante().getId()
         );
     }
 

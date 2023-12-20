@@ -9,7 +9,7 @@
         <th>actions</th>
       </tr>
       <tr v-for="fabricante in fabricantes">
-        <td>{{ fabricante.nomeFabricante }}</td>
+        <td>{{ fabricante.nome }}</td>
         <td>
           <nuxt-link :to="`/fabricantes/${fabricante.id}`">Details</nuxt-link>
           |

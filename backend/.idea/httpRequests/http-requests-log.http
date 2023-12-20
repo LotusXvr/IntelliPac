@@ -1,3 +1,13 @@
+GET http://localhost:8080/intellipac/api/fabricantes
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-12-20T194444.200.json
+
+###
+
 GET http://localhost:8080/intellipac/api/fabricantes/1
 Accept: application/json
 Connection: Keep-Alive
@@ -479,19 +489,6 @@ User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
 Accept-Encoding: br,deflate,gzip,x-gzip
 
 <> 2023-12-19T174914.200.json
-
-###
-
-POST http://localhost:8080/intellipac/api/fabricantes
-Content-Type: application/json
-Content-Length: 33
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-  "nome": "Fabricante (POST)"
-}
 
 ###
 

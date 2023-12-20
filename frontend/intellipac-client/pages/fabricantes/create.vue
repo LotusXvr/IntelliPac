@@ -1,8 +1,8 @@
 <template>
   <form @submit.prevent="create">
-    <label for="nomeFabricante">Nome</label>
-    <input id="nomeFabricante" v-model="fabricanteForm.nomeFabricante" />
-    <span class="error">{{ formFeedback.nomeFabricante }}</span>
+    <label for="nome">Nome</label>
+    <input id="nome" v-model="fabricanteForm.nome" />
+    <span class="error">{{ formFeedback.nome }}</span>
     <br />
     <button type="submit" :disabled="!isFormValid">Criar fabricante</button>
   </form>
@@ -16,11 +16,11 @@
 <script setup>
 import { ref, reactive, computed } from "vue";
 const fabricanteForm = reactive({
-  nomeFabricante: null,
+  nome: null,
 });
 
 const formFeedback = reactive({
-  nomeFabricante: "",
+  nome: "",
 });
 
 const config = useRuntimeConfig();
@@ -28,18 +28,18 @@ const api = config.public.API_URL;
 const message = ref("");
 
 const isNameValid = computed(() => {
-  if (fabricanteForm.nomeFabricante === null) {
+  if (fabricanteForm.nome === null) {
     return false;
   }
-  if (fabricanteForm.nomeFabricante.length < 3) {
-    formFeedback.nomeFabricante = "O nome deve ter pelo menos 3 caracteres";
+  if (fabricanteForm.nome.length < 3) {
+    formFeedback.nome = "O nome deve ter pelo menos 3 caracteres";
     return false;
   }
-  if (fabricanteForm.nomeFabricante.length > 20) {
-    formFeedback.nomeFabricante = "O nome deve ter no máximo 20 caracteres";
+  if (fabricanteForm.nome.length > 20) {
+    formFeedback.nome = "O nome deve ter no máximo 20 caracteres";
     return false;
   }
-  formFeedback.nomeFabricante = "";
+  formFeedback.nome = "";
   return true;
 });
 
