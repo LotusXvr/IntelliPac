@@ -3,6 +3,7 @@ package pt.ipleiria.estg.dei.ei.dae.backend.entities;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -13,14 +14,16 @@ public class FabricanteDeProdutos {
 
     private String nomeFabricante;
 
-    @OneToMany(mappedBy = "fabricante")
+    @OneToMany(mappedBy = "fabricante", fetch = FetchType.EAGER)
     private List<Produto> produtos;
 
     public FabricanteDeProdutos() {
+        produtos = new ArrayList<>();
     }
 
     public FabricanteDeProdutos(String nomeFabricante) {
         this.nomeFabricante = nomeFabricante;
+        produtos = new ArrayList<>();
     }
 
     public Long getId() {
@@ -45,5 +48,13 @@ public class FabricanteDeProdutos {
 
     public void setProdutos(List<Produto> produtos) {
         this.produtos = produtos;
+    }
+
+    public void addProduto(Produto produto) {
+        produtos.add(produto);
+    }
+
+    public void removeProduto(Produto produto) {
+        produtos.remove(produto);
     }
 }

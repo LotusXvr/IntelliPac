@@ -4,6 +4,7 @@ package pt.ipleiria.estg.dei.ei.dae.backend.entities;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -31,11 +32,15 @@ public class Produto implements Serializable {
     private List<SensorDispositivo> sensoresDispositivos;
 
     public Produto() {
+        embalagens = new ArrayList<>();
+        sensoresDispositivos = new ArrayList<>();
     }
 
     public Produto(String nomeProduto, FabricanteDeProdutos fabricante) {
         this.nomeProduto = nomeProduto;
         this.fabricante = fabricante;
+        embalagens = new ArrayList<>();
+        sensoresDispositivos = new ArrayList<>();
     }
 
     public Long getId() {
