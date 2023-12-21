@@ -32,7 +32,7 @@ public class ProdutoBean {
     }
 
 
-    public Produto createProduto(String nomeProduto, long fabricanteId) throws MyEntityExistsException, MyEntityNotFoundException {
+    public Produto create(String nomeProduto, long fabricanteId) throws MyEntityExistsException, MyEntityNotFoundException {
 
         if(exists(nomeProduto, fabricanteId)) {
             throw new MyEntityExistsException("Produto com nome " + nomeProduto + " já existe");
@@ -58,12 +58,12 @@ public class ProdutoBean {
 
     }
 
-    public Produto findProduto(long id) {
+    public Produto find(long id) {
         return entityManager.find(Produto.class, id);
     }
 
     public void update(long id, String nomeProduto, long fabricanteId) throws MyEntityNotFoundException {
-        Produto produto = findProduto(id);
+        Produto produto = find(id);
         if (produto == null) {
             throw new MyEntityNotFoundException("Produto com id " + id + " não existe");
         }
@@ -79,7 +79,7 @@ public class ProdutoBean {
     }
 
     public void remove(long id) throws MyEntityNotFoundException {
-        Produto produto = findProduto(id);
+        Produto produto = find(id);
         if (produto == null) {
             throw new MyEntityNotFoundException("Produto com id " + id + " não existe");
         }

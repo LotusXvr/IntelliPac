@@ -25,11 +25,11 @@ public class ConfigBean {
         System.out.println("ConfigBean: PostConstruct");
 
         try {
-            fabricanteDeProdutosBean.create("fabricante 1");
-            fabricanteDeProdutosBean.create("fabricante 2");
+            fabricanteDeProdutosBean.create("fabricante1", "123", "fabricante 1", "fabricante1@mail.pt");
+            fabricanteDeProdutosBean.create("fabricante2", "123", "fabricante 2", "fabricante2@mail.pt");
 
-            produtoBean.createProduto("produto 1", 1);
-            produtoBean.createProduto("produto 2", 1);
+            produtoBean.create("produto 1", 1);
+            produtoBean.create("produto 2", 1);
 
         } catch (Exception e) {
             logger.severe(e.getMessage());

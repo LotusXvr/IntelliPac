@@ -14,30 +14,32 @@ import java.util.Objects;
                 query = "SELECT p FROM Produto p ORDER BY p.nomeProduto"
         )
 })
-public class FabricanteDeProdutos {
+public class FabricanteDeProdutos extends User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
     private String nome;
 
     @OneToMany(mappedBy = "fabricante", fetch = FetchType.EAGER)
     private List<Produto> produtos;
 
+
+
     public FabricanteDeProdutos() {
         this.produtos = new ArrayList<>();
     }
 
-    public FabricanteDeProdutos(String nome) {
-        this.nome = nome;
+    public FabricanteDeProdutos(String username, String password, String nome, String email) {
+        super(username, password, nome, email);
         this.produtos = new ArrayList<>();
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 

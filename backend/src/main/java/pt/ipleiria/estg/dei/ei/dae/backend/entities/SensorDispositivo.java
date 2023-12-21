@@ -7,7 +7,7 @@ import jakarta.persistence.*;
 public class SensorDispositivo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
     private String tipoSensorDispositivo;
     private String dadosSensor;
@@ -25,11 +25,11 @@ public class SensorDispositivo {
         this.produto = produto;
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 

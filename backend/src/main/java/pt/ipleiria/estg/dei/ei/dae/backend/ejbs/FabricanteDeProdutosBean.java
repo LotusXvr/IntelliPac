@@ -4,6 +4,7 @@ import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
+import jakarta.validation.ConstraintViolationException;
 import org.hibernate.Hibernate;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.FabricanteDeProdutos;
 import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyEntityExistsException;
@@ -24,13 +25,19 @@ public class FabricanteDeProdutosBean {
         return (Long)query.getSingleResult() > 0L;
     }
 
-    public void create(String nomeFabricante) throws MyEntityExistsException {
-        if (exists(nomeFabricante)) {
-            throw new MyEntityExistsException("FabricanteDeProdutos with nomeFabricante '" + nomeFabricante + "' already exists");
+    public void create(String username, String password, String nome, String email) throws MyEntityExistsException {
+        if (exists(nome)) {
+            throw new MyEntityExistsException("FabricanteDeProdutos with name '" + nome + "' already exists");
         }
 
-        FabricanteDeProdutos fabricanteDeProdutos = new FabricanteDeProdutos(nomeFabricante);
-        entityManager.persist(fabricanteDeProdutos);
+        FabricanteDeProdutos fabricanteDeProdutos = null;
+
+        try {
+            fabricanteDeProdutos = new FabricanteDeProdutos(username, password, nome, email);
+            entityManager.persist(fabricanteDeProdutos);
+        } catch (ConstraintViolationException e) {
+            throw new MyEntityExistsException(e.getMessage());
+        }
     }
 
     public FabricanteDeProdutos find(long id) {

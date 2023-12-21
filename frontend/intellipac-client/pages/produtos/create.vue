@@ -6,18 +6,14 @@
     <br />
     <div>
       Fabricante:
-      <select v-model="produtoForm.fabricanteID">
-        <option value="">--- Please select Fabricante ---</option>
+      <select v-model="produtoForm.idFabricante">
+        <option value=''>--- Please select Fabricante ---</option>
         <option v-for="fabricante in fabricantes" :value="fabricante.id">
-          {{ fabricante.nomeFabricante }}
+          {{ fabricante.nome }}
         </option>
       </select>
-      <span
-        v-if="produtoForm.idFabricante !== null && !isFabricanteValid"
-        class="error"
-      >
-        ERRO: {{ formFeedback.idFabricante }}</span
-      >
+      <span v-if="produtoForm.idFabricante !== null && !isFabricanteValid" class="error">
+        ERRO: {{ formFeedback.idFabricante }}</span>
     </div>
 
     <br />
@@ -34,7 +30,7 @@
 import { ref, reactive, computed } from "vue";
 const produtoForm = reactive({
   nome: null,
-  idFabricante: null, // Alterado de Number para aceitar nulos
+  idFabricante: '', // Alterado de Number para aceitar nulos
 });
 
 const formFeedback = reactive({
@@ -64,11 +60,11 @@ const isNameValid = computed(() => {
 });
 
 const isFabricanteValid = computed(() => {
-  if (produtoForm.fabricanteID === null) {
+  if (produtoForm.idFabricante === null) {
     return false;
   }
 
-  formFeedback.fabricanteID = "";
+  formFeedback.idFabricante = "";
   return true;
 });
 
@@ -77,8 +73,8 @@ const isFormValid = computed(() => {
 });
 
 async function create() {
-  // Converte fabricanteID para número
-  produtoForm.idFabricante = Number(produtoForm.fabricanteID);
+  // Converte idFabricante para número
+  produtoForm.idFabricante = Number(produtoForm.idFabricante);
 
   const requestOptions = {
     method: "POST",

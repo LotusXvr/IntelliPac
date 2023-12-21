@@ -42,7 +42,7 @@ public class ProdutoService {
     @POST
     @Path("/")
     public void createNewProduct(ProdutoDTO produtoDTO) throws MyEntityExistsException, MyEntityNotFoundException {
-        produtoBean.createProduto(produtoDTO.getNome(), produtoDTO.getIdFabricante());
+        produtoBean.create(produtoDTO.getNome(), produtoDTO.getIdFabricante());
     }
 
     @PUT
@@ -60,7 +60,7 @@ public class ProdutoService {
     @GET
     @Path("{id}")
     public ProdutoDTO getProductDetails(@PathParam("id") long id) throws MyEntityNotFoundException {
-        return toDTO(produtoBean.findProduto(id));
+        return toDTO(produtoBean.find(id));
     }
 
 

@@ -1,14 +1,19 @@
 package pt.ipleiria.estg.dei.ei.dae.backend.ws;
 
 import jakarta.ejb.EJB;
+import jakarta.mail.MessagingException;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
+import pt.ipleiria.estg.dei.ei.dae.backend.dtos.EmailDTO;
 import pt.ipleiria.estg.dei.ei.dae.backend.dtos.FabricanteProdutoDTO;
 import pt.ipleiria.estg.dei.ei.dae.backend.dtos.ProdutoDTO;
+import pt.ipleiria.estg.dei.ei.dae.backend.ejbs.EmailBean;
 import pt.ipleiria.estg.dei.ei.dae.backend.ejbs.FabricanteDeProdutosBean;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.FabricanteDeProdutos;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.Produto;
 import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyEntityExistsException;
+import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyEntityNotFoundException;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,15 +26,21 @@ public class FabricanteService {
     @EJB
     private FabricanteDeProdutosBean fabricanteDeProdutosBean;
 
+    @EJB
+    private EmailBean emailBean;
+
     private FabricanteProdutoDTO toDTO(FabricanteDeProdutos fabricante) {
         return new FabricanteProdutoDTO(
-                fabricante.getId(),
+                fabricante.getUsername(),
+                fabricante.getPassword(),
                 fabricante.getNome(),
+                fabricante.getEmail(),
+                fabricante.getId(),
                 produtosToDTOs(fabricante.getProdutos())
         );
     }
 
-private ProdutoDTO toDTOProducts(Produto produto) {
+    private ProdutoDTO toDTOProducts(Produto produto) {
         return new ProdutoDTO(
                 produto.getId(),
                 produto.getNomeProduto(),
@@ -60,7 +71,11 @@ private ProdutoDTO toDTOProducts(Produto produto) {
         }
 
         fabricanteDeProdutosBean.create(
-                fabricanteProdutoDTO.getNome()
+                // String username, String password, String nome, String email
+                fabricanteProdutoDTO.getUsername(),
+                fabricanteProdutoDTO.getPassword(),
+                fabricanteProdutoDTO.getNome(),
+                fabricanteProdutoDTO.getEmail()
         );
     }
 
@@ -85,6 +100,19 @@ private ProdutoDTO toDTOProducts(Produto produto) {
     public FabricanteProdutoDTO getFabricanteDetails(@PathParam("id") long id) {
         FabricanteDeProdutos fabricante = fabricanteDeProdutosBean.find(id);
         return toDTO(fabricante);
+    }
+
+    @POST
+    @Path("/{id}/email/send")
+    public Response sendEmail(@PathParam("id") long id, EmailDTO email)
+            throws MyEntityNotFoundException, MessagingException {
+        FabricanteDeProdutos fabricanteDeProdutos = fabricanteDeProdutosBean.find(id);
+        if (fabricanteDeProdutos == null) {
+            throw new MyEntityNotFoundException("Student with id '" + id
+                    + "' not found in our records.");
+        }
+        emailBean.send(fabricanteDeProdutos.getEmail(), email.getSubject(), email.getMessage());
+        return Response.status(Response.Status.OK).entity("E-mail sent").build();
     }
 
 }

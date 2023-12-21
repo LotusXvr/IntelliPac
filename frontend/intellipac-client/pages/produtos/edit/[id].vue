@@ -6,22 +6,17 @@
       <label for="nome">Nome:</label>
       <input v-model.trim="produtoForm.nome" type="text" />
       <span v-if="produtoForm.nome !== null && !isNameValid" class="error">
-        ERRO: {{ formFeedback.nome }}</span
-      >
+        ERRO: {{ formFeedback.nome }}</span>
       <br />
       <div>
         Fabricante:
         <select v-model.trim="produtoForm.idFabricante">
           <option v-for="fabricante in fabricantes" :value="fabricante.id">
-            {{ fabricante.nomeFabricante }}
+            {{ fabricante.nome }}
           </option>
         </select>
-        <span
-          v-if="produtoForm.idFabricante !== null && !isFabricanteValid"
-          class="error"
-        >
-          ERRO: {{ formFeedback.idFabricante }}</span
-        >
+        <span v-if="produtoForm.idFabricante !== null && !isFabricanteValid" class="error">
+          ERRO: {{ formFeedback.idFabricante }}</span>
       </div>
       <br />
 
