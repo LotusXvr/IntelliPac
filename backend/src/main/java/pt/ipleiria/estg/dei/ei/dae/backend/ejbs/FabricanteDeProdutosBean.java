@@ -18,7 +18,7 @@ public class FabricanteDeProdutosBean {
 
     public boolean exists(String nome) {
         Query query = entityManager.createQuery(
-                "SELECT COUNT(f.nome) FROM FabricanteDeProdutos f WHERE f.nome = :nomeFabricante",
+                "SELECT COUNT(f.name) FROM FabricanteDeProdutos f WHERE f.name = :nomeFabricante",
                 Long.class
         );
         query.setParameter("nomeFabricante", nome);
@@ -40,10 +40,10 @@ public class FabricanteDeProdutosBean {
         }
     }
 
-    public FabricanteDeProdutos find(long id) {
-        var fabricanteDeProdutos = entityManager.find(FabricanteDeProdutos.class, id);
+    public FabricanteDeProdutos find(String username) {
+        var fabricanteDeProdutos = entityManager.find(FabricanteDeProdutos.class, username);
         if (fabricanteDeProdutos == null) {
-            throw new IllegalArgumentException("FabricanteDeProdutos with id '" + id + "' not found");
+            throw new IllegalArgumentException("FabricanteDeProdutos with id '" + username + "' not found");
         }
         Hibernate.initialize(fabricanteDeProdutos.getProdutos());
 
@@ -59,8 +59,9 @@ public class FabricanteDeProdutosBean {
     }
 
     public List<FabricanteDeProdutos> getAllFabricantes() {
-        Query query = entityManager.createQuery("SELECT f FROM FabricanteDeProdutos f ORDER BY f.nome");
+        Query query = entityManager.createQuery("SELECT f FROM FabricanteDeProdutos f ORDER BY f.name");
         return query.getResultList();
     }
+
 
 }

@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FabricanteProdutoDTO implements Serializable {
-    private long id;
     private String nome;
     private List<ProdutoDTO> produtos;
     private String username;
@@ -18,21 +17,12 @@ public class FabricanteProdutoDTO implements Serializable {
         this.produtos = new ArrayList<>();
     }
 
-    public FabricanteProdutoDTO(String username, String password, String nome, String email, long id, List<ProdutoDTO> produtos) {
+    public FabricanteProdutoDTO(String username, String password, String nome, String email, List<ProdutoDTO> produtos) {
         this.username = username;
         this.password = password;
-        this.id = id;
         this.nome = nome;
         this.email = email;
         this.produtos = produtos;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getNome() {

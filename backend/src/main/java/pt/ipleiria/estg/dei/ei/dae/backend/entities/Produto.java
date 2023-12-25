@@ -21,22 +21,32 @@ public class Produto implements Serializable {
     @NotNull
     private FabricanteDeProdutos fabricante;
 
-    @OneToMany(mappedBy = "produtoEmb")
-    private List<Embalagem> embalagens;
+    @ManyToMany
+    @JoinTable(
+            name = "produto_embalagem",
+            joinColumns = @JoinColumn(
+                    name = "product_id",
+                    referencedColumnName = "id"
+            ),
+            inverseJoinColumns = @JoinColumn(
+                    name = "embalagem_id",
+                    referencedColumnName = "id"
+            )
+    )
+    private List<EmbalagemDeProduto> embalagemDeProdutos;
 
-    @OneToMany(mappedBy = "produto")
-    private List<SensorDispositivo> sensoresDispositivos;
+  //  @OneToMany(mappedBy = "produto")
+   // private List<SensorDispositivo> sensoresDispositivos;
 
     public Produto() {
-        embalagens = new ArrayList<>();
-        sensoresDispositivos = new ArrayList<>();
+        embalagemDeProdutos = new ArrayList<>();
+        //sensoresDispositivos = new ArrayList<>();
     }
 
     public Produto(String nomeProduto, FabricanteDeProdutos fabricante) {
         this.nomeProduto = nomeProduto;
         this.fabricante = fabricante;
-        embalagens = new ArrayList<>();
-        sensoresDispositivos = new ArrayList<>();
+        this.embalagemDeProdutos = new ArrayList<>();
     }
 
     public long getId() {
@@ -55,10 +65,6 @@ public class Produto implements Serializable {
         this.nomeProduto = nomeProduto;
     }
 
-    public long getFabricanteId() {
-        return fabricante.getId();
-    }
-
     public FabricanteDeProdutos getFabricante() {
         return fabricante;
     }
@@ -67,19 +73,11 @@ public class Produto implements Serializable {
         this.fabricante = fabricante;
     }
 
-    public List<Embalagem> getEmbalagens() {
-        return embalagens;
+    public List<EmbalagemDeProduto> getEmbalagemDeProdutos() {
+        return embalagemDeProdutos;
     }
 
-    public void setEmbalagens(List<Embalagem> embalagens) {
-        this.embalagens = embalagens;
-    }
-
-    public List<SensorDispositivo> getSensoresDispositivos() {
-        return sensoresDispositivos;
-    }
-
-    public void setSensoresDispositivos(List<SensorDispositivo> sensoresDispositivos) {
-        this.sensoresDispositivos = sensoresDispositivos;
+    public void setEmbalagemDeProdutos(List<EmbalagemDeProduto> embalagemDeProdutos) {
+        this.embalagemDeProdutos = embalagemDeProdutos;
     }
 }

@@ -6,14 +6,16 @@ import java.util.List;
 public class EmbalagemTransporteDTO {
     private Long id;
     private Long idEncomenda; // Referência à Encomenda
+    private String material;
     private List<EncomendaDTO> encomendas;
 
     public EmbalagemTransporteDTO() {
         this.encomendas = new ArrayList<>();
     }
 
-    public EmbalagemTransporteDTO(Long id, Long idEncomenda, List<EncomendaDTO> encomendas) {
+    public EmbalagemTransporteDTO(Long id,String material, Long idEncomenda, List<EncomendaDTO> encomendas) {
         this.id = id;
+        this.material = material;
         this.idEncomenda = idEncomenda;
         this.encomendas = encomendas;
     }
@@ -47,4 +49,14 @@ public class EmbalagemTransporteDTO {
     public void setEncomendas(List<EncomendaDTO> encomendas) {
         this.encomendas = encomendas;
     }
+
+    public String getMaterial() {
+        return material;
+    }
+
+    public void setMaterial(String material) {
+        this.material = material;
+    }
+
+
 }

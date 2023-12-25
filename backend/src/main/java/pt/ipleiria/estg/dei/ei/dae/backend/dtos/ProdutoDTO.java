@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class ProdutoDTO implements Serializable {
     private long id;
     private String nome;
-    private long idFabricante; // Referência ao Fabricante de Produtos
+    private String fabricanteUsername; // Referência ao Fabricante de Produtos
     private String nomeFabricante;
 
     public ProdutoDTO() {
@@ -16,16 +16,16 @@ public class ProdutoDTO implements Serializable {
         this.nome = nome;
     }
 
-    public ProdutoDTO(long id, String nome, long idFabricante) {
+    public ProdutoDTO(long id, String nome, String fabricanteUsername) {
         this.id = id;
         this.nome = nome;
-        this.idFabricante = idFabricante;
+        this.fabricanteUsername = fabricanteUsername;
     }
 
-    public ProdutoDTO(long id, String nome, long idFabricante, String nomeFabricante) {
+    public ProdutoDTO(long id, String nome, String fabricanteUsername, String nomeFabricante) {
         this.id = id;
         this.nome = nome;
-        this.idFabricante = idFabricante;
+        this.fabricanteUsername = fabricanteUsername;
         this.nomeFabricante = nomeFabricante;
     }
 
@@ -46,12 +46,12 @@ public class ProdutoDTO implements Serializable {
         this.nome = nome;
     }
 
-    public long getIdFabricante() {
-        return idFabricante;
+    public String getFabricanteUsername() {
+        return fabricanteUsername;
     }
 
-    public void setIdFabricante(long idFabricante) {
-        this.idFabricante = idFabricante;
+    public void setFabricanteUsername(String fabricanteUsername) {
+        this.fabricanteUsername = fabricanteUsername;
     }
 
     public String getNomeFabricante() {

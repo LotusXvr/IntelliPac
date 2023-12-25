@@ -21,26 +21,26 @@ public class ProdutoBean {
     @EJB
     private FabricanteDeProdutosBean fabricanteDeProdutosBean;
 
-    public boolean exists(String nomeProduto, long fabricanteId) {
+    public boolean exists(String nomeProduto, String fabrincanteUsername) {
         Query query = entityManager.createQuery(
-                "SELECT COUNT(p.nomeProduto) FROM Produto p WHERE p.nomeProduto = :nomeProduto AND p.fabricante.id = :fabricanteId",
+                "SELECT COUNT(p.nomeProduto) FROM Produto p WHERE p.nomeProduto = :nomeProduto AND p.fabricante.username = :fabrincanteUsername",
                 Long.class
         );
         query.setParameter("nomeProduto", nomeProduto);
-        query.setParameter("fabricanteId", fabricanteId);
+        query.setParameter("fabrincanteUsername", fabrincanteUsername);
         return (Long)query.getSingleResult() > 0L;
     }
 
 
-    public Produto create(String nomeProduto, long fabricanteId) throws MyEntityExistsException, MyEntityNotFoundException {
+    public Produto create(String nomeProduto, String fabrincanteUsername) throws MyEntityExistsException, MyEntityNotFoundException {
 
-        if(exists(nomeProduto, fabricanteId)) {
+        if(exists(nomeProduto, fabrincanteUsername)) {
             throw new MyEntityExistsException("Produto com nome " + nomeProduto + " já existe");
         }
 
-        var fabricante = fabricanteDeProdutosBean.find(fabricanteId);
+        var fabricante = fabricanteDeProdutosBean.find(fabrincanteUsername);
         if (fabricante == null) {
-            throw new MyEntityNotFoundException("Fabricante com id " + fabricanteId + " não existe");
+            throw new MyEntityNotFoundException("Fabricante com id " + fabrincanteUsername + " não existe");
         }
 
         Produto produto = null;
@@ -62,15 +62,15 @@ public class ProdutoBean {
         return entityManager.find(Produto.class, id);
     }
 
-    public void update(long id, String nomeProduto, long fabricanteId) throws MyEntityNotFoundException {
+    public void update(long id, String nomeProduto, String fabrincanteUsername) throws MyEntityNotFoundException {
         Produto produto = find(id);
         if (produto == null) {
             throw new MyEntityNotFoundException("Produto com id " + id + " não existe");
         }
 
-        FabricanteDeProdutos fabricante = entityManager.find(FabricanteDeProdutos.class, fabricanteId);
+        FabricanteDeProdutos fabricante = entityManager.find(FabricanteDeProdutos.class, fabrincanteUsername);
         if (fabricante == null) {
-            throw new MyEntityNotFoundException("Fabricante com id " + fabricanteId + " não existe");
+            throw new MyEntityNotFoundException("Fabricante com id " + fabrincanteUsername + " não existe");
         }
 
         produto.setNomeProduto(nomeProduto);
