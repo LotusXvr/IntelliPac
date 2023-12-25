@@ -18,6 +18,9 @@ public class ConfigBean {
     @EJB
     FabricanteDeProdutosBean fabricanteDeProdutosBean;
 
+    @EJB
+    OperadorDeLogisticaBean operadorDeLogisticaBean;
+
     private Logger logger = Logger.getLogger("ejbs.ConfigBean");
 
     @PostConstruct
@@ -30,6 +33,9 @@ public class ConfigBean {
 
             produtoBean.create("produto 1", "Fabrica1");
             produtoBean.create("produto 2", "Fabrica2");
+
+            operadorDeLogisticaBean.create("ValterLogo", "123", "Valte", "valtefutebole@mail.pt");
+            operadorDeLogisticaBean.create("Joaoz", "123", "Joao", "joao@mail.pt");
 
         } catch (Exception e) {
             logger.severe(e.getMessage());

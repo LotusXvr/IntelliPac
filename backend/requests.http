@@ -61,3 +61,24 @@ Content-Type: application/json
 Accept: application/json
 
 { "username": "Fabrica1", "password": "123" }
+
+
+### GET Operadores de Logistica
+GET http://localhost:8080/intellipac/api/operadores
+Accept: application/json
+
+### POST Operadores de Logistica
+POST http://localhost:8080/intellipac/api/operadores
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJGYWJyaWNhMSIsImlhdCI6MTcwMzUzMjIxNiwiZXhwIjoxNzAzNTM1ODE2fQ.QSN10txLm3lhwXK5HF9_FLFyG-frqurDJ7xfbqrUg6M8WheWC1aETiWNQQys-2kp
+Content-Type: application/json
+
+{
+ "email": "diogo@mail.com",
+ "name": "Diogo Diogo",
+ "username": "DiogoGuerra",
+ "password": "123"
+}
+
+### getOperadoresLogisticaDetails()
+GET http://localhost:8080/intellipac/api/operadores/ValterLogo
+Accept: application/json
