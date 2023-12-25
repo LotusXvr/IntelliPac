@@ -25,8 +25,8 @@ public class ProdutoService {
         return new ProdutoDTO(
                 produto.getId(),
                 produto.getNomeProduto(),
-                produto.getFabricante().getId(),
-                produto.getFabricante().getNome()
+                produto.getFabricante().getUsername(),
+                produto.getFabricante().getName()
         );
     }
     // converts an entire list of entities into a list of DTOs
@@ -42,13 +42,13 @@ public class ProdutoService {
     @POST
     @Path("/")
     public void createNewProduct(ProdutoDTO produtoDTO) throws MyEntityExistsException, MyEntityNotFoundException {
-        produtoBean.create(produtoDTO.getNome(), produtoDTO.getIdFabricante());
+        produtoBean.create(produtoDTO.getNome(), produtoDTO.getFabricanteUsername());
     }
 
     @PUT
     @Path("{id}")
     public void updateProduct(@PathParam("id") long id, ProdutoDTO produtoDTO) throws MyEntityNotFoundException {
-        produtoBean.update(id, produtoDTO.getNome(), produtoDTO.getIdFabricante());
+        produtoBean.update(id, produtoDTO.getNome(), produtoDTO.getFabricanteUsername());
     }
 
     @DELETE

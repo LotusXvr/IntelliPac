@@ -2,30 +2,20 @@ package pt.ipleiria.estg.dei.ei.dae.backend.entities;
 
 import jakarta.persistence.*;
 
-@Entity
-public class EmbalagemDeTransporte {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+import java.io.Serializable;
 
+@Entity
+public class EmbalagemDeTransporte extends Embalagem implements Serializable {
     @ManyToOne
     @JoinColumn(name = "encomenda_id")
     private Encomenda encomenda;
 
-    // Outros atributos e getters/setters
     public EmbalagemDeTransporte() {
     }
 
-    public EmbalagemDeTransporte(Encomenda encomenda) {
+    public EmbalagemDeTransporte(String material, Encomenda encomenda) {
+        super(material);
         this.encomenda = encomenda;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public Encomenda getEncomenda() {

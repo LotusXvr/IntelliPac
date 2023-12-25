@@ -33,9 +33,8 @@ public class FabricanteService {
         return new FabricanteProdutoDTO(
                 fabricante.getUsername(),
                 fabricante.getPassword(),
-                fabricante.getNome(),
+                fabricante.getName(),
                 fabricante.getEmail(),
-                fabricante.getId(),
                 produtosToDTOs(fabricante.getProdutos())
         );
     }
@@ -44,7 +43,7 @@ public class FabricanteService {
         return new ProdutoDTO(
                 produto.getId(),
                 produto.getNomeProduto(),
-                produto.getFabricante().getId()
+                produto.getFabricante().getUsername()
         );
     }
 
@@ -80,35 +79,35 @@ public class FabricanteService {
     }
 
     @DELETE
-    @Path("{id}")
-    public void deleteFabricante(@PathParam("id") long id) {
+    @Path("{username}")
+    public void deleteFabricante(@PathParam("username") String username) {
         fabricanteDeProdutosBean.remove(
-                fabricanteDeProdutosBean.find(id)
+                fabricanteDeProdutosBean.find(username)
         );
     }
 
     @PUT
-    @Path("{id}")
-    public void updateFabricante(@PathParam("id") long id, FabricanteProdutoDTO fabricanteProdutoDTO) {
-        FabricanteDeProdutos fabricanteDeProdutos = fabricanteDeProdutosBean.find(id);
-        fabricanteDeProdutos.setNome(fabricanteProdutoDTO.getNome());
+    @Path("{username}")
+    public void updateFabricante(@PathParam("username") String username, FabricanteProdutoDTO fabricanteProdutoDTO) {
+        FabricanteDeProdutos fabricanteDeProdutos = fabricanteDeProdutosBean.find(username);
+        fabricanteDeProdutos.setName(fabricanteProdutoDTO.getNome());
         fabricanteDeProdutosBean.update(fabricanteDeProdutos);
     }
 
     @GET
-    @Path("{id}")
-    public FabricanteProdutoDTO getFabricanteDetails(@PathParam("id") long id) {
-        FabricanteDeProdutos fabricante = fabricanteDeProdutosBean.find(id);
+    @Path("{username}")
+    public FabricanteProdutoDTO getFabricanteDetails(@PathParam("username") String username) {
+        FabricanteDeProdutos fabricante = fabricanteDeProdutosBean.find(username);
         return toDTO(fabricante);
     }
 
     @POST
-    @Path("/{id}/email/send")
-    public Response sendEmail(@PathParam("id") long id, EmailDTO email)
+    @Path("/{username}/email/send")
+    public Response sendEmail(@PathParam("username") String username, EmailDTO email)
             throws MyEntityNotFoundException, MessagingException {
-        FabricanteDeProdutos fabricanteDeProdutos = fabricanteDeProdutosBean.find(id);
+        FabricanteDeProdutos fabricanteDeProdutos = fabricanteDeProdutosBean.find(username);
         if (fabricanteDeProdutos == null) {
-            throw new MyEntityNotFoundException("Student with id '" + id
+            throw new MyEntityNotFoundException("Student with id '" + username
                     + "' not found in our records.");
         }
         emailBean.send(fabricanteDeProdutos.getEmail(), email.getSubject(), email.getMessage());
