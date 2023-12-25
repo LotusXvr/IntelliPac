@@ -54,3 +54,10 @@ Accept: application/json
 ###
 GET http://localhost:8080/intellipac/api/fabricantes/1
 Accept: application/json
+
+### REQUEST JWT TOKEN
+POST http://localhost:8080/intellipac/api/auth/login
+Content-Type: application/json
+Accept: application/json
+
+{ "username": "Fabrica1", "password": "123" }

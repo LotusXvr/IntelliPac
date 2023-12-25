@@ -1,6 +1,7 @@
 package pt.ipleiria.estg.dei.ei.dae.backend.ejbs;
 
 import jakarta.ejb.Stateless;
+import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
@@ -8,6 +9,7 @@ import jakarta.validation.ConstraintViolationException;
 import org.hibernate.Hibernate;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.FabricanteDeProdutos;
 import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyEntityExistsException;
+import pt.ipleiria.estg.dei.ei.dae.backend.security.Hasher;
 
 import java.util.List;
 
@@ -15,6 +17,9 @@ import java.util.List;
 public class FabricanteDeProdutosBean {
     @PersistenceContext
     private EntityManager entityManager;
+
+    @Inject
+    private Hasher hasher;
 
     public boolean exists(String nome) {
         Query query = entityManager.createQuery(
@@ -33,7 +38,7 @@ public class FabricanteDeProdutosBean {
         FabricanteDeProdutos fabricanteDeProdutos = null;
 
         try {
-            fabricanteDeProdutos = new FabricanteDeProdutos(username, password, nome, email);
+            fabricanteDeProdutos = new FabricanteDeProdutos(username, hasher.hash(password), nome, email);
             entityManager.persist(fabricanteDeProdutos);
         } catch (ConstraintViolationException e) {
             throw new MyEntityExistsException(e.getMessage());
