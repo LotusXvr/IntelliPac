@@ -1,3 +1,80 @@
+GET http://localhost:8080/intellipac/api/clientes/Marcyo
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-12-26T155416.200.json
+
+###
+
+GET http://localhost:8080/intellipac/api/clientes
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-12-26T155344.200.json
+
+###
+
+POST http://localhost:8080/intellipac/api/clientes
+Content-Type: application/json
+Content-Length: 96
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "email": "marco@mail.com",
+  "name": "Marcio",
+  "username": "Marcyo",
+  "password": "123"
+}
+
+###
+
+POST http://localhost:8080/intellipac/api/clientes
+Content-Type: application/json
+Content-Length: 0
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-12-26T155305.500.json
+
+###
+
+GET http://localhost:8080/intellipac/api/operadores
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-12-26T155231.200.json
+
+###
+
+GET http://localhost:8080/intellipac/api/clientes
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-12-26T155223.200.json
+
+###
+
+GET http://localhost:8080/intellipac/api/operadores
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-12-26T155207.404.html
+
+###
+
 POST http://localhost:8080/intellipac/api/auth/login
 Content-Type: application/json
 Accept: application/json
@@ -514,94 +591,6 @@ User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
 Accept-Encoding: br,deflate,gzip,x-gzip
 
 { "username": "Fabrica1", "password": "1223" }
-
-###
-
-POST http://localhost:8080/intellipac/api/auth/login
-Content-Type: application/json
-Accept: application/json
-Content-Length: 45
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{ "username": "Fabrica1", "password": "123" }
-
-<> 2023-12-25T175930.200.json
-
-###
-
-POST http://localhost:8080/intellipac/api/auth/login
-Content-Type: application/json
-Accept: application/json
-Content-Length: 44
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{ "username": "Fabric1", "password": "123" }
-
-###
-
-POST http://localhost:8080/intellipac/api/auth/login
-Content-Type: application/json
-Accept: application/json
-Content-Length: 45
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{ "username": "Fabrica1", "password": "123" }
-
-<> 2023-12-25T175829.200.json
-
-###
-
-GET http://localhost:8080/intellipac/api/fabricantes
-Accept: application/json
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-12-25T175616.404.html
-
-###
-
-POST http://localhost:8080/intellipac/api/auth/login
-Content-Type: application/json
-Accept: application/json
-Content-Length: 45
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{ "username": "Fabrica1", "password": "123" }
-
-<> 2023-12-25T175247.404.html
-
-###
-
-POST http://localhost:8080/intellipac/api/auth/login
-Content-Type: application/json
-Accept: application/json
-Content-Length: 45
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{ "username": "Fabrica1", "password": "123" }
-
-###
-
-POST http://localhost:8080/intellipac/api/auth/login
-Content-Type: application/json
-Accept: application/json
-Content-Length: 45
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{ "username": "Fabrica1", "password": "123" }
 
 ###
 

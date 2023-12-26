@@ -5,15 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c16a9ce7-b8ca-4660-a077-28c4d0becec3" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/backend/dtos/OperadorDeLogisticaDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/backend/ejbs/OperadorDeLogisticaBean.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/backend/entities/OperadorDeLogistica.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/backend/exceptions/MyConstraintViolationException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/backend/ws/OperadorService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/backend/dtos/ClienteDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/backend/ejbs/ClienteBean.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/backend/entities/Cliente.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/backend/ws/ClienteService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/httpRequests/http-requests-log.http" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/httpRequests/http-requests-log.http" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/requests.http" beforeDir="false" afterPath="$PROJECT_DIR$/requests.http" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/backend/ejbs/ConfigBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/backend/ejbs/ConfigBean.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,29 +86,29 @@
       <recent name="D:\DAE\IntelliPac\backend" />
     </key>
   </component>
-  <component name="RunManager" selected="HTTP Request.requests | REQUEST JWT TOKEN">
+  <component name="RunManager" selected="HTTP Request.requests | getClienteDetails()">
+    <configuration name="requests | GET Clientes" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/requests.http" index="14" requestIdentifier="GET Clientes" runType="Run single request">
+      <method v="2" />
+    </configuration>
     <configuration name="requests | GET Operadores de Logistica" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/requests.http" index="13" requestIdentifier="GET Operadores de Logistica" runType="Run single request">
       <method v="2" />
     </configuration>
-    <configuration name="requests | POST Operadores de Logistica" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/requests.http" index="12" requestIdentifier="POST Operadores de Logistica" runType="Run single request">
+    <configuration name="requests | POST Clientes" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/requests.http" index="15" requestIdentifier="POST Clientes" runType="Run single request">
       <method v="2" />
     </configuration>
     <configuration name="requests | REQUEST JWT TOKEN" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/requests.http" index="10" requestIdentifier="REQUEST JWT TOKEN" runType="Run single request">
       <method v="2" />
     </configuration>
-    <configuration name="requests | #### Fabricantes" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/requests.http" index="5" requestIdentifier="#### Fabricantes" runType="Run single request">
-      <method v="2" />
-    </configuration>
-    <configuration name="requests | getOperadoresLogisticaDetails()" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/requests.http" index="13" requestIdentifier="getOperadoresLogisticaDetails()" runType="Run single request">
+    <configuration name="requests | getClienteDetails()" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/requests.http" index="16" requestIdentifier="getClienteDetails()" runType="Run single request">
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="HTTP Request.requests | REQUEST JWT TOKEN" />
+        <item itemvalue="HTTP Request.requests | getClienteDetails()" />
+        <item itemvalue="HTTP Request.requests | GET Clientes" />
+        <item itemvalue="HTTP Request.requests | POST Clientes" />
         <item itemvalue="HTTP Request.requests | GET Operadores de Logistica" />
-        <item itemvalue="HTTP Request.requests | POST Operadores de Logistica" />
-        <item itemvalue="HTTP Request.requests | getOperadoresLogisticaDetails()" />
-        <item itemvalue="HTTP Request.requests | #### Fabricantes" />
+        <item itemvalue="HTTP Request.requests | REQUEST JWT TOKEN" />
       </list>
     </recent_temporary>
   </component>

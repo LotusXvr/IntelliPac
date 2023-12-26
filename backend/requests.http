@@ -82,3 +82,22 @@ Content-Type: application/json
 ### getOperadoresLogisticaDetails()
 GET http://localhost:8080/intellipac/api/operadores/ValterLogo
 Accept: application/json
+
+### GET Clientes
+GET http://localhost:8080/intellipac/api/clientes
+Accept: application/json
+
+### POST Clientes
+POST http://localhost:8080/intellipac/api/clientes
+Content-Type: application/json
+
+{
+  "email": "marco@mail.com",
+  "name": "Marcio",
+  "username": "Marcyo",
+  "password": "123"
+}
+
+### getClienteDetails()
+GET http://localhost:8080/intellipac/api/clientes/Marcyo
+Accept: application/json
