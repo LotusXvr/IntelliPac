@@ -1,1 +1,0 @@
-Cannot invoke "java.lang.Long.longValue()" because the return value of "pt.ipleiria.estg.dei.ei.dae.backend.dtos.ProdutoDTO.getIdFabricante()" is null

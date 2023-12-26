@@ -7,6 +7,78 @@ Content-Type: application/json
 
 {
   "nome": "Produto (POST)",
-  "idFabricante": 1
+  "idFabricante": 2
 
 }
+
+###
+PUT http://localhost:8080/intellipac/api/produtos/2
+Content-Type: application/json
+
+{
+  "nome": "Produto (PUT)",
+  "idFabricante": 2
+
+}
+
+###
+DELETE http://localhost:8080/intellipac/api/produtos/2
+Accept: application/json
+
+
+
+##### Fabricantes
+GET http://localhost:8080/intellipac/api/fabricantes
+Accept: application/json
+
+###
+POST http://localhost:8080/intellipac/api/fabricantes
+Content-Type: application/json
+
+{
+  "nomeFabricante": "Fabricante (POST)"
+}
+
+###
+PUT http://localhost:8080/intellipac/api/fabricantes/3
+Content-Type: application/json
+
+{
+  "nomeFabricante": "Fabricante (PUT)"
+}
+
+###
+DELETE http://localhost:8080/intellipac/api/fabricantes/3
+Accept: application/json
+
+###
+GET http://localhost:8080/intellipac/api/fabricantes/1
+Accept: application/json
+
+### REQUEST JWT TOKEN
+POST http://localhost:8080/intellipac/api/auth/login
+Content-Type: application/json
+Accept: application/json
+
+{ "username": "Fabrica1", "password": "123" }
+
+
+### GET Operadores de Logistica
+GET http://localhost:8080/intellipac/api/operadores
+Accept: application/json
+
+### POST Operadores de Logistica
+POST http://localhost:8080/intellipac/api/operadores
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJGYWJyaWNhMSIsImlhdCI6MTcwMzUzMjIxNiwiZXhwIjoxNzAzNTM1ODE2fQ.QSN10txLm3lhwXK5HF9_FLFyG-frqurDJ7xfbqrUg6M8WheWC1aETiWNQQys-2kp
+Content-Type: application/json
+
+{
+ "email": "diogo@mail.com",
+ "name": "Diogo Diogo",
+ "username": "DiogoGuerra",
+ "password": "123"
+}
+
+### getOperadoresLogisticaDetails()
+GET http://localhost:8080/intellipac/api/operadores/ValterLogo
+Accept: application/json

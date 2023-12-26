@@ -1,34 +1,40 @@
 package pt.ipleiria.estg.dei.ei.dae.backend.dtos;
 
-public class ProdutoDTO {
-    private Long id;
-    private String nome;
-    private Long idFabricante; // Referência ao Fabricante de Produtos
+import java.io.Serializable;
 
+public class ProdutoDTO implements Serializable {
+    private long id;
+    private String nome;
+    private String fabricanteUsername; // Referência ao Fabricante de Produtos
     private String nomeFabricante;
 
     public ProdutoDTO() {
     }
 
-    public ProdutoDTO(Long id, String nome, Long idFabricante) {
+    public ProdutoDTO(long id, String nome) {
         this.id = id;
         this.nome = nome;
-        this.idFabricante = idFabricante;
     }
 
-    public ProdutoDTO(Long id, String nome, Long idFabricante, String nomeFabricante) {
+    public ProdutoDTO(long id, String nome, String fabricanteUsername) {
         this.id = id;
         this.nome = nome;
-        this.idFabricante = idFabricante;
+        this.fabricanteUsername = fabricanteUsername;
+    }
+
+    public ProdutoDTO(long id, String nome, String fabricanteUsername, String nomeFabricante) {
+        this.id = id;
+        this.nome = nome;
+        this.fabricanteUsername = fabricanteUsername;
         this.nomeFabricante = nomeFabricante;
     }
 
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -40,12 +46,12 @@ public class ProdutoDTO {
         this.nome = nome;
     }
 
-    public Long getIdFabricante() {
-        return idFabricante;
+    public String getFabricanteUsername() {
+        return fabricanteUsername;
     }
 
-    public void setIdFabricante(Long idFabricante) {
-        this.idFabricante = idFabricante;
+    public void setFabricanteUsername(String fabricanteUsername) {
+        this.fabricanteUsername = fabricanteUsername;
     }
 
     public String getNomeFabricante() {

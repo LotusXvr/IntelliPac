@@ -1,13 +1,13 @@
 package pt.ipleiria.estg.dei.ei.dae.backend.entities;
-
-
 import jakarta.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class SensorDispositivo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
     private String tipoSensorDispositivo;
     private String dadosSensor;
@@ -16,20 +16,25 @@ public class SensorDispositivo {
     @JoinColumn(name = "produto_id")
     private Produto produto;
 
+    @ManyToMany(mappedBy = "sensores")
+    private List<Embalagem> embalagens;
+
     public SensorDispositivo() {
+        this.embalagens = new ArrayList<>();
     }
 
     public SensorDispositivo(String tipoSensorDispositivo, String dadosSensor, Produto produto) {
         this.tipoSensorDispositivo = tipoSensorDispositivo;
         this.dadosSensor = dadosSensor;
         this.produto = produto;
+        this.embalagens = new ArrayList<>();
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -55,5 +60,13 @@ public class SensorDispositivo {
 
     public void setProduto(Produto produto) {
         this.produto = produto;
+    }
+
+    public List<Embalagem> getEmbalagens() {
+        return embalagens;
+    }
+
+    public void setEmbalagens(List<Embalagem> embalagens) {
+        this.embalagens = embalagens;
     }
 }

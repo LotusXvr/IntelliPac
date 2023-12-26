@@ -5,58 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c16a9ce7-b8ca-4660-a077-28c4d0becec3" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/httpRequests/2023-11-06T141333.200.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/httpRequests/2023-11-06T141506.404.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/httpRequests/2023-11-06T141513.200.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/httpRequests/2023-11-06T141608.500.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/httpRequests/2023-11-06T141707.500.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/httpRequests/2023-11-06T142000.500.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/httpRequests/2023-11-06T142135.200.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/httpRequests/2023-11-06T142145.500.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/httpRequests/2023-11-06T142432.500.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/httpRequests/2023-11-06T142552.500.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/httpRequests/2023-11-06T142607.409.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/httpRequests/http-client.cookies" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/httpRequests/http-requests-log.http" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/requests.http" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/backend/providers/CorsFilter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../frontend/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../frontend/.idea/frontend.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../frontend/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../frontend/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../frontend/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../frontend/intellipac-client/pages/create.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../frontend/intellipac-client/pages/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/375abd3c-dcab-4715-bb52-364ff6f5f583.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/375abd3c-dcab-4715-bb52-364ff6f5f583.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/375abd3c-dcab-4715-bb52-364ff6f5f583/storage_v2/_src_/database/intellipac.34bTlg/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/375abd3c-dcab-4715-bb52-364ff6f5f583/storage_v2/_src_/database/intellipac.34bTlg/schema/public.abK9xQ.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/backend/dtos/OperadorDeLogisticaDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/backend/ejbs/OperadorDeLogisticaBean.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/backend/entities/OperadorDeLogistica.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/backend/exceptions/MyConstraintViolationException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/backend/ws/OperadorService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/httpRequests/http-requests-log.http" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/httpRequests/http-requests-log.http" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/backend/dtos/ProdutoDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/backend/dtos/ProdutoDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requests.http" beforeDir="false" afterPath="$PROJECT_DIR$/requests.http" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/backend/ejbs/ConfigBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/backend/ejbs/ConfigBean.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/backend/ws/ProdutoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/backend/ws/ProdutoService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/.eslintrc.cjs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/.prettierrc.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/.vscode/extensions.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/package-lock.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/public/favicon.ico" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/App.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/assets/base.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/assets/logo.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/assets/main.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/components/HelloWorld.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/components/TheWelcome.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/components/WelcomeItem.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/components/icons/IconCommunity.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/components/icons/IconDocumentation.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/components/icons/IconEcosystem.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/components/icons/IconSupport.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/components/icons/IconTooling.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/main.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/vite.config.js" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,6 +30,12 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
+  <component name="KubernetesApiProvider">{
+  &quot;isMigrated&quot;: true
+}</component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
@@ -88,29 +51,33 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/dae/IntelliPac/frontend",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "reference.settings.project.maven.importing",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;HTTP Request.requests | #9.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.requests | Fabricantes.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.requests | Produtos.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/dae/IntelliPac/frontend&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "postgresql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;postgresql&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="pt.ipleiria.estg.dei.ei.dae.backend.dtos" />
@@ -121,19 +88,38 @@
       <recent name="D:\DAE\IntelliPac\backend" />
     </key>
   </component>
-  <component name="RunManager" selected="HTTP Request.requests | Produtos">
-    <configuration name="requests | Produtos" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/requests.http" requestIdentifier="Produtos" runType="Run single request">
+  <component name="RunManager" selected="HTTP Request.requests | REQUEST JWT TOKEN">
+    <configuration name="requests | GET Operadores de Logistica" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/requests.http" index="13" requestIdentifier="GET Operadores de Logistica" runType="Run single request">
       <method v="2" />
     </configuration>
-    <configuration name="requests | #2" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/requests.http" index="2" requestIdentifier="#2" runType="Run single request">
+    <configuration name="requests | POST Operadores de Logistica" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/requests.http" index="12" requestIdentifier="POST Operadores de Logistica" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="requests | REQUEST JWT TOKEN" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/requests.http" index="10" requestIdentifier="REQUEST JWT TOKEN" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="requests | #### Fabricantes" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/requests.http" index="5" requestIdentifier="#### Fabricantes" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="requests | getOperadoresLogisticaDetails()" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/requests.http" index="13" requestIdentifier="getOperadoresLogisticaDetails()" runType="Run single request">
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="HTTP Request.requests | Produtos" />
-        <item itemvalue="HTTP Request.requests | #2" />
+        <item itemvalue="HTTP Request.requests | REQUEST JWT TOKEN" />
+        <item itemvalue="HTTP Request.requests | GET Operadores de Logistica" />
+        <item itemvalue="HTTP Request.requests | POST Operadores de Logistica" />
+        <item itemvalue="HTTP Request.requests | getOperadoresLogisticaDetails()" />
+        <item itemvalue="HTTP Request.requests | #### Fabricantes" />
       </list>
     </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="jdk-17.0.9-corretto-17.0.9-3183f394aec4-8f899f12" />
+      </set>
+    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -147,11 +133,35 @@
       <workItem from="1698943851384" duration="1979000" />
       <workItem from="1699030681425" duration="1150000" />
       <workItem from="1699032079983" duration="8262000" />
-      <workItem from="1699278245557" duration="3557000" />
+      <workItem from="1699278245557" duration="4008000" />
+      <workItem from="1699960034368" duration="14000" />
+      <workItem from="1700212971720" duration="26000" />
+      <workItem from="1700213020214" duration="249000" />
+      <workItem from="1701275640008" duration="237000" />
+      <workItem from="1701275943727" duration="3688000" />
+      <workItem from="1702986214133" duration="3515000" />
+      <workItem from="1703007768504" duration="2069000" />
+      <workItem from="1703092600762" duration="7512000" />
+      <workItem from="1703190731359" duration="3521000" />
+      <workItem from="1703361839320" duration="1285000" />
+      <workItem from="1703458666254" duration="2637000" />
+      <workItem from="1703461533367" duration="2466000" />
+      <workItem from="1703464015383" duration="137000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>
