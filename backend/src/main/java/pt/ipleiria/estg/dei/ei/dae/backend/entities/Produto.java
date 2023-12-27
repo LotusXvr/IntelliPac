@@ -11,9 +11,8 @@ import java.util.List;
 @Entity
 public class Produto extends ProdutoCatalogo implements Serializable {
 
-
-    @Column(unique = true)
-    private String serialNumber;
+    @Transient
+    private Long serialNumber;
     @ManyToMany
     @JoinTable(
             name = "produto_embalagem",
@@ -33,21 +32,18 @@ public class Produto extends ProdutoCatalogo implements Serializable {
 
     public Produto() {
         embalagemDeProdutos = new ArrayList<>();
-        generateSerialNumber();
         //sensoresDispositivos = new ArrayList<>();
     }
 
     public Produto(String nomeProduto, FabricanteDeProdutos fabricante) {
         super(nomeProduto, fabricante);
+        this.nomeProduto = nomeProduto;
         this.embalagemDeProdutos = new ArrayList<>();
-        generateSerialNumber();
     }
 
-    @PrePersist
-    private void generateSerialNumber() {
-        // You can use a more sophisticated logic to generate serial numbers
-        // For simplicity, let's assume a basic logic using the current timestamp and the product ID
-        this.serialNumber = "SN" + System.currentTimeMillis() + "-" + this.getId();
+    @Override
+    public String getNomeProduto() {
+        return nomeProduto + " - " +serialNumber;
     }
     public List<EmbalagemDeProduto> getEmbalagemDeProdutos() {
         return embalagemDeProdutos;
@@ -56,4 +52,12 @@ public class Produto extends ProdutoCatalogo implements Serializable {
     public void setEmbalagemDeProdutos(List<EmbalagemDeProduto> embalagemDeProdutos) {
         this.embalagemDeProdutos = embalagemDeProdutos;
     }
+
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "produto_sequence")
+    @SequenceGenerator(name = "produto_sequence", sequenceName = "produto_sequence", allocationSize = 1)
+    @Column(unique = true, nullable = false)
+    public Long getSerialNumber() {
+        return serialNumber;
+    }
+
 }

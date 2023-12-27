@@ -14,7 +14,7 @@ import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyEntityNotFoundException;
 import java.util.List;
 
 @Stateless
-public class ProdutoBean {
+public class ProdutoCatalogoBean {
     @PersistenceContext
     private EntityManager entityManager;
 
