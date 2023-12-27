@@ -18,6 +18,7 @@ public class Produto extends ProdutoCatalogo implements Serializable {
     @JoinTable(
             name = "produto_embalagem",
             joinColumns = @JoinColumn(
+                    // produto?
                     name = "product_id",
                     referencedColumnName = "id"
             ),

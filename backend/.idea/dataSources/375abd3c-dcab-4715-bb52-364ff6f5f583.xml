@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataSource name="intellipac">
-  <database-model serializer="dbm" dbms="POSTGRES" family-id="POSTGRES" format-version="4.45">
+  <database-model serializer="dbm" dbms="POSTGRES" family-id="POSTGRES" format-version="4.49">
     <root id="1">
       <DateStyle>mdy</DateStyle>
       <IntrospectionStateNumber>746</IntrospectionStateNumber>
