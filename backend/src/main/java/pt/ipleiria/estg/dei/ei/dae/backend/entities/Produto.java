@@ -9,18 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Produto implements Serializable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+public class Produto extends ProdutoCatalogo implements Serializable {
 
-    private String nomeProduto;
 
-    @ManyToOne
-    @JoinColumn(name = "fabricante_id")
-    @NotNull
-    private FabricanteDeProdutos fabricante;
-
+    @Column(unique = true)
+    private String serialNumber;
     @ManyToMany
     @JoinTable(
             name = "produto_embalagem",
@@ -35,44 +28,27 @@ public class Produto implements Serializable {
     )
     private List<EmbalagemDeProduto> embalagemDeProdutos;
 
-  //  @OneToMany(mappedBy = "produto")
+    //  @OneToMany(mappedBy = "produto")
    // private List<SensorDispositivo> sensoresDispositivos;
 
     public Produto() {
         embalagemDeProdutos = new ArrayList<>();
+        generateSerialNumber();
         //sensoresDispositivos = new ArrayList<>();
     }
 
     public Produto(String nomeProduto, FabricanteDeProdutos fabricante) {
-        this.nomeProduto = nomeProduto;
-        this.fabricante = fabricante;
+        super(nomeProduto, fabricante);
         this.embalagemDeProdutos = new ArrayList<>();
+        generateSerialNumber();
     }
 
-    public long getId() {
-        return id;
+    @PrePersist
+    private void generateSerialNumber() {
+        // You can use a more sophisticated logic to generate serial numbers
+        // For simplicity, let's assume a basic logic using the current timestamp and the product ID
+        this.serialNumber = "SN" + System.currentTimeMillis() + "-" + this.getId();
     }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getNomeProduto() {
-        return nomeProduto;
-    }
-
-    public void setNomeProduto(String nomeProduto) {
-        this.nomeProduto = nomeProduto;
-    }
-
-    public FabricanteDeProdutos getFabricante() {
-        return fabricante;
-    }
-
-    public void setFabricante(FabricanteDeProdutos fabricante) {
-        this.fabricante = fabricante;
-    }
-
     public List<EmbalagemDeProduto> getEmbalagemDeProdutos() {
         return embalagemDeProdutos;
     }
