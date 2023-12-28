@@ -12,7 +12,7 @@ public class ProdutoCatalogo implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    private String nomeProduto;
+    protected String nomeProduto;
 
     @ManyToOne
     @JoinColumn(name = "fabricante_id")

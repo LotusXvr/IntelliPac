@@ -13,7 +13,7 @@ import java.util.logging.Logger;
 public class ConfigBean {
 
     @EJB
-    private ProdutoBean produtoBean;
+    private ProdutoCatalogoBean produtoCatalogoBean;
 
     @EJB
     FabricanteDeProdutosBean fabricanteDeProdutosBean;
@@ -31,8 +31,8 @@ public class ConfigBean {
             fabricanteDeProdutosBean.create("Fabrica1", "123", "fabricante 1", "fabricante1@mail.pt");
             fabricanteDeProdutosBean.create("Fabrica2", "123", "fabricante 2", "fabricante2@mail.pt");
 
-            produtoBean.create("produto 1", "Fabrica1");
-            produtoBean.create("produto 2", "Fabrica2");
+            produtoCatalogoBean.create("produto 1", "Fabrica1");
+            produtoCatalogoBean.create("produto 2", "Fabrica2");
 
             operadorDeLogisticaBean.create("ValterLogo", "123", "Valte", "valtefutebole@mail.pt");
             operadorDeLogisticaBean.create("Joaoz", "123", "Joao", "joao@mail.pt");

@@ -5,7 +5,7 @@ import jakarta.ejb.EJB;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import pt.ipleiria.estg.dei.ei.dae.backend.dtos.ProdutoDTO;
-import pt.ipleiria.estg.dei.ei.dae.backend.ejbs.ProdutoBean;
+import pt.ipleiria.estg.dei.ei.dae.backend.ejbs.ProdutoCatalogoBean;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.Produto;
 import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyEntityExistsException;
 import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyEntityNotFoundException;
@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 @Consumes({MediaType.APPLICATION_JSON}) // injects header “Accept: application/json”
 public class ProdutoService {
     @EJB
-    private ProdutoBean produtoBean;
+    private ProdutoCatalogoBean produtoCatalogoBean;
 
     // Converts an entity Student to a DTO Student class
     private ProdutoDTO toDTO(Produto produto) {
@@ -36,31 +36,31 @@ public class ProdutoService {
     @GET // means: to call this endpoint, we need to use the HTTP GET method
     @Path("/") // means: the relative url path is “/api/produtos/”
     public List<ProdutoDTO> getAllProducts() {
-        return toDTOs(produtoBean.getAllProducts());
+        return toDTOs(produtoCatalogoBean.getAllProducts());
     }
 
     @POST
     @Path("/")
     public void createNewProduct(ProdutoDTO produtoDTO) throws MyEntityExistsException, MyEntityNotFoundException {
-        produtoBean.create(produtoDTO.getNome(), produtoDTO.getFabricanteUsername());
+        produtoCatalogoBean.create(produtoDTO.getNome(), produtoDTO.getFabricanteUsername());
     }
 
     @PUT
     @Path("{id}")
     public void updateProduct(@PathParam("id") long id, ProdutoDTO produtoDTO) throws MyEntityNotFoundException {
-        produtoBean.update(id, produtoDTO.getNome(), produtoDTO.getFabricanteUsername());
+        produtoCatalogoBean.update(id, produtoDTO.getNome(), produtoDTO.getFabricanteUsername());
     }
 
     @DELETE
     @Path("{id}")
     public void deleteProduct(@PathParam("id") long id) throws MyEntityNotFoundException {
-        produtoBean.remove(id);
+        produtoCatalogoBean.remove(id);
     }
 
     @GET
     @Path("{id}")
     public ProdutoDTO getProductDetails(@PathParam("id") long id) throws MyEntityNotFoundException {
-        return toDTO(produtoBean.find(id));
+        return toDTO(produtoCatalogoBean.find(id));
     }
 
 
