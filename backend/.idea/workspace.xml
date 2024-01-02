@@ -7,8 +7,8 @@
     <list default="true" id="c16a9ce7-b8ca-4660-a077-28c4d0becec3" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/backend/ejbs/SensorBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/backend/ejbs/SensorBean.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/backend/entities/Sensor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/backend/entities/Sensor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/backend/ws/SensorService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/backend/ws/SensorService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/intellipac-client/pages/sensores/create.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/intellipac-client/pages/sensores/create.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

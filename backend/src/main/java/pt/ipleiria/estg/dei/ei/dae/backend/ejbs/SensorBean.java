@@ -40,7 +40,14 @@ public class SensorBean {
         return entityManager.createNamedQuery("getAllSensor", Sensor.class).getResultList();
     }
 
-    public void update(Sensor sensor) {
+    public void update(long idSensor, String tipo, String unidade, String valor) {
+        Sensor sensor = findBySensorId(idSensor);
+        if (sensor == null) {
+            throw new IllegalArgumentException("Sensor with id " + idSensor + " not found.");
+        }
+        sensor.setTipo(tipo);
+        sensor.setUnidade(unidade);
+        sensor.setValor(valor);
         entityManager.merge(sensor);
     }
 

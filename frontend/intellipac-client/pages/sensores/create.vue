@@ -47,8 +47,6 @@ const config = useRuntimeConfig()
 const api = config.public.API_URL
 const message = ref("")
 
-
-
 const isFormValid = computed(() => {
     return true
 })

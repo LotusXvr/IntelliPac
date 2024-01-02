@@ -42,7 +42,7 @@ public class SensorService {
     @GET
     @Path("{idSensor}")
     public SensorDTO getSensorDetails(@PathParam("idSensor") long idSensor) {
-        Sensor sensor = sensorBean.find(idSensor);
+        Sensor sensor = sensorBean.findBySensorId(idSensor);
         return toDTO(sensor);
     }
 
@@ -64,6 +64,18 @@ public class SensorService {
             return Response.status(Response.Status.BAD_REQUEST).build();
         }
         return Response.status(Response.Status.CREATED).build();
+    }
+
+    @PUT
+    @Path("{idSensor}")
+    public Response updateSensor(@PathParam("idSensor") long idSensor, SensorDTO sensorDTO) {
+        try {
+            sensorBean.update(sensorDTO.getIdSensor(), sensorDTO.getTipo(), sensorDTO.getUnidade(), sensorDTO.getValor());
+            return Response.status(Response.Status.OK).build();
+        } catch (
+                Exception e) {
+            return Response.status(Response.Status.BAD_REQUEST).entity("ERROR_UPDATING_SUBJECT").build();
+        }
 
     }
 
