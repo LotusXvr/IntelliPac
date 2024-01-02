@@ -5,13 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c16a9ce7-b8ca-4660-a077-28c4d0becec3" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/backend/dtos/ObservacaoDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/backend/ejbs/ObservacaoBean.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/backend/entities/Observacao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/backend/dtos/SensorDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/375abd3c-dcab-4715-bb52-364ff6f5f583.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/375abd3c-dcab-4715-bb52-364ff6f5f583.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/375abd3c-dcab-4715-bb52-364ff6f5f583/storage_v2/_src_/database/intellipac.34bTlg/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/375abd3c-dcab-4715-bb52-364ff6f5f583/storage_v2/_src_/database/intellipac.34bTlg/schema/public.abK9xQ.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/375abd3c-dcab-4715-bb52-364ff6f5f583.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/375abd3c-dcab-4715-bb52-364ff6f5f583/storage_v2/_src_/database/intellipac.34bTlg/schema/public.abK9xQ.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/backend/dtos/SensorDispositivoDTO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/backend/ejbs/SensorDispositivoBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/backend/ejbs/SensorBean.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/backend/entities/Embalagem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/backend/entities/Embalagem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/backend/entities/Observacao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/backend/entities/Observacao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/backend/entities/SensorDispositivo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/backend/entities/Sensor.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -15,7 +15,7 @@ public class Observacao {
 
     @ManyToOne
     @JoinColumn(name = "sensor_id")
-    private SensorDispositivo sensor;
+    private Sensor sensor;
 
     @ManyToOne
     @JoinColumn(name = "product_id")
@@ -28,7 +28,7 @@ public class Observacao {
     public Observacao() {
     }
 
-    public Observacao(String valor, SensorDispositivo sensor, Produto produtoFisico, Embalagem embalagem) {
+    public Observacao(String valor, Sensor sensor, Produto produtoFisico, Embalagem embalagem) {
         this.valor = valor;
         this.sensor = sensor;
         this.produtoFisico = produtoFisico;
@@ -51,11 +51,11 @@ public class Observacao {
         this.valor = valor;
     }
 
-    public SensorDispositivo getSensor() {
+    public Sensor getSensor() {
         return sensor;
     }
 
-    public void setSensor(SensorDispositivo sensor) {
+    public void setSensor(Sensor sensor) {
         this.sensor = sensor;
     }
 

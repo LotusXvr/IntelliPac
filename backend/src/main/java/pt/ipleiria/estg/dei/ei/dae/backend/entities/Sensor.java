@@ -3,9 +3,19 @@ import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
-public class SensorDispositivo {
 
+
+@Table(name = "sensor"
+        , uniqueConstraints = @UniqueConstraint(columnNames = {"id"})
+)
+@NamedQueries({
+        @NamedQuery(
+                name = "getAllSensor",
+                query = "SELECT s FROM Sensor s ORDER BY s.id" // JPQL
+        )
+})
+@Entity
+public class Sensor {
 
     // id
     @Id
@@ -25,11 +35,11 @@ public class SensorDispositivo {
     private List<Embalagem> embalagens;
     // relação de oneToMany com Observação e ManyToOne ao contrario
 
-    public SensorDispositivo() {
+    public Sensor() {
         this.embalagens = new ArrayList<>();
     }
 
-    public SensorDispositivo(int id, String value) {
+    public Sensor(int id, String value) {
         this.id = id;
         this.value = value;
         this.embalagens = new ArrayList<>();

@@ -28,7 +28,7 @@ public class Embalagem {
                     referencedColumnName = "id"
             )
     )
-    private List<SensorDispositivo> sensores;
+    private List<Sensor> sensores;
 
     public Embalagem() {
         this.sensores = new ArrayList<>();
@@ -55,11 +55,11 @@ public class Embalagem {
         this.material = material;
     }
 
-    public List<SensorDispositivo> getSensores() {
+    public List<Sensor> getSensores() {
         return sensores;
     }
 
-    public void setSensores(List<SensorDispositivo> sensores) {
+    public void setSensores(List<Sensor> sensores) {
         this.sensores = sensores;
     }
 
