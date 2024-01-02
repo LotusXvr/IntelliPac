@@ -1,11 +1,9 @@
 package pt.ipleiria.estg.dei.ei.dae.backend.ws;
 
 import jakarta.ejb.EJB;
-import jakarta.ws.rs.Consumes;
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
 import pt.ipleiria.estg.dei.ei.dae.backend.dtos.SensorDTO;
 import pt.ipleiria.estg.dei.ei.dae.backend.ejbs.SensorBean;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.Sensor;
@@ -22,6 +20,7 @@ public class SensorService {
 
     private SensorDTO toDTO(Sensor sensor) {
         return new SensorDTO(
+                sensor.getIdSensor(),
                 sensor.getValor(),
                 sensor.getTipo(),
                 sensor.getUnidade()
@@ -37,6 +36,24 @@ public class SensorService {
     @Path("/") // means: the relative url path is “/api/sensores/”
     public List<SensorDTO> getAllSensores() {
         return toDTOs(sensorBean.getAll());
+    }
+
+    @GET
+    @Path("{idSensor}")
+    public SensorDTO getSensorDetails(@PathParam("idSensor") long idSensor) {
+        Sensor sensor = sensorBean.find(idSensor);
+        return toDTO(sensor);
+    }
+
+    @DELETE
+    @Path("{idSensor}")
+    public Response deleteSensor(@PathParam("idSensor") long idSensor) {
+        try{
+            sensorBean.remove(idSensor);
+            return Response.status(Response.Status.OK).build();
+        } catch (Exception e) {
+            return Response.status(Response.Status.BAD_REQUEST).entity("ERROR_DELETE_SENSOR").build();
+        }
     }
 
 }

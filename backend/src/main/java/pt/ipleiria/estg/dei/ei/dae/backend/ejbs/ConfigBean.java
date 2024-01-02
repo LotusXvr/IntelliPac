@@ -40,13 +40,13 @@ public class ConfigBean {
             operadorDeLogisticaBean.create("ValterLogo", "123", "Valte", "valtefutebole@mail.pt");
             operadorDeLogisticaBean.create("Joaoz", "123", "Joao", "joao@mail.pt");
 
-            sensorBean.create("Temperatura", "20", "C");
-            sensorBean.create("Humidade", "50", "%");
-            sensorBean.create("Luminosidade", "100", "LUX");
-            sensorBean.create("Pressao", "1000", "hPa");
-            sensorBean.create("Velocidade do Vento", "10", "km/h");
-            sensorBean.create("Direcao do Vento", "Norte", "N");
-            sensorBean.create("Precipitacao", "0", "mm");
+            sensorBean.create(1,"Temperatura", "20", "C");
+            sensorBean.create(2,"Humidade", "50", "%");
+            sensorBean.create(3,"Luminosidade", "100", "LUX");
+            sensorBean.create(4, "Pressao", "1000", "hPa");
+            sensorBean.create(5, "Velocidade do Vento", "10", "km/h");
+            sensorBean.create(6, "Direcao do Vento", "Norte", "N");
+            sensorBean.create(7, "Precipitacao", "0", "mm");
 
 
 

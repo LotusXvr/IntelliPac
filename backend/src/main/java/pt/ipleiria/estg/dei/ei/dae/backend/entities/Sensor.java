@@ -22,6 +22,7 @@ public class Sensor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     // id_sensor
+    private long idSensor;
     // timestamp
     // tipo (temperatura, humidade, etc)
     private String tipo;
@@ -42,7 +43,8 @@ public class Sensor {
         this.embalagens = new ArrayList<>();
     }
 
-    public Sensor(String tipo, String valor, String unidade) {
+    public Sensor(long idSensor, String tipo, String valor, String unidade) {
+        this.idSensor = idSensor;
         this.tipo = tipo;
         this.valor = valor;
         this.unidade = unidade;
@@ -64,6 +66,14 @@ public class Sensor {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public long getIdSensor() {
+        return idSensor;
+    }
+
+    public void setIdSensor(long idSensor) {
+        this.idSensor = idSensor;
     }
 
     public String getTipo() {

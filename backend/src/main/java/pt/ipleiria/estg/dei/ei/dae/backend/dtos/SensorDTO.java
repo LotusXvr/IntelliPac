@@ -9,6 +9,7 @@ import java.util.List;
 public class SensorDTO {
 
     private long id;
+    private long idSensor;
     private String valor;
     private String tipo;
     private String unidade;
@@ -18,7 +19,8 @@ public class SensorDTO {
         this.embalagens = new ArrayList<>();
     }
 
-    public SensorDTO( String valor, String tipo, String unidade) {
+    public SensorDTO(long idSensor, String valor, String tipo, String unidade) {
+        this.idSensor = idSensor;
         this.valor = valor;
         this.tipo = tipo;
         this.unidade = unidade;
@@ -40,6 +42,14 @@ public class SensorDTO {
     public void setId(long id) {
         this.id = id;
     }
+
+        public long getIdSensor() {
+            return idSensor;
+        }
+
+        public void setIdSensor(long idSensor) {
+            this.idSensor = idSensor;
+        }
 
     public String getValor() {
         return valor;

@@ -5,21 +5,23 @@
         <h2>Sensores</h2>
         <table>
             <tr>
+                <th>id sensor</th>
                 <th>Tipo</th>
                 <th>Unidade</th>
                 <th>Valor</th>
                 <th>Ações</th>
             </tr>
             <tr v-for="sensor in sensores">
+                <td>{{ sensor.idSensor }}</td>
                 <td>{{ sensor.tipo }}</td>
                 <td>{{ sensor.unidade }}</td>
                 <td>{{ sensor.valor }}</td>
                 <td>
-                    <nuxt-link :to="`/sensoers/${sensor.id}`">Detalhes</nuxt-link>
+                    <nuxt-link :to="`/sensores/${sensor.idSensor}`">Detalhes</nuxt-link>
                     |
-                    <nuxt-link :to="'/sensores/edit/' + sensor.id">Editar</nuxt-link>
+                    <nuxt-link :to="'/sensores/edit/' + sensor.idSensor">Editar</nuxt-link>
                     |
-                    <button @click="deleteProduto(sensor.id)">Excluir</button>
+                    <button @click="deleteProduto(sensor.idSensor)">Excluir</button>
                 </td>
             </tr>
         </table>
