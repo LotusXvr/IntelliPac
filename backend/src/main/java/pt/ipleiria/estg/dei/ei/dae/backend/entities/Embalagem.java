@@ -20,6 +20,9 @@ public class Embalagem {
                     name = "embalagem_id",
                     referencedColumnName = "id"
             ),
+            // adicionalmente terá um data de instalação
+            // para verificar se o sensor está atualmente em x embalagem
+            // ou se já está desatualizado
             inverseJoinColumns = @JoinColumn(
                     name = "sensor_id",
                     referencedColumnName = "id"

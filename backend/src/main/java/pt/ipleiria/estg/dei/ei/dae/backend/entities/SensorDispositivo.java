@@ -5,30 +5,36 @@ import java.util.List;
 
 @Entity
 public class SensorDispositivo {
+
+
+    // id
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    // id_sensor
+    // timestamp
+    // type (temperatura, humidade, etc)
+    // value
+    private String value;
+    // unit (ºC, %, etc)
+    // id_embalagem
+    // id_encomenda
 
-    private String tipoSensorDispositivo;
-    private String dadosSensor;
-
-    @ManyToOne
-    @JoinColumn(name = "produto_id")
-    private Produto produto;
-
+    // relação com embalagem de many to many e vice versa
     @ManyToMany(mappedBy = "sensores")
     private List<Embalagem> embalagens;
+    // relação de oneToMany com Observação e ManyToOne ao contrario
 
     public SensorDispositivo() {
         this.embalagens = new ArrayList<>();
     }
 
-    public SensorDispositivo(String tipoSensorDispositivo, String dadosSensor, Produto produto) {
-        this.tipoSensorDispositivo = tipoSensorDispositivo;
-        this.dadosSensor = dadosSensor;
-        this.produto = produto;
+    public SensorDispositivo(int id, String value) {
+        this.id = id;
+        this.value = value;
         this.embalagens = new ArrayList<>();
     }
+
 
     public long getId() {
         return id;
@@ -38,28 +44,12 @@ public class SensorDispositivo {
         this.id = id;
     }
 
-    public String getTipoSensorDispositivo() {
-        return tipoSensorDispositivo;
+    public String getValue() {
+        return value;
     }
 
-    public void setTipoSensorDispositivo(String tipoSensorDispositivo) {
-        this.tipoSensorDispositivo = tipoSensorDispositivo;
-    }
-
-    public String getDadosSensor() {
-        return dadosSensor;
-    }
-
-    public void setDadosSensor(String dadosSensor) {
-        this.dadosSensor = dadosSensor;
-    }
-
-    public Produto getProduto() {
-        return produto;
-    }
-
-    public void setProduto(Produto produto) {
-        this.produto = produto;
+    public void setValue(String value) {
+        this.value = value;
     }
 
     public List<Embalagem> getEmbalagens() {
