@@ -6,6 +6,8 @@
     <br />
     Please visit our
     <nuxt-link to="/fabricantes">Fabricantes</nuxt-link>
+    <br />
+    <nuxt-link to="/sensores">Sensores</nuxt-link>
   </div>
 </template>
 <script setup lang="ts"></script>

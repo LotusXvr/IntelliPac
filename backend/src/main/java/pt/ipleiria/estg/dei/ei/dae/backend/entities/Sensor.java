@@ -23,10 +23,13 @@ public class Sensor {
     private long id;
     // id_sensor
     // timestamp
-    // type (temperatura, humidade, etc)
-    // value
-    private String value;
-    // unit (ºC, %, etc)
+    // tipo (temperatura, humidade, etc)
+    private String tipo;
+    // valor
+    // No value ainda não sei se é string ou int
+    private String valor;
+    // unidade (ºC, %, etc)
+    private String unidade;
     // id_embalagem
     // id_encomenda
 
@@ -39,12 +42,21 @@ public class Sensor {
         this.embalagens = new ArrayList<>();
     }
 
-    public Sensor(int id, String value) {
-        this.id = id;
-        this.value = value;
+    public Sensor(String tipo, String valor, String unidade) {
+        this.tipo = tipo;
+        this.valor = valor;
+        this.unidade = unidade;
         this.embalagens = new ArrayList<>();
     }
 
+
+    public List<Embalagem> getEmbalagens() {
+        return embalagens;
+    }
+
+    public void setEmbalagens(List<Embalagem> embalagens) {
+        this.embalagens = embalagens;
+    }
 
     public long getId() {
         return id;
@@ -54,19 +66,27 @@ public class Sensor {
         this.id = id;
     }
 
-    public String getValue() {
-        return value;
+    public String getTipo() {
+        return tipo;
     }
 
-    public void setValue(String value) {
-        this.value = value;
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
-    public List<Embalagem> getEmbalagens() {
-        return embalagens;
+    public String getValor() {
+        return valor;
     }
 
-    public void setEmbalagens(List<Embalagem> embalagens) {
-        this.embalagens = embalagens;
+    public void setValor(String valor) {
+        this.valor = valor;
+    }
+
+    public String getUnidade() {
+        return unidade;
+    }
+
+    public void setUnidade(String unidade) {
+        this.unidade = unidade;
     }
 }
