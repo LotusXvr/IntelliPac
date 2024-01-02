@@ -17,11 +17,11 @@
                 <td>{{ sensor.unidade }}</td>
                 <td>{{ sensor.valor }}</td>
                 <td>
-                    <nuxt-link :to="`/sensores/${sensor.idSensor}`">Detalhes</nuxt-link>
+                    <nuxt-link :to="`/sensores/${sensor.id}`">Detalhes</nuxt-link>
                     |
-                    <nuxt-link :to="'/sensores/edit/' + sensor.idSensor">Editar</nuxt-link>
+                    <nuxt-link :to="'/sensores/edit/' + sensor.id">Editar</nuxt-link>
                     |
-                    <button @click="deleteProduto(sensor.idSensor)">Excluir</button>
+                    <button @click="deleteProduto(sensor.id)">Excluir</button>
                 </td>
             </tr>
         </table>

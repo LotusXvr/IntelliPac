@@ -21,6 +21,7 @@ public class SensorService {
 
     private SensorDTO toDTO(Sensor sensor) {
         return new SensorDTO(
+                sensor.getId(),
                 sensor.getIdSensor(),
                 sensor.getValor(),
                 sensor.getTipo(),
@@ -40,9 +41,9 @@ public class SensorService {
     }
 
     @GET
-    @Path("{idSensor}")
-    public SensorDTO getSensorDetails(@PathParam("idSensor") long idSensor) {
-        Sensor sensor = sensorBean.findBySensorId(idSensor);
+    @Path("{id}")
+    public SensorDTO getSensorDetails(@PathParam("id") long id) {
+        Sensor sensor = sensorBean.find(id);
         return toDTO(sensor);
     }
 
@@ -67,23 +68,37 @@ public class SensorService {
     }
 
     @PUT
-    @Path("{idSensor}")
-    public Response updateSensor(@PathParam("idSensor") long idSensor, SensorDTO sensorDTO) {
+    @Path("{id}")
+    public Response updateSensor(@PathParam("id") long id, SensorDTO sensorDTO) {
         try {
-            sensorBean.update(sensorDTO.getIdSensor(), sensorDTO.getTipo(), sensorDTO.getUnidade(), sensorDTO.getValor());
-            return Response.status(Response.Status.OK).build();
-        } catch (
-                Exception e) {
-            return Response.status(Response.Status.BAD_REQUEST).entity("ERROR_UPDATING_SUBJECT").build();
-        }
+            var sensor = sensorBean.find(id);
+            if (sensor == null) {
+                return Response.status(Response.Status.NOT_FOUND).build();
+            }
 
+            sensorBean.update(
+                    id,
+                    sensorDTO.getIdSensor(),
+                    sensorDTO.getTipo(),
+                    sensorDTO.getUnidade(),
+                    sensorDTO.getValor()
+            );
+            return Response.status(Response.Status.OK).build();
+        } catch (Exception e) {
+            return Response.status(Response.Status.BAD_REQUEST).entity("ERROR_UPDATE_SENSOR").build();
+        }
     }
 
     @DELETE
-    @Path("{idSensor}")
-    public Response deleteSensor(@PathParam("idSensor") long idSensor) {
+    @Path("{id}")
+    public Response deleteSensor(@PathParam("id") long id) {
         try {
-            sensorBean.remove(idSensor);
+            var sensor = sensorBean.find(id);
+            if (sensor == null) {
+                return Response.status(Response.Status.NOT_FOUND).build();
+            }
+
+            sensorBean.remove(id);
             return Response.status(Response.Status.OK).build();
         } catch (Exception e) {
             return Response.status(Response.Status.BAD_REQUEST).entity("ERROR_DELETE_SENSOR").build();

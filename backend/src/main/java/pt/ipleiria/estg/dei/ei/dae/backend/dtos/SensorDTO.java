@@ -19,7 +19,8 @@ public class SensorDTO {
         this.embalagens = new ArrayList<>();
     }
 
-    public SensorDTO(long idSensor, String valor, String tipo, String unidade) {
+    public SensorDTO(long id, long idSensor, String valor, String tipo, String unidade) {
+        this.id = id;
         this.idSensor = idSensor;
         this.valor = valor;
         this.tipo = tipo;
@@ -43,13 +44,13 @@ public class SensorDTO {
         this.id = id;
     }
 
-        public long getIdSensor() {
-            return idSensor;
-        }
+    public long getIdSensor() {
+        return idSensor;
+    }
 
-        public void setIdSensor(long idSensor) {
-            this.idSensor = idSensor;
-        }
+    public void setIdSensor(long idSensor) {
+        this.idSensor = idSensor;
+    }
 
     public String getValor() {
         return valor;

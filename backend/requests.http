@@ -101,3 +101,38 @@ Content-Type: application/json
 ### getClienteDetails()
 GET http://localhost:8080/intellipac/api/clientes/Marcyo
 Accept: application/json
+
+
+### GET SENSORES
+GET http://localhost:8080/intellipac/api/sensores
+Accept: application/json
+
+### POST SENSORES
+POST http://localhost:8080/intellipac/api/sensores
+Content-Type: application/json
+
+{
+  "idSensor": 8,
+  "tipo": "Temperatura",
+  "valor": "20",
+  "unidade": "Celsius"
+}
+
+### DELETE SENSORES
+DELETE http://localhost:8080/intellipac/api/sensores/8
+Accept: application/json
+
+### UPDATE SENSORES
+PUT http://localhost:8080/intellipac/api/sensores/1
+Content-Type: application/json
+
+{
+  "idSensor": 20,
+  "tipo": "Temperatura",
+  "valor": "20",
+  "unidade": "CE"
+}
+
+### GET SENSORES BY ID
+GET http://localhost:8080/intellipac/api/sensores/1
+Accept: application/json

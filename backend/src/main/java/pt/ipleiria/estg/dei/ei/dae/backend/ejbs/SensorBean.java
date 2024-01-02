@@ -18,7 +18,7 @@ public class SensorBean {
         entityManager.persist(sensor);
     }
 
-    public Sensor find(Long id) {
+    public Sensor find(long id) {
         return entityManager.find(Sensor.class, id);
     }
 
@@ -40,11 +40,10 @@ public class SensorBean {
         return entityManager.createNamedQuery("getAllSensor", Sensor.class).getResultList();
     }
 
-    public void update(long idSensor, String tipo, String unidade, String valor) {
-        Sensor sensor = findBySensorId(idSensor);
-        if (sensor == null) {
-            throw new IllegalArgumentException("Sensor with id " + idSensor + " not found.");
-        }
+    public void update(long id, long idSensor, String tipo, String unidade, String valor) {
+        Sensor sensor = find(id);
+
+        sensor.setIdSensor(idSensor);
         sensor.setTipo(tipo);
         sensor.setUnidade(unidade);
         sensor.setValor(valor);

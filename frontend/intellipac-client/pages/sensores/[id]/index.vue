@@ -14,10 +14,10 @@
 </template>
 <script setup>
 const route = useRoute()
-const idSensor = route.params.idSensor
+const id = route.params.id
 const config = useRuntimeConfig()
 const api = config.public.API_URL
-const { data: sensor, error: sensorErr } = await useFetch(`${api}/sensores/${idSensor}`)
+const { data: sensor, error: sensorErr } = await useFetch(`${api}/sensores/${id}`)
 const messages = ref([])
 if (sensorErr.value) messages.value.push(sensorErr.value)
 </script>

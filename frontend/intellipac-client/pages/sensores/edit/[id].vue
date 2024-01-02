@@ -4,7 +4,7 @@
 
         <form @submit.prevent="updateSensor">
             <label for="idSensor">id Sensor</label>
-            <input id="idSensor" v-model="sensorForm.idSensor" />
+            <input id="idSensor" v-model="sensorForm.idSensor" type="number" />
             <span class="error">{{ formFeedback.idSensor }}</span>
             <br />
             <label for="tipo">Tipo</label>
@@ -35,7 +35,7 @@
 </style>
 <script setup>
 const route = useRoute()
-const idSensor = route.params.id
+const id = route.params.id
 const config = useRuntimeConfig()
 const api = config.public.API_URL
 
@@ -58,7 +58,7 @@ const formFeedback = reactive({
 
 const fetchSensor = async () => {
     try {
-        const response = await fetch(`${api}/sensores/${idSensor}`)
+        const response = await fetch(`${api}/sensores/${id}`)
         if (!response.ok) {
             throw new Error(response.statusText)
         }
@@ -86,7 +86,7 @@ const updateSensor = async () => {
             body: JSON.stringify(sensorForm),
         }
 
-        const response = await fetch(`${api}/sensores/${idSensor}`, requestOptions)
+        const response = await fetch(`${api}/sensores/${id}`, requestOptions)
         if (!response.ok) {
             throw new Error(response.statusText)
         }
