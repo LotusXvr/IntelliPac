@@ -5,13 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c16a9ce7-b8ca-4660-a077-28c4d0becec3" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/backend/dtos/ObservacaoDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/backend/ejbs/ObservacaoBean.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/backend/entities/Observacao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/375abd3c-dcab-4715-bb52-364ff6f5f583.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/375abd3c-dcab-4715-bb52-364ff6f5f583.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/375abd3c-dcab-4715-bb52-364ff6f5f583/storage_v2/_src_/database/intellipac.34bTlg/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/375abd3c-dcab-4715-bb52-364ff6f5f583/storage_v2/_src_/database/intellipac.34bTlg/schema/public.abK9xQ.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/backend/dtos/ObservacaoDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/backend/dtos/ObservacaoDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/backend/entities/Observacao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/backend/entities/Observacao.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -147,7 +143,7 @@
       <workItem from="1703461533367" duration="2466000" />
       <workItem from="1703464015383" duration="137000" />
       <workItem from="1703606278720" duration="3574000" />
-      <workItem from="1704213096649" duration="2119000" />
+      <workItem from="1704213096649" duration="2598000" />
     </task>
     <servers />
   </component>
