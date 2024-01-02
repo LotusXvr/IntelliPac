@@ -3,6 +3,7 @@ package pt.ipleiria.estg.dei.ei.dae.backend.ejbs;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.TypedQuery;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.Sensor;
 
 import java.util.List;
@@ -21,6 +22,20 @@ public class SensorBean {
         return entityManager.find(Sensor.class, id);
     }
 
+    public Sensor findBySensorId(long idSensor) {
+        // Use a TypedQuery with JPQL to find a Sensor based on idSensor
+        List<Sensor> results = entityManager.createQuery(
+                        "SELECT s FROM Sensor s WHERE s.idSensor = :idSensor", Sensor.class)
+                .setParameter("idSensor", idSensor)
+                .getResultList();
+
+        if (results.isEmpty()) {
+            return null;
+        }
+
+        return results.get(0);
+    }
+
     public List<Sensor> getAll() {
         return entityManager.createNamedQuery("getAllSensor", Sensor.class).getResultList();
     }
@@ -29,9 +44,9 @@ public class SensorBean {
         entityManager.merge(sensor);
     }
 
-    public void remove(long id){
+    public void remove(long id) {
         Sensor sensor = entityManager.find(Sensor.class, id);
-        if(sensor == null){
+        if (sensor == null) {
             throw new IllegalArgumentException("Sensor with id " + id + " not found.");
         }
         entityManager.remove(sensor);

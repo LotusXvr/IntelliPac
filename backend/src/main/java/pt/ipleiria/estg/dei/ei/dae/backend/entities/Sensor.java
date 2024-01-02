@@ -6,7 +6,7 @@ import java.util.List;
 
 
 @Table(name = "sensor"
-        , uniqueConstraints = @UniqueConstraint(columnNames = {"id"})
+        , uniqueConstraints = @UniqueConstraint(columnNames = {"id", "idSensor"})
 )
 @NamedQueries({
         @NamedQuery(

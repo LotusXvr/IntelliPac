@@ -8,6 +8,7 @@ import pt.ipleiria.estg.dei.ei.dae.backend.dtos.SensorDTO;
 import pt.ipleiria.estg.dei.ei.dae.backend.ejbs.SensorBean;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.Sensor;
 
+import java.nio.file.ReadOnlyFileSystemException;
 import java.util.List;
 
 @Path("sensores") // relative url web path for this service
@@ -45,10 +46,31 @@ public class SensorService {
         return toDTO(sensor);
     }
 
+    @POST
+    @Path("/")
+    public Response createNewSensor(SensorDTO sensorDTO) {
+        // check if idSensor has already been assigned
+        if (sensorBean.findBySensorId(sensorDTO.getIdSensor()) != null) {
+            return Response.status(Response.Status.CONFLICT).build();
+        }
+        sensorBean.create(
+                sensorDTO.getIdSensor(),
+                sensorDTO.getTipo(),
+                sensorDTO.getValor(),
+                sensorDTO.getUnidade()
+        );
+        Sensor sensor = sensorBean.findBySensorId(sensorDTO.getIdSensor());
+        if (sensor == null) {
+            return Response.status(Response.Status.BAD_REQUEST).build();
+        }
+        return Response.status(Response.Status.CREATED).build();
+
+    }
+
     @DELETE
     @Path("{idSensor}")
     public Response deleteSensor(@PathParam("idSensor") long idSensor) {
-        try{
+        try {
             sensorBean.remove(idSensor);
             return Response.status(Response.Status.OK).build();
         } catch (Exception e) {
