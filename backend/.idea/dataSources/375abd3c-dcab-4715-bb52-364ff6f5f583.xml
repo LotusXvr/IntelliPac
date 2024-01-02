@@ -11,9 +11,9 @@
 4||10|c|G
 4||10|C|G
 4||10|T|G</Grants>
-      <IntrospectionStateNumber>820</IntrospectionStateNumber>
-      <ServerVersion>16.0</ServerVersion>
-      <StartupTime>1703190769</StartupTime>
+      <IntrospectionStateNumber>755</IntrospectionStateNumber>
+      <ServerVersion>16.1</ServerVersion>
+      <StartupTime>1704214733</StartupTime>
       <TimeZones>true ACDT
 true ACSST
 false ACST
@@ -674,7 +674,6 @@ false PET
 false PETST
 false PETT
 false PGT
-false PHOT
 false PHT
 true PKST
 false PKT
@@ -809,7 +808,7 @@ false Zulu
 13191||10|C|G
 13191||-9223372036854775808|U|G
 13191||10|U|G</Grants>
-      <IntrospectionStateNumber>820</IntrospectionStateNumber>
+      <IntrospectionStateNumber>755</IntrospectionStateNumber>
       <ObjectId>16384</ObjectId>
       <OwnerName>postgres</OwnerName>
     </database>
@@ -818,50 +817,50 @@ false Zulu
       <ObjectId>5</ObjectId>
       <OwnerName>postgres</OwnerName>
     </database>
-    <role id="4" parent="1" name="pg_database_owner">
+    <role id="4" parent="1" name="pg_checkpoint">
+      <ObjectId>4544</ObjectId>
+    </role>
+    <role id="5" parent="1" name="pg_create_subscription">
+      <ObjectId>6304</ObjectId>
+    </role>
+    <role id="6" parent="1" name="pg_database_owner">
       <ObjectId>6171</ObjectId>
     </role>
-    <role id="5" parent="1" name="pg_read_all_data">
-      <ObjectId>6181</ObjectId>
+    <role id="7" parent="1" name="pg_execute_server_program">
+      <ObjectId>4571</ObjectId>
     </role>
-    <role id="6" parent="1" name="pg_write_all_data">
-      <ObjectId>6182</ObjectId>
-    </role>
-    <role id="7" parent="1" name="pg_monitor">
+    <role id="8" parent="1" name="pg_monitor">
       <ObjectId>3373</ObjectId>
       <RoleGrants>3374
 3375
 3377</RoleGrants>
     </role>
-    <role id="8" parent="1" name="pg_read_all_settings">
+    <role id="9" parent="1" name="pg_read_all_data">
+      <ObjectId>6181</ObjectId>
+    </role>
+    <role id="10" parent="1" name="pg_read_all_settings">
       <ObjectId>3374</ObjectId>
     </role>
-    <role id="9" parent="1" name="pg_read_all_stats">
+    <role id="11" parent="1" name="pg_read_all_stats">
       <ObjectId>3375</ObjectId>
     </role>
-    <role id="10" parent="1" name="pg_stat_scan_tables">
-      <ObjectId>3377</ObjectId>
-    </role>
-    <role id="11" parent="1" name="pg_read_server_files">
+    <role id="12" parent="1" name="pg_read_server_files">
       <ObjectId>4569</ObjectId>
     </role>
-    <role id="12" parent="1" name="pg_write_server_files">
-      <ObjectId>4570</ObjectId>
-    </role>
-    <role id="13" parent="1" name="pg_execute_server_program">
-      <ObjectId>4571</ObjectId>
-    </role>
-    <role id="14" parent="1" name="pg_signal_backend">
+    <role id="13" parent="1" name="pg_signal_backend">
       <ObjectId>4200</ObjectId>
     </role>
-    <role id="15" parent="1" name="pg_checkpoint">
-      <ObjectId>4544</ObjectId>
+    <role id="14" parent="1" name="pg_stat_scan_tables">
+      <ObjectId>3377</ObjectId>
     </role>
-    <role id="16" parent="1" name="pg_use_reserved_connections">
+    <role id="15" parent="1" name="pg_use_reserved_connections">
       <ObjectId>4550</ObjectId>
     </role>
-    <role id="17" parent="1" name="pg_create_subscription">
-      <ObjectId>6304</ObjectId>
+    <role id="16" parent="1" name="pg_write_all_data">
+      <ObjectId>6182</ObjectId>
+    </role>
+    <role id="17" parent="1" name="pg_write_server_files">
+      <ObjectId>4570</ObjectId>
     </role>
     <role id="18" parent="1" name="postgres">
       <BypassRls>1</BypassRls>
@@ -4233,381 +4232,523 @@ false Zulu
     <schema id="264" parent="2" name="public">
       <Comment>standard public schema</Comment>
       <Current>1</Current>
-      <IntrospectionStateNumber>820</IntrospectionStateNumber>
-      <IntrospectionTimestamp>2023-12-21.21:31:19.081</IntrospectionTimestamp>
-      <LocalIntrospectionTimestamp>2023-12-21.21:31:19</LocalIntrospectionTimestamp>
+      <IntrospectionStateNumber>755</IntrospectionStateNumber>
+      <IntrospectionTimestamp>2024-01-02.16:59:14.873</IntrospectionTimestamp>
+      <LocalIntrospectionTimestamp>2024-01-02.16:59:15</LocalIntrospectionTimestamp>
       <ObjectId>2200</ObjectId>
       <StateNumber>523</StateNumber>
       <OwnerName>pg_database_owner</OwnerName>
     </schema>
     <sequence id="265" parent="264" name="embalagem_id_seq">
       <DasType>integer|0s</DasType>
-      <ObjectId>24656</ObjectId>
+      <ObjectId>16386</ObjectId>
       <SequenceIdentity>1(1)</SequenceIdentity>
       <StartValue>1</StartValue>
-      <StateNumber>797</StateNumber>
+      <StateNumber>733</StateNumber>
       <OwnerName>postgres</OwnerName>
     </sequence>
-    <sequence id="266" parent="264" name="embalagemdetransporte_id_seq">
+    <sequence id="266" parent="264" name="encomenda_id_seq">
       <DasType>bigint|0s</DasType>
-      <ObjectId>24665</ObjectId>
+      <ObjectId>16398</ObjectId>
       <SequenceIdentity>1(1)</SequenceIdentity>
       <StartValue>1</StartValue>
-      <StateNumber>798</StateNumber>
+      <StateNumber>735</StateNumber>
       <OwnerName>postgres</OwnerName>
     </sequence>
-    <sequence id="267" parent="264" name="encomenda_id_seq">
+    <sequence id="267" parent="264" name="observacao_seq">
       <DasType>bigint|0s</DasType>
-      <ObjectId>24672</ObjectId>
-      <SequenceIdentity>1(1)</SequenceIdentity>
+      <ObjectId>16385</ObjectId>
+      <SequenceIdentity>1(1)+50</SequenceIdentity>
       <StartValue>1</StartValue>
-      <StateNumber>799</StateNumber>
+      <StateNumber>732</StateNumber>
       <OwnerName>postgres</OwnerName>
     </sequence>
-    <sequence id="268" parent="264" name="fabricantedeprodutos_id_seq">
+    <sequence id="268" parent="264" name="produtocatalogo_id_seq">
       <DasType>bigint|0s</DasType>
-      <ObjectId>24682</ObjectId>
+      <ObjectId>16416</ObjectId>
       <SequenceIdentity>1(3)</SequenceIdentity>
       <StartValue>1</StartValue>
-      <StateNumber>801</StateNumber>
+      <StateNumber>739</StateNumber>
       <OwnerName>postgres</OwnerName>
     </sequence>
-    <sequence id="269" parent="264" name="produto_id_seq">
+    <sequence id="269" parent="264" name="sensordispositivo_id_seq">
       <DasType>bigint|0s</DasType>
-      <ObjectId>24689</ObjectId>
-      <SequenceIdentity>1(4)</SequenceIdentity>
-      <StartValue>1</StartValue>
-      <StateNumber>802</StateNumber>
-      <OwnerName>postgres</OwnerName>
-    </sequence>
-    <sequence id="270" parent="264" name="sensordispositivo_id_seq">
-      <DasType>bigint|0s</DasType>
-      <ObjectId>24696</ObjectId>
+      <ObjectId>16425</ObjectId>
       <SequenceIdentity>1(1)</SequenceIdentity>
       <StartValue>1</StartValue>
-      <StateNumber>803</StateNumber>
+      <StateNumber>740</StateNumber>
       <OwnerName>postgres</OwnerName>
     </sequence>
-    <table id="271" parent="264" name="embalagem">
-      <ObjectId>24657</ObjectId>
-      <StateNumber>804</StateNumber>
+    <table id="270" parent="264" name="embalagem">
+      <ObjectId>16387</ObjectId>
+      <StateNumber>742</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
-    <table id="272" parent="264" name="embalagemdetransporte">
-      <ObjectId>24666</ObjectId>
-      <StateNumber>805</StateNumber>
+    <table id="271" parent="264" name="embalagem_sensor">
+      <ObjectId>16395</ObjectId>
+      <StateNumber>743</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
-    <table id="273" parent="264" name="encomenda">
-      <ObjectId>24673</ObjectId>
-      <StateNumber>805</StateNumber>
+    <table id="272" parent="264" name="encomenda">
+      <ObjectId>16399</ObjectId>
+      <StateNumber>742</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
-    <table id="274" parent="264" name="encomenda_produtos">
-      <ObjectId>24679</ObjectId>
-      <StateNumber>806</StateNumber>
+    <table id="273" parent="264" name="encomenda_produtos">
+      <ObjectId>16405</ObjectId>
+      <StateNumber>745</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
-    <table id="275" parent="264" name="fabricantedeprodutos">
-      <ObjectId>24683</ObjectId>
-      <StateNumber>808</StateNumber>
+    <table id="274" parent="264" name="observacao">
+      <ObjectId>16408</ObjectId>
+      <StateNumber>747</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
-    <table id="276" parent="264" name="produto">
-      <ObjectId>24690</ObjectId>
-      <StateNumber>804</StateNumber>
+    <table id="275" parent="264" name="produto_embalagem">
+      <ObjectId>16413</ObjectId>
+      <StateNumber>750</StateNumber>
+      <AccessMethodId>2</AccessMethodId>
+      <OwnerName>postgres</OwnerName>
+    </table>
+    <table id="276" parent="264" name="produtocatalogo">
+      <ObjectId>16417</ObjectId>
+      <StateNumber>745</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
     <table id="277" parent="264" name="sensordispositivo">
-      <ObjectId>24697</ObjectId>
-      <StateNumber>809</StateNumber>
+      <ObjectId>16426</ObjectId>
+      <StateNumber>743</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
-    <column id="278" parent="271" name="id">
+    <table id="278" parent="264" name="users">
+      <ObjectId>16434</ObjectId>
+      <StateNumber>752</StateNumber>
+      <AccessMethodId>2</AccessMethodId>
+      <OwnerName>postgres</OwnerName>
+    </table>
+    <column id="279" parent="270" name="dtype">
+      <DasType>varchar(31)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+      <StateNumber>733</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="280" parent="270" name="id">
       <DasType>integer|0s</DasType>
       <DefaultExpression>nextval(&apos;embalagem_id_seq&apos;::regclass)</DefaultExpression>
       <NotNull>1</NotNull>
-      <Position>1</Position>
-      <StateNumber>797</StateNumber>
-      <SequenceId>24656</SequenceId>
+      <Position>2</Position>
+      <StateNumber>733</StateNumber>
+      <SequenceId>16386</SequenceId>
       <TypeId>23</TypeId>
     </column>
-    <column id="279" parent="271" name="material">
-      <DasType>varchar(255)|0s</DasType>
-      <Position>2</Position>
-      <StateNumber>797</StateNumber>
-      <TypeId>1043</TypeId>
-    </column>
-    <column id="280" parent="271" name="tipoembalagem">
+    <column id="281" parent="270" name="material">
       <DasType>varchar(255)|0s</DasType>
       <Position>3</Position>
-      <StateNumber>797</StateNumber>
+      <StateNumber>733</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="281" parent="271" name="produto_id">
-      <DasType>bigint|0s</DasType>
+    <column id="282" parent="270" name="tipoembalagem">
+      <DasType>varchar(255)|0s</DasType>
       <Position>4</Position>
-      <StateNumber>797</StateNumber>
+      <StateNumber>733</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="283" parent="270" name="encomenda_id">
+      <DasType>bigint|0s</DasType>
+      <Position>5</Position>
+      <StateNumber>733</StateNumber>
       <TypeId>20</TypeId>
     </column>
-    <foreign-key id="282" parent="271" name="fkskgqtk3u2sfk7c7hfoh0l4dfw">
-      <ColNames>produto_id</ColNames>
-      <ObjectId>24705</ObjectId>
-      <StateNumber>804</StateNumber>
+    <foreign-key id="284" parent="270" name="fkgowquias9kpbqgsb8bd0xso87">
+      <ColNames>encomenda_id</ColNames>
+      <ObjectId>16441</ObjectId>
+      <StateNumber>742</StateNumber>
       <RefKeyColPositions>1</RefKeyColPositions>
-      <RefTableId>24690</RefTableId>
+      <RefTableId>16399</RefTableId>
     </foreign-key>
-    <index id="283" parent="271" name="embalagem_pkey">
+    <index id="285" parent="270" name="embalagem_pkey">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>24663</ObjectId>
+      <ObjectId>16393</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>797</StateNumber>
+      <StateNumber>733</StateNumber>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <key id="284" parent="271" name="embalagem_pkey">
+    <key id="286" parent="270" name="embalagem_pkey">
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>24664</ObjectId>
+      <ObjectId>16394</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>797</StateNumber>
-      <UnderlyingIndexId>24663</UnderlyingIndexId>
+      <StateNumber>733</StateNumber>
+      <UnderlyingIndexId>16393</UnderlyingIndexId>
     </key>
-    <column id="285" parent="272" name="id">
-      <DasType>bigint|0s</DasType>
-      <DefaultExpression>nextval(&apos;embalagemdetransporte_id_seq&apos;::regclass)</DefaultExpression>
+    <column id="287" parent="271" name="embalagem_id">
+      <DasType>integer|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
-      <StateNumber>798</StateNumber>
-      <SequenceId>24665</SequenceId>
-      <TypeId>20</TypeId>
+      <StateNumber>734</StateNumber>
+      <TypeId>23</TypeId>
     </column>
-    <column id="286" parent="272" name="encomenda_id">
+    <column id="288" parent="271" name="sensor_id">
       <DasType>bigint|0s</DasType>
+      <NotNull>1</NotNull>
       <Position>2</Position>
-      <StateNumber>798</StateNumber>
+      <StateNumber>734</StateNumber>
       <TypeId>20</TypeId>
     </column>
-    <foreign-key id="287" parent="272" name="fkktxnvea6morg2qejuey312x1y">
-      <ColNames>encomenda_id</ColNames>
-      <ObjectId>24710</ObjectId>
-      <StateNumber>805</StateNumber>
-      <RefKeyColPositions>1</RefKeyColPositions>
-      <RefTableId>24673</RefTableId>
+    <foreign-key id="289" parent="271" name="fkpavei18ytlx2f98qcnrepnlqj">
+      <ColNames>embalagem_id</ColNames>
+      <ObjectId>16451</ObjectId>
+      <StateNumber>744</StateNumber>
+      <RefKeyColPositions>2</RefKeyColPositions>
+      <RefTableId>16387</RefTableId>
     </foreign-key>
-    <index id="288" parent="272" name="embalagemdetransporte_pkey">
-      <ColNames>id</ColNames>
-      <NameSurrogate>1</NameSurrogate>
-      <ObjectId>24670</ObjectId>
-      <Primary>1</Primary>
-      <StateNumber>798</StateNumber>
-      <Unique>1</Unique>
-      <AccessMethodId>403</AccessMethodId>
-    </index>
-    <key id="289" parent="272" name="embalagemdetransporte_pkey">
-      <NameSurrogate>1</NameSurrogate>
-      <ObjectId>24671</ObjectId>
-      <Primary>1</Primary>
-      <StateNumber>798</StateNumber>
-      <UnderlyingIndexId>24670</UnderlyingIndexId>
-    </key>
-    <column id="290" parent="273" name="id">
+    <foreign-key id="290" parent="271" name="fk8tp0myqykbgww807qsn9sbrq6">
+      <ColNames>sensor_id</ColNames>
+      <ObjectId>16446</ObjectId>
+      <StateNumber>743</StateNumber>
+      <RefKeyColPositions>1</RefKeyColPositions>
+      <RefTableId>16426</RefTableId>
+    </foreign-key>
+    <column id="291" parent="272" name="id">
       <DasType>bigint|0s</DasType>
       <DefaultExpression>nextval(&apos;encomenda_id_seq&apos;::regclass)</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>1</Position>
-      <StateNumber>799</StateNumber>
-      <SequenceId>24672</SequenceId>
+      <StateNumber>735</StateNumber>
+      <SequenceId>16398</SequenceId>
       <TypeId>20</TypeId>
     </column>
-    <column id="291" parent="273" name="consumidorfinal">
+    <column id="292" parent="272" name="consumidorfinal">
       <DasType>varchar(255)|0s</DasType>
       <Position>2</Position>
-      <StateNumber>799</StateNumber>
+      <StateNumber>735</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="292" parent="273" name="dataencomenda">
+    <column id="293" parent="272" name="dataencomenda">
       <DasType>timestamp(6)|0s</DasType>
       <Position>3</Position>
-      <StateNumber>799</StateNumber>
+      <StateNumber>735</StateNumber>
       <TypeId>1114</TypeId>
     </column>
-    <index id="293" parent="273" name="encomenda_pkey">
+    <index id="294" parent="272" name="encomenda_pkey">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>24677</ObjectId>
+      <ObjectId>16403</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>799</StateNumber>
+      <StateNumber>735</StateNumber>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <key id="294" parent="273" name="encomenda_pkey">
+    <key id="295" parent="272" name="encomenda_pkey">
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>24678</ObjectId>
+      <ObjectId>16404</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>799</StateNumber>
-      <UnderlyingIndexId>24677</UnderlyingIndexId>
+      <StateNumber>735</StateNumber>
+      <UnderlyingIndexId>16403</UnderlyingIndexId>
     </key>
-    <column id="295" parent="274" name="encomenda_id">
+    <column id="296" parent="273" name="encomenda_id">
       <DasType>bigint|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
-      <StateNumber>800</StateNumber>
+      <StateNumber>736</StateNumber>
       <TypeId>20</TypeId>
     </column>
-    <column id="296" parent="274" name="produto_id">
+    <column id="297" parent="273" name="produto_id">
       <DasType>bigint|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
-      <StateNumber>800</StateNumber>
+      <StateNumber>736</StateNumber>
       <TypeId>20</TypeId>
     </column>
-    <foreign-key id="297" parent="274" name="fkntt7xyin7tvw800o9082awo0w">
+    <foreign-key id="298" parent="273" name="fkntt7xyin7tvw800o9082awo0w">
       <ColNames>encomenda_id</ColNames>
-      <ObjectId>24720</ObjectId>
-      <StateNumber>807</StateNumber>
+      <ObjectId>16461</ObjectId>
+      <StateNumber>746</StateNumber>
       <RefKeyColPositions>1</RefKeyColPositions>
-      <RefTableId>24673</RefTableId>
+      <RefTableId>16399</RefTableId>
     </foreign-key>
-    <foreign-key id="298" parent="274" name="fkk17k2dg5igj44sefps3tnqpru">
+    <foreign-key id="299" parent="273" name="fkpyl97glqnkmb50f7m53ny4xca">
       <ColNames>produto_id</ColNames>
-      <ObjectId>24715</ObjectId>
-      <StateNumber>806</StateNumber>
-      <RefKeyColPositions>1</RefKeyColPositions>
-      <RefTableId>24690</RefTableId>
+      <ObjectId>16456</ObjectId>
+      <StateNumber>745</StateNumber>
+      <RefKeyColPositions>2</RefKeyColPositions>
+      <RefTableId>16417</RefTableId>
     </foreign-key>
-    <column id="299" parent="275" name="id">
+    <column id="300" parent="274" name="id">
       <DasType>bigint|0s</DasType>
-      <DefaultExpression>nextval(&apos;fabricantedeprodutos_id_seq&apos;::regclass)</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>1</Position>
-      <StateNumber>801</StateNumber>
-      <SequenceId>24682</SequenceId>
+      <StateNumber>737</StateNumber>
       <TypeId>20</TypeId>
     </column>
-    <column id="300" parent="275" name="nome">
-      <DasType>varchar(255)|0s</DasType>
-      <Position>2</Position>
-      <StateNumber>801</StateNumber>
-      <TypeId>1043</TypeId>
-    </column>
-    <index id="301" parent="275" name="fabricantedeprodutos_pkey">
-      <ColNames>id</ColNames>
-      <NameSurrogate>1</NameSurrogate>
-      <ObjectId>24687</ObjectId>
-      <Primary>1</Primary>
-      <StateNumber>801</StateNumber>
-      <Unique>1</Unique>
-      <AccessMethodId>403</AccessMethodId>
-    </index>
-    <key id="302" parent="275" name="fabricantedeprodutos_pkey">
-      <NameSurrogate>1</NameSurrogate>
-      <ObjectId>24688</ObjectId>
-      <Primary>1</Primary>
-      <StateNumber>801</StateNumber>
-      <UnderlyingIndexId>24687</UnderlyingIndexId>
-    </key>
-    <column id="303" parent="276" name="id">
-      <DasType>bigint|0s</DasType>
-      <DefaultExpression>nextval(&apos;produto_id_seq&apos;::regclass)</DefaultExpression>
+    <column id="301" parent="274" name="data">
+      <DasType>date|0s</DasType>
       <NotNull>1</NotNull>
-      <Position>1</Position>
-      <StateNumber>802</StateNumber>
-      <SequenceId>24689</SequenceId>
-      <TypeId>20</TypeId>
-    </column>
-    <column id="304" parent="276" name="nomeproduto">
-      <DasType>varchar(255)|0s</DasType>
       <Position>2</Position>
-      <StateNumber>802</StateNumber>
-      <TypeId>1043</TypeId>
+      <StateNumber>737</StateNumber>
+      <TypeId>1082</TypeId>
     </column>
-    <column id="305" parent="276" name="fabricante_id">
-      <DasType>bigint|0s</DasType>
+    <column id="302" parent="274" name="valor">
+      <DasType>double precision|0s</DasType>
       <NotNull>1</NotNull>
       <Position>3</Position>
-      <StateNumber>802</StateNumber>
+      <StateNumber>737</StateNumber>
+      <TypeId>701</TypeId>
+    </column>
+    <column id="303" parent="274" name="embalagem_id">
+      <DasType>integer|0s</DasType>
+      <Position>4</Position>
+      <StateNumber>737</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="304" parent="274" name="product_id">
+      <DasType>bigint|0s</DasType>
+      <Position>5</Position>
+      <StateNumber>737</StateNumber>
       <TypeId>20</TypeId>
     </column>
-    <foreign-key id="306" parent="276" name="fkp0xdkmc8mx648d2fbda45613i">
-      <ColNames>fabricante_id</ColNames>
-      <ObjectId>24725</ObjectId>
-      <StateNumber>808</StateNumber>
-      <RefKeyColPositions>1</RefKeyColPositions>
-      <RefTableId>24683</RefTableId>
+    <column id="305" parent="274" name="sensor_id">
+      <DasType>bigint|0s</DasType>
+      <Position>6</Position>
+      <StateNumber>737</StateNumber>
+      <TypeId>20</TypeId>
+    </column>
+    <foreign-key id="306" parent="274" name="fkhu3tidlo1rtgxyfropyofs6ny">
+      <ColNames>embalagem_id</ColNames>
+      <ObjectId>16466</ObjectId>
+      <StateNumber>747</StateNumber>
+      <RefKeyColPositions>2</RefKeyColPositions>
+      <RefTableId>16387</RefTableId>
     </foreign-key>
-    <index id="307" parent="276" name="produto_pkey">
+    <foreign-key id="307" parent="274" name="fkma7479997k6etpqilbmn7d69k">
+      <ColNames>product_id</ColNames>
+      <ObjectId>16471</ObjectId>
+      <StateNumber>748</StateNumber>
+      <RefKeyColPositions>2</RefKeyColPositions>
+      <RefTableId>16417</RefTableId>
+    </foreign-key>
+    <foreign-key id="308" parent="274" name="fkmi5ewlsg2t1tgaxsuw127b5qq">
+      <ColNames>sensor_id</ColNames>
+      <ObjectId>16476</ObjectId>
+      <StateNumber>749</StateNumber>
+      <RefKeyColPositions>1</RefKeyColPositions>
+      <RefTableId>16426</RefTableId>
+    </foreign-key>
+    <index id="309" parent="274" name="observacao_pkey">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>24694</ObjectId>
+      <ObjectId>16411</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>802</StateNumber>
+      <StateNumber>737</StateNumber>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <key id="308" parent="276" name="produto_pkey">
+    <key id="310" parent="274" name="observacao_pkey">
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>24695</ObjectId>
+      <ObjectId>16412</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>802</StateNumber>
-      <UnderlyingIndexId>24694</UnderlyingIndexId>
+      <StateNumber>737</StateNumber>
+      <UnderlyingIndexId>16411</UnderlyingIndexId>
     </key>
-    <column id="309" parent="277" name="id">
+    <column id="311" parent="275" name="product_id">
+      <DasType>bigint|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+      <StateNumber>738</StateNumber>
+      <TypeId>20</TypeId>
+    </column>
+    <column id="312" parent="275" name="embalagem_id">
+      <DasType>integer|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+      <StateNumber>738</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <foreign-key id="313" parent="275" name="fkmqtmrscvj3ewsvric6yhg4ul6">
+      <ColNames>product_id</ColNames>
+      <ObjectId>16486</ObjectId>
+      <StateNumber>751</StateNumber>
+      <RefKeyColPositions>2</RefKeyColPositions>
+      <RefTableId>16417</RefTableId>
+    </foreign-key>
+    <foreign-key id="314" parent="275" name="fk2ntxy1s2ewy282tjmjqpfah4i">
+      <ColNames>embalagem_id</ColNames>
+      <ObjectId>16481</ObjectId>
+      <StateNumber>750</StateNumber>
+      <RefKeyColPositions>2</RefKeyColPositions>
+      <RefTableId>16387</RefTableId>
+    </foreign-key>
+    <column id="315" parent="276" name="dtype">
+      <DasType>varchar(31)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+      <StateNumber>739</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="316" parent="276" name="id">
+      <DasType>bigint|0s</DasType>
+      <DefaultExpression>nextval(&apos;produtocatalogo_id_seq&apos;::regclass)</DefaultExpression>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+      <StateNumber>739</StateNumber>
+      <SequenceId>16416</SequenceId>
+      <TypeId>20</TypeId>
+    </column>
+    <column id="317" parent="276" name="nomeproduto">
+      <DasType>varchar(255)|0s</DasType>
+      <Position>3</Position>
+      <StateNumber>739</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="318" parent="276" name="fabricante_id">
+      <DasType>varchar(255)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>4</Position>
+      <StateNumber>739</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <foreign-key id="319" parent="276" name="fkg0ws41p9al42px2ndo980jyya">
+      <ColNames>fabricante_id</ColNames>
+      <ObjectId>16491</ObjectId>
+      <StateNumber>752</StateNumber>
+      <RefKeyColPositions>2</RefKeyColPositions>
+      <RefTableId>16434</RefTableId>
+    </foreign-key>
+    <index id="320" parent="276" name="produtocatalogo_pkey">
+      <ColNames>id</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>16423</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>739</StateNumber>
+      <Unique>1</Unique>
+      <AccessMethodId>403</AccessMethodId>
+    </index>
+    <key id="321" parent="276" name="produtocatalogo_pkey">
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>16424</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>739</StateNumber>
+      <UnderlyingIndexId>16423</UnderlyingIndexId>
+    </key>
+    <column id="322" parent="277" name="id">
       <DasType>bigint|0s</DasType>
       <DefaultExpression>nextval(&apos;sensordispositivo_id_seq&apos;::regclass)</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>1</Position>
-      <StateNumber>803</StateNumber>
-      <SequenceId>24696</SequenceId>
+      <StateNumber>740</StateNumber>
+      <SequenceId>16425</SequenceId>
       <TypeId>20</TypeId>
     </column>
-    <column id="310" parent="277" name="dadossensor">
+    <column id="323" parent="277" name="dadossensor">
       <DasType>varchar(255)|0s</DasType>
       <Position>2</Position>
-      <StateNumber>803</StateNumber>
+      <StateNumber>740</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="311" parent="277" name="tiposensordispositivo">
+    <column id="324" parent="277" name="tiposensordispositivo">
       <DasType>varchar(255)|0s</DasType>
       <Position>3</Position>
-      <StateNumber>803</StateNumber>
+      <StateNumber>740</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="312" parent="277" name="produto_id">
+    <column id="325" parent="277" name="produto_id">
       <DasType>bigint|0s</DasType>
       <Position>4</Position>
-      <StateNumber>803</StateNumber>
+      <StateNumber>740</StateNumber>
       <TypeId>20</TypeId>
     </column>
-    <foreign-key id="313" parent="277" name="fk98d5onxv16rxg2h7plsj1if69">
+    <foreign-key id="326" parent="277" name="fkqcjptpit9qvr0oliuck4fjpve">
       <ColNames>produto_id</ColNames>
-      <ObjectId>24730</ObjectId>
-      <StateNumber>809</StateNumber>
-      <RefKeyColPositions>1</RefKeyColPositions>
-      <RefTableId>24690</RefTableId>
+      <ObjectId>16496</ObjectId>
+      <StateNumber>753</StateNumber>
+      <RefKeyColPositions>2</RefKeyColPositions>
+      <RefTableId>16417</RefTableId>
     </foreign-key>
-    <index id="314" parent="277" name="sensordispositivo_pkey">
+    <index id="327" parent="277" name="sensordispositivo_pkey">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>24703</ObjectId>
+      <ObjectId>16432</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>803</StateNumber>
+      <StateNumber>740</StateNumber>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <key id="315" parent="277" name="sensordispositivo_pkey">
+    <key id="328" parent="277" name="sensordispositivo_pkey">
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>24704</ObjectId>
+      <ObjectId>16433</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>803</StateNumber>
-      <UnderlyingIndexId>24703</UnderlyingIndexId>
+      <StateNumber>740</StateNumber>
+      <UnderlyingIndexId>16432</UnderlyingIndexId>
+    </key>
+    <column id="329" parent="278" name="dtype">
+      <DasType>varchar(31)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+      <StateNumber>741</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="330" parent="278" name="username">
+      <DasType>varchar(255)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+      <StateNumber>741</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="331" parent="278" name="version">
+      <DasType>integer|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>3</Position>
+      <StateNumber>741</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="332" parent="278" name="email">
+      <DasType>varchar(255)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>4</Position>
+      <StateNumber>741</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="333" parent="278" name="name">
+      <DasType>varchar(255)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>5</Position>
+      <StateNumber>741</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="334" parent="278" name="password">
+      <DasType>varchar(255)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>6</Position>
+      <StateNumber>741</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <index id="335" parent="278" name="users_pkey">
+      <ColNames>username</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>16439</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>741</StateNumber>
+      <Unique>1</Unique>
+      <AccessMethodId>403</AccessMethodId>
+      <CollationNames>default</CollationNames>
+      <CollationIds>100</CollationIds>
+      <CollationParentNames>pg_catalog</CollationParentNames>
+    </index>
+    <key id="336" parent="278" name="users_pkey">
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>16440</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>741</StateNumber>
+      <UnderlyingIndexId>16439</UnderlyingIndexId>
     </key>
   </database-model>
 </dataSource>
