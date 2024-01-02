@@ -27,6 +27,12 @@ public class EmbalagemDeProduto extends Embalagem implements Serializable {
         this.produtos = new ArrayList<>();
     }
 
+    public EmbalagemDeProduto(String material, String tipoEmbalagem, List<Produto> produtos) {
+        super(material);
+        this.tipoEmbalagem = tipoEmbalagem;
+        this.produtos = produtos;
+    }
+
     public String getTipoEmbalagem() {
         return tipoEmbalagem;
     }
@@ -41,5 +47,13 @@ public class EmbalagemDeProduto extends Embalagem implements Serializable {
 
     public void setProdutos(List<Produto> produtos) {
         this.produtos = produtos;
+    }
+
+    public void addProduto(Produto produto) {
+        this.produtos.add(produto);
+    }
+
+    public void removeProduto(Produto produto) {
+        this.produtos.remove(produto);
     }
 }
