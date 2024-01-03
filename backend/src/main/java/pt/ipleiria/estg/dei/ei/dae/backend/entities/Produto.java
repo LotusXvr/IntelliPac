@@ -5,60 +5,50 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
-public class Produto extends ProdutoCatalogo implements Serializable {
+public class Produto implements Serializable {
 
-    @Transient
-    private Long serialNumber;
-    @ManyToMany
-    @JoinTable(
-            name = "produto_embalagem",
-            joinColumns = @JoinColumn(
-                    // produto?
-                    name = "product_id",
-                    referencedColumnName = "id"
-            ),
-            inverseJoinColumns = @JoinColumn(
-                    name = "embalagem_id",
-                    referencedColumnName = "id"
-            )
-    )
-    private List<EmbalagemDeProduto> embalagemDeProdutos;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
 
-    //  @OneToMany(mappedBy = "produto")
-   // private List<SensorDispositivo> sensoresDispositivos;
+    protected String nomeProduto;
 
-    public Produto() {
-        embalagemDeProdutos = new ArrayList<>();
-        //sensoresDispositivos = new ArrayList<>();
-    }
+    @ManyToOne
+    @JoinColumn(name = "fabricante_id")
+    @NotNull
+    private FabricanteDeProdutos fabricante;
 
     public Produto(String nomeProduto, FabricanteDeProdutos fabricante) {
-        super(nomeProduto, fabricante);
         this.nomeProduto = nomeProduto;
-        this.embalagemDeProdutos = new ArrayList<>();
+        this.fabricante = fabricante;
     }
 
-    @Override
+    public Produto() {
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
     public String getNomeProduto() {
-        return nomeProduto + " - " +serialNumber;
-    }
-    public List<EmbalagemDeProduto> getEmbalagemDeProdutos() {
-        return embalagemDeProdutos;
+        return nomeProduto;
     }
 
-    public void setEmbalagemDeProdutos(List<EmbalagemDeProduto> embalagemDeProdutos) {
-        this.embalagemDeProdutos = embalagemDeProdutos;
+    public void setNomeProduto(String nomeProduto) {
+        this.nomeProduto = nomeProduto;
     }
 
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "produto_sequence")
-    @SequenceGenerator(name = "produto_sequence", sequenceName = "produto_sequence", allocationSize = 1)
-    @Column(unique = true, nullable = false)
-    public Long getSerialNumber() {
-        return serialNumber;
+    public FabricanteDeProdutos getFabricante() {
+        return fabricante;
     }
 
+    public void setFabricante(FabricanteDeProdutos fabricante) {
+        this.fabricante = fabricante;
+    }
 }

@@ -4,51 +4,42 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-public class ProdutoCatalogo implements Serializable {
+public class ProdutoCatalogo extends Produto implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    protected String nomeProduto;
-
-    @ManyToOne
-    @JoinColumn(name = "fabricante_id")
-    @NotNull
-    private FabricanteDeProdutos fabricante;
-
-    public ProdutoCatalogo(String nomeProduto, FabricanteDeProdutos fabricante) {
-        this.nomeProduto = nomeProduto;
-        this.fabricante = fabricante;
-    }
+    @OneToMany(mappedBy = "produtoCatalogo")
+    private List<ProdutoFisico> produtos;
 
     public ProdutoCatalogo() {
+        this.produtos = new ArrayList<>();
     }
 
-    public long getId() {
-
-        return id;
+    public ProdutoCatalogo(String nomeProduto, FabricanteDeProdutos fabricante) {
+        super(nomeProduto, fabricante);
+        this.produtos = new ArrayList<>();
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public List<ProdutoFisico> getProdutos() {
+        return produtos;
     }
 
-    public String getNomeProduto() {
-        return nomeProduto;
+    public void setProdutos(List<ProdutoFisico> produtos) {
+        this.produtos = produtos;
     }
 
-    public void setNomeProduto(String nomeProduto) {
-        this.nomeProduto = nomeProduto;
+    public void addProduto(ProdutoFisico produto) {
+        this.produtos.add(produto);
     }
 
-    public FabricanteDeProdutos getFabricante() {
-        return fabricante;
+    public void removeProduto(ProdutoFisico produto) {
+        this.produtos.remove(produto);
     }
 
-    public void setFabricante(FabricanteDeProdutos fabricante) {
-        this.fabricante = fabricante;
-    }
 }
