@@ -6,6 +6,8 @@ import jakarta.persistence.PersistenceContext;
 import org.hibernate.Hibernate;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.Produto;
 
+import java.util.List;
+
 @Stateless
 public class ProdutoBean {
     @PersistenceContext
@@ -18,5 +20,9 @@ public class ProdutoBean {
         var produto = entityManager.getReference(Produto.class, nomeProduto);
         Hibernate.initialize(produto);
         return produto;
+    }
+
+    public List<Produto> getAllProducts() {
+        return entityManager.createNamedQuery("getAllProducts", Produto.class).getResultList();
     }
 }

@@ -8,6 +8,7 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.FabricanteDeProdutos;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.Produto;
+import pt.ipleiria.estg.dei.ei.dae.backend.entities.ProdutoCatalogo;
 import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyEntityExistsException;
 import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyEntityNotFoundException;
 
@@ -23,7 +24,7 @@ public class ProdutoCatalogoBean {
 
     public boolean exists(String nomeProduto, String fabrincanteUsername) {
         Query query = entityManager.createQuery(
-                "SELECT COUNT(p.nomeProduto) FROM Produto p WHERE p.nomeProduto = :nomeProduto AND p.fabricante.username = :fabrincanteUsername",
+                "SELECT COUNT(p.nomeProduto) FROM ProdutoCatalogo p WHERE p.nomeProduto = :nomeProduto AND p.fabricante.username = :fabrincanteUsername",
                 Long.class
         );
         query.setParameter("nomeProduto", nomeProduto);
@@ -32,10 +33,10 @@ public class ProdutoCatalogoBean {
     }
 
 
-    public Produto create(String nomeProduto, String fabrincanteUsername) throws MyEntityExistsException, MyEntityNotFoundException {
+    public ProdutoCatalogo create(String nomeProduto, String fabrincanteUsername) throws MyEntityExistsException, MyEntityNotFoundException {
 
         if(exists(nomeProduto, fabrincanteUsername)) {
-            throw new MyEntityExistsException("Produto com nome " + nomeProduto + " já existe");
+            throw new MyEntityExistsException("Produto catálogo com nome " + nomeProduto + " já existe");
         }
 
         var fabricante = fabricanteDeProdutosBean.find(fabrincanteUsername);
@@ -43,29 +44,29 @@ public class ProdutoCatalogoBean {
             throw new MyEntityNotFoundException("Fabricante com id " + fabrincanteUsername + " não existe");
         }
 
-        Produto produto = null;
+        ProdutoCatalogo produtoCatalogo = null;
 
         try {
-            produto = new Produto(nomeProduto, fabricante);
-            entityManager.persist(produto);
+            produtoCatalogo = new ProdutoCatalogo(nomeProduto, fabricante);
+            entityManager.persist(produtoCatalogo);
         }
         catch (Exception e) {
-            throw new MyEntityExistsException("Produto com nome " + nomeProduto + " já existe");
+            throw new MyEntityExistsException("Produto catálogo com nome " + nomeProduto + " já existe");
         }
 
-        fabricante.addProduto(produto);
-        return produto;
+        fabricante.addProduto(produtoCatalogo);
+        return produtoCatalogo;
 
     }
 
-    public Produto find(long id) {
-        return entityManager.find(Produto.class, id);
+    public ProdutoCatalogo find(long id) {
+        return entityManager.find(ProdutoCatalogo.class, id);
     }
 
     public void update(long id, String nomeProduto, String fabrincanteUsername) throws MyEntityNotFoundException {
-        Produto produto = find(id);
-        if (produto == null) {
-            throw new MyEntityNotFoundException("Produto com id " + id + " não existe");
+        ProdutoCatalogo produtoCatalogo = find(id);
+        if (produtoCatalogo == null) {
+            throw new MyEntityNotFoundException("Produto catálogo com id " + id + " não existe");
         }
 
         FabricanteDeProdutos fabricante = entityManager.find(FabricanteDeProdutos.class, fabrincanteUsername);
@@ -73,20 +74,16 @@ public class ProdutoCatalogoBean {
             throw new MyEntityNotFoundException("Fabricante com id " + fabrincanteUsername + " não existe");
         }
 
-        produto.setNomeProduto(nomeProduto);
-        produto.setFabricante(fabricante);
-        entityManager.merge(produto);
+        produtoCatalogo.setNomeProduto(nomeProduto);
+        produtoCatalogo.setFabricante(fabricante);
+        entityManager.merge(produtoCatalogo);
     }
 
     public void remove(long id) throws MyEntityNotFoundException {
-        Produto produto = find(id);
-        if (produto == null) {
-            throw new MyEntityNotFoundException("Produto com id " + id + " não existe");
+        ProdutoCatalogo produtoCatalogo = find(id);
+        if (produtoCatalogo == null) {
+            throw new MyEntityNotFoundException("Produto catálogo com id " + id + " não existe");
         }
-        entityManager.remove(produto);
-    }
-
-    public List<Produto> getAllProducts() {
-        return entityManager.createNamedQuery("getAllProducts", Produto.class).getResultList();
+        entityManager.remove(produtoCatalogo);
     }
 }
