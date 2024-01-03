@@ -9,12 +9,6 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-@NamedQueries({
-        @NamedQuery(
-                name = "getAllProducts",
-                query = "SELECT p FROM Produto p ORDER BY p.nomeProduto"
-        )
-})
 public class FabricanteDeProdutos extends User implements Serializable {
     @OneToMany(mappedBy = "fabricante", fetch = FetchType.EAGER)
     private List<Produto> produtos;

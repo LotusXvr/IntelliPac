@@ -8,6 +8,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@NamedQueries({
+        @NamedQuery(
+                name = "getAllProductsCatalogo",
+                query = "SELECT p FROM ProdutoCatalogo p ORDER BY p.nomeProduto"
+        )
+})
 public class ProdutoCatalogo extends Produto implements Serializable {
 
     @Id

@@ -8,6 +8,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@NamedQueries({
+        @NamedQuery(
+                name = "getAllProductsFisico",
+                query = "SELECT p FROM ProdutoFisico p ORDER BY p.nomeProduto"
+        )
+})
 public class ProdutoFisico extends Produto implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

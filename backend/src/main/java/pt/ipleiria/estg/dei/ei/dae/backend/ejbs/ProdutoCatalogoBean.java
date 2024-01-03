@@ -6,9 +6,10 @@ import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
+import jakarta.validation.ConstraintViolationException;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.FabricanteDeProdutos;
-import pt.ipleiria.estg.dei.ei.dae.backend.entities.Produto;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.ProdutoCatalogo;
+import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyConstraintViolationException;
 import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyEntityExistsException;
 import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyEntityNotFoundException;
 
@@ -33,7 +34,7 @@ public class ProdutoCatalogoBean {
     }
 
 
-    public ProdutoCatalogo create(String nomeProduto, String fabrincanteUsername) throws MyEntityExistsException, MyEntityNotFoundException {
+    public ProdutoCatalogo create(String nomeProduto, String fabrincanteUsername) throws MyEntityExistsException, MyEntityNotFoundException, MyConstraintViolationException {
 
         if(exists(nomeProduto, fabrincanteUsername)) {
             throw new MyEntityExistsException("Produto catálogo com nome " + nomeProduto + " já existe");
@@ -50,8 +51,8 @@ public class ProdutoCatalogoBean {
             produtoCatalogo = new ProdutoCatalogo(nomeProduto, fabricante);
             entityManager.persist(produtoCatalogo);
         }
-        catch (Exception e) {
-            throw new MyEntityExistsException("Produto catálogo com nome " + nomeProduto + " já existe");
+        catch (ConstraintViolationException e) {
+            throw new MyConstraintViolationException(e);
         }
 
         fabricante.addProduto(produtoCatalogo);
@@ -85,5 +86,9 @@ public class ProdutoCatalogoBean {
             throw new MyEntityNotFoundException("Produto catálogo com id " + id + " não existe");
         }
         entityManager.remove(produtoCatalogo);
+    }
+
+    public List<ProdutoCatalogo> getAllProductsCatalogo() {
+        return entityManager.createNamedQuery("getAllProductsCatalogo", ProdutoCatalogo.class).getResultList();
     }
 }

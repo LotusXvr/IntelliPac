@@ -21,8 +21,4 @@ public class ProdutoBean {
         Hibernate.initialize(produto);
         return produto;
     }
-
-    public List<Produto> getAllProducts() {
-        return entityManager.createNamedQuery("getAllProducts", Produto.class).getResultList();
-    }
 }
