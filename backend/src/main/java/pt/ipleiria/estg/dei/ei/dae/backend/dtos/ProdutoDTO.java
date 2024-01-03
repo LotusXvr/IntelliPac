@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class ProdutoDTO implements Serializable {
     private long id;
     private String nome;
-    private String fabricanteUsername; // Referência ao Fabricante de Produtos
+    private String fabricanteUsername;
     private String nomeFabricante;
 
     public ProdutoDTO() {
