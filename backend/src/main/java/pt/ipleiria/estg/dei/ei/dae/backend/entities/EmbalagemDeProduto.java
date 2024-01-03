@@ -15,7 +15,7 @@ public class EmbalagemDeProduto extends Embalagem implements Serializable {
     private String tipoEmbalagem;
 
     @ManyToMany(mappedBy = "embalagemDeProdutos", fetch = FetchType.LAZY)
-    private List<Produto> produtos;
+    private List<ProdutoFisico> produtos;
 
     public EmbalagemDeProduto() {
         this.produtos = new ArrayList<>();
@@ -27,7 +27,7 @@ public class EmbalagemDeProduto extends Embalagem implements Serializable {
         this.produtos = new ArrayList<>();
     }
 
-    public EmbalagemDeProduto(String material, String tipoEmbalagem, List<Produto> produtos) {
+    public EmbalagemDeProduto(String material, String tipoEmbalagem, List<ProdutoFisico> produtos) {
         super(material);
         this.tipoEmbalagem = tipoEmbalagem;
         this.produtos = produtos;
@@ -41,19 +41,19 @@ public class EmbalagemDeProduto extends Embalagem implements Serializable {
         this.tipoEmbalagem = tipoEmbalagem;
     }
 
-    public List<Produto> getProdutos() {
+    public List<ProdutoFisico> getProdutos() {
         return produtos;
     }
 
-    public void setProdutos(List<Produto> produtos) {
+    public void setProdutos(List<ProdutoFisico> produtos) {
         this.produtos = produtos;
     }
 
-    public void addProduto(Produto produto) {
+    public void addProduto(ProdutoFisico produto) {
         this.produtos.add(produto);
     }
 
-    public void removeProduto(Produto produto) {
+    public void removeProduto(ProdutoFisico produto) {
         this.produtos.remove(produto);
     }
 }
