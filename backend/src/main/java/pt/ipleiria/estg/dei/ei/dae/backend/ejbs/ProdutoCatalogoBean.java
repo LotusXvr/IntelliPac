@@ -7,6 +7,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
 import jakarta.validation.ConstraintViolationException;
+import org.hibernate.Hibernate;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.FabricanteDeProdutos;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.ProdutoCatalogo;
 import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyConstraintViolationException;
@@ -90,5 +91,13 @@ public class ProdutoCatalogoBean {
 
     public List<ProdutoCatalogo> getAllProductsCatalogo() {
         return entityManager.createNamedQuery("getAllProductsCatalogo", ProdutoCatalogo.class).getResultList();
+    }
+
+    public ProdutoCatalogo getProdutoCatalogoWithProdutos(long id) {
+        ProdutoCatalogo produtoCatalogo = find(id);
+        if (produtoCatalogo != null) {
+            Hibernate.initialize(produtoCatalogo.getProdutos());
+        }
+        return produtoCatalogo;
     }
 }

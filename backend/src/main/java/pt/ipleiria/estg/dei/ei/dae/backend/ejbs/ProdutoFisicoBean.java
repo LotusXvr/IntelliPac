@@ -108,4 +108,5 @@ public class ProdutoFisicoBean {
     public List<ProdutoFisico> getAllProductsFisico() {
         return entityManager.createNamedQuery("getAllProductsFisico", ProdutoFisico.class).getResultList();
     }
+
 }

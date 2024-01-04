@@ -9,16 +9,16 @@ public class ProdutoFisicoDTO {
     private long id;
     private String nome;
     private String fabricanteUsername;
-    private ProdutoCatalogo produtoCatalogo;
+    private long produtoCatalogoId;
 
     public ProdutoFisicoDTO() {
     }
 
-    public ProdutoFisicoDTO(long id, String nome, String fabricanteUsername, ProdutoCatalogo produtoCatalogo) {
+    public ProdutoFisicoDTO(long id, String nome, String fabricanteUsername, long produtoCatalogoId) {
         this.id = id;
         this.nome = nome;
         this.fabricanteUsername = fabricanteUsername;
-        this.produtoCatalogo = produtoCatalogo;
+        this.produtoCatalogoId = produtoCatalogoId;
     }
 
     public long getId() {
@@ -45,11 +45,11 @@ public class ProdutoFisicoDTO {
         this.fabricanteUsername = fabricanteUsername;
     }
 
-    public ProdutoCatalogo getProdutoCatalogo() {
-        return produtoCatalogo;
+    public long getProdutoCatalogoId() {
+        return produtoCatalogoId;
     }
 
-    public void setProdutoCatalogo(ProdutoCatalogo produtoCatalogo) {
-        this.produtoCatalogo = produtoCatalogo;
+    public void setProdutoCatalogoId(long produtoCatalogoId) {
+        this.produtoCatalogoId = produtoCatalogoId;
     }
 }
