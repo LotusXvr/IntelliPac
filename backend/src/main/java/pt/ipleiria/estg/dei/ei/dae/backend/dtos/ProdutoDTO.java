@@ -6,14 +6,8 @@ public class ProdutoDTO implements Serializable {
     private long id;
     private String nome;
     private String fabricanteUsername;
-    private String nomeFabricante;
 
     public ProdutoDTO() {
-    }
-
-    public ProdutoDTO(long id, String nome) {
-        this.id = id;
-        this.nome = nome;
     }
 
     public ProdutoDTO(long id, String nome, String fabricanteUsername) {
@@ -21,14 +15,6 @@ public class ProdutoDTO implements Serializable {
         this.nome = nome;
         this.fabricanteUsername = fabricanteUsername;
     }
-
-    public ProdutoDTO(long id, String nome, String fabricanteUsername, String nomeFabricante) {
-        this.id = id;
-        this.nome = nome;
-        this.fabricanteUsername = fabricanteUsername;
-        this.nomeFabricante = nomeFabricante;
-    }
-
 
     public long getId() {
         return id;
@@ -54,12 +40,5 @@ public class ProdutoDTO implements Serializable {
         this.fabricanteUsername = fabricanteUsername;
     }
 
-    public String getNomeFabricante() {
-        return nomeFabricante;
-    }
-
-    public void setNomeFabricante(String nomeFabricante) {
-        this.nomeFabricante = nomeFabricante;
-    }
 }
 
