@@ -67,11 +67,10 @@ public class ProdutoCatalogoService {
     @Path("/")
     public Response create(ProdutoCatalogoDTO produtoCatalogoDTO)
             throws MyEntityExistsException, MyEntityNotFoundException, MyConstraintViolationException {
-        produtoCatalogoBean.create(
+        ProdutoCatalogo produtoCatalogo = produtoCatalogoBean.create(
                 produtoCatalogoDTO.getNome(),
                 produtoCatalogoDTO.getFabricanteUsername()
         );
-        ProdutoCatalogo produtoCatalogo = produtoCatalogoBean.find(produtoCatalogoDTO.getId());
         return Response.status(Response.Status.CREATED).entity(toDTONoProdutos(produtoCatalogo)).build();
     }
 
@@ -79,12 +78,9 @@ public class ProdutoCatalogoService {
     @Path("{id}")
     public Response getProdutoCatalogoDetails(@PathParam("id") long id) {
 
-        ProdutoCatalogo produtoCatalogo = produtoCatalogoBean.find(id);
+        ProdutoCatalogo produtoCatalogo = produtoCatalogoBean.getProdutoCatalogoWithProdutos(id);
 
         if (produtoCatalogo != null) {
-            // Inicializa explicitamente a coleção de produtos para este produto Catalogo
-            Hibernate.initialize(produtoCatalogo.getProdutos());
-
             return Response.ok(toDTO(produtoCatalogo)).build();
         }
 

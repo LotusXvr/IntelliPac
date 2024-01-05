@@ -1,31 +1,31 @@
-##### Produtos
-GET http://localhost:8080/intellipac/api/produtos
+##### ProdutosCatalogo
+GET http://localhost:8080/intellipac/api/produtosCatalogo
 Accept: application/json
 ###
-POST http://localhost:8080/intellipac/api/produtos
+POST http://localhost:8080/intellipac/api/produtosCatalogo
 Content-Type: application/json
 
 {
   "nome": "Produto (POST)",
-  "idFabricante": 2
+  "fabricanteUsername": "Fabrica1"
 
 }
-
 ###
-PUT http://localhost:8080/intellipac/api/produtos/2
+PUT http://localhost:8080/intellipac/api/produtosCatalogo/2
 Content-Type: application/json
 
 {
   "nome": "Produto (PUT)",
-  "idFabricante": 2
-
+  "fabricanteUsername": "Fabrica1"
 }
 
 ###
-DELETE http://localhost:8080/intellipac/api/produtos/2
+DELETE http://localhost:8080/intellipac/api/produtosCatalogo/2
 Accept: application/json
 
-
+##### Detalhes de um produtoCataloo
+GET http://localhost:8080/intellipac/api/produtosCatalogo/1
+Accept: application/json
 
 ##### Fabricantes
 GET http://localhost:8080/intellipac/api/fabricantes
