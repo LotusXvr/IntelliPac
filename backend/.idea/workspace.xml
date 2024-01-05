@@ -5,12 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c16a9ce7-b8ca-4660-a077-28c4d0becec3" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/httpRequests/http-requests-log.http" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/httpRequests/http-requests-log.http" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/intellipac-client/pages/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/intellipac-client/pages/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/intellipac-client/pages/produtos/create.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/intellipac-client/pages/produtos/edit/[id].vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/intellipac-client/pages/produtos/index.vue" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -150,7 +145,7 @@
       <workItem from="1704223163014" duration="1848000" />
       <workItem from="1704237625788" duration="6718000" />
       <workItem from="1704280302387" duration="11686000" />
-      <workItem from="1704448291193" duration="2706000" />
+      <workItem from="1704448291193" duration="4202000" />
     </task>
     <servers />
   </component>
