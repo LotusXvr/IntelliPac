@@ -10,13 +10,13 @@
       <br />
       <div>
         Fabricante:
-        <select v-model.trim="produtoForm.idFabricante">
-          <option v-for="fabricante in fabricantes" :value="fabricante.id">
+        <select v-model.trim="produtoForm.fabricanteUsername">
+          <option v-for="fabricante in fabricantes" :value="fabricante.username">
             {{ fabricante.nome }}
           </option>
         </select>
-        <span v-if="produtoForm.idFabricante !== null && !isFabricanteValid" class="error">
-          ERRO: {{ formFeedback.idFabricante }}</span>
+        <span v-if="produtoForm.fabricanteUsername !== null && !isFabricanteValid" class="error">
+          ERRO: {{ formFeedback.fabricanteUsername }}</span>
       </div>
       <br />
 
@@ -43,25 +43,25 @@ const messages = ref([]);
 
 const produtoForm = reactive({
   nome: null,
-  idFabricante: null,
+  fabricanteUsername: null,
 });
 
 const formFeedback = reactive({
   nome: "",
-  idFabricante: "",
+  fabricanteUsername: "",
 });
 
 const { data: fabricantes } = await useFetch(`${api}/fabricantes`);
 
 const fetchProduto = async () => {
   try {
-    const response = await fetch(`${api}/produtos/${id}`);
+    const response = await fetch(`${api}/produtosCatalogo/${id}`);
     if (!response.ok) {
       throw new Error(response.statusText);
     }
     produto.value = await response.json();
     produtoForm.nome = produto.value.nome;
-    produtoForm.idFabricante = produto.value.idFabricante;
+    produtoForm.fabricanteUsername = produto.value.fabricanteUsername;
   } catch (error) {
     messages.value.push(error.message);
   }
@@ -84,11 +84,11 @@ const isNameValid = computed(() => {
 });
 
 const isFabricanteValid = computed(() => {
-  if (produtoForm.idFabricante === null) {
+  if (produtoForm.fabricanteUsername === null) {
     return false;
   }
 
-  formFeedback.idFabricante = "";
+  formFeedback.fabricanteUsername = "";
   return true;
 });
 
@@ -104,11 +104,11 @@ const updateProduto = async () => {
       body: JSON.stringify(produtoForm),
     };
 
-    const response = await fetch(`${api}/produtos/${id}`, requestOptions);
+    const response = await fetch(`${api}/produtosCatalogo/${id}`, requestOptions);
     if (!response.ok) {
       throw new Error(response.statusText);
     }
-    navigateTo("/produtos");
+    navigateTo("/produtosCatalogo");
   } catch (error) {
     messages.value.push(error.message);
   }

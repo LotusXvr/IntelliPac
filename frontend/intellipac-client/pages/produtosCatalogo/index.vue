@@ -1,7 +1,7 @@
 <template>
   <div v-if="error">Error: {{ error.message }}</div>
   <div v-else>
-    <nuxt-link to="produtos/create">Criar novo Produto</nuxt-link>
+    <nuxt-link to="produtosCatalogo/create">Criar novo Produto</nuxt-link>
     <h2>Produtos</h2>
     <table>
       <tr>
@@ -13,9 +13,9 @@
         <td>{{ produto.nome }}</td>
         <td>{{ produto.nomeFabricante }}</td>
         <td>
-          <nuxt-link :to="`/produtos/${produto.id}`">Detalhes</nuxt-link>
+          <nuxt-link :to="`/produtosCatalogo/${produto.id}`">Detalhes</nuxt-link>
           |
-          <nuxt-link :to="'/produtos/edit/' + produto.id">Editar</nuxt-link>
+          <nuxt-link :to="'/produtosCatalogo/edit/' + produto.id">Editar</nuxt-link>
           |
           <button @click="deleteProduto(produto.id)">Excluir</button>
         </td>
@@ -30,11 +30,11 @@
 <script setup>
 const config = useRuntimeConfig();
 const api = config.public.API_URL;
-const { data: produtos, error, refresh } = await useFetch(`${api}/produtos`);
+const { data: produtos, error, refresh } = await useFetch(`${api}/produtosCatalogo`);
 
 const deleteProduto = async (id) => {
   try {
-    const response = await fetch(`${api}/produtos/${id}`, {
+    const response = await fetch(`${api}/produtosCatalogo/${id}`, {
       method: "DELETE",
     });
     if (response.ok) {

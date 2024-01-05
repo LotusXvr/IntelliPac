@@ -6,14 +6,14 @@
     <br />
     <div>
       Fabricante:
-      <select v-model="produtoForm.idFabricante">
+      <select v-model="produtoForm.fabricanteUsername">
         <option value=''>--- Please select Fabricante ---</option>
-        <option v-for="fabricante in fabricantes" :value="fabricante.id">
+        <option v-for="fabricante in fabricantes" :value="fabricante.username">
           {{ fabricante.nome }}
         </option>
       </select>
-      <span v-if="produtoForm.idFabricante !== null && !isFabricanteValid" class="error">
-        ERRO: {{ formFeedback.idFabricante }}</span>
+      <span v-if="produtoForm.fabricanteUsername !== null && !isFabricanteValid" class="error">
+        ERRO: {{ formFeedback.fabricanteUsername }}</span>
     </div>
 
     <br />
@@ -30,12 +30,12 @@
 import { ref, reactive, computed } from "vue";
 const produtoForm = reactive({
   nome: null,
-  idFabricante: '', // Alterado de Number para aceitar nulos
+  fabricanteUsername: '', // Alterado de Number para aceitar nulos
 });
 
 const formFeedback = reactive({
   nome: "",
-  idFabricante: "",
+  fabricanteUsername: "",
 });
 
 const config = useRuntimeConfig();
@@ -60,11 +60,11 @@ const isNameValid = computed(() => {
 });
 
 const isFabricanteValid = computed(() => {
-  if (produtoForm.idFabricante === null) {
+  if (produtoForm.fabricanteUsername === null) {
     return false;
   }
 
-  formFeedback.idFabricante = "";
+  formFeedback.fabricanteUsername = "";
   return true;
 });
 
@@ -73,17 +73,17 @@ const isFormValid = computed(() => {
 });
 
 async function create() {
-  // Converte idFabricante para número
-  produtoForm.idFabricante = Number(produtoForm.idFabricante);
+  console.log(produtoForm)
+  produtoForm.fabricanteUsername = produtoForm.fabricanteUsername;
 
   const requestOptions = {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(produtoForm),
   };
-
-  const { error } = await useFetch(`${api}/produtos`, requestOptions);
-  if (!error.value) navigateTo("/produtos");
+  
+  const { error } = await useFetch(`${api}/produtosCatalogo`, requestOptions);
+  if (!error.value) navigateTo("/produtosCatalogo");
   message.value = error.value;
 }
 </script>

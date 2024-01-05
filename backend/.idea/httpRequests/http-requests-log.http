@@ -1,3 +1,20 @@
+POST http://localhost:8080/intellipac/api/produtosCatalogo
+Content-Type: application/json
+Content-Length: 67
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "nome": "Produto (POST)",
+  "fabricanteUsername": "Fabrica1"
+
+}
+
+<> 2024-01-05T103606.201.json
+
+###
+
 GET http://localhost:8080/intellipac/api/produtosCatalogo/1
 Accept: application/json
 Connection: Keep-Alive
@@ -592,22 +609,6 @@ User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
 Accept-Encoding: br,deflate,gzip,x-gzip
 
 <> 2024-01-02T194031.200.json
-
-###
-
-PUT http://localhost:8080/intellipac/api/sensores/1
-Content-Type: application/json
-Content-Length: 85
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-  "idSensor": 1,
-  "tipo": "Temperatura",
-  "valor": "20",
-  "unidade": "Celsius"
-}
 
 ###
 
