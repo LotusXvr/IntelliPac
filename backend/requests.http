@@ -136,3 +136,9 @@ Content-Type: application/json
 ### GET SENSORES BY ID
 GET http://localhost:8080/intellipac/api/sensores/1
 Accept: application/json
+
+## OBSERVACOES
+
+### GET ALL OBSERVACOES
+GET http://localhost:8080/intellipac/api/observacoes
+Accept: application/json

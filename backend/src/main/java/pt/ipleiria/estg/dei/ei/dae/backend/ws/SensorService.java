@@ -7,6 +7,8 @@ import jakarta.ws.rs.core.Response;
 import pt.ipleiria.estg.dei.ei.dae.backend.dtos.SensorDTO;
 import pt.ipleiria.estg.dei.ei.dae.backend.ejbs.SensorBean;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.Sensor;
+import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyEntityExistsException;
+import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyEntityNotFoundException;
 
 import java.nio.file.ReadOnlyFileSystemException;
 import java.util.List;
@@ -29,8 +31,8 @@ public class SensorService {
         );
     }
 
-    private List<SensorDTO> toDTOs(List<Sensor> sensors) {
-        return sensors.stream().map(this::toDTO).collect(java.util.stream.Collectors.toList());
+    private List<SensorDTO> toDTOs(List<Sensor> sensores) {
+        return sensores.stream().map(this::toDTO).collect(java.util.stream.Collectors.toList());
     }
 
     @GET
@@ -60,9 +62,9 @@ public class SensorService {
         );
         Sensor sensor = sensorBean.findBySensorId(sensorDTO.getIdSensor());
         if (sensor == null) {
-            return Response.status(Response.Status.BAD_REQUEST).build();
+            return Response.status(Response.Status.NOT_FOUND).build();
         }
-        return Response.status(Response.Status.CREATED).build();
+        return Response.status(Response.Status.CREATED).entity(toDTO(sensor)).build();
     }
 
     @PUT

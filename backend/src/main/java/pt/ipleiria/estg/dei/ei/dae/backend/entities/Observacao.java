@@ -4,6 +4,13 @@ import jakarta.persistence.*;
 
 import java.time.LocalDate;
 
+
+@NamedQueries({
+        @NamedQuery(
+                name = "getAllObservacao",
+                query = "SELECT o FROM Observacao o ORDER BY o.id" // JPQL
+        )
+})
 @Entity
 public class Observacao {
     @Id
@@ -27,7 +34,7 @@ public class Observacao {
     public Observacao() {
     }
 
-    public Observacao(String valor, LocalDate timestamp, Sensor sensor) {
+    public Observacao(LocalDate timestamp, String valor, Sensor sensor) {
         this.sensor = sensor;
         this.timestamp = timestamp;
         this.valor = valor;
