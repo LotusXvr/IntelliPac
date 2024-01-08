@@ -1,8 +1,9 @@
 package pt.ipleiria.estg.dei.ei.dae.backend.entities;
+
 import jakarta.persistence.*;
+
 import java.util.ArrayList;
 import java.util.List;
-
 
 
 @Table(name = "sensor"
@@ -21,7 +22,7 @@ public class Sensor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    // id_sensor
+    // id_sensor (razao ainda por esclarecer, mas será necessario)
     private long idSensor;
     // timestamp
     // tipo (temperatura, humidade, etc)
@@ -41,6 +42,7 @@ public class Sensor {
     // relação de oneToMany com Observação e ManyToOne ao contrario
 
     public Sensor() {
+        this.observacoes = new ArrayList<>();
         this.embalagens = new ArrayList<>();
     }
 
@@ -48,6 +50,7 @@ public class Sensor {
         this.idSensor = idSensor;
         this.tipo = tipo;
         this.unidade = unidade;
+        this.observacoes = new ArrayList<>();
         this.embalagens = new ArrayList<>();
     }
 
@@ -58,6 +61,14 @@ public class Sensor {
 
     public void setEmbalagens(List<Embalagem> embalagens) {
         this.embalagens = embalagens;
+    }
+
+    public List<Observacao> getObservacoes() {
+        return observacoes;
+    }
+
+    public void setObservacoes(List<Observacao> observacoes) {
+        this.observacoes = observacoes;
     }
 
     public long getId() {

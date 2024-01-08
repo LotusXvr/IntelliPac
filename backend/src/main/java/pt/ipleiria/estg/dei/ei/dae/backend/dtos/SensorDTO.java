@@ -2,6 +2,7 @@ package pt.ipleiria.estg.dei.ei.dae.backend.dtos;
 
 
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.Embalagem;
+import pt.ipleiria.estg.dei.ei.dae.backend.entities.Observacao;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,13 +11,14 @@ public class SensorDTO {
 
     private long id;
     private long idSensor;
-    private String valor;
     private String tipo;
     private String unidade;
     private List<Embalagem> embalagens;
+    private List<Observacao> observacoes;
 
     public SensorDTO() {
         this.embalagens = new ArrayList<>();
+        this.observacoes = new ArrayList<>();
     }
 
     public SensorDTO(long id, long idSensor, String tipo, String unidade) {
@@ -25,6 +27,7 @@ public class SensorDTO {
         this.tipo = tipo;
         this.unidade = unidade;
         this.embalagens = new ArrayList<>();
+        this.observacoes = new ArrayList<>();
     }
 
     public List<Embalagem> getEmbalagens() {
@@ -33,6 +36,14 @@ public class SensorDTO {
 
     public void setEmbalagens(List<Embalagem> embalagens) {
         this.embalagens = embalagens;
+    }
+
+    public List<Observacao> getObservacoes() {
+        return observacoes;
+    }
+
+    public void setObservacoes(List<Observacao> observacoes) {
+        this.observacoes = observacoes;
     }
 
     public long getId() {

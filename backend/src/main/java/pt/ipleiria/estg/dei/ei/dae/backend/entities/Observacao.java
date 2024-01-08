@@ -56,4 +56,12 @@ public class Observacao {
     public void setSensor(Sensor sensor) {
         this.sensor = sensor;
     }
+
+    public LocalDate getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(LocalDate timestamp) {
+        this.timestamp = timestamp;
+    }
 }
