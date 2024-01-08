@@ -7,6 +7,7 @@ import pt.ipleiria.estg.dei.ei.dae.backend.entities.Observacao;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.Sensor;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Stateless
@@ -24,7 +25,7 @@ public class ObservacaoBean {
         return entityManager.createNamedQuery("getAllObservacao", Observacao.class).getResultList();
     }
 
-    public void create(LocalDate timestamp, String valor, Long sensorId){
+    public void create(LocalDateTime timestamp, String valor, Long sensorId){
         Sensor sensor = entityManager.find(Sensor.class, sensorId);
         Observacao observacao = new Observacao(timestamp, valor, sensor);
         entityManager.persist(observacao);

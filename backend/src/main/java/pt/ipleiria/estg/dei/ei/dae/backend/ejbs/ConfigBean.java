@@ -51,10 +51,10 @@ public class ConfigBean {
             sensorBean.create(6, "Direcao do Vento",  "N");
             sensorBean.create(7, "Precipitacao",  "mm");
 
-            observacaoBean.create(java.time.LocalDate.now(), "20", 1L);
-            observacaoBean.create(java.time.LocalDate.now(), "90", 2L);
-            observacaoBean.create(java.time.LocalDate.now(), "400", 3L);
-            observacaoBean.create(java.time.LocalDate.now(), "1000", 4L);
+            observacaoBean.create(java.time.LocalDateTime.now(), "20", 1L);
+            observacaoBean.create(java.time.LocalDateTime.now(), "90", 2L);
+            observacaoBean.create(java.time.LocalDateTime.now(), "400", 3L);
+            observacaoBean.create(java.time.LocalDateTime.now(), "1000", 4L);
 
 
 

@@ -1,8 +1,10 @@
 package pt.ipleiria.estg.dei.ei.dae.backend.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 
 @NamedQueries({
@@ -24,7 +26,8 @@ public class Observacao {
 
     // timestamp
     @Column(nullable = false)
-    private LocalDate timestamp;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime timestamp;
 
     // o valor registado
     @Column(nullable = false)
@@ -34,7 +37,7 @@ public class Observacao {
     public Observacao() {
     }
 
-    public Observacao(LocalDate timestamp, String valor, Sensor sensor) {
+    public Observacao(LocalDateTime timestamp, String valor, Sensor sensor) {
         this.sensor = sensor;
         this.timestamp = timestamp;
         this.valor = valor;
@@ -64,11 +67,11 @@ public class Observacao {
         this.sensor = sensor;
     }
 
-    public LocalDate getTimestamp() {
+    public LocalDateTime getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(LocalDate timestamp) {
+    public void setTimestamp(LocalDateTime timestamp) {
         this.timestamp = timestamp;
     }
 }

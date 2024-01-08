@@ -2,18 +2,19 @@ package pt.ipleiria.estg.dei.ei.dae.backend.dtos;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class ObservacaoDTO implements Serializable {
 
     private long id;
-    private LocalDate timestamp;
+    private LocalDateTime timestamp;
     private String valor;
     private Long sensorId;
 
     public ObservacaoDTO() {
     }
 
-    public ObservacaoDTO(long id, LocalDate timestamp, String valor, Long sensorId) {
+    public ObservacaoDTO(long id, LocalDateTime timestamp, String valor, Long sensorId) {
         this.id = id;
         this.timestamp = timestamp;
         this.valor = valor;
@@ -36,11 +37,11 @@ public class ObservacaoDTO implements Serializable {
         sensorId = sensorId;
     }
 
-    public LocalDate getTimestamp() {
+    public LocalDateTime getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(LocalDate timestamp) {
+    public void setTimestamp(LocalDateTime timestamp) {
         this.timestamp = timestamp;
     }
 
