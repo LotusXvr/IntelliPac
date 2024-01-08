@@ -31,6 +31,10 @@ public class Sensor {
     // id_embalagem
     // id_encomenda
 
+    // o sensor vai ter uma lista de observaçoes numa relaçao de one to many
+    @OneToMany(mappedBy = "sensor")
+    private List<Observacao> observacoes;
+
     // relação com embalagem de many to many e vice versa
     @ManyToMany(mappedBy = "sensores")
     private List<Embalagem> embalagens;

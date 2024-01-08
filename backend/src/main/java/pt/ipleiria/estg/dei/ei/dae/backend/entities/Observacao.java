@@ -10,19 +10,27 @@ public class Observacao {
     @GeneratedValue
     private Long id;
 
-    @Column(nullable = false)
-    private String valor;
-
+    // sensor associado á observação
     @ManyToOne
     @JoinColumn(name = "sensor_id")
     private Sensor sensor;
 
+    // timestamp
+    @Column(nullable = false)
+    private LocalDate timestamp;
+
+    // o valor registado
+    @Column(nullable = false)
+    private String valor;
+
+
     public Observacao() {
     }
 
-    public Observacao(String valor, Sensor sensor, Produto produtoFisico, Embalagem embalagem) {
-        this.valor = valor;
+    public Observacao(String valor, LocalDate timestamp, Sensor sensor) {
         this.sensor = sensor;
+        this.timestamp = timestamp;
+        this.valor = valor;
     }
 
     public Long getId() {
