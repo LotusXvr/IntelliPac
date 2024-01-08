@@ -23,7 +23,6 @@ public class SensorService {
         return new SensorDTO(
                 sensor.getId(),
                 sensor.getIdSensor(),
-                sensor.getValor(),
                 sensor.getTipo(),
                 sensor.getUnidade()
 
@@ -57,7 +56,6 @@ public class SensorService {
         sensorBean.create(
                 sensorDTO.getIdSensor(),
                 sensorDTO.getTipo(),
-                sensorDTO.getValor(),
                 sensorDTO.getUnidade()
         );
         Sensor sensor = sensorBean.findBySensorId(sensorDTO.getIdSensor());
@@ -80,8 +78,7 @@ public class SensorService {
                     id,
                     sensorDTO.getIdSensor(),
                     sensorDTO.getTipo(),
-                    sensorDTO.getUnidade(),
-                    sensorDTO.getValor()
+                    sensorDTO.getUnidade()
             );
             return Response.status(Response.Status.OK).build();
         } catch (Exception e) {

@@ -13,8 +13,8 @@ public class SensorBean {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public void create(long idSensor, String tipo, String valor, String unidade) {
-        Sensor sensor = new Sensor(idSensor, tipo, valor, unidade);
+    public void create(long idSensor, String tipo, String unidade) {
+        Sensor sensor = new Sensor(idSensor, tipo, unidade);
         entityManager.persist(sensor);
     }
 
@@ -40,13 +40,12 @@ public class SensorBean {
         return entityManager.createNamedQuery("getAllSensor", Sensor.class).getResultList();
     }
 
-    public void update(long id, long idSensor, String tipo, String unidade, String valor) {
+    public void update(long id, long idSensor, String tipo, String unidade) {
         Sensor sensor = find(id);
 
         sensor.setIdSensor(idSensor);
         sensor.setTipo(tipo);
         sensor.setUnidade(unidade);
-        sensor.setValor(valor);
         entityManager.merge(sensor);
     }
 

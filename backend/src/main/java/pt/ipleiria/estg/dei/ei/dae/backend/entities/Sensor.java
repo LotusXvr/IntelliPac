@@ -26,9 +26,6 @@ public class Sensor {
     // timestamp
     // tipo (temperatura, humidade, etc)
     private String tipo;
-    // valor
-    // No value ainda não sei se é string ou int
-    private String valor;
     // unidade (ºC, %, etc)
     private String unidade;
     // id_embalagem
@@ -43,10 +40,9 @@ public class Sensor {
         this.embalagens = new ArrayList<>();
     }
 
-    public Sensor(long idSensor, String tipo, String valor, String unidade) {
+    public Sensor(long idSensor, String tipo, String unidade) {
         this.idSensor = idSensor;
         this.tipo = tipo;
-        this.valor = valor;
         this.unidade = unidade;
         this.embalagens = new ArrayList<>();
     }
@@ -82,14 +78,6 @@ public class Sensor {
 
     public void setTipo(String tipo) {
         this.tipo = tipo;
-    }
-
-    public String getValor() {
-        return valor;
-    }
-
-    public void setValor(String valor) {
-        this.valor = valor;
     }
 
     public String getUnidade() {
