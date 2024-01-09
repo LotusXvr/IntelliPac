@@ -6,14 +6,4 @@ import jakarta.ws.rs.core.Application;
 
 @ApplicationPath("/api")
 public class IntelliPacApplication extends Application {
-    static ObjectMapper mapper = new ObjectMapper();
-
-    static {
-        // Configure the ObjectMapper with modules
-        mapper.findAndRegisterModules();
-    }
-
-    public static ObjectMapper getObjectMapper() {
-        return mapper;
-    }
 }
