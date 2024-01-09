@@ -41,7 +41,7 @@ public class EncomendaBean {
 
         Date data = new Date();
         try{
-            encomenda = new Encomenda(cliente,data, operadorDeLogistica);
+            encomenda = new Encomenda(cliente,data, operadorDeLogistica, "pendente");
             entityManager.persist(encomenda);
         }
         catch (ConstraintViolationException e) {
@@ -54,15 +54,34 @@ public class EncomendaBean {
     }
 
 
-    public Encomenda findEncomendaById(Long id) {
+    public Encomenda find(long id) {
         return entityManager.find(Encomenda.class, id);
     }
 
-    public void updateEncomenda(Encomenda encomenda) {
+    public void update(long id, String estado)  throws MyEntityNotFoundException{
+        Encomenda encomenda = find(id);
+        if (encomenda == null) {
+            throw new MyEntityNotFoundException("Encomenda com id " + id + " não existe");
+        }
+
+        encomenda.setEstado(estado);
         entityManager.merge(encomenda);
     }
 
-    public void removeEncomenda(Encomenda encomenda) {
-        entityManager.remove(entityManager.contains(encomenda) ? encomenda : entityManager.merge(encomenda));
+    public void remove(long id) throws MyEntityNotFoundException {
+        Encomenda encomenda = find(id);
+        if (encomenda == null) {
+            throw new MyEntityNotFoundException("Encomenda com id " + id + " não existe");
+        }
+        entityManager.remove(encomenda);
+    }
+    public List<Encomenda> getAllEncomendasCliente(String clienteUsername) {
+        var cliente = clienteBean.find(clienteUsername);
+        return entityManager.createNamedQuery("getAllEncomendasCliente", Encomenda.class).setParameter("cliente", cliente).getResultList();
+    }
+    public List<Encomenda> getAllEncomendasOperadoresLogistica(String operadorUsername) {
+        var operadorLogistica = operadorDeLogisticaBean.find(operadorUsername);
+        return entityManager.createNamedQuery("getAllEncomendasCliente", Encomenda.class).setParameter("operador", operadorLogistica).getResultList();
     }
 }
+
