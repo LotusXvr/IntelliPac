@@ -5,6 +5,7 @@ import jakarta.annotation.PostConstruct;
 import jakarta.ejb.EJB;
 import jakarta.ejb.Singleton;
 import jakarta.ejb.Startup;
+import pt.ipleiria.estg.dei.ei.dae.backend.entities.ProdutoCatalogo;
 
 import java.time.LocalDateTime;
 import java.util.logging.Logger;
@@ -28,6 +29,9 @@ public class ConfigBean {
     @EJB
     ObservacaoBean observacaoBean;
 
+    @EJB
+    ProdutoFisicoBean produtoFisicoBean;
+
     private Logger logger = Logger.getLogger("ejbs.ConfigBean");
 
     @PostConstruct
@@ -38,8 +42,12 @@ public class ConfigBean {
             fabricanteDeProdutosBean.create("Fabrica1", "123", "fabricante 1", "fabricante1@mail.pt");
             fabricanteDeProdutosBean.create("Fabrica2", "123", "fabricante 2", "fabricante2@mail.pt");
 
-            produtoCatalogoBean.create("produto 1", "Fabrica1");
-            produtoCatalogoBean.create("produto 2", "Fabrica2");
+            ProdutoCatalogo produtoCatalogo1 = produtoCatalogoBean.create("produto 1", "Fabrica1");
+            ProdutoCatalogo produtoCatalogo2 = produtoCatalogoBean.create("produto 2", "Fabrica2");
+
+            produtoFisicoBean.create("produto1Fisico", "Fabrica1", produtoCatalogo1.getId());
+            produtoFisicoBean.create("produto2Fisico", "Fabrica1", produtoCatalogo2.getId());
+
 
             operadorDeLogisticaBean.create("ValterLogo", "123", "Valte", "valtefutebole@mail.pt");
             operadorDeLogisticaBean.create("Joaoz", "123", "Joao", "joao@mail.pt");

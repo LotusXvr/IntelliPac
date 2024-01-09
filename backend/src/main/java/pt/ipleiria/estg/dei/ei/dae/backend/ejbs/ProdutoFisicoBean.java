@@ -85,7 +85,7 @@ public class ProdutoFisicoBean {
 
         ProdutoCatalogo produtoCatalogo = entityManager.find(ProdutoCatalogo.class, produtoCatalogoId);
 
-        if (produtoCatalogo != null) {
+        if (produtoCatalogo == null) {
             throw new MyEntityNotFoundException("Produto catálogo com id " + produtoCatalogo.getId() + " não existe");
         }
 

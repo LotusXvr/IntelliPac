@@ -27,6 +27,36 @@ Accept: application/json
 GET http://localhost:8080/intellipac/api/produtosCatalogo/1
 Accept: application/json
 
+##### Produtos Fisicos
+
+GET http://localhost:8080/intellipac/api/produtosFisicos
+Accept: application/json
+###
+POST http://localhost:8080/intellipac/api/produtosFisicos
+Content-Type: application/json
+
+{
+  "nome": "Produto1Fisico (POST)",
+  "fabricanteUsername": "Fabrica1",
+  "produtoCatalogoId" : 1
+
+}
+###
+PUT http://localhost:8080/intellipac/api/produtosFisicos/3
+Content-Type: application/json
+
+{
+  "nome": "Produto1Fisico (PUT)",
+  "fabricanteUsername": "Fabrica1",
+  "produtoCatalogoId" : 1
+}
+###
+DELETE http://localhost:8080/intellipac/api/produtosFisicos/4
+Accept: application/json
+
+##### Detalhes de um produtoFisico
+GET http://localhost:8080/intellipac/api/produtosFisicos/3
+Accept: application/json
 ##### Fabricantes
 GET http://localhost:8080/intellipac/api/fabricantes
 Accept: application/json

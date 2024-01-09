@@ -2,6 +2,7 @@ package pt.ipleiria.estg.dei.ei.dae.backend.ws;
 
 import jakarta.ejb.EJB;
 import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import pt.ipleiria.estg.dei.ei.dae.backend.dtos.ProdutoFisicoDTO;
 import pt.ipleiria.estg.dei.ei.dae.backend.ejbs.ProdutoFisicoBean;
@@ -12,6 +13,9 @@ import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyEntityNotFoundException;
 
 import java.util.List;
 
+@Path("produtosFisicos")
+@Produces({MediaType.APPLICATION_JSON})
+@Consumes({MediaType.APPLICATION_JSON})
 public class ProdutoFisicoService {
     @EJB
     private ProdutoFisicoBean produtoFisicoBean;
@@ -75,7 +79,7 @@ public class ProdutoFisicoService {
             produtoFisicoBean.update(id, produtoFisicoDTO.getNome(), produtoFisicoDTO.getFabricanteUsername(), produtoFisicoDTO.getProdutoCatalogoId());
             return Response.status(Response.Status.OK).build();
         } catch (Exception e) {
-            return Response.status(Response.Status.BAD_REQUEST).entity("ERROR_UPDATING_PRODUTOFISICO").build();
+            return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
         }
     }
 
