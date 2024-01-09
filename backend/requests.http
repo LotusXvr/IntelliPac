@@ -38,7 +38,8 @@ Content-Type: application/json
 {
   "nome": "Produto1Fisico (POST)",
   "fabricanteUsername": "Fabrica1",
-  "produtoCatalogoId" : 1
+  "produtoCatalogoId" : 1,
+  "encomendaId" : 1
 
 }
 ###
@@ -48,7 +49,8 @@ Content-Type: application/json
 {
   "nome": "Produto1Fisico (PUT)",
   "fabricanteUsername": "Fabrica1",
-  "produtoCatalogoId" : 1
+  "produtoCatalogoId" : 1,
+  "encomendaId" : 1
 }
 ###
 DELETE http://localhost:8080/intellipac/api/produtosFisicos/4

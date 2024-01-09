@@ -3,6 +3,7 @@ package pt.ipleiria.estg.dei.ei.dae.backend.entities;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -11,26 +12,29 @@ public class Encomenda {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    private String consumidorFinal;
+    @ManyToOne
+    @JoinColumn(name = "cliente_id")
+    private Cliente consumidorFinal;
+    @ManyToOne
+    @JoinColumn(name = "operador_logistica_id")
+    private OperadorDeLogistica operadorLogistica;
     private Date dataEncomenda;
 
     @OneToMany(mappedBy = "encomenda")
     private List<EmbalagemDeTransporte> embalagensTransporte;
 
-    @ManyToMany
-    @JoinTable(name = "encomenda_produtos",
-            joinColumns = @JoinColumn(name = "encomenda_id"),
-            inverseJoinColumns = @JoinColumn(name = "produto_id"))
-    private List<Produto> produtos;
+    @OneToMany(mappedBy = "encomenda")
+    private List<ProdutoFisico> produtos;
 
     // Outros atributos e getters/setters
     public Encomenda() {
     }
 
-    public Encomenda(String consumidorFinal, Date dataEncomenda) {
+    public Encomenda(Cliente consumidorFinal, Date dataEncomenda, OperadorDeLogistica operadorLogistica) {
         this.consumidorFinal = consumidorFinal;
         this.dataEncomenda = dataEncomenda;
+        this.operadorLogistica = operadorLogistica;
+        this.produtos = new ArrayList<>();
     }
 
     public Long getId() {
@@ -41,11 +45,11 @@ public class Encomenda {
         this.id = id;
     }
 
-    public String getConsumidorFinal() {
+    public Cliente getConsumidorFinal() {
         return consumidorFinal;
     }
 
-    public void setConsumidorFinal(String consumidorFinal) {
+    public void setConsumidorFinal(Cliente consumidorFinal) {
         this.consumidorFinal = consumidorFinal;
     }
 
@@ -65,11 +69,20 @@ public class Encomenda {
         this.embalagensTransporte = embalagensTransporte;
     }
 
-    public List<Produto> getProdutos() {
+    public List<ProdutoFisico> getProdutos() {
         return produtos;
     }
 
-    public void setProdutos(List<Produto> produtos) {
+    public void setProdutos(List<ProdutoFisico> produtos) {
         this.produtos = produtos;
     }
+
+    public void addProduto(ProdutoFisico produto) {
+        this.produtos.add(produto);
+    }
+
+    public void removeProduto(ProdutoFisico produto) {
+        this.produtos.remove(produto);
+    }
+
 }

@@ -6,6 +6,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
 import jakarta.validation.ConstraintViolationException;
+import pt.ipleiria.estg.dei.ei.dae.backend.entities.Encomenda;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.FabricanteDeProdutos;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.ProdutoCatalogo;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.ProdutoFisico;
@@ -25,6 +26,9 @@ public class ProdutoFisicoBean {
     private FabricanteDeProdutosBean fabricanteDeProdutosBean;
 
     @EJB
+    private EncomendaBean encomendaBean;
+
+    @EJB
     private ProdutoCatalogoBean produtoCatalogoBean;
 
     public boolean exists(String nomeProduto, String fabrincanteUsername, ProdutoCatalogo produtoCatalogo) {
@@ -38,7 +42,7 @@ public class ProdutoFisicoBean {
         return (Long)query.getSingleResult() > 0L;
     }
 
-    public ProdutoFisico create(String nomeProduto, String fabrincanteUsername, long produtoCatalogoId) throws MyEntityExistsException, MyEntityNotFoundException, MyConstraintViolationException {
+    public ProdutoFisico create(String nomeProduto, String fabrincanteUsername, long produtoCatalogoId, long encomendaId) throws MyEntityExistsException, MyEntityNotFoundException, MyConstraintViolationException {
 
         ProdutoCatalogo produtoCatalogo = entityManager.find(ProdutoCatalogo.class, produtoCatalogoId);
 
@@ -55,16 +59,23 @@ public class ProdutoFisicoBean {
             throw new MyEntityNotFoundException("Fabricante com id " + fabrincanteUsername + " não existe");
         }
 
+        Encomenda encomenda = entityManager.find(Encomenda.class, encomendaId);
+        if(encomenda == null){
+            throw new MyEntityNotFoundException("Encomenda com id " + encomenda.getId() + " não existe");
+        }
+
         ProdutoFisico produtoFisico = null;
 
         try {
-            produtoFisico = new ProdutoFisico(nomeProduto, fabricante, produtoCatalogo);
+            produtoFisico = new ProdutoFisico(nomeProduto, fabricante, produtoCatalogo, encomenda);
             entityManager.persist(produtoFisico);
         }
         catch (ConstraintViolationException e) {
             throw new MyConstraintViolationException(e);
         }
 
+        encomenda.addProduto(produtoFisico);
+        produtoCatalogo.addProduto(produtoFisico);
         return produtoFisico;
     }
 

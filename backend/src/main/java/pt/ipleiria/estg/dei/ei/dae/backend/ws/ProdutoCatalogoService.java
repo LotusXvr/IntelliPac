@@ -94,7 +94,8 @@ public class ProdutoCatalogoService {
                 produtoFisico.getId(),
                 produtoFisico.getNomeProduto(),
                 produtoFisico.getFabricante().getUsername(),
-                produtoFisico.getProdutoCatalogo().getId()
+                produtoFisico.getProdutoCatalogo().getId(),
+                produtoFisico.getEncomenda().getId()
         );
     }
 

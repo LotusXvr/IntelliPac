@@ -37,14 +37,19 @@ public class ProdutoFisico extends Produto implements Serializable {
     )
     private List<EmbalagemDeProduto> embalagemDeProdutos;
 
+    @ManyToOne
+    @JoinColumn(name = "encomenda_id")
+    private Encomenda encomenda;
+
     public ProdutoFisico() {
         embalagemDeProdutos = new ArrayList<>();
     }
 
-    public ProdutoFisico(String nomeProduto, FabricanteDeProdutos fabricante, ProdutoCatalogo produtoCatalogo) {
+    public ProdutoFisico(String nomeProduto, FabricanteDeProdutos fabricante, ProdutoCatalogo produtoCatalogo, Encomenda encomenda) {
         super(nomeProduto, fabricante);
         this.produtoCatalogo = produtoCatalogo;
         this.embalagemDeProdutos = new ArrayList<>();
+        this.encomenda = encomenda;
     }
 
 
@@ -69,5 +74,13 @@ public class ProdutoFisico extends Produto implements Serializable {
     }
     public void removeEmbalagem(EmbalagemDeProduto embalagemDeProduto) {
         this.embalagemDeProdutos.remove(embalagemDeProduto);
+    }
+
+    public Encomenda getEncomenda() {
+        return encomenda;
+    }
+
+    public void setEncomenda(Encomenda encomenda) {
+        this.encomenda = encomenda;
     }
 }

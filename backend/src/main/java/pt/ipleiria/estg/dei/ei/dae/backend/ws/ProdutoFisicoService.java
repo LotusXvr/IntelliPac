@@ -25,7 +25,8 @@ public class ProdutoFisicoService {
                 produtoFisico.getId(),
                 produtoFisico.getNomeProduto(),
                 produtoFisico.getFabricante().getUsername(),
-                produtoFisico.getProdutoCatalogo().getId()
+                produtoFisico.getProdutoCatalogo().getId(),
+                produtoFisico.getEncomenda().getId()
         );
     }
 
@@ -52,7 +53,8 @@ public class ProdutoFisicoService {
         produtoFisicoBean.create(
                 produtoFisicoDTO.getNome(),
                 produtoFisicoDTO.getFabricanteUsername(),
-                produtoFisicoDTO.getProdutoCatalogoId()
+                produtoFisicoDTO.getProdutoCatalogoId(),
+                produtoFisicoDTO.getEncomendaId()
         );
 
         ProdutoFisico newProdutoFisico = produtoFisicoBean.find(produtoFisicoDTO.getId());
