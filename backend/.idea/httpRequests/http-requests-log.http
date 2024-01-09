@@ -1,3 +1,521 @@
+POST http://localhost:8080/intellipac/api/observacoes
+Content-Type: application/json
+Content-Length: 74
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "timestamp": "2019-10-10 10:10:10",
+  "valor": "10",
+  "sensorId": 1
+}
+
+<> 2024-01-09T200500.201.json
+
+###
+
+POST http://localhost:8080/intellipac/api/observacoes
+Content-Type: application/json
+Content-Length: 74
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "timestamp": "2019-10-10 10:10:10",
+  "valor": "10",
+  "sensorId": 1
+}
+
+<> 2024-01-09T200046.500.json
+
+###
+
+POST http://localhost:8080/intellipac/api/observacoes
+Content-Type: application/json
+Content-Length: 74
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "timestamp": "2019-10-10 10:10:10",
+  "valor": "10",
+  "sensorId": 1
+}
+
+<> 2024-01-09T195916.500.json
+
+###
+
+POST http://localhost:8080/intellipac/api/observacoes
+Content-Type: application/json
+Content-Length: 74
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "timestamp": "2019-10-10 10:10:10",
+  "valor": "10",
+  "sensorId": 1
+}
+
+<> 2024-01-09T195832.500.json
+
+###
+
+POST http://localhost:8080/intellipac/api/observacoes
+Content-Type: application/json
+Content-Length: 74
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "timestamp": "2019-10-10 10:10:10",
+  "valor": "10",
+  "sensorId": 1
+}
+
+<> 2024-01-09T195816.404.html
+
+###
+
+POST http://localhost:8080/intellipac/api/observacoes
+Content-Type: application/json
+Content-Length: 74
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "timestamp": "2019-10-10 10:10:10",
+  "valor": "10",
+  "sensorId": 1
+}
+
+<> 2024-01-09T195727.500.json
+
+###
+
+POST http://localhost:8080/intellipac/api/observacoes
+Content-Type: application/json
+Content-Length: 74
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "timestamp": "2019-10-10 10:10:10",
+  "valor": "10",
+  "sensorId": 1
+}
+
+<> 2024-01-09T195713.500.json
+
+###
+
+POST http://localhost:8080/intellipac/api/observacoes
+Content-Type: application/json
+Content-Length: 74
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "timestamp": "2019-10-10 10:10:10",
+  "valor": "10",
+  "sensorId": 1
+}
+
+<> 2024-01-09T195702.500.json
+
+###
+
+POST http://localhost:8080/intellipac/api/observacoes
+Content-Type: application/json
+Content-Length: 74
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "timestamp": "2019-10-10 10:10:10",
+  "valor": "10",
+  "sensorId": 1
+}
+
+<> 2024-01-09T195654.500.json
+
+###
+
+POST http://localhost:8080/intellipac/api/observacoes
+Content-Type: application/json
+Content-Length: 74
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "timestamp": "2019-10-10 10:10:10",
+  "valor": "10",
+  "sensorId": 1
+}
+
+<> 2024-01-09T195652.404.html
+
+###
+
+POST http://localhost:8080/intellipac/api/observacoes
+Content-Type: application/json
+Content-Length: 74
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "timestamp": "2019-10-10 10:10:10",
+  "valor": "10",
+  "sensorId": 1
+}
+
+<> 2024-01-09T195609.500.json
+
+###
+
+POST http://localhost:8080/intellipac/api/observacoes
+Content-Type: application/json
+Content-Length: 74
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "timestamp": "2019-10-10 10:10:10",
+  "valor": "10",
+  "sensorId": 1
+}
+
+<> 2024-01-09T195605.500.json
+
+###
+
+GET http://localhost:8080/intellipac/api/observacoes
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2024-01-09T195557.200.json
+
+###
+
+POST http://localhost:8080/intellipac/api/observacoes
+Content-Type: application/json
+Content-Length: 85
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "id": 5,
+  "timestamp": "2019-10-10 10:10:10",
+  "valor": "10",
+  "sensorId": 1
+}
+
+<> 2024-01-09T195552.500.json
+
+###
+
+POST http://localhost:8080/intellipac/api/observacoes
+Content-Type: application/json
+Content-Length: 85
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "id": 5,
+  "timestamp": "2019-10-10 10:10:10",
+  "valor": "10",
+  "sensorId": 1
+}
+
+<> 2024-01-09T195549.500.json
+
+###
+
+POST http://localhost:8080/intellipac/api/observacoes
+Content-Type: application/json
+Content-Length: 74
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "timestamp": "2019-10-10 10:10:10",
+  "valor": "10",
+  "sensorId": 1
+}
+
+<> 2024-01-09T195216.500.json
+
+###
+
+POST http://localhost:8080/intellipac/api/observacoes
+Content-Type: application/json
+Content-Length: 85
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "id": 5,
+  "timestamp": "2019-10-10 10:10:10",
+  "valor": "10",
+  "sensorId": 1
+}
+
+<> 2024-01-09T195212.500.json
+
+###
+
+POST http://localhost:8080/intellipac/api/observacoes
+Content-Type: application/json
+Content-Length: 116
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "id": 5,
+  "descricao": "Observacao 5",
+  "timestamp": "2019-10-10 10:10:10",
+  "valor": "10",
+  "sensorId": 1
+}
+
+<> 2024-01-09T195204.400.html
+
+###
+
+POST http://localhost:8080/intellipac/api/observacoes
+Content-Type: application/json
+Content-Length: 85
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "id": 5,
+  "timestamp": "2019-10-10 10:10:10",
+  "valor": "10",
+  "sensorId": 1
+}
+
+<> 2024-01-09T195159.500.json
+
+###
+
+POST http://localhost:8080/intellipac/api/observacoes
+Content-Type: application/json
+Content-Length: 85
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "id": 5,
+  "timestamp": "2019-10-10 10:10:10",
+  "valor": "10",
+  "sensorId": 1
+}
+
+<> 2024-01-09T195155.500.json
+
+###
+
+POST http://localhost:8080/intellipac/api/observacoes
+Content-Type: application/json
+Content-Length: 74
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "timestamp": "2019-10-10 10:10:10",
+  "valor": "10",
+  "sensorId": 1
+}
+
+<> 2024-01-09T194926.500.json
+
+###
+
+POST http://localhost:8080/intellipac/api/observacoes
+Content-Type: application/json
+Content-Length: 74
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "timestamp": "2019-10-10 10:10:10",
+  "valor": "10",
+  "sensorId": 1
+}
+
+<> 2024-01-09T194923.500.json
+
+###
+
+POST http://localhost:8080/intellipac/api/observacoes
+Content-Type: application/json
+Content-Length: 74
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "timestamp": "2019-10-10 10:10:10",
+  "valor": "10",
+  "sensorId": 1
+}
+
+<> 2024-01-09T194918.404.html
+
+###
+
+POST http://localhost:8080/intellipac/api/observacoes
+Content-Type: application/json
+Content-Length: 74
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "timestamp": "2019-10-10 10:10:10",
+  "valor": "10",
+  "sensorId": 1
+}
+
+<> 2024-01-09T194523.500.json
+
+###
+
+POST http://localhost:8080/intellipac/api/observacoes
+Content-Type: application/json
+Content-Length: 74
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "timestamp": "2019-10-10 10:10:10",
+  "valor": "10",
+  "sensorId": 1
+}
+
+<> 2024-01-09T194519.500.json
+
+###
+
+POST http://localhost:8080/intellipac/api/observacoes
+Content-Type: application/json
+Content-Length: 74
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "timestamp": "2019-10-10 10:10:10",
+  "valor": "10",
+  "sensorId": 1
+}
+
+<> 2024-01-09T194440.500.json
+
+###
+
+POST http://localhost:8080/intellipac/api/observacoes
+Content-Type: application/json
+Content-Length: 74
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "timestamp": "2019-10-10 10:10:10",
+  "valor": "10",
+  "sensorId": 1
+}
+
+<> 2024-01-09T194401.404.html
+
+###
+
+POST http://localhost:8080/intellipac/api/observacoes
+Content-Type: application/json
+Content-Length: 74
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "timestamp": "2019-10-10 10:10:10",
+  "valor": "10",
+  "sensorId": 1
+}
+
+<> 2024-01-09T193832.500.json
+
+###
+
+POST http://localhost:8080/intellipac/api/observacoes
+Content-Type: application/json
+Content-Length: 74
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "timestamp": "2019-10-10 10:10:10",
+  "valor": "10",
+  "sensorId": 1
+}
+
+<> 2024-01-09T193742.500.json
+
+###
+
+POST http://localhost:8080/intellipac/api/observacoes
+Content-Type: application/json
+Content-Length: 74
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "timestamp": "2019-10-10 10:10:10",
+  "valor": "10",
+  "sensorId": 1
+}
+
+###
+
+GET http://localhost:8080/intellipac/api/observacoes
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2024-01-09T193006.200.json
+
+###
+
 GET http://localhost:8080/intellipac/api/produtosFisicos
 Accept: application/json
 Connection: Keep-Alive
@@ -279,373 +797,6 @@ Accept-Encoding: br,deflate,gzip,x-gzip
 }
 
 <> 2024-01-09T022941.400.json
-
-###
-
-GET http://localhost:8080/intellipac/api/produtosFisicos
-Accept: application/json
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.6)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2024-01-09T022934.200.json
-
-###
-
-PUT http://localhost:8080/intellipac/api/produtosFisicos/3
-Content-Type: application/json
-Content-Length: 100
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.6)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-  "nome": "Produto1Fisico (PUT)",
-  "fabricanteUsername": "Fabrica1",
-  "produtoCatalogoId" : 1
-
-}
-
-<> 2024-01-09T022930.400.json
-
-###
-
-PUT http://localhost:8080/intellipac/api/produtosFisicos/3
-Content-Type: application/json
-Content-Length: 100
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.6)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-  "nome": "Produto1Fisico (PUT)",
-  "fabricanteUsername": "Fabrica1",
-  "produtoCatalogoId" : 1
-
-}
-
-<> 2024-01-09T022913.400.json
-
-###
-
-POST http://localhost:8080/intellipac/api/produtosFisicos
-Content-Type: application/json
-Content-Length: 101
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.6)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-  "nome": "Produto1Fisico (POST)",
-  "fabricanteUsername": "Fabrica1",
-  "produtoCatalogoId" : 1
-
-}
-
-<> 2024-01-09T022833.404.json
-
-###
-
-GET http://localhost:8080/intellipac/api/produtosFisicos
-Accept: application/json
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.6)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2024-01-09T022829.200.json
-
-###
-
-PUT http://localhost:8080/intellipac/api/produtosFisicos/3
-Content-Type: application/json
-Content-Length: 98
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.6)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-  "nome": "ProdutoFisico (PUT)",
-  "fabricanteUsername": "Fabrica1",
-  "produtoCatalogoId" : 1
-}
-
-<> 2024-01-09T022822.400.json
-
-###
-
-PUT http://localhost:8080/intellipac/api/produtosFisicos/3
-Content-Type: application/json
-Content-Length: 67
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.6)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-"nome": "ProdutoFisico (PUT)",
-"fabricanteUsername": "Fabrica1"
-}
-
-<> 2024-01-09T022740.400.json
-
-###
-
-GET http://localhost:8080/intellipac/api/produtosFisicos
-Accept: application/json
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.6)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2024-01-09T022735.200.json
-
-###
-
-PUT http://localhost:8080/intellipac/api/produtosFisicos/3
-Content-Type: application/json
-Content-Length: 67
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.6)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-"nome": "ProdutoFisico (PUT)",
-"fabricanteUsername": "Fabrica1"
-}
-
-<> 2024-01-09T022731.400.json
-
-###
-
-GET http://localhost:8080/intellipac/api/produtosFisicos
-Accept: application/json
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.6)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2024-01-09T022700.200.json
-
-###
-
-PUT http://localhost:8080/intellipac/api/produtosFisicos/5
-Content-Length: 98
-Content-Type: */*; charset=UTF-8
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.6)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-Content-Type: application/json
-{
-"nome": "ProdutoFisico (PUT)",
-"fabricanteUsername": "Fabrica1"
-}
-
-###
-
-GET http://localhost:8080/intellipac/api/produtosFisicos
-Accept: application/json
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.6)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2024-01-09T022532.200.json
-
-###
-
-POST http://localhost:8080/intellipac/api/produtosFisicos
-Content-Type: application/json
-Content-Length: 101
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.6)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-  "nome": "Produto1Fisico (POST)",
-  "fabricanteUsername": "Fabrica1",
-  "produtoCatalogoId" : 1
-
-}
-
-###
-
-GET http://localhost:8080/intellipac/api/produtosFisicos
-Accept: application/json
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.6)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2024-01-09T022415.200.json
-
-###
-
-GET http://localhost:8080/intellipac/api/produtosFisicos
-Accept: application/json
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.6)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2024-01-09T021948.200.json
-
-###
-
-GET http://localhost:8080/intellipac/api/produtosFisicos
-Accept: application/json
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.6)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-###
-
-GET http://localhost:8080/intellipac/api/produtosCatalogo
-Accept: application/json
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.6)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2024-01-09T021848.200.json
-
-###
-
-GET http://localhost:8080/intellipac/api/produtosFisicos
-Accept: application/json
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.6)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-###
-
-GET http://localhost:8080/intellipac/api/observacoes
-Accept: application/json
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2024-01-09T001330.200.json
-
-###
-
-GET http://localhost:8080/intellipac/api/observacoes
-Accept: application/json
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2024-01-09T001328.200.json
-
-###
-
-GET http://localhost:8080/intellipac/api/observacoes
-Accept: application/json
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2024-01-09T001325.200.json
-
-###
-
-GET http://localhost:8080/intellipac/api/observacoes
-Accept: application/json
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2024-01-09T001303.500.json
-
-###
-
-GET http://localhost:8080/intellipac/api/observacoes
-Accept: application/json
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2024-01-09T000401.500.json
-
-###
-
-GET http://localhost:8080/intellipac/api/observacoes
-Accept: application/json
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2024-01-08T234948.500.json
-
-###
-
-GET http://localhost:8080/intellipac/api/observacoes
-Accept: application/json
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2024-01-08T233836.500.json
-
-###
-
-GET http://localhost:8080/intellipac/api/observacoes
-Accept: application/json
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2024-01-08T233827.500.json
-
-###
-
-GET http://localhost:8080/intellipac/api/observacoes
-Accept: application/json
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2024-01-08T233210.500.json
-
-###
-
-GET http://localhost:8080/intellipac/api/observacoes
-Accept: application/json
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2024-01-08T233132.500.json
-
-###
-
-GET http://localhost:8080/intellipac/api/observacoes
-Accept: application/json
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2024-01-08T232729.500.json
-
-###
-
-GET http://localhost:8080/intellipac/api/sensores
-Accept: application/json
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2024-01-08T232713.200.json
-
-###
-
-POST http://localhost:8080/intellipac/api/produtosCatalogo
-Content-Type: application/json
-Content-Length: 67
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.6)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-  "nome": "Produto (POST)",
-  "fabricanteUsername": "Fabrica1"
-
-}
-
-<> 2024-01-05T103606.201.json
 
 ###
 

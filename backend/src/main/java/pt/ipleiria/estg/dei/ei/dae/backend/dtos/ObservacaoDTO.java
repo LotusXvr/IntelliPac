@@ -9,16 +9,24 @@ public class ObservacaoDTO implements Serializable {
     private long id;
     private String timestamp;
     private String valor;
-    private Long sensorId;
+    private long sensorId;
 
     public ObservacaoDTO() {
     }
 
-    public ObservacaoDTO(long id, String timestamp, String valor, Long sensorId) {
+    public ObservacaoDTO(long id, String timestamp, String valor, long sensorId) {
         this.id = id;
         this.timestamp = timestamp;
         this.valor = valor;
         this.sensorId = sensorId;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getValor() {
@@ -29,12 +37,12 @@ public class ObservacaoDTO implements Serializable {
         this.valor = valor;
     }
 
-    public Long getSensorId() {
+    public long getSensorId() {
         return sensorId;
     }
 
-    public void setSensorId(Long sensorId) {
-        sensorId = sensorId;
+    public void setSensorId(long sensorId) {
+        this.sensorId = sensorId;
     }
 
     public String getTimestamp() {

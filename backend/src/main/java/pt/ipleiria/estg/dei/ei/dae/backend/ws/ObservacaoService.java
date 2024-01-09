@@ -1,11 +1,9 @@
 package pt.ipleiria.estg.dei.ei.dae.backend.ws;
 
 import jakarta.ejb.EJB;
-import jakarta.ws.rs.Consumes;
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
 import pt.ipleiria.estg.dei.ei.dae.backend.dtos.ObservacaoDTO;
 import pt.ipleiria.estg.dei.ei.dae.backend.dtos.SensorDTO;
 import pt.ipleiria.estg.dei.ei.dae.backend.ejbs.ObservacaoBean;
@@ -39,6 +37,24 @@ public class ObservacaoService {
     @Path("/") // means: the relative url path is “/api/observacoes/”
     public List<ObservacaoDTO> getAllObservacoes() {
         return toDTOs(observacaoBean.getAll());
+    }
+
+    @POST
+    @Path("/")
+    public Response createNewObservacao(ObservacaoDTO observacaoDTO) {
+        try{
+            observacaoBean.create(
+                    observacaoDTO.getTimestamp(),
+                    observacaoDTO.getValor(),
+                    observacaoDTO.getSensorId()
+            );
+
+            return Response.status(Response.Status.CREATED).entity(observacaoDTO).build();
+        } catch (Exception e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(observacaoDTO).build();
+        }
+
+
     }
 
 

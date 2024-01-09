@@ -172,3 +172,14 @@ Accept: application/json
 ### GET ALL OBSERVACOES
 GET http://localhost:8080/intellipac/api/observacoes
 Accept: application/json
+
+### POST OBSERVACAO
+POST http://localhost:8080/intellipac/api/observacoes
+Content-Type: application/json
+
+{
+  "timestamp": "2019-10-10 10:10:10",
+  "valor": "10",
+  "sensorId": 1
+}
+

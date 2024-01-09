@@ -25,9 +25,11 @@ public class ObservacaoBean {
         return entityManager.createNamedQuery("getAllObservacao", Observacao.class).getResultList();
     }
 
-    public void create(String timestamp, String valor, Long sensorId){
+    public void create(String timestamp, String valor, long sensorId) {
 
         Sensor sensor = entityManager.find(Sensor.class, sensorId);
+        if (sensor == null) throw new IllegalArgumentException("Sensor with id " + sensorId + " not found.");
+
         Observacao observacao = new Observacao(timestamp, valor, sensor);
         entityManager.persist(observacao);
     }
