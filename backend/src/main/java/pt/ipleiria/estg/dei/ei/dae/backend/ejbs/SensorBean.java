@@ -4,6 +4,7 @@ import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
+import jakarta.ws.rs.core.Response;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.Sensor;
 
 import java.util.List;
@@ -42,6 +43,9 @@ public class SensorBean {
 
     public void update(long id, long idSensor, String tipo, String unidade) {
         Sensor sensor = find(id);
+        if (sensor == null) {
+            throw new IllegalArgumentException("Sensor with id " + id + " not found.");
+        }
 
         sensor.setIdSensor(idSensor);
         sensor.setTipo(tipo);

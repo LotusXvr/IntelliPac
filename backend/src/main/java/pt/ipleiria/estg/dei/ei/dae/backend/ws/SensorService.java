@@ -71,11 +71,6 @@ public class SensorService {
     @Path("{id}")
     public Response updateSensor(@PathParam("id") long id, SensorDTO sensorDTO) {
         try {
-            var sensor = sensorBean.find(id);
-            if (sensor == null) {
-                return Response.status(Response.Status.NOT_FOUND).build();
-            }
-
             sensorBean.update(
                     id,
                     sensorDTO.getIdSensor(),
@@ -84,7 +79,7 @@ public class SensorService {
             );
             return Response.status(Response.Status.OK).build();
         } catch (Exception e) {
-            return Response.status(Response.Status.BAD_REQUEST).entity("ERROR_UPDATE_SENSOR").build();
+            return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
         }
     }
 
@@ -92,15 +87,10 @@ public class SensorService {
     @Path("{id}")
     public Response deleteSensor(@PathParam("id") long id) {
         try {
-            var sensor = sensorBean.find(id);
-            if (sensor == null) {
-                return Response.status(Response.Status.NOT_FOUND).build();
-            }
-
             sensorBean.remove(id);
             return Response.status(Response.Status.OK).build();
         } catch (Exception e) {
-            return Response.status(Response.Status.BAD_REQUEST).entity("ERROR_DELETE_SENSOR").build();
+            return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
         }
     }
 
