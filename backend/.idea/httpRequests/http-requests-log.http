@@ -4,6 +4,56 @@ Connection: Keep-Alive
 User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
 Accept-Encoding: br,deflate,gzip,x-gzip
 
+<> 2024-01-09T001330.200.json
+
+###
+
+GET http://localhost:8080/intellipac/api/observacoes
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2024-01-09T001328.200.json
+
+###
+
+GET http://localhost:8080/intellipac/api/observacoes
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2024-01-09T001325.200.json
+
+###
+
+GET http://localhost:8080/intellipac/api/observacoes
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2024-01-09T001303.500.json
+
+###
+
+GET http://localhost:8080/intellipac/api/observacoes
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2024-01-09T000401.500.json
+
+###
+
+GET http://localhost:8080/intellipac/api/observacoes
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
 <> 2024-01-08T234948.500.json
 
 ###
@@ -523,74 +573,6 @@ User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
 Accept-Encoding: br,deflate,gzip,x-gzip
 
 <> 2024-01-02T194232.200.json
-
-###
-
-PUT http://localhost:8080/intellipac/api/sensores/1
-Content-Type: application/json
-Content-Length: 79
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-  "idSensor": 1,
-  "tipo": "Temperatura",
-  "valor": "20",
-  "unidade": "C"
-}
-
-###
-
-GET http://localhost:8080/intellipac/api/sensores/1
-Accept: application/json
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2024-01-02T194130.200.json
-
-###
-
-PUT http://localhost:8080/intellipac/api/sensores/1
-Content-Type: application/json
-Content-Length: 79
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-  "idSensor": 1,
-  "tipo": "Temperatura",
-  "valor": "20",
-  "unidade": "C"
-}
-
-###
-
-GET http://localhost:8080/intellipac/api/sensores/1
-Accept: application/json
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2024-01-02T194124.200.json
-
-###
-
-PUT http://localhost:8080/intellipac/api/sensores/1
-Content-Type: application/json
-Content-Length: 79
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-  "idSensor": 5,
-  "tipo": "Temperatura",
-  "valor": "20",
-  "unidade": "C"
-}
 
 ###
 

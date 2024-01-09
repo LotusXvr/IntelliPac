@@ -6,6 +6,7 @@ import jakarta.ejb.EJB;
 import jakarta.ejb.Singleton;
 import jakarta.ejb.Startup;
 
+import java.time.LocalDateTime;
 import java.util.logging.Logger;
 
 @Startup
@@ -51,10 +52,11 @@ public class ConfigBean {
             sensorBean.create(6, "Direcao do Vento",  "N");
             sensorBean.create(7, "Precipitacao",  "mm");
 
-            observacaoBean.create(java.time.LocalDateTime.now(), "20", 1L);
-            observacaoBean.create(java.time.LocalDateTime.now(), "90", 2L);
-            observacaoBean.create(java.time.LocalDateTime.now(), "400", 3L);
-            observacaoBean.create(java.time.LocalDateTime.now(), "1000", 4L);
+            System.out.println("DATA CONFIG BEAN: " + java.time.LocalDateTime.now());
+            observacaoBean.create("09-01-2024 00:05:23", "20", 1L);
+            observacaoBean.create("09-01-2024 00:05:23", "90", 2L);
+            observacaoBean.create("09-01-2024 00:05:23", "400", 3L);
+            observacaoBean.create("09-01-2024 00:05:23", "1000", 4L);
 
 
 

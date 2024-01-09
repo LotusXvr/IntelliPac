@@ -7,14 +7,14 @@ import java.time.LocalDateTime;
 public class ObservacaoDTO implements Serializable {
 
     private long id;
-    private LocalDateTime timestamp;
+    private String timestamp;
     private String valor;
     private Long sensorId;
 
     public ObservacaoDTO() {
     }
 
-    public ObservacaoDTO(long id, LocalDateTime timestamp, String valor, Long sensorId) {
+    public ObservacaoDTO(long id, String timestamp, String valor, Long sensorId) {
         this.id = id;
         this.timestamp = timestamp;
         this.valor = valor;
@@ -37,11 +37,11 @@ public class ObservacaoDTO implements Serializable {
         sensorId = sensorId;
     }
 
-    public LocalDateTime getTimestamp() {
+    public String getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(LocalDateTime timestamp) {
+    public void setTimestamp(String timestamp) {
         this.timestamp = timestamp;
     }
 

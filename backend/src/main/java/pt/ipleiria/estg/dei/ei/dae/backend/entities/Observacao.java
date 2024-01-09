@@ -27,7 +27,7 @@ public class Observacao {
     // timestamp
     @Column(nullable = false)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime timestamp;
+    private String timestamp;
 
     // o valor registado
     @Column(nullable = false)
@@ -37,7 +37,7 @@ public class Observacao {
     public Observacao() {
     }
 
-    public Observacao(LocalDateTime timestamp, String valor, Sensor sensor) {
+    public Observacao(String timestamp, String valor, Sensor sensor) {
         this.sensor = sensor;
         this.timestamp = timestamp;
         this.valor = valor;
@@ -67,11 +67,11 @@ public class Observacao {
         this.sensor = sensor;
     }
 
-    public LocalDateTime getTimestamp() {
+    public String getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(LocalDateTime timestamp) {
+    public void setTimestamp(String timestamp) {
         this.timestamp = timestamp;
     }
 }

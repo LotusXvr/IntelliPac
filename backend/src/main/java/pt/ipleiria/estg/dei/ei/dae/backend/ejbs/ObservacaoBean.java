@@ -25,7 +25,8 @@ public class ObservacaoBean {
         return entityManager.createNamedQuery("getAllObservacao", Observacao.class).getResultList();
     }
 
-    public void create(LocalDateTime timestamp, String valor, Long sensorId){
+    public void create(String timestamp, String valor, Long sensorId){
+
         Sensor sensor = entityManager.find(Sensor.class, sensorId);
         Observacao observacao = new Observacao(timestamp, valor, sensor);
         entityManager.persist(observacao);
