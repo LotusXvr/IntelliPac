@@ -51,7 +51,7 @@ public class ObservacaoService {
 
             return Response.status(Response.Status.CREATED).entity(observacaoDTO).build();
         } catch (Exception e) {
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(observacaoDTO).build();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
         }
 
 
