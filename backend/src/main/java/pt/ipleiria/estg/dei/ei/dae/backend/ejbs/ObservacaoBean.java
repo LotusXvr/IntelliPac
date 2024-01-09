@@ -31,54 +31,47 @@ public class ObservacaoBean {
         return entityManager.createNamedQuery("getAllObservacao", Observacao.class).getResultList();
     }
 
-    public void create(String timestamp, String valor, long sensorId) {
+    public void create(String valor, long sensorId) {
 
         Sensor sensor = entityManager.find(Sensor.class, sensorId);
         if (sensor == null) throw new IllegalArgumentException("Sensor with id " + sensorId + " not found.");
 
-        if (!isValidFormat(timestamp)) throw new IllegalArgumentException("Invalid timestamp format (Should be dd-mm-yyyy hh:mm:ss).");
-
-
-        Observacao observacao = new Observacao(timestamp, valor, sensor);
+        Observacao observacao = new Observacao(getTimestamp(), valor, sensor);
         entityManager.persist(observacao);
     }
 
-    public void update(Observacao observacao) {
+    public void update(long id, String valor, long sensorId) {
+        Observacao observacao = find(id);
+
+        if (sensorId == 0 && valor != null){
+            sensorId = observacao.getSensor().getId();
+        }
+
+        if (valor == null && sensorId != 0){
+            valor = observacao.getValor();
+        }
+
+        Sensor sensor = entityManager.find(Sensor.class, sensorId);
+        if (sensor == null) throw new IllegalArgumentException("Sensor with id " + sensorId + " not found.");
+
+        observacao.setTimestamp(getTimestamp());
+        observacao.setValor(valor);
+        observacao.setSensor(sensor);
         entityManager.merge(observacao);
     }
 
-    public void remove(Observacao observacao) {
-        entityManager.remove(entityManager.contains(observacao) ? observacao : entityManager.merge(observacao));
+    public void remove(long id) {
+        Observacao observacao = entityManager.find(Observacao.class, id);
+        if (observacao == null) {
+            throw new IllegalArgumentException("Observacao with id " + id + " not found.");
+        }
+        entityManager.remove(observacao);
     }
 
-    public static boolean isValidFormat(String timestamp) {
-        LocalDateTime ldt = null;
-        String format = "dd-MM-yyyy HH:mm:ss";
-        Locale locale = Locale.ENGLISH;
-        DateTimeFormatter fomatter = DateTimeFormatter.ofPattern(format, locale);
-
-        try {
-            ldt = LocalDateTime.parse(timestamp, fomatter);
-            String result = ldt.format(fomatter);
-            return result.equals(timestamp);
-        } catch (DateTimeParseException e) {
-            try {
-                LocalDate ld = LocalDate.parse(timestamp, fomatter);
-                String result = ld.format(fomatter);
-                return result.equals(timestamp);
-            } catch (DateTimeParseException exp) {
-                try {
-                    LocalTime lt = LocalTime.parse(timestamp, fomatter);
-                    String result = lt.format(fomatter);
-                    return result.equals(timestamp);
-                } catch (DateTimeParseException e2) {
-                    // Debugging purposes
-                    //e2.printStackTrace();
-                }
-            }
-        }
-
-        return false;
+    public String getTimestamp(){
+        LocalDateTime timestampToFormat = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        return timestampToFormat.format(formatter);
     }
 
 }

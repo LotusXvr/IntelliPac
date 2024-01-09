@@ -26,7 +26,6 @@ public class Observacao {
 
     // timestamp
     @Column(nullable = false)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private String timestamp;
 
     // o valor registado
@@ -55,7 +54,7 @@ public class Observacao {
         return valor;
     }
 
-    public void String(String valor) {
+    public void setValor(String valor) {
         this.valor = valor;
     }
 

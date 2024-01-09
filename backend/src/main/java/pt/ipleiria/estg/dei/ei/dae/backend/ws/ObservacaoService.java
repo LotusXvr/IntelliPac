@@ -42,9 +42,24 @@ public class ObservacaoService {
     @POST
     @Path("/")
     public Response createNewObservacao(ObservacaoDTO observacaoDTO) {
-        try{
+        try {
             observacaoBean.create(
-                    observacaoDTO.getTimestamp(),
+                    observacaoDTO.getValor(),
+                    observacaoDTO.getSensorId()
+            );
+
+            return Response.status(Response.Status.CREATED).entity(observacaoDTO).build();
+        } catch (Exception e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
+        }
+    }
+
+    @PUT
+    @Path("{id}")
+    public Response updateObservacao(@PathParam("id") long id, ObservacaoDTO observacaoDTO) {
+        try {
+            observacaoBean.update(
+                    id,
                     observacaoDTO.getValor(),
                     observacaoDTO.getSensorId()
             );
@@ -54,7 +69,17 @@ public class ObservacaoService {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
         }
 
+    }
 
+    @DELETE
+    @Path("{id}")
+    public Response deleteObservacao(@PathParam("id") long id) {
+        try {
+            observacaoBean.remove(id);
+            return Response.status(Response.Status.OK).build();
+        } catch (Exception e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
+        }
     }
 
 

@@ -63,20 +63,19 @@ public class ConfigBean {
             produtoFisicoBean.create("produto1Fisico", "Fabrica1", produtoCatalogo1.getId(), encomenda1.getId());
             produtoFisicoBean.create("produto2Fisico", "Fabrica1", produtoCatalogo2.getId(), encomenda1.getId());
 
-            sensorBean.create(1,"Temperatura", "C");
-            sensorBean.create(2,"Humidade",  "%");
-            sensorBean.create(3,"Luminosidade",  "LUX");
-            sensorBean.create(4, "Pressao",  "hPa");
-            sensorBean.create(5, "Velocidade do Vento",  "km/h");
-            sensorBean.create(6, "Direcao do Vento",  "N");
-            sensorBean.create(7, "Precipitacao",  "mm");
+            sensorBean.create(1, "Temperatura", "C");
+            sensorBean.create(2, "Humidade", "%");
+            sensorBean.create(3, "Luminosidade", "LUX");
+            sensorBean.create(4, "Pressao", "hPa");
+            sensorBean.create(5, "Velocidade do Vento", "km/h");
+            sensorBean.create(6, "Direcao do Vento", "N");
+            sensorBean.create(7, "Precipitacao", "mm");
 
-            System.out.println("DATA CONFIG BEAN: " + java.time.LocalDateTime.now());
-            observacaoBean.create("09-01-2024 00:05:23", "20", 1L);
-            observacaoBean.create("09-01-2024 00:05:23", "90", 2L);
-            observacaoBean.create("09-01-2024 00:05:23", "400", 3L);
-            observacaoBean.create("09-01-2024 00:05:23", "1000", 4L);
 
+            observacaoBean.create("20", 1L);
+            observacaoBean.create("90", 2L);
+            observacaoBean.create("400", 3L);
+            observacaoBean.create("1000", 4L);
 
 
         } catch (Exception e) {
