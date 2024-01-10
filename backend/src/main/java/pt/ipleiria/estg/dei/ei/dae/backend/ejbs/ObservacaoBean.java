@@ -50,16 +50,26 @@ public class ObservacaoBean {
     public void update(long id, String valor, long sensorId) throws MyEntityNotFoundException {
         Observacao observacao = find(id);
 
+        if (observacao == null) throw new MyEntityNotFoundException("Observacao with id " + id + " not found.");
+
+        // apenas o valor foi fornecido
         if (sensorId == 0 && valor != null) {
             sensorId = observacao.getSensor().getId();
         }
 
+        // apenas o sensor foi fornecido
         if (valor == null && sensorId != 0) {
             valor = observacao.getValor();
         }
 
         Sensor sensor = entityManager.find(Sensor.class, sensorId);
-        if (sensor == null) throw new IllegalArgumentException("Sensor with id " + sensorId + " not found.");
+        if (sensor == null) throw new MyEntityNotFoundException("Sensor with id " + sensorId + " not found.");
+
+        // se o sensor tiver sido alterado, alterar a associaçao com o sensor novo
+        if (observacao.getSensor().getId() != sensorId) {
+            observacao.getSensor().removeObservacao(observacao);
+            sensor.addObservacao(observacao);
+        }
 
         observacao.setTimestamp(getTimestamp());
         observacao.setValor(valor);
