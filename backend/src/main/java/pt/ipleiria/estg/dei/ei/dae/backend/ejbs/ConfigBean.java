@@ -65,7 +65,7 @@ public class ConfigBean {
 
 
             // Sensores
-            sensorBean.create(1, "Temperatura", "C");
+            sensorBean.create(1, "Temperatura", "ºC");
             sensorBean.create(2, "Humidade", "%");
             sensorBean.create(3, "Luminosidade", "LUX");
             sensorBean.create(4, "Pressao", "hPa");
