@@ -4,9 +4,12 @@ import jakarta.ejb.EJB;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import org.hibernate.Hibernate;
 import pt.ipleiria.estg.dei.ei.dae.backend.dtos.SensorDTO;
 import pt.ipleiria.estg.dei.ei.dae.backend.ejbs.SensorBean;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.Sensor;
+import pt.ipleiria.estg.dei.ei.dae.backend.dtos.ObservacaoDTO;
+import pt.ipleiria.estg.dei.ei.dae.backend.entities.Observacao;
 import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyEntityExistsException;
 import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyEntityNotFoundException;
 
@@ -40,12 +43,25 @@ public class SensorService {
                 sensor.getIdSensor(),
                 sensor.getTipo(),
                 sensor.getUnidade(),
-                sensor.getObservacoes()
+                observacaoToDTOs(sensor.getObservacoes())
         );
     }
 
     private List<SensorDTO> toDTOs(List<Sensor> sensores) {
         return sensores.stream().map(this::toDTO).collect(java.util.stream.Collectors.toList());
+    }
+
+    private ObservacaoDTO observacaoToDTO(Observacao observacao) {
+        return new ObservacaoDTO(
+                observacao.getId(),
+                observacao.getTimestamp(),
+                observacao.getValor(),
+                observacao.getSensor().getId()
+        );
+    }
+
+    private List<ObservacaoDTO> observacaoToDTOs(List<Observacao> observacoes) {
+        return observacoes.stream().map(this::observacaoToDTO).collect(java.util.stream.Collectors.toList());
     }
 
     @GET
@@ -56,9 +72,11 @@ public class SensorService {
 
     @GET
     @Path("{id}")
-    public Response getSensorDetails(@PathParam("id") long id) throws MyEntityNotFoundException {
+    public Response getSensorDetails(@PathParam("id") long id) {
         Sensor sensor = sensorBean.findSensorWithObservacoes(id);
-        return Response.ok(toDTO(sensor)).build();
+
+        return Response.status(Response.Status.OK).entity(toDTO(sensor)).build();
+
     }
 
     @POST

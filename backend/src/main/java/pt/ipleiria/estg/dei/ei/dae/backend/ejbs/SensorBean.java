@@ -22,7 +22,11 @@ public class SensorBean {
     }
 
     public Sensor find(long id) {
-        return entityManager.find(Sensor.class, id);
+        Sensor sensor = entityManager.find(Sensor.class, id);
+        if (sensor == null) {
+            throw new IllegalArgumentException("Sensor with id " + id + " not found.");
+        }
+        return sensor;
     }
 
     public Sensor findBySensorId(long idSensor) {
@@ -43,12 +47,12 @@ public class SensorBean {
         return entityManager.createNamedQuery("getAllSensor", Sensor.class).getResultList();
     }
 
-    public Sensor findSensorWithObservacoes(long id) throws MyEntityNotFoundException{
+    public Sensor findSensorWithObservacoes(long id) {
         Sensor sensor = entityManager.find(Sensor.class, id);
-        if (sensor == null) {
-            throw new MyEntityNotFoundException("Sensor with id " + id + " not found.");
+        if (sensor != null) {
+            Hibernate.initialize(sensor.getObservacoes());
         }
-        Hibernate.initialize(sensor.getObservacoes());
+
         return sensor;
     }
 

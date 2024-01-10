@@ -13,8 +13,8 @@ public class SensorDTO {
     private long idSensor;
     private String tipo;
     private String unidade;
-    private List<Embalagem> embalagens;
-    private List<Observacao> observacoes;
+    private List<EmbalagemDTO> embalagens;
+    private List<ObservacaoDTO> observacoes;
 
     public SensorDTO() {
         this.embalagens = new ArrayList<>();
@@ -30,7 +30,7 @@ public class SensorDTO {
         this.observacoes = new ArrayList<>();
     }
 
-    public SensorDTO(long id, long idSensor, String tipo, String unidade, List<Observacao> observacoes) {
+    public SensorDTO(long id, long idSensor, String tipo, String unidade, List<ObservacaoDTO> observacoes) {
         this.id = id;
         this.idSensor = idSensor;
         this.tipo = tipo;
@@ -39,19 +39,19 @@ public class SensorDTO {
         this.observacoes = observacoes;
     }
 
-    public List<Embalagem> getEmbalagens() {
+    public List<EmbalagemDTO> getEmbalagens() {
         return embalagens;
     }
 
-    public void setEmbalagens(List<Embalagem> embalagens) {
+    public void setEmbalagens(List<EmbalagemDTO> embalagens) {
         this.embalagens = embalagens;
     }
 
-    public List<Observacao> getObservacoes() {
+    public List<ObservacaoDTO> getObservacoes() {
         return observacoes;
     }
 
-    public void setObservacoes(List<Observacao> observacoes) {
+    public void setObservacoes(List<ObservacaoDTO> observacoes) {
         this.observacoes = observacoes;
     }
 
