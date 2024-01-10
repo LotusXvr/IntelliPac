@@ -42,9 +42,22 @@ public class ObservacaoService {
 
     @GET
     @Path("{id}")
-    public ObservacaoDTO getObservacaoDetails(@PathParam("id") long id) throws MyEntityNotFoundException {
+    public Response getObservacaoDetails(@PathParam("id") long id) throws MyEntityNotFoundException {
         Observacao observacao = observacaoBean.find(id);
-        return toDTO(observacao);
+        return Response.ok(toDTO(observacao)).build();
+    }
+
+    @GET
+    @Path("sensor/{id}")
+    public List<ObservacaoDTO> getObservacoesBySensor(@PathParam("id") long id) throws MyEntityNotFoundException {
+        return toDTOs(observacaoBean.getObservacoesBySensor(id));
+    }
+
+    @GET
+    @Path("sensor/{id}/last")
+    public Response getLastObservacaoBySensor(@PathParam("id") long id) throws MyEntityNotFoundException {
+        Observacao observacao = observacaoBean.getLastObservacaoBySensor(id);
+        return Response.ok(toDTO(observacao)).build();
     }
 
     @POST

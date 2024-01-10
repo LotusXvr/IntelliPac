@@ -27,7 +27,6 @@ public class SensorService {
                 sensor.getIdSensor(),
                 sensor.getTipo(),
                 sensor.getUnidade()
-
         );
     }
 
@@ -43,9 +42,9 @@ public class SensorService {
 
     @GET
     @Path("{id}")
-    public SensorDTO getSensorDetails(@PathParam("id") long id) {
+    public Response getSensorDetails(@PathParam("id") long id) {
         Sensor sensor = sensorBean.find(id);
-        return toDTO(sensor);
+        return Response.ok(toDTO(sensor)).build();
     }
 
     @POST

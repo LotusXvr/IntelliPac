@@ -48,11 +48,11 @@ public class ObservacaoBean {
     public void update(long id, String valor, long sensorId) throws MyEntityNotFoundException {
         Observacao observacao = find(id);
 
-        if (sensorId == 0 && valor != null){
+        if (sensorId == 0 && valor != null) {
             sensorId = observacao.getSensor().getId();
         }
 
-        if (valor == null && sensorId != 0){
+        if (valor == null && sensorId != 0) {
             valor = observacao.getValor();
         }
 
@@ -73,10 +73,21 @@ public class ObservacaoBean {
         entityManager.remove(observacao);
     }
 
-    public String getTimestamp(){
+    public String getTimestamp() {
         LocalDateTime timestampToFormat = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         return timestampToFormat.format(formatter);
     }
 
+    public List<Observacao> getObservacoesBySensor(long sensorId) throws MyEntityNotFoundException {
+        Sensor sensor = entityManager.find(Sensor.class, sensorId);
+        if (sensor == null) throw new MyEntityNotFoundException("Sensor with id " + sensorId + " not found.");
+        return entityManager.createNamedQuery("getObservacoesBySensor", Observacao.class).setParameter("id", sensorId).getResultList();
+    }
+
+    public Observacao getLastObservacaoBySensor(long sensorId) throws MyEntityNotFoundException{
+        Sensor sensor = entityManager.find(Sensor.class, sensorId);
+        if (sensor == null) throw new MyEntityNotFoundException("Sensor with id " + sensorId + " not found.");
+        return entityManager.createNamedQuery("getObservacoesBySensor", Observacao.class).setParameter("id", sensorId).setMaxResults(1).getSingleResult();
+    }
 }

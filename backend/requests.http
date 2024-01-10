@@ -179,12 +179,20 @@ Accept: application/json
 GET http://localhost:8080/intellipac/api/observacoes/10
 Accept: application/json
 
+### GET OBSERVACOES DE SENSOR
+GET http://localhost:8080/intellipac/api/observacoes/sensor/1
+Accept: application/json
+
+### GET ULTIMA OBSERVACAO DE SENSOR
+GET http://localhost:8080/intellipac/api/observacoes/sensor/1/last
+Accept: application/json
+
 ### POST OBSERVACAO
 POST http://localhost:8080/intellipac/api/observacoes
 Content-Type: application/json
 
 {
-  "valor": "10",
+  "valor": "5000",
   "sensorId": 1
 }
 

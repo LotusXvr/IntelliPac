@@ -11,7 +11,11 @@ import java.time.LocalDateTime;
         @NamedQuery(
                 name = "getAllObservacao",
                 query = "SELECT o FROM Observacao o ORDER BY o.id" // JPQL
-        )
+        ),
+        @NamedQuery(
+                name = "getObservacoesBySensor",
+                query = "SELECT o FROM Observacao o WHERE o.sensor.id = :id ORDER BY o.timestamp DESC" // JPQL
+        ),
 })
 @Entity
 public class Observacao {
