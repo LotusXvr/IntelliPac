@@ -9,6 +9,7 @@ import pt.ipleiria.estg.dei.ei.dae.backend.dtos.SensorDTO;
 import pt.ipleiria.estg.dei.ei.dae.backend.ejbs.ObservacaoBean;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.Observacao;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.Sensor;
+import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyEntityNotFoundException;
 
 import java.util.List;
 
@@ -37,6 +38,13 @@ public class ObservacaoService {
     @Path("/") // means: the relative url path is “/api/observacoes/”
     public List<ObservacaoDTO> getAllObservacoes() {
         return toDTOs(observacaoBean.getAll());
+    }
+
+    @GET
+    @Path("{id}")
+    public ObservacaoDTO getObservacaoDetails(@PathParam("id") long id) throws MyEntityNotFoundException {
+        Observacao observacao = observacaoBean.find(id);
+        return toDTO(observacao);
     }
 
     @POST

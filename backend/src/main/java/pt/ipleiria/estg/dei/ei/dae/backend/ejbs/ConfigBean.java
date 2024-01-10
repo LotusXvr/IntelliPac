@@ -63,6 +63,8 @@ public class ConfigBean {
             produtoFisicoBean.create("produto1Fisico", "Fabrica1", produtoCatalogo1.getId(), encomenda1.getId());
             produtoFisicoBean.create("produto2Fisico", "Fabrica1", produtoCatalogo2.getId(), encomenda1.getId());
 
+
+            // Sensores
             sensorBean.create(1, "Temperatura", "C");
             sensorBean.create(2, "Humidade", "%");
             sensorBean.create(3, "Luminosidade", "LUX");
@@ -71,7 +73,7 @@ public class ConfigBean {
             sensorBean.create(6, "Direcao do Vento", "N");
             sensorBean.create(7, "Precipitacao", "mm");
 
-
+            // Observacoes
             observacaoBean.create("20", 1L);
             observacaoBean.create("90", 2L);
             observacaoBean.create("400", 3L);

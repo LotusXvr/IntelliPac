@@ -175,6 +175,10 @@ Accept: application/json
 GET http://localhost:8080/intellipac/api/observacoes
 Accept: application/json
 
+### GET OBSERVACAO
+GET http://localhost:8080/intellipac/api/observacoes/10
+Accept: application/json
+
 ### POST OBSERVACAO
 POST http://localhost:8080/intellipac/api/observacoes
 Content-Type: application/json

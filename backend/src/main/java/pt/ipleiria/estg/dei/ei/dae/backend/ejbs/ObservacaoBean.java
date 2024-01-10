@@ -5,6 +5,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.Observacao;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.Sensor;
+import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyEntityNotFoundException;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -23,8 +24,12 @@ public class ObservacaoBean {
     private EntityManager entityManager;
 
 
-    public Observacao find(Long id) {
-        return entityManager.find(Observacao.class, id);
+    public Observacao find(Long id) throws MyEntityNotFoundException {
+        Observacao observacao = entityManager.find(Observacao.class, id);
+        if (observacao == null) {
+            throw new MyEntityNotFoundException("Observacao with id " + id + " not found.");
+        }
+        return observacao;
     }
 
     public List<Observacao> getAll() {
@@ -40,7 +45,7 @@ public class ObservacaoBean {
         entityManager.persist(observacao);
     }
 
-    public void update(long id, String valor, long sensorId) {
+    public void update(long id, String valor, long sensorId) throws MyEntityNotFoundException {
         Observacao observacao = find(id);
 
         if (sensorId == 0 && valor != null){
