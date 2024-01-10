@@ -8,9 +8,10 @@
       <change beforePath="$PROJECT_DIR$/.idea/httpRequests/http-requests-log.http" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/httpRequests/http-requests-log.http" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/requests.http" beforeDir="false" afterPath="$PROJECT_DIR$/requests.http" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/backend/dtos/SensorDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/backend/dtos/SensorDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/backend/ejbs/ObservacaoBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/backend/ejbs/ObservacaoBean.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/backend/entities/Observacao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/backend/entities/Observacao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/backend/ws/ObservacaoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/backend/ws/ObservacaoService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/backend/ejbs/SensorBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/backend/ejbs/SensorBean.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/backend/entities/Sensor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/backend/entities/Sensor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/backend/ws/SensorService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/backend/ws/SensorService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -62,6 +63,8 @@
     "HTTP Request.requests | GET OBSERVACAO DE SENSOR.executor": "Run",
     "HTTP Request.requests | GET OBSERVACAO.executor": "Run",
     "HTTP Request.requests | GET OBSERVACOES DE SENSOR.executor": "Run",
+    "HTTP Request.requests | GET SENSORES BY ID.executor": "Run",
+    "HTTP Request.requests | GET SENSORES.executor": "Run",
     "HTTP Request.requests | GET ULTIMA OBSERVACAO DE SENSOR.executor": "Run",
     "HTTP Request.requests | POST OBSERVACAO.executor": "Run",
     "HTTP Request.requests | Produtos.executor": "Run",
@@ -97,14 +100,14 @@
       <recent name="D:\DAE\IntelliPac\backend" />
     </key>
   </component>
-  <component name="RunManager" selected="HTTP Request.requests | GET OBSERVACOES DE SENSOR">
-    <configuration name="requests | GET OBSERVACAO DE SENSOR" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/requests.http" index="30" requestIdentifier="GET OBSERVACAO DE SENSOR" runType="Run single request">
-      <method v="2" />
-    </configuration>
-    <configuration name="requests | GET OBSERVACAO" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/requests.http" index="29" requestIdentifier="GET OBSERVACAO" runType="Run single request">
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="HTTP Request.requests | GET SENSORES BY ID">
     <configuration name="requests | GET OBSERVACOES DE SENSOR" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/requests.http" index="30" requestIdentifier="GET OBSERVACOES DE SENSOR" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="requests | GET SENSORES BY ID" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/requests.http" index="27" requestIdentifier="GET SENSORES BY ID" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="requests | GET SENSORES" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/requests.http" index="23" requestIdentifier="GET SENSORES" runType="Run single request">
       <method v="2" />
     </configuration>
     <configuration name="requests | GET ULTIMA OBSERVACAO DE SENSOR" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/requests.http" index="31" requestIdentifier="GET ULTIMA OBSERVACAO DE SENSOR" runType="Run single request">
@@ -115,11 +118,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="HTTP Request.requests | GET SENSORES BY ID" />
+        <item itemvalue="HTTP Request.requests | GET SENSORES" />
         <item itemvalue="HTTP Request.requests | GET OBSERVACOES DE SENSOR" />
         <item itemvalue="HTTP Request.requests | GET ULTIMA OBSERVACAO DE SENSOR" />
         <item itemvalue="HTTP Request.requests | POST OBSERVACAO" />
-        <item itemvalue="HTTP Request.requests | GET OBSERVACAO DE SENSOR" />
-        <item itemvalue="HTTP Request.requests | GET OBSERVACAO" />
       </list>
     </recent_temporary>
   </component>
@@ -161,7 +164,7 @@
       <workItem from="1704755286347" duration="8000" />
       <workItem from="1704755304883" duration="3699000" />
       <workItem from="1704828527310" duration="2757000" />
-      <workItem from="1704894420488" duration="2059000" />
+      <workItem from="1704894420488" duration="3939000" />
     </task>
     <servers />
   </component>

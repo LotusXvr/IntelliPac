@@ -33,7 +33,7 @@ public class Sensor {
     // id_encomenda
 
     // o sensor vai ter uma lista de observaçoes numa relaçao de one to many
-    @OneToMany(mappedBy = "sensor")
+    @OneToMany(mappedBy = "sensor", fetch = FetchType.LAZY)
     private List<Observacao> observacoes;
 
     // relação com embalagem de many to many e vice versa
@@ -69,6 +69,10 @@ public class Sensor {
 
     public void setObservacoes(List<Observacao> observacoes) {
         this.observacoes = observacoes;
+    }
+
+    public void addObservacao(Observacao observacao) {
+        observacoes.add(observacao);
     }
 
     public long getId() {

@@ -139,6 +139,10 @@ Accept: application/json
 GET http://localhost:8080/intellipac/api/sensores
 Accept: application/json
 
+### GET SENSORES BY ID
+GET http://localhost:8080/intellipac/api/sensores/1
+Accept: application/json
+
 ### POST SENSORES
 POST http://localhost:8080/intellipac/api/sensores
 Content-Type: application/json
@@ -165,9 +169,7 @@ Content-Type: application/json
   "unidade": "CE"
 }
 
-### GET SENSORES BY ID
-GET http://localhost:8080/intellipac/api/sensores/1
-Accept: application/json
+
 
 ## OBSERVACOES
 

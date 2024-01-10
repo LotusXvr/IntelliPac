@@ -42,6 +42,8 @@ public class ObservacaoBean {
         if (sensor == null) throw new IllegalArgumentException("Sensor with id " + sensorId + " not found.");
 
         Observacao observacao = new Observacao(getTimestamp(), valor, sensor);
+        sensor.addObservacao(observacao);
+
         entityManager.persist(observacao);
     }
 

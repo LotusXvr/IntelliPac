@@ -5,7 +5,9 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
 import jakarta.ws.rs.core.Response;
+import org.hibernate.Hibernate;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.Sensor;
+import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyEntityNotFoundException;
 
 import java.util.List;
 
@@ -39,6 +41,15 @@ public class SensorBean {
 
     public List<Sensor> getAll() {
         return entityManager.createNamedQuery("getAllSensor", Sensor.class).getResultList();
+    }
+
+    public Sensor findSensorWithObservacoes(long id) throws MyEntityNotFoundException{
+        Sensor sensor = entityManager.find(Sensor.class, id);
+        if (sensor == null) {
+            throw new MyEntityNotFoundException("Sensor with id " + id + " not found.");
+        }
+        Hibernate.initialize(sensor.getObservacoes());
+        return sensor;
     }
 
     public void update(long id, long idSensor, String tipo, String unidade) {

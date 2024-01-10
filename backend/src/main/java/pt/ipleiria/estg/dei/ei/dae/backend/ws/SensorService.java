@@ -21,12 +21,26 @@ public class SensorService {
     @EJB
     private SensorBean sensorBean;
 
-    private SensorDTO toDTO(Sensor sensor) {
+    private SensorDTO toDTONoObservacoes(Sensor sensor) {
         return new SensorDTO(
                 sensor.getId(),
                 sensor.getIdSensor(),
                 sensor.getTipo(),
                 sensor.getUnidade()
+        );
+    }
+
+    private List<SensorDTO> toDTOsNoObservacoes(List<Sensor> sensores) {
+        return sensores.stream().map(this::toDTONoObservacoes).collect(java.util.stream.Collectors.toList());
+    }
+
+    private SensorDTO toDTO(Sensor sensor) {
+        return new SensorDTO(
+                sensor.getId(),
+                sensor.getIdSensor(),
+                sensor.getTipo(),
+                sensor.getUnidade(),
+                sensor.getObservacoes()
         );
     }
 
@@ -37,13 +51,13 @@ public class SensorService {
     @GET
     @Path("/") // means: the relative url path is “/api/sensores/”
     public List<SensorDTO> getAllSensores() {
-        return toDTOs(sensorBean.getAll());
+        return toDTOsNoObservacoes(sensorBean.getAll());
     }
 
     @GET
     @Path("{id}")
-    public Response getSensorDetails(@PathParam("id") long id) {
-        Sensor sensor = sensorBean.find(id);
+    public Response getSensorDetails(@PathParam("id") long id) throws MyEntityNotFoundException {
+        Sensor sensor = sensorBean.findSensorWithObservacoes(id);
         return Response.ok(toDTO(sensor)).build();
     }
 
