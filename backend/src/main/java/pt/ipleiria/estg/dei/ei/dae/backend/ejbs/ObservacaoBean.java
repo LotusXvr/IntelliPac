@@ -82,6 +82,7 @@ public class ObservacaoBean {
         if (observacao == null) {
             throw new IllegalArgumentException("Observacao with id " + id + " not found.");
         }
+        observacao.getSensor().removeObservacao(observacao);
         entityManager.remove(observacao);
     }
 

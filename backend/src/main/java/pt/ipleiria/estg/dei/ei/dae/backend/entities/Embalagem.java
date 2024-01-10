@@ -10,7 +10,7 @@ import java.util.List;
 public class Embalagem {
     @Id
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
-    private int id;
+    private long id;
     private String material;
 
     @ManyToMany
@@ -39,11 +39,27 @@ public class Embalagem {
         this.sensores = new ArrayList<>();
     }
 
-    public int getId() {
+    public List<Sensor> getSensores() {
+        return sensores;
+    }
+
+    public void setSensores(List<Sensor> sensores) {
+        this.sensores = sensores;
+    }
+
+    public void addSensor(Sensor sensor) {
+        this.sensores.add(sensor);
+    }
+
+    public void removeSensor(Sensor sensor) {
+        this.sensores.remove(sensor);
+    }
+
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -55,13 +71,7 @@ public class Embalagem {
         this.material = material;
     }
 
-    public List<Sensor> getSensores() {
-        return sensores;
-    }
 
-    public void setSensores(List<Sensor> sensores) {
-        this.sensores = sensores;
-    }
 
 
 }

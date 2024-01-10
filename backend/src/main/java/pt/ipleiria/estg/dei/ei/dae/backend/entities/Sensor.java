@@ -22,9 +22,10 @@ public class Sensor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    // id_sensor (razao ainda por esclarecer, mas será necessario)
+    // id_sensor -> o mesmo sensor vai ser utilizado para diferentes encomendas
+    // e quando o sensor mudar de encomenda, vai registar novas observacoes
+    // que terao de ter outra associaçao
     private long idSensor;
-    // timestamp
     // tipo (temperatura, humidade, etc)
     private String tipo;
     // unidade (ºC, %, etc)

@@ -2,17 +2,15 @@ package pt.ipleiria.estg.dei.ei.dae.backend.dtos;
 
 
 public class EmbalagemDTO {
-    private Long id;
+    private long id;
     private String material;
-    private String valoresObservados;
 
     public EmbalagemDTO() {
     }
 
-    public EmbalagemDTO(Long id, String material, String valoresObservados) {
+    public EmbalagemDTO(long id, String material) {
         this.id = id;
         this.material = material;
-        this.valoresObservados = valoresObservados;
     }
 
     // Getters e Setters para os atributos
@@ -30,14 +28,6 @@ public class EmbalagemDTO {
 
     public void setMaterial(String material) {
         this.material = material;
-    }
-
-    public String getValoresObservados() {
-        return valoresObservados;
-    }
-
-    public void setValoresObservados(String valoresObservados) {
-        this.valoresObservados = valoresObservados;
     }
 
 
