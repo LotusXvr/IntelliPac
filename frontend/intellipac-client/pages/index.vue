@@ -8,6 +8,8 @@
     <nuxt-link to="/fabricantes">Fabricantes</nuxt-link>
     <br />
     <nuxt-link to="/sensores">Sensores</nuxt-link>
+    <br />
+    <nuxt-link to="/observacoes">Observações</nuxt-link>
   </div>
 </template>
 <script setup lang="ts"></script>

@@ -11,7 +11,7 @@
       </tr>
       <tr v-for="produto in produtos">
         <td>{{ produto.nome }}</td>
-        <td>{{ produto.nomeFabricante }}</td>
+        <td>{{ produto.fabricanteUsername }}</td>
         <td>
           <nuxt-link :to="`/produtosCatalogo/${produto.id}`">Detalhes</nuxt-link>
           |

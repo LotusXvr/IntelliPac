@@ -169,9 +169,7 @@ Content-Type: application/json
   "unidade": "CE"
 }
 
-
-
-## OBSERVACOES
+### OBSERVACOES
 
 ### GET ALL OBSERVACOES
 GET http://localhost:8080/intellipac/api/observacoes
