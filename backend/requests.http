@@ -1,6 +1,7 @@
 ##### ProdutosCatalogo
 GET http://localhost:8080/intellipac/api/produtosCatalogo
 Accept: application/json
+
 ###
 POST http://localhost:8080/intellipac/api/produtosCatalogo
 Content-Type: application/json
@@ -8,8 +9,8 @@ Content-Type: application/json
 {
   "nome": "Produto (POST)",
   "fabricanteUsername": "Fabrica1"
-
 }
+
 ###
 PUT http://localhost:8080/intellipac/api/produtosCatalogo/2
 Content-Type: application/json
@@ -31,6 +32,7 @@ Accept: application/json
 
 GET http://localhost:8080/intellipac/api/produtosFisicos
 Accept: application/json
+
 ###
 POST http://localhost:8080/intellipac/api/produtosFisicos
 Content-Type: application/json
@@ -38,10 +40,10 @@ Content-Type: application/json
 {
   "nome": "Produto1Fisico (POST)",
   "fabricanteUsername": "Fabrica1",
-  "produtoCatalogoId" : 1,
-  "encomendaId" : 1
-
+  "produtoCatalogoId": 1,
+  "encomendaId": 1
 }
+
 ###
 PUT http://localhost:8080/intellipac/api/produtosFisicos/3
 Content-Type: application/json
@@ -49,9 +51,10 @@ Content-Type: application/json
 {
   "nome": "Produto1Fisico (PUT)",
   "fabricanteUsername": "Fabrica1",
-  "produtoCatalogoId" : 1,
-  "encomendaId" : 1
+  "produtoCatalogoId": 1,
+  "encomendaId": 1
 }
+
 ###
 DELETE http://localhost:8080/intellipac/api/produtosFisicos/4
 Accept: application/json
@@ -59,6 +62,7 @@ Accept: application/json
 ##### Detalhes de um produtoFisico
 GET http://localhost:8080/intellipac/api/produtosFisicos/3
 Accept: application/json
+
 ##### Fabricantes
 GET http://localhost:8080/intellipac/api/fabricantes
 Accept: application/json
@@ -92,7 +96,10 @@ POST http://localhost:8080/intellipac/api/auth/login
 Content-Type: application/json
 Accept: application/json
 
-{ "username": "Fabrica1", "password": "123" }
+{
+  "username": "Fabrica1",
+  "password": "123"
+}
 
 
 ### GET Operadores de Logistica
@@ -105,10 +112,10 @@ Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJGYWJyaWNhMSIsImlhdCI6MTcwM
 Content-Type: application/json
 
 {
- "email": "diogo@mail.com",
- "name": "Diogo Diogo",
- "username": "DiogoGuerra",
- "password": "123"
+  "email": "diogo@mail.com",
+  "name": "Diogo Diogo",
+  "username": "DiogoGuerra",
+  "password": "123"
 }
 
 ### getOperadoresLogisticaDetails()
@@ -185,7 +192,7 @@ POST http://localhost:8080/intellipac/api/embalagens
 Content-Type: application/json
 
 {
-  "material":  "EcoPlastico"
+  "material": "EcoPlastico"
 }
 
 ### DELETE EMBALAGEM
@@ -197,9 +204,8 @@ PUT http://localhost:8080/intellipac/api/embalagens/1
 Content-Type: application/json
 
 {
-  "material":  "EcoPlastico"
+  "material": "EcoPlastico"
 }
-
 
 
 ### ------------- OBSERVACOES -------------
