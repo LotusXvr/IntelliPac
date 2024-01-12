@@ -33,11 +33,11 @@ public class Sensor {
 
 
     // o sensor vai ter uma lista de observaçoes numa relaçao de one to many
-    @OneToMany(mappedBy = "sensor", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "sensor", fetch = FetchType.EAGER)
     private List<Observacao> observacoes;
 
     // relação com embalagem de many to many e vice versa
-    @ManyToMany(mappedBy = "sensores", fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "sensores", fetch = FetchType.EAGER)
     private List<Embalagem> embalagens;
     // relação de oneToMany com Observação e ManyToOne ao contrario
 

@@ -139,7 +139,7 @@ Accept: application/json
 GET http://localhost:8080/intellipac/api/sensores
 Accept: application/json
 
-### GET SENSOR
+### GET SENSOR DETAILS
 GET http://localhost:8080/intellipac/api/sensores/1
 Accept: application/json
 
@@ -182,7 +182,7 @@ GET http://localhost:8080/intellipac/api/observacoes
 Accept: application/json
 
 ### GET OBSERVACAO
-GET http://localhost:8080/intellipac/api/observacoes/10
+GET http://localhost:8080/intellipac/api/observacoes/3
 Accept: application/json
 
 ### GET OBSERVACOES DE SENSOR

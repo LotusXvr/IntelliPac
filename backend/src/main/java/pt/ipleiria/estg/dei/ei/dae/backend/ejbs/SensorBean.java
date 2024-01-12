@@ -45,13 +45,14 @@ public class SensorBean {
     }
 
     public Sensor findSensorDetails(long id) {
+
         Sensor sensor = entityManager.find(Sensor.class, id);
         if (sensor != null) {
-            Hibernate.initialize(sensor.getObservacoes());
-            Hibernate.initialize(sensor.getEmbalagens());
+            /*Hibernate.initialize(sensor.getObservacoes());
+            Hibernate.initialize(sensor.getEmbalagens());*/
         }
-
         return sensor;
+
     }
 
     public void update(long id, long idSensor, String tipo, String unidade) {

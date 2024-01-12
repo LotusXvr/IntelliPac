@@ -16,7 +16,7 @@ public class Embalagem {
     private long id;
     private String material;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "embalagem_sensor",
             joinColumns = @JoinColumn(

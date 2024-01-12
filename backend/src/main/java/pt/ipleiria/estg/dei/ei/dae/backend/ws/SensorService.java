@@ -89,10 +89,9 @@ public class SensorService {
     @Path("{id}")
     public Response getSensorDetails(@PathParam("id") long id) {
         Sensor sensor = sensorBean.findSensorDetails(id);
-
         return Response.status(Response.Status.OK).entity(toDTO(sensor)).build();
-
     }
+
 
     @POST
     @Path("/")
