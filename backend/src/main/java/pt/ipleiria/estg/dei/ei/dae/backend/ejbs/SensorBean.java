@@ -16,8 +16,8 @@ public class SensorBean {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public void create(long idSensor, String tipo, String unidade) {
-        Sensor sensor = new Sensor(idSensor, tipo, unidade);
+    public void create(long idSensor, String tipo, String unidade, long idEmbalagem) {
+        Sensor sensor = new Sensor(idSensor, tipo, unidade, idEmbalagem);
         entityManager.persist(sensor);
     }
 
@@ -56,7 +56,7 @@ public class SensorBean {
         return sensor;
     }
 
-    public void update(long id, long idSensor, String tipo, String unidade) {
+    public void update(long id, long idSensor, String tipo, String unidade, long idEmbalagem) {
         Sensor sensor = find(id);
         if (sensor == null) {
             throw new IllegalArgumentException("Sensor with id " + id + " not found.");
@@ -65,6 +65,7 @@ public class SensorBean {
         sensor.setIdSensor(idSensor);
         sensor.setTipo(tipo);
         sensor.setUnidade(unidade);
+        sensor.setIdEmbalagem(idEmbalagem);
         entityManager.merge(sensor);
     }
 

@@ -5,6 +5,9 @@ import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@NamedQueries({
+        @NamedQuery(name = "getAllEmbalagem", query = "SELECT e FROM Embalagem e ORDER BY e.id")
+})
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Embalagem {

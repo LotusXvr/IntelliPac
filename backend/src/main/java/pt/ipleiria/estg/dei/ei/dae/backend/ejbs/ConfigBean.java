@@ -6,6 +6,7 @@ import jakarta.ejb.EJB;
 import jakarta.ejb.Singleton;
 import jakarta.ejb.Startup;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.Cliente;
+import pt.ipleiria.estg.dei.ei.dae.backend.entities.Embalagem;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.Encomenda;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.ProdutoCatalogo;
 
@@ -40,6 +41,9 @@ public class ConfigBean {
     @EJB
     ClienteBean clienteBean;
 
+    @EJB
+    EmbalagemBean embalagemBean;
+
     private Logger logger = Logger.getLogger("ejbs.ConfigBean");
 
     @PostConstruct
@@ -63,15 +67,20 @@ public class ConfigBean {
             produtoFisicoBean.create("produto1Fisico", "Fabrica1", produtoCatalogo1.getId(), encomenda1.getId());
             produtoFisicoBean.create("produto2Fisico", "Fabrica1", produtoCatalogo2.getId(), encomenda1.getId());
 
+            // Embalagens
+            Embalagem embalagemPlastico = embalagemBean.create("Plastico");
+            Embalagem embalagemCartao = embalagemBean.create("Cartao");
+            Embalagem embalagemVidro = embalagemBean.create("Vidro");
+            Embalagem embalagemMetal = embalagemBean.create("Metal");
 
             // Sensores
-            sensorBean.create(1, "Temperatura", "ºC");
-            sensorBean.create(2, "Humidade", "%");
-            sensorBean.create(3, "Luminosidade", "LUX");
-            sensorBean.create(4, "Pressao", "hPa");
-            sensorBean.create(5, "Velocidade do Vento", "km/h");
-            sensorBean.create(6, "Direcao do Vento", "N");
-            sensorBean.create(7, "Precipitacao", "mm");
+            sensorBean.create(1, "Temperatura", "ºC", embalagemPlastico.getId());
+            sensorBean.create(2, "Humidade", "%", embalagemCartao.getId());
+            sensorBean.create(3, "Luminosidade", "LUX", embalagemVidro.getId());
+            sensorBean.create(4, "Pressao", "hPa", embalagemMetal.getId());
+            sensorBean.create(5, "Velocidade do Vento", "km/h", embalagemPlastico.getId());
+            sensorBean.create(6, "Direcao do Vento", "N", embalagemCartao.getId());
+            sensorBean.create(7, "Precipitacao", "mm", embalagemVidro.getId());
 
             // Observacoes
             observacaoBean.create("20", 1L);
