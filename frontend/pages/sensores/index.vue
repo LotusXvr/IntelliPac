@@ -1,4 +1,5 @@
 <template>
+    <Navbar />
     <div v-if="error">Error: {{ error.message }}</div>
     <div v-else>
         <nuxt-link to="sensores/create">Criar novo Sensor</nuxt-link>
@@ -32,6 +33,7 @@
     <nuxt-link to="/">Voltar à Home</nuxt-link>
 </template>
 <script setup>
+import Navbar from "/pages/navbar.vue"
 const config = useRuntimeConfig()
 const api = config.public.API_URL
 const { data: sensores, error, refresh } = await useFetch(`${api}/sensores`)

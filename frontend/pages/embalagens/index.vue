@@ -1,4 +1,5 @@
 <template>
+    <Navbar />
     <div v-if="error">Error: {{ error.message }}</div>
     <div v-else>
         <nuxt-link to="observacoes/create">Criar nova observação</nuxt-link>
@@ -32,21 +33,21 @@
     <nuxt-link to="/">Voltar à Home</nuxt-link>
 </template>
 <script setup>
-const config = useRuntimeConfig();
-const api = config.public.API_URL;
-const { data: observacoes, error, refresh } = await useFetch(`${api}/observacoes`);
+import Navbar from "/pages/navbar.vue"
+const config = useRuntimeConfig()
+const api = config.public.API_URL
+const { data: observacoes, error, refresh } = await useFetch(`${api}/observacoes`)
 
 const deleteObservacao = async (id) => {
     try {
         const response = await fetch(`${api}/observacoes/${id}`, {
             method: "DELETE",
-        });
+        })
         if (response.ok) {
-            refresh();
+            refresh()
         }
     } catch (error) {
-        console.error(error);
+        console.error(error)
     }
-};
+}
 </script>
-  
