@@ -87,6 +87,16 @@ public class ConfigBean {
             sensorBean.create(6, "Direcao do Vento", "N");
             sensorBean.create(7, "Precipitacao", "mm");
 
+            // associar sensores a embalagens
+            embalagemBean.associateSensorToEmbalagem(3L, 1L);
+            embalagemBean.associateSensorToEmbalagem(4L, 2L);
+            embalagemBean.associateSensorToEmbalagem(2L, 3L);
+            embalagemBean.associateSensorToEmbalagem(1L, 4L);
+            embalagemBean.associateSensorToEmbalagem(1L, 5L);
+            embalagemBean.associateSensorToEmbalagem(1L, 6L);
+
+
+
             // Observacoes
             observacaoBean.create("20", 1L);
             observacaoBean.create("90", 2L);
