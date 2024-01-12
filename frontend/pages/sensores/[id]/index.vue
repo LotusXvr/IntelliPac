@@ -9,8 +9,8 @@
 
         <p>Embalagens:</p>
         <ul>
-            <li v-for="embalagem in sensor.embagalens" :key="sensor.idSensor">
-                {{ embalagem.nome }}
+            <li v-for="embalagem in sensor.embalagens" :key="embalagem.id">
+                {{ embalagem.material }}
             </li>
         </ul>
         <p>Observações</p>
