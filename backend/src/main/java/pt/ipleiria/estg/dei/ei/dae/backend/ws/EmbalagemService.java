@@ -88,13 +88,12 @@ public class EmbalagemService {
         return Response.status(Response.Status.OK).build();
     }
 
-
-
-
-
-
-
-
+    @DELETE
+    @Path("/{id}")
+    public Response deleteEmbalagem(@PathParam("id") long id) throws MyEntityNotFoundException {
+        embalagemBean.delete(id);
+        return Response.status(Response.Status.OK).build();
+    }
 
 
 }

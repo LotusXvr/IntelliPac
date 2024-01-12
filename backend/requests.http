@@ -180,6 +180,26 @@ Accept: application/json
 GET http://localhost:8080/intellipac/api/embalagens/1
 Accept: application/json
 
+### POST EMBALAGEM
+POST http://localhost:8080/intellipac/api/embalagens
+Content-Type: application/json
+
+{
+  "material":  "EcoPlastico"
+}
+
+### DELETE EMBALAGEM
+DELETE http://localhost:8080/intellipac/api/embalagens/5
+Accept: application/json
+
+### UPDATE EMBALAGEM
+PUT http://localhost:8080/intellipac/api/embalagens/1
+Content-Type: application/json
+
+{
+  "material":  "EcoPlastico"
+}
+
 
 
 ### ------------- OBSERVACOES -------------
