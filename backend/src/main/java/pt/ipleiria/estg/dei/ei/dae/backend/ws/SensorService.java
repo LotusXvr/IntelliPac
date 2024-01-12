@@ -40,7 +40,7 @@ public class SensorService {
     }
 
     private SensorDTO toDTO(Sensor sensor) {
-        return new SensorDTO(
+        SensorDTO sensorDTO = new SensorDTO(
                 sensor.getId(),
                 sensor.getIdSensor(),
                 sensor.getTipo(),
@@ -48,6 +48,7 @@ public class SensorService {
                 embalagemToDTOs(sensor.getEmbalagens()),
                 observacaoToDTOs(sensor.getObservacoes())
         );
+        return sensorDTO;
     }
 
     private List<SensorDTO> toDTOs(List<Sensor> sensores) {
@@ -70,8 +71,7 @@ public class SensorService {
     private EmbalagemDTO embalagemToDTO(Embalagem embalagem) {
         return new EmbalagemDTO(
                 embalagem.getId(),
-                embalagem.getMaterial(),
-                toDTOs(embalagem.getSensores())
+                embalagem.getMaterial()
         );
     }
 
@@ -86,10 +86,12 @@ public class SensorService {
     }
 
     @GET
-    @Path("{id}")
+    @Path("/{id}")
     public Response getSensorDetails(@PathParam("id") long id) {
+
         Sensor sensor = sensorBean.findSensorDetails(id);
         return Response.status(Response.Status.OK).entity(toDTO(sensor)).build();
+
     }
 
 
@@ -113,7 +115,7 @@ public class SensorService {
     }
 
     @PUT
-    @Path("{id}")
+    @Path("/{id}")
     public Response updateSensor(@PathParam("id") long id, SensorDTO sensorDTO) {
         try {
             sensorBean.update(
@@ -129,7 +131,7 @@ public class SensorService {
     }
 
     @DELETE
-    @Path("{id}")
+    @Path("/{id}")
     public Response deleteSensor(@PathParam("id") long id) {
         try {
             sensorBean.remove(id);

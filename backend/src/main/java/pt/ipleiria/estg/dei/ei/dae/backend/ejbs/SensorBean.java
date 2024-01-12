@@ -48,8 +48,8 @@ public class SensorBean {
 
         Sensor sensor = entityManager.find(Sensor.class, id);
         if (sensor != null) {
-            /*Hibernate.initialize(sensor.getObservacoes());
-            Hibernate.initialize(sensor.getEmbalagens());*/
+            Hibernate.initialize(sensor.getObservacoes());
+            Hibernate.initialize(sensor.getEmbalagens());
         }
         return sensor;
 

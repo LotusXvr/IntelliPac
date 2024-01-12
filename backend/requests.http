@@ -150,7 +150,6 @@ Content-Type: application/json
 {
   "idSensor": 8,
   "tipo": "Temperatura",
-  "valor": "20",
   "unidade": "Celsius"
 }
 
@@ -169,10 +168,16 @@ Content-Type: application/json
   "unidade": "CE"
 }
 
+### EMBALAGENS
 
-### ASSOCIATE SENSOR TO EMBALAGEM
-POST http://localhost:8080/intellipac/api/sensores/1/embalagem/1
+### GET ALL EMBALAGENS
+GET http://localhost:8080/intellipac/api/embalagens
 Accept: application/json
+
+### GET EMBALAGEM
+GET http://localhost:8080/intellipac/api/embalagens/1
+Accept: application/json
+
 
 
 ### OBSERVACOES

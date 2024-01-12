@@ -74,6 +74,20 @@ public class EmbalagemService {
         return Response.status(Response.Status.OK).entity(toDTO(embalagem)).build();
     }
 
+    @POST
+    @Path("/")
+    public Response createNewEmbalagem(EmbalagemDTO embalagemDTO) throws MyEntityNotFoundException {
+        embalagemBean.create(embalagemDTO.getMaterial());
+        return Response.status(Response.Status.CREATED).build();
+    }
+
+    @PUT
+    @Path("/{id}")
+    public Response updateEmbalagem(@PathParam("id") long id, EmbalagemDTO embalagemDTO) throws MyEntityNotFoundException {
+        embalagemBean.update(id, embalagemDTO.getMaterial());
+        return Response.status(Response.Status.OK).build();
+    }
+
 
 
 
