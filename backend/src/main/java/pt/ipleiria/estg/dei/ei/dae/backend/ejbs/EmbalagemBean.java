@@ -6,6 +6,7 @@ import jakarta.persistence.PersistenceContext;
 import pt.ipleiria.estg.dei.ei.dae.backend.dtos.EmbalagemDTO;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.Embalagem;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.Sensor;
+import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyEntityNotFoundException;
 
 import java.util.List;
 
@@ -13,6 +14,14 @@ import java.util.List;
 public class EmbalagemBean {
     @PersistenceContext
     private EntityManager entityManager;
+
+    public Embalagem find(long id) throws MyEntityNotFoundException {
+        Embalagem embalagem = entityManager.find(Embalagem.class, id);
+        if (embalagem == null) {
+            throw new MyEntityNotFoundException("Embalagem with id " + id + " not found");
+        }
+        return embalagem;
+    }
 
     public List<Embalagem> getAll() {
         return entityManager.createNamedQuery("getAllEmbalagem", Embalagem.class).getResultList();

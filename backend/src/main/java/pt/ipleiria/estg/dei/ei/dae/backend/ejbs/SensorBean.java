@@ -44,10 +44,11 @@ public class SensorBean {
         return entityManager.createNamedQuery("getAllSensor", Sensor.class).getResultList();
     }
 
-    public Sensor findSensorWithObservacoes(long id) {
+    public Sensor findSensorDetails(long id) {
         Sensor sensor = entityManager.find(Sensor.class, id);
         if (sensor != null) {
             Hibernate.initialize(sensor.getObservacoes());
+            Hibernate.initialize(sensor.getEmbalagens());
         }
 
         return sensor;

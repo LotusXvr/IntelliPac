@@ -30,12 +30,12 @@ public class SensorDTO {
         this.observacoes = new ArrayList<>();
     }
 
-    public SensorDTO(long id, long idSensor, String tipo, String unidade, List<ObservacaoDTO> observacoes) {
+    public SensorDTO(long id, long idSensor, String tipo, String unidade,List<EmbalagemDTO> embalagens, List<ObservacaoDTO> observacoes) {
         this.id = id;
         this.idSensor = idSensor;
         this.tipo = tipo;
         this.unidade = unidade;
-        this.embalagens = new ArrayList<>();
+        this.embalagens = embalagens;
         this.observacoes = observacoes;
     }
 

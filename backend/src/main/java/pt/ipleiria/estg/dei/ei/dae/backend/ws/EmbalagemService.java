@@ -11,6 +11,7 @@ import pt.ipleiria.estg.dei.ei.dae.backend.dtos.SensorDTO;
 import pt.ipleiria.estg.dei.ei.dae.backend.ejbs.EmbalagemBean;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.Embalagem;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.Sensor;
+import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyEntityNotFoundException;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -67,6 +68,11 @@ public class EmbalagemService {
         return toDTOsNoSensores(embalagemBean.getAll());
     }
 
+    @GET
+    @Path("/{id}")
+    public EmbalagemDTO getEmbalagemDetails(long id) throws MyEntityNotFoundException {
+        return toDTO(embalagemBean.find(id));
+    }
 
 
 

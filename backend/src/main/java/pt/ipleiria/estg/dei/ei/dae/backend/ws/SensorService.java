@@ -5,8 +5,10 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.hibernate.Hibernate;
+import pt.ipleiria.estg.dei.ei.dae.backend.dtos.EmbalagemDTO;
 import pt.ipleiria.estg.dei.ei.dae.backend.dtos.SensorDTO;
 import pt.ipleiria.estg.dei.ei.dae.backend.ejbs.SensorBean;
+import pt.ipleiria.estg.dei.ei.dae.backend.entities.Embalagem;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.Sensor;
 import pt.ipleiria.estg.dei.ei.dae.backend.dtos.ObservacaoDTO;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.Observacao;
@@ -24,7 +26,7 @@ public class SensorService {
     @EJB
     private SensorBean sensorBean;
 
-    private SensorDTO toDTONoObservacoes(Sensor sensor) {
+    private SensorDTO toDTONoObservacoesNoEmbalagens(Sensor sensor) {
         return new SensorDTO(
                 sensor.getId(),
                 sensor.getIdSensor(),
@@ -34,7 +36,7 @@ public class SensorService {
     }
 
     private List<SensorDTO> toDTOsNoObservacoes(List<Sensor> sensores) {
-        return sensores.stream().map(this::toDTONoObservacoes).collect(java.util.stream.Collectors.toList());
+        return sensores.stream().map(this::toDTONoObservacoesNoEmbalagens).collect(java.util.stream.Collectors.toList());
     }
 
     private SensorDTO toDTO(Sensor sensor) {
@@ -43,6 +45,7 @@ public class SensorService {
                 sensor.getIdSensor(),
                 sensor.getTipo(),
                 sensor.getUnidade(),
+                embalagemToDTOs(sensor.getEmbalagens()),
                 observacaoToDTOs(sensor.getObservacoes())
         );
     }
@@ -64,6 +67,18 @@ public class SensorService {
         return observacoes.stream().map(this::observacaoToDTO).collect(java.util.stream.Collectors.toList());
     }
 
+    private EmbalagemDTO embalagemToDTO(Embalagem embalagem) {
+        return new EmbalagemDTO(
+                embalagem.getId(),
+                embalagem.getMaterial(),
+                toDTOs(embalagem.getSensores())
+        );
+    }
+
+    private List<EmbalagemDTO> embalagemToDTOs(List<Embalagem> embalagens) {
+        return embalagens.stream().map(this::embalagemToDTO).collect(java.util.stream.Collectors.toList());
+    }
+
     @GET
     @Path("/") // means: the relative url path is “/api/sensores/”
     public List<SensorDTO> getAllSensores() {
@@ -73,7 +88,7 @@ public class SensorService {
     @GET
     @Path("{id}")
     public Response getSensorDetails(@PathParam("id") long id) {
-        Sensor sensor = sensorBean.findSensorWithObservacoes(id);
+        Sensor sensor = sensorBean.findSensorDetails(id);
 
         return Response.status(Response.Status.OK).entity(toDTO(sensor)).build();
 
