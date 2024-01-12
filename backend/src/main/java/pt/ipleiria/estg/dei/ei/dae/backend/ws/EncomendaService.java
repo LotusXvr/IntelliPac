@@ -65,4 +65,11 @@ public class EncomendaService {
     public List<EncomendaDTO> getAllEncomendas() {
         return toDTOs(encomendaBean.getAllEncomendasCliente(securityContext.getUserPrincipal().getName()));
     }
+
+    // getAllEncomendas (operador)
+    @GET
+    @Path("/operador/{username}")
+    public List<EncomendaDTO> getAllEncomendasAdmin() {
+        return toDTOs(encomendaBean.getAllEncomendasOperadoresLogistica("ValterLogo"));
+    }
 }
