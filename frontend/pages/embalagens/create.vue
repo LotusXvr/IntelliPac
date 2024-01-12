@@ -1,23 +1,10 @@
 <template>
     <form @submit.prevent="create">
-        <label for="valor">Valor: </label>
-        <input id="valor" v-model="observacaoForm.valor" />
-        <span class="error">{{ formFeedback.valor }}</span>
+        <label for="material">Material: </label>
+        <input id="material" v-model="embalagemForm.material" />
+        <span class="error">{{ formFeedback.material }}</span>
         <br />
-        <div>
-            Sensor:
-            <select v-model="observacaoForm.sensorId">
-                <option value=''>--- Please select Sensor ---</option>
-                <option v-for="sensor in sensores" :value="sensor.idSensor">
-                    {{ sensor.idSensor }} - {{ sensor.tipo }}
-                </option>
-            </select>
-            <span v-if="observacaoForm.sensorId !== null && !isSensorValid" class="error">
-                ERRO: {{ formFeedback.sensorId }}</span>
-        </div>
-
-        <br />
-        <button type="submit" :disabled="!isFormValid">Criar produto</button>
+        <button type="submit" :disabled="!isFormValid">Criar embalagem</button>
     </form>
     {{ message }}
 </template>
@@ -27,68 +14,50 @@
 }
 </style>
 <script setup>
-import { ref, reactive, computed } from "vue";
-const observacaoForm = reactive({
-    valor: null,
-    sensorId: '', // Alterado de Number para aceitar nulos
-});
+import { ref, reactive, computed } from "vue"
+const embalagemForm = reactive({
+    material: null,
+})
 
 const formFeedback = reactive({
-    valor: "",
-    sensorId: "",
-});
+    material: "",
+})
 
-const config = useRuntimeConfig();
-const api = config.public.API_URL;
-const { data: sensores } = await useFetch(`${api}/sensores`);
-const message = ref("");
+const config = useRuntimeConfig()
+const api = config.public.API_URL
+const message = ref("")
 
-const isValorValid = computed(() => {
-    if (observacaoForm.valor === null) {
-        return false;
+const isMaterialValid = computed(() => {
+    if (embalagemForm.material === null) {
+        return false
     }
-    if (observacaoForm.valor.length < 1) {
-        formFeedback.valor = "A observação deve ter pelo menos 1 caracteres";
-        return false;
+    if (embalagemForm.material.length < 1) {
+        formFeedback.material = "A embalagem deve ter pelo menos 1 caracteres"
+        return false
     }
-    if (observacaoForm.valor.length > 5) {
-        formFeedback.valor = "A observação deve ter no máximo 5 caracteres";
-        return false;
+    if (embalagemForm.material.length > 25) {
+        formFeedback.material = "A embalagem deve ter no máximo 25 caracteres"
+        return false
     }
-    formFeedback.valor = "";
-    return true;
-});
-
-const isSensorValid = computed(() => {
-    if (observacaoForm.sensorId === null) {
-        return false;
-    }
-    if (observacaoForm.sensorId.length < 1) {
-        formFeedback.sensorId = "Escolha um sensor";
-        return false;
-    }
-
-    formFeedback.sensorId = "";
-    return true;
-});
+    formFeedback.material = ""
+    return true
+})
 
 const isFormValid = computed(() => {
-    return isValorValid.value && isSensorValid.value;
-});
+    return isMaterialValid.value
+})
 
 async function create() {
-    console.log(observacaoForm)
-    observacaoForm.sensorId = observacaoForm.sensorId;
+    console.log(embalagemForm)
 
     const requestOptions = {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(observacaoForm),
-    };
+        body: JSON.stringify(embalagemForm),
+    }
 
-    const { error } = await useFetch(`${api}/observacoes`, requestOptions);
-    if (!error.value) navigateTo("/observacoes");
-    message.value = error.value;
+    const { error } = await useFetch(`${api}/embalagens`, requestOptions)
+    if (!error.value) navigateTo("/embalagens")
+    message.value = error.value
 }
 </script>
-  

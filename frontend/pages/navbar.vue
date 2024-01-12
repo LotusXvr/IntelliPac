@@ -1,7 +1,6 @@
 <template>
     <div>
         <div class="container d-flex flex-column align-items-center justify-content-center mt-5">
-            
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="navbar-nav">
                     <nuxt-link to="/" class="nav-link">Home</nuxt-link>
