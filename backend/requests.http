@@ -139,7 +139,7 @@ Accept: application/json
 GET http://localhost:8080/intellipac/api/sensores
 Accept: application/json
 
-### GET SENSORES BY ID
+### GET SENSOR
 GET http://localhost:8080/intellipac/api/sensores/1
 Accept: application/json
 
@@ -221,3 +221,15 @@ Accept: application/json
 ### GET ALL ENCOMENDAS DE Operador
 GET http://localhost:8080/intellipac/api/encomendas/operador/ValterLogo
 Accept: application/json
+
+
+### EMBALAGENS
+
+### GET ALL EMBALAGENS
+GET http://localhost:8080/intellipac/api/embalagens
+Accept: application/json
+
+### GET EMBALAGEM
+GET http://localhost:8080/intellipac/api/embalagens/1
+Accept: application/json
+
