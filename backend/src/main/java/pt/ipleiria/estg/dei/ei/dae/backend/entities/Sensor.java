@@ -37,8 +37,8 @@ public class Sensor {
     private List<Observacao> observacoes;
 
     // relação com embalagem de many to many e vice versa
-    @OneToMany(mappedBy = "sensor", fetch = FetchType.LAZY)
-    private List<EmbalagemSensor> embalagens;
+    @ManyToMany(mappedBy = "sensor", fetch = FetchType.LAZY)
+    private List<Embalagem> embalagens;
     // relação de oneToMany com Observação e ManyToOne ao contrario
 
     public Sensor() {
@@ -55,11 +55,11 @@ public class Sensor {
     }
 
 
-    public List<EmbalagemSensor> getEmbalagens() {
+    public List<Embalagem> getEmbalagens() {
         return embalagens;
     }
 
-    public void setEmbalagens(List<EmbalagemSensor> embalagens) {
+    public void setEmbalagens(List<Embalagem> embalagens) {
         this.embalagens = embalagens;
     }
 
@@ -75,11 +75,11 @@ public class Sensor {
         observacoes.add(observacao);
     }
 
-    public void addEmbalagem(EmbalagemSensor embalagem) {
+    public void addEmbalagem(Embalagem embalagem) {
         embalagens.add(embalagem);
     }
 
-    public void removeEmbalagem(EmbalagemSensor embalagem) {
+    public void removeEmbalagem(Embalagem embalagem) {
         embalagens.remove(embalagem);
     }
 

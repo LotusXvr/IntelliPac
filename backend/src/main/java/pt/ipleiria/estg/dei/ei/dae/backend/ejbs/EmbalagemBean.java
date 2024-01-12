@@ -5,6 +5,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import pt.ipleiria.estg.dei.ei.dae.backend.dtos.EmbalagemDTO;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.Embalagem;
+import pt.ipleiria.estg.dei.ei.dae.backend.entities.Sensor;
 
 import java.util.List;
 
@@ -22,4 +23,5 @@ public class EmbalagemBean {
         entityManager.persist(embalagem);
         return embalagem;
     }
+
 }

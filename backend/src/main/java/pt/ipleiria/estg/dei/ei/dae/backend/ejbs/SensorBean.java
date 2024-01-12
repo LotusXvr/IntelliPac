@@ -3,11 +3,8 @@ package pt.ipleiria.estg.dei.ei.dae.backend.ejbs;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.TypedQuery;
-import jakarta.ws.rs.core.Response;
 import org.hibernate.Hibernate;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.Sensor;
-import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyEntityNotFoundException;
 
 import java.util.List;
 
@@ -76,5 +73,5 @@ public class SensorBean {
         entityManager.remove(sensor);
     }
 
-    // Outros métodos conforme necessário para operações relacionadas a SensorDispositivo
+
 }

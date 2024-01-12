@@ -1,9 +1,6 @@
 package pt.ipleiria.estg.dei.ei.dae.backend.dtos;
 
 
-import jakarta.persistence.OneToMany;
-import pt.ipleiria.estg.dei.ei.dae.backend.entities.EmbalagemSensor;
-
 import java.util.ArrayList;
 import java.util.List;
 

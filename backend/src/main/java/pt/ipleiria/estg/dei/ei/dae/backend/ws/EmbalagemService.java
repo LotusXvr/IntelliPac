@@ -10,7 +10,6 @@ import pt.ipleiria.estg.dei.ei.dae.backend.dtos.EmbalagemDTO;
 import pt.ipleiria.estg.dei.ei.dae.backend.dtos.SensorDTO;
 import pt.ipleiria.estg.dei.ei.dae.backend.ejbs.EmbalagemBean;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.Embalagem;
-import pt.ipleiria.estg.dei.ei.dae.backend.entities.EmbalagemSensor;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.Sensor;
 
 import java.util.List;
@@ -56,9 +55,8 @@ public class EmbalagemService {
         );
     }
 
-    private List<SensorDTO> sensorToDTOs(List<EmbalagemSensor> embalagemSensores) {
-        return embalagemSensores.stream()
-                .map(EmbalagemSensor::getSensor)
+    private List<SensorDTO> sensorToDTOs(List<Sensor> sensores) {
+        return sensores.stream()
                 .map(this::sensorToDTO)
                 .collect(Collectors.toList());
     }

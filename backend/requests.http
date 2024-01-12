@@ -169,6 +169,12 @@ Content-Type: application/json
   "unidade": "CE"
 }
 
+
+### ASSOCIATE SENSOR TO EMBALAGEM
+POST http://localhost:8080/intellipac/api/sensores/1/embalagem/1
+Accept: application/json
+
+
 ### OBSERVACOES
 
 ### GET ALL OBSERVACOES
