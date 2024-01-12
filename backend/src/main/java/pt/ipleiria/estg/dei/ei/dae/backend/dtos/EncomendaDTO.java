@@ -7,21 +7,32 @@ import java.util.List;
 public class EncomendaDTO{
     private Long id;
     private String consumidorFinal;
-    private Date dataEncomenda;
+    private String dataEncomenda;
     private List<ProdutoFisicoDTO> produtos; // Lista de produtos associados à encomenda
+
+    private String operadorLogistica;
 
     public EncomendaDTO() {
         this.produtos = new ArrayList<>();
     }
 
-    public EncomendaDTO(Long id, String consumidorFinal, Date dataEncomenda, List<ProdutoFisicoDTO> produtos) {
+
+    public EncomendaDTO(Long id, String consumidorFinal, String dataEncomenda, List<ProdutoFisicoDTO> produtos, String operadorLogistica) {
+        this.id = id;
+        this.consumidorFinal = consumidorFinal;
+        this.dataEncomenda = dataEncomenda;
+        this.produtos = produtos;
+        this.operadorLogistica = operadorLogistica;
+    }
+
+    public EncomendaDTO(Long id, String consumidorFinal, String dataEncomenda, List<ProdutoFisicoDTO> produtos) {
         this.id = id;
         this.consumidorFinal = consumidorFinal;
         this.dataEncomenda = dataEncomenda;
         this.produtos = produtos;
     }
 
-    public EncomendaDTO(Long id, String consumidorFinal, Date dataEncomenda) {
+    public EncomendaDTO(Long id, String consumidorFinal, String dataEncomenda) {
         this.id = id;
         this.consumidorFinal = consumidorFinal;
         this.dataEncomenda = dataEncomenda;
@@ -44,11 +55,11 @@ public class EncomendaDTO{
         this.consumidorFinal = consumidorFinal;
     }
 
-    public Date getDataEncomenda() {
+    public String getDataEncomenda() {
         return dataEncomenda;
     }
 
-    public void setDataEncomenda(Date dataEncomenda) {
+    public void setDataEncomenda(String dataEncomenda) {
         this.dataEncomenda = dataEncomenda;
     }
 
@@ -58,5 +69,13 @@ public class EncomendaDTO{
 
     public void setProdutos(List<ProdutoFisicoDTO> produtos) {
         this.produtos = produtos;
+    }
+
+    public String getOperadorLogistica() {
+        return operadorLogistica;
+    }
+
+    public void setOperadorLogistica(String operadorLogistica) {
+        this.operadorLogistica = operadorLogistica;
     }
 }

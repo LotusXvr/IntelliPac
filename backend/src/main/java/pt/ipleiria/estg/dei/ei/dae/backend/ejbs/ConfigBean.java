@@ -5,6 +5,7 @@ import jakarta.annotation.PostConstruct;
 import jakarta.ejb.EJB;
 import jakarta.ejb.Singleton;
 import jakarta.ejb.Startup;
+import pt.ipleiria.estg.dei.ei.dae.backend.dtos.EncomendaDTO;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.Cliente;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.Embalagem;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.Encomenda;
@@ -58,11 +59,15 @@ public class ConfigBean {
             operadorDeLogisticaBean.create("Joaoz", "123", "Joao", "joao@mail.pt");
 
             clienteBean.create("Emanuel", "123", "Emanuel Nunes", "emanuel@nunes.pt");
+            clienteBean.create("Marco", "123", "Marco Nunes", "marco@mail.pt");
 
             ProdutoCatalogo produtoCatalogo1 = produtoCatalogoBean.create("produto 1", "Fabrica1");
             ProdutoCatalogo produtoCatalogo2 = produtoCatalogoBean.create("produto 2", "Fabrica2");
 
-            Encomenda encomenda1 = encomendaBean.create("Emanuel", "ValterLogo");
+            EncomendaDTO encomendaDTO = new EncomendaDTO();
+            encomendaDTO.setConsumidorFinal("Emanuel");
+            encomendaDTO.setOperadorLogistica("ValterLogo");
+            Encomenda encomenda1 = encomendaBean.create(encomendaDTO);
 
             produtoFisicoBean.create("produto1Fisico", "Fabrica1", produtoCatalogo1.getId(), encomenda1.getId());
             produtoFisicoBean.create("produto2Fisico", "Fabrica1", produtoCatalogo2.getId(), encomenda1.getId());

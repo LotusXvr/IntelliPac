@@ -214,10 +214,16 @@ Content-Type: application/json
   "sensorId": 4
 }
 
-### GET ALL ENCOMENDAS DE CLIENTE
+### GET ALL ENCOMENDAS
 GET http://localhost:8080/intellipac/api/encomendas
 Accept: application/json
 
-### GET ALL ENCOMENDAS DE Operador
-GET http://localhost:8080/intellipac/api/encomendas/operador/ValterLogo
-Accept: application/json
+### POST ENCOMENDA
+POST http://localhost:8080/intellipac/api/encomendas
+Content-Type: application/json
+
+{
+  "consumidorFinal": "Marco",
+  "operadorLogistica": "Joaoz",
+  "produtos": []
+}

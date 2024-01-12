@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @NamedQueries({
@@ -28,7 +29,9 @@ public class Encomenda {
     @ManyToOne
     @JoinColumn(name = "operador_logistica_id")
     private OperadorDeLogistica operadorLogistica;
-    private Date dataEncomenda;
+
+    @Column(nullable = false)
+    private String dataEncomenda;
 
     @OneToMany(mappedBy = "encomenda")
     private List<EmbalagemDeTransporte> embalagensTransporte;
@@ -42,7 +45,7 @@ public class Encomenda {
     public Encomenda() {
     }
 
-    public Encomenda(Cliente consumidorFinal, Date dataEncomenda, OperadorDeLogistica operadorLogistica, String estado) {
+    public Encomenda(Cliente consumidorFinal, String dataEncomenda, OperadorDeLogistica operadorLogistica, String estado) {
         this.consumidorFinal = consumidorFinal;
         this.dataEncomenda = dataEncomenda;
         this.operadorLogistica = operadorLogistica;
@@ -66,11 +69,11 @@ public class Encomenda {
         this.consumidorFinal = consumidorFinal;
     }
 
-    public Date getDataEncomenda() {
+    public String getDataEncomenda() {
         return dataEncomenda;
     }
 
-    public void setDataEncomenda(Date dataEncomenda) {
+    public void setDataEncomenda(String dataEncomenda) {
         this.dataEncomenda = dataEncomenda;
     }
 
@@ -112,5 +115,18 @@ public class Encomenda {
 
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Encomenda encomenda = (Encomenda) o;
+        return Objects.equals(id, encomenda.id) && Objects.equals(consumidorFinal, encomenda.consumidorFinal) && Objects.equals(operadorLogistica, encomenda.operadorLogistica) && Objects.equals(dataEncomenda, encomenda.dataEncomenda) && Objects.equals(embalagensTransporte, encomenda.embalagensTransporte) && Objects.equals(produtos, encomenda.produtos) && Objects.equals(estado, encomenda.estado);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, consumidorFinal, operadorLogistica, dataEncomenda, embalagensTransporte, produtos, estado);
     }
 }

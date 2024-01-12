@@ -52,6 +52,12 @@ public class ProdutoFisico extends Produto implements Serializable {
         this.encomenda = encomenda;
     }
 
+    public ProdutoFisico(ProdutoCatalogo produtoCatalogo, Encomenda encomenda) {
+        this.produtoCatalogo = produtoCatalogo;
+        this.embalagemDeProdutos = new ArrayList<>();
+        this.encomenda = encomenda;
+    }
+
 
     public List<EmbalagemDeProduto> getEmbalagemDeProdutos() {
         return embalagemDeProdutos;

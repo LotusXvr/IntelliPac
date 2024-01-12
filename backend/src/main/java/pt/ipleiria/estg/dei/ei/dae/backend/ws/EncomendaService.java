@@ -1,10 +1,8 @@
 package pt.ipleiria.estg.dei.ei.dae.backend.ws;
 
 import jakarta.ejb.EJB;
-import jakarta.ws.rs.Consumes;
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.Produces;
+import jakarta.validation.ConstraintViolationException;
+import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.SecurityContext;
@@ -14,6 +12,9 @@ import pt.ipleiria.estg.dei.ei.dae.backend.dtos.ProdutoFisicoDTO;
 import pt.ipleiria.estg.dei.ei.dae.backend.ejbs.EncomendaBean;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.Encomenda;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.ProdutoFisico;
+import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyConstraintViolationException;
+import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyEntityExistsException;
+import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyEntityNotFoundException;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -36,7 +37,8 @@ public class EncomendaService {
                 encomenda.getId(),
                 encomenda.getConsumidorFinal().getUsername(),
                 encomenda.getDataEncomenda(),
-                produtosToDTOs(encomenda.getProdutos())
+                produtosToDTOs(encomenda.getProdutos()),
+                encomenda.getOperadorLogistica().getUsername()
         );
     }
 
@@ -55,15 +57,31 @@ public class EncomendaService {
         return new ProdutoFisicoDTO(
                 produto.getId(),
                 produto.getNomeProduto(),
-                produto.getFabricante().getUsername()
+                produto.getFabricante().getUsername(),
+                produto.getProdutoCatalogo().getId(),  // Adicione esta linha para obter o produtoCatalogoId
+                produto.getEncomenda().getId()        // Adicione esta linha para obter o encomendaId
         );
     }
+
 
     // getAllEncomendas
     @GET
     @Path("/")
     public List<EncomendaDTO> getAllEncomendas() {
-        return toDTOs(encomendaBean.getAllEncomendasCliente(securityContext.getUserPrincipal().getName()));
+        return toDTOs(encomendaBean.getAllEncomendas());
+    }
+
+    // POST
+    // createEncomenda (cliente)
+    // Encomenda create(String consumidorFinal, String operadorLogistica)
+    @POST
+    @Path("/")
+    public EncomendaDTO createEncomenda(EncomendaDTO encomendaDTO) throws MyConstraintViolationException, MyEntityNotFoundException, MyEntityExistsException {
+        try {
+            return toDTO(encomendaBean.create(encomendaDTO));
+        } catch (ConstraintViolationException e) {
+            throw new MyConstraintViolationException(e);
+        }
     }
 
     // getAllEncomendas (operador)

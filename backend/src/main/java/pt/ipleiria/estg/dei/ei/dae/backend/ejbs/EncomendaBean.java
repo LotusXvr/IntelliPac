@@ -6,11 +6,16 @@ import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.validation.ConstraintViolationException;
+import org.hibernate.Hibernate;
+import pt.ipleiria.estg.dei.ei.dae.backend.dtos.EncomendaDTO;
+import pt.ipleiria.estg.dei.ei.dae.backend.dtos.ProdutoFisicoDTO;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.*;
 import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyConstraintViolationException;
 import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyEntityExistsException;
 import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyEntityNotFoundException;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 
@@ -25,34 +30,45 @@ public class EncomendaBean {
     @EJB
     private OperadorDeLogisticaBean operadorDeLogisticaBean;
 
-    public Encomenda create(String consumidorFinal, String operadorLogistica) throws MyEntityExistsException, MyEntityNotFoundException, MyConstraintViolationException {
+    public Encomenda create(EncomendaDTO encomendaDTO) throws MyEntityExistsException, MyEntityNotFoundException, MyConstraintViolationException {
 
-        var cliente = clienteBean.find(consumidorFinal);
+        var cliente = clienteBean.find(encomendaDTO.getConsumidorFinal());
         if (cliente == null) {
             throw new MyEntityNotFoundException("Cliente com id " + cliente + " não existe");
         }
 
-        var operadorDeLogistica = operadorDeLogisticaBean.find(operadorLogistica);
+        var operadorDeLogistica = operadorDeLogisticaBean.find(encomendaDTO.getOperadorLogistica());
         if (operadorDeLogistica == null) {
             throw new MyEntityNotFoundException("Operador com id " + cliente + " não existe");
         }
 
         Encomenda encomenda = null;
 
-        Date data = new Date();
-        try{
-            encomenda = new Encomenda(cliente,data, operadorDeLogistica, "pendente");
+        try {
+            encomenda = new Encomenda(cliente, getTimestamp(), operadorDeLogistica, "pendente");
+            ProdutoFisico produtoFisico = null;
+            // Adicione lógica para associar os produtosCatalogo à encomenda
+            for (ProdutoFisicoDTO produtoDTO : encomendaDTO.getProdutos()) {
+                ProdutoCatalogo produtoCatalogo = entityManager.find(ProdutoCatalogo.class, produtoDTO.getId());
+
+                        // Agora, em vez de usar o DTO diretamente, crie uma instância de ProdutoFisico e persista-a
+                        produtoFisico = new ProdutoFisico(produtoCatalogo, encomenda);
+                entityManager.persist(produtoFisico);
+
+                // Adicione o produtoFisico à encomenda
+                encomenda.addProduto(produtoFisico);
+            }
+
             entityManager.persist(encomenda);
-        }
-        catch (ConstraintViolationException e) {
+        } catch (ConstraintViolationException e) {
             throw new MyConstraintViolationException(e);
         }
+
         cliente.addEncomenda(encomenda);
         operadorDeLogistica.addEncomenda(encomenda);
 
         return encomenda;
     }
-
 
     public Encomenda find(long id) {
         return entityManager.find(Encomenda.class, id);
@@ -83,5 +99,23 @@ public class EncomendaBean {
         var operadorLogistica = operadorDeLogisticaBean.find(operadorUsername);
         return entityManager.createNamedQuery("getAllEncomendasOperadoresLogistica", Encomenda.class).setParameter("operador", operadorLogistica).getResultList();
     }
+
+    public List<Encomenda> getAllEncomendas() {
+        List<Encomenda> encomendas = entityManager.createQuery("SELECT e FROM Encomenda e", Encomenda.class)
+                .getResultList();
+
+        for (Encomenda encomenda : encomendas) {
+            Hibernate.initialize(encomenda.getProdutos());
+        }
+
+        return encomendas;
+    }
+
+    public String getTimestamp() {
+        LocalDateTime timestampToFormat = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        return timestampToFormat.format(formatter);
+    }
+
 }
 
