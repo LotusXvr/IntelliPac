@@ -24,6 +24,19 @@ public class ProdutoFisicoDTO {
         this.encomendaId = encomendaId;
     }
 
+    public ProdutoFisicoDTO(long id, String nome, String fabricanteUsername, long produtoCatalogoId) {
+        this.id = id;
+        this.nome = nome;
+        this.fabricanteUsername = fabricanteUsername;
+        this.produtoCatalogoId = produtoCatalogoId;
+    }
+
+    public ProdutoFisicoDTO(long id, String nome, String fabricanteUsername) {
+        this.id = id;
+        this.nome = nome;
+        this.fabricanteUsername = fabricanteUsername;
+    }
+
     public long getId() {
         return id;
     }

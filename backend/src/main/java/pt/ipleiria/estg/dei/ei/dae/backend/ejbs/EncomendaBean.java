@@ -81,7 +81,7 @@ public class EncomendaBean {
     }
     public List<Encomenda> getAllEncomendasOperadoresLogistica(String operadorUsername) {
         var operadorLogistica = operadorDeLogisticaBean.find(operadorUsername);
-        return entityManager.createNamedQuery("getAllEncomendasCliente", Encomenda.class).setParameter("operador", operadorLogistica).getResultList();
+        return entityManager.createNamedQuery("getAllEncomendasOperadoresLogistica", Encomenda.class).setParameter("operador", operadorLogistica).getResultList();
     }
 }
 

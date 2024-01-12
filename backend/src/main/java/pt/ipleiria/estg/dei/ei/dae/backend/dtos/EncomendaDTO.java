@@ -8,13 +8,13 @@ public class EncomendaDTO{
     private Long id;
     private String consumidorFinal;
     private Date dataEncomenda;
-    private List<ProdutoDTO> produtos; // Lista de produtos associados à encomenda
+    private List<ProdutoFisicoDTO> produtos; // Lista de produtos associados à encomenda
 
     public EncomendaDTO() {
         this.produtos = new ArrayList<>();
     }
 
-    public EncomendaDTO(Long id, String consumidorFinal, Date dataEncomenda, List<ProdutoDTO> produtos) {
+    public EncomendaDTO(Long id, String consumidorFinal, Date dataEncomenda, List<ProdutoFisicoDTO> produtos) {
         this.id = id;
         this.consumidorFinal = consumidorFinal;
         this.dataEncomenda = dataEncomenda;
@@ -52,11 +52,11 @@ public class EncomendaDTO{
         this.dataEncomenda = dataEncomenda;
     }
 
-    public List<ProdutoDTO> getProdutos() {
+    public List<ProdutoFisicoDTO> getProdutos() {
         return produtos;
     }
 
-    public void setProdutos(List<ProdutoDTO> produtos) {
+    public void setProdutos(List<ProdutoFisicoDTO> produtos) {
         this.produtos = produtos;
     }
 }
