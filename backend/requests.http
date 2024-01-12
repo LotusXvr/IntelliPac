@@ -135,6 +135,8 @@ GET http://localhost:8080/intellipac/api/clientes/Marcyo
 Accept: application/json
 
 
+### ------------- SENSORES -------------
+
 ### GET SENSORES
 GET http://localhost:8080/intellipac/api/sensores
 Accept: application/json
@@ -168,7 +170,7 @@ Content-Type: application/json
   "unidade": "CE"
 }
 
-### EMBALAGENS
+### ------------- EMBALAGENS -------------
 
 ### GET ALL EMBALAGENS
 GET http://localhost:8080/intellipac/api/embalagens
@@ -180,7 +182,7 @@ Accept: application/json
 
 
 
-### OBSERVACOES
+### ------------- OBSERVACOES -------------
 
 ### GET ALL OBSERVACOES
 GET http://localhost:8080/intellipac/api/observacoes
@@ -218,6 +220,8 @@ Content-Type: application/json
 {
   "sensorId": 4
 }
+
+### ------------- ENCOMENDAS -------------
 
 ### GET ALL ENCOMENDAS
 GET http://localhost:8080/intellipac/api/encomendas

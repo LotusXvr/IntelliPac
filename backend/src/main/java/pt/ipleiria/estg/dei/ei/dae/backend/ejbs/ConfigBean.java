@@ -94,7 +94,8 @@ public class ConfigBean {
             embalagemBean.associateSensorToEmbalagem(1L, 4L);
             embalagemBean.associateSensorToEmbalagem(1L, 5L);
             embalagemBean.associateSensorToEmbalagem(1L, 6L);
-
+            embalagemBean.associateSensorToEmbalagem(2L, 1L);
+            embalagemBean.associateSensorToEmbalagem(3L, 1L);
 
 
             // Observacoes
