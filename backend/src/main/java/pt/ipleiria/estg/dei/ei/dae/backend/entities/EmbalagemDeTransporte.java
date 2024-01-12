@@ -3,27 +3,36 @@ package pt.ipleiria.estg.dei.ei.dae.backend.entities;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class EmbalagemDeTransporte extends Embalagem implements Serializable {
-    @ManyToOne
-    @JoinColumn(name = "encomenda_id")
-    private Encomenda encomenda;
+    @ManyToMany(mappedBy = "embalagensTransporte")
+    private List<Encomenda> encomendas;
 
     public EmbalagemDeTransporte() {
+        this.encomendas = new ArrayList<>();
     }
 
-    public EmbalagemDeTransporte(String material, Encomenda encomenda) {
+    public EmbalagemDeTransporte(String material, List<Encomenda> encomendas) {
         super(material);
-        this.encomenda = encomenda;
+        this.encomendas = new ArrayList<>();
     }
 
-    public Encomenda getEncomenda() {
-        return encomenda;
+    public List<Encomenda> getEncomendas() {
+        return encomendas;
     }
 
-    public void setEncomenda(Encomenda encomenda) {
-        this.encomenda = encomenda;
+    public void setEncomendas(List<Encomenda> encomendas) {
+        this.encomendas = encomendas;
+    }
+
+    public void addEncomenda(Encomenda encomenda){
+        this.encomendas.add(encomenda);
+    }
+    public void removeEncomenda(Encomenda encomenda){
+        this.encomendas.remove(encomenda);
     }
 }
 

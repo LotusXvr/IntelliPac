@@ -33,7 +33,12 @@ public class Encomenda {
     @Column(nullable = false)
     private String dataEncomenda;
 
-    @OneToMany(mappedBy = "encomenda")
+    @ManyToMany
+    @JoinTable(
+            name = "Encomenda_Embalagem",
+            joinColumns = @JoinColumn(name = "encomenda_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "embalagem_id", referencedColumnName = "id")
+    )
     private List<EmbalagemDeTransporte> embalagensTransporte;
 
     @OneToMany(mappedBy = "encomenda", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -43,6 +48,8 @@ public class Encomenda {
 
     // Outros atributos e getters/setters
     public Encomenda() {
+        this.produtos = new ArrayList<>();
+        this.embalagensTransporte = new ArrayList<>();
     }
 
     public Encomenda(Cliente consumidorFinal, String dataEncomenda, OperadorDeLogistica operadorLogistica, String estado) {
@@ -51,6 +58,7 @@ public class Encomenda {
         this.operadorLogistica = operadorLogistica;
         this.estado = estado;
         this.produtos = new ArrayList<>();
+        this.embalagensTransporte = new ArrayList<>();
     }
 
     public Long getId() {
@@ -99,6 +107,14 @@ public class Encomenda {
 
     public void removeProduto(ProdutoFisico produto) {
         this.produtos.remove(produto);
+    }
+
+    public void addEmbalagemTransporte(EmbalagemDeTransporte embalagemDeTransporte) {
+        this.embalagensTransporte.add(embalagemDeTransporte);
+    }
+
+    public void removeEmbalagemTransporte(EmbalagemDeTransporte embalagemDeTransporte) {
+        this.embalagensTransporte.remove(embalagemDeTransporte);
     }
 
     public OperadorDeLogistica getOperadorLogistica() {

@@ -13,10 +13,9 @@ public class EmbalagemTransporteDTO {
         this.encomendas = new ArrayList<>();
     }
 
-    public EmbalagemTransporteDTO(Long id,String material, Long idEncomenda, List<EncomendaDTO> encomendas) {
+    public EmbalagemTransporteDTO(Long id,String material, List<EncomendaDTO> encomendas) {
         this.id = id;
         this.material = material;
-        this.idEncomenda = idEncomenda;
         this.encomendas = encomendas;
     }
 

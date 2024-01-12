@@ -106,6 +106,7 @@ public class EncomendaBean {
 
         for (Encomenda encomenda : encomendas) {
             Hibernate.initialize(encomenda.getProdutos());
+            Hibernate.initialize(encomenda.getEmbalagensTransporte());
         }
 
         return encomendas;
