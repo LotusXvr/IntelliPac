@@ -2,7 +2,7 @@
     <div>
         <div class="container d-flex flex-column align-items-center justify-content-center mt-5">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <div class="navbar-nav">
+                <div class="navbar-nav custom-center">
                     <nuxt-link to="/" class="nav-link">Home</nuxt-link>
                     <nuxt-link to="/produtosCatalogo" class="nav-link">Produtos</nuxt-link>
                     <nuxt-link to="/fabricantes" class="nav-link">Fabricantes</nuxt-link>
@@ -28,8 +28,16 @@
 }
 
 .nav-link {
+    font: 15px 'Roboto', sans-serif;
     color: #fff;
-    margin: 20px;
+    margin: 0px 20px;
+}
+
+.custom-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
 }
 
 .content-container {
