@@ -2,27 +2,23 @@
     <Navbar />
     <div v-if="error">Error: {{ error.message }}</div>
     <div v-else>
-        <nuxt-link to="observacoes/create">Criar nova observação</nuxt-link>
-        <h2>Observações</h2>
+        <nuxt-link to="embalagens/create">Criar nova embalagem</nuxt-link>
+        <h2>Embalagens</h2>
         <table>
             <tr>
                 <th>id</th>
-                <th>Data de registo</th>
-                <th>Valor</th>
-                <th>Id do Sensor</th>
+                <th>Material</th>
             </tr>
-            <tr v-for="observacao in observacoes">
-                <td>{{ observacao.id }}</td>
-                <td>{{ observacao.timestamp }}</td>
-                <td>{{ observacao.valor }}</td>
-                <td>{{ observacao.sensorId }}</td>
+            <tr v-for="embalagem in embalagens">
+                <td>{{ embalagem.id }}</td>
+                <td>{{ embalagem.material }}</td>
 
                 <td>
-                    <nuxt-link :to="`/observacoes/${observacao.id}`">Detalhes</nuxt-link>
+                    <nuxt-link :to="`/embalagens/${embalagem.id}`">Detalhes</nuxt-link>
                     |
-                    <nuxt-link :to="'/observacoes/edit/' + observacao.id">Editar</nuxt-link>
+                    <nuxt-link :to="'/embalagens/edit/' + embalagem.id">Editar</nuxt-link>
                     |
-                    <button @click="deleteObservacao(observacao.id)">Excluir</button>
+                    <button @click="deleteembalagem(embalagem.id)">Excluir</button>
                 </td>
             </tr>
         </table>
@@ -36,11 +32,11 @@
 import Navbar from "/pages/navbar.vue"
 const config = useRuntimeConfig()
 const api = config.public.API_URL
-const { data: observacoes, error, refresh } = await useFetch(`${api}/observacoes`)
+const { data: embalagens, error, refresh } = await useFetch(`${api}/embalagens`)
 
-const deleteObservacao = async (id) => {
+const deleteembalagem = async (id) => {
     try {
-        const response = await fetch(`${api}/observacoes/${id}`, {
+        const response = await fetch(`${api}/embalagens/${id}`, {
             method: "DELETE",
         })
         if (response.ok) {
