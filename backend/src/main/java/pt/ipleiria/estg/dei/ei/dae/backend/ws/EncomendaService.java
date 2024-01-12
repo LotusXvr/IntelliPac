@@ -38,7 +38,8 @@ public class EncomendaService {
                 encomenda.getConsumidorFinal().getUsername(),
                 encomenda.getDataEncomenda(),
                 produtosToDTOs(encomenda.getProdutos()),
-                encomenda.getOperadorLogistica().getUsername()
+                encomenda.getOperadorLogistica().getUsername(),
+                encomenda.getEstado()
         );
     }
 
@@ -84,10 +85,15 @@ public class EncomendaService {
         }
     }
 
-    // getAllEncomendas (operador)
-    @GET
-    @Path("/operador/{username}")
-    public List<EncomendaDTO> getAllEncomendasAdmin() {
-        return toDTOs(encomendaBean.getAllEncomendasOperadoresLogistica("ValterLogo"));
+    @DELETE
+    @Path("{id}")
+    public void deleteEncomenda(@PathParam("id") long id) throws MyEntityNotFoundException {
+        encomendaBean.remove(id);
+    }
+
+    @PUT
+    @Path("{id}")
+    public void updateEncomenda(@PathParam("id") long id, EncomendaDTO encomendaDTO) throws MyEntityNotFoundException {
+        encomendaBean.update(id, encomendaDTO.getEstado());
     }
 }

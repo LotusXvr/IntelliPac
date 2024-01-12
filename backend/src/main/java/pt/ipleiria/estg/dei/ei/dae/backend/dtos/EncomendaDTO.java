@@ -9,13 +9,21 @@ public class EncomendaDTO{
     private String consumidorFinal;
     private String dataEncomenda;
     private List<ProdutoFisicoDTO> produtos; // Lista de produtos associados à encomenda
-
     private String operadorLogistica;
+    private String estado;
 
     public EncomendaDTO() {
         this.produtos = new ArrayList<>();
     }
 
+    public EncomendaDTO(Long id, String consumidorFinal, String dataEncomenda, List<ProdutoFisicoDTO> produtos, String operadorLogistica, String estado) {
+        this.id = id;
+        this.consumidorFinal = consumidorFinal;
+        this.dataEncomenda = dataEncomenda;
+        this.produtos = produtos;
+        this.operadorLogistica = operadorLogistica;
+        this.estado = estado;
+    }
 
     public EncomendaDTO(Long id, String consumidorFinal, String dataEncomenda, List<ProdutoFisicoDTO> produtos, String operadorLogistica) {
         this.id = id;
@@ -77,5 +85,13 @@ public class EncomendaDTO{
 
     public void setOperadorLogistica(String operadorLogistica) {
         this.operadorLogistica = operadorLogistica;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 }

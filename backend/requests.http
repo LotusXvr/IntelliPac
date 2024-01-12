@@ -259,6 +259,17 @@ Content-Type: application/json
 
 {
   "consumidorFinal": "Marco",
-  "operadorLogistica": "Joaoz",
-  "produtos": []
+  "operadorLogistica": "Joaoz"
+}
+
+### DELETE ENCOMENDA
+DELETE http://localhost:8080/intellipac/api/encomendas/1
+Accept: application/json
+
+### UPDATE ENCOMENDA
+PUT http://localhost:8080/intellipac/api/encomendas/1
+Content-Type: application/json
+
+{
+  "estado": "roubado"
 }

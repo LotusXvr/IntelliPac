@@ -36,7 +36,7 @@ public class Encomenda {
     @OneToMany(mappedBy = "encomenda")
     private List<EmbalagemDeTransporte> embalagensTransporte;
 
-    @OneToMany(mappedBy = "encomenda")
+    @OneToMany(mappedBy = "encomenda", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ProdutoFisico> produtos;
 
     private String estado;
