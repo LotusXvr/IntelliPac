@@ -13,22 +13,8 @@ public class Embalagem {
     private long id;
     private String material;
 
-    @ManyToMany
-    @JoinTable(
-            name = "embalagem_sensor",
-            joinColumns = @JoinColumn(
-                    name = "embalagem_id",
-                    referencedColumnName = "id"
-            ),
-            // adicionalmente terá um data de instalação
-            // para verificar se o sensor está atualmente em x embalagem
-            // ou se já está desatualizado
-            inverseJoinColumns = @JoinColumn(
-                    name = "sensor_id",
-                    referencedColumnName = "id"
-            )
-    )
-    private List<Sensor> sensores;
+    @OneToMany(mappedBy = "embalagem")
+    private List<EmbalagemSensor> sensores;
 
     public Embalagem() {
         this.sensores = new ArrayList<>();
@@ -39,19 +25,19 @@ public class Embalagem {
         this.sensores = new ArrayList<>();
     }
 
-    public List<Sensor> getSensores() {
+    public List<EmbalagemSensor> getSensores() {
         return sensores;
     }
 
-    public void setSensores(List<Sensor> sensores) {
+    public void setSensores(List<EmbalagemSensor> sensores) {
         this.sensores = sensores;
     }
 
-    public void addSensor(Sensor sensor) {
+    public void addSensor(EmbalagemSensor sensor) {
         this.sensores.add(sensor);
     }
 
-    public void removeSensor(Sensor sensor) {
+    public void removeSensor(EmbalagemSensor sensor) {
         this.sensores.remove(sensor);
     }
 
