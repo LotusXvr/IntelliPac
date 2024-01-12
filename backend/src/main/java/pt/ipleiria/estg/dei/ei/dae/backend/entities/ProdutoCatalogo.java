@@ -23,12 +23,14 @@ public class ProdutoCatalogo extends Produto implements Serializable {
     @OneToMany(mappedBy = "produtoCatalogo")
     private List<ProdutoFisico> produtos;
 
+    private long peso;
     public ProdutoCatalogo() {
         this.produtos = new ArrayList<>();
     }
 
-    public ProdutoCatalogo(String nomeProduto, FabricanteDeProdutos fabricante) {
+    public ProdutoCatalogo(String nomeProduto, FabricanteDeProdutos fabricante, long peso) {
         super(nomeProduto, fabricante);
+        this.peso = peso;
         this.produtos = new ArrayList<>();
     }
 
@@ -48,4 +50,11 @@ public class ProdutoCatalogo extends Produto implements Serializable {
         this.produtos.remove(produto);
     }
 
+    public long getPeso() {
+        return peso;
+    }
+
+    public void setPeso(long peso) {
+        this.peso = peso;
+    }
 }

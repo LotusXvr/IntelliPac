@@ -12,22 +12,26 @@ public class ProdutoCatalogoDTO {
     private String fabricanteUsername;
     private List<ProdutoFisicoDTO> produtos;
 
+    private long peso;
+
     public ProdutoCatalogoDTO() {
         this.produtos = new ArrayList<>();
     }
 
-    public ProdutoCatalogoDTO(long id, String nome, String fabricanteUsername) {
+    public ProdutoCatalogoDTO(long id, String nome, String fabricanteUsername, long peso) {
         this.id = id;
         this.nome = nome;
         this.fabricanteUsername = fabricanteUsername;
         this.produtos = new ArrayList<>();
+        this.peso = peso;
     }
 
-    public ProdutoCatalogoDTO(long id, String nome, String fabricanteUsername, List<ProdutoFisicoDTO> produtos) {
+    public ProdutoCatalogoDTO(long id, String nome, String fabricanteUsername, List<ProdutoFisicoDTO> produtos, long peso) {
         this.id = id;
         this.nome = nome;
         this.fabricanteUsername = fabricanteUsername;
         this.produtos = produtos;
+        this.peso = peso;
     }
 
     public long getId() {
@@ -60,5 +64,13 @@ public class ProdutoCatalogoDTO {
 
     public void setProdutos(List<ProdutoFisicoDTO> produtos) {
         this.produtos = produtos;
+    }
+
+    public long getPeso() {
+        return peso;
+    }
+
+    public void setPeso(long peso) {
+        this.peso = peso;
     }
 }

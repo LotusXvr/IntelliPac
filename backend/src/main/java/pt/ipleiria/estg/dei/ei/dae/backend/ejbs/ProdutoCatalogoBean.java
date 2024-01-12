@@ -35,8 +35,11 @@ public class ProdutoCatalogoBean {
     }
 
 
-    public ProdutoCatalogo create(String nomeProduto, String fabrincanteUsername) throws MyEntityExistsException, MyEntityNotFoundException, MyConstraintViolationException {
+    public ProdutoCatalogo create(String nomeProduto, String fabrincanteUsername, long peso) throws Exception {
 
+        if(peso <= 0){
+            throw new Exception("Peso "+peso+" Kg não é valido");
+        }
         if(exists(nomeProduto, fabrincanteUsername)) {
             throw new MyEntityExistsException("Produto catálogo com nome " + nomeProduto + " já existe");
         }
@@ -49,7 +52,7 @@ public class ProdutoCatalogoBean {
         ProdutoCatalogo produtoCatalogo = null;
 
         try {
-            produtoCatalogo = new ProdutoCatalogo(nomeProduto, fabricante);
+            produtoCatalogo = new ProdutoCatalogo(nomeProduto, fabricante, peso);
             entityManager.persist(produtoCatalogo);
         }
         catch (ConstraintViolationException e) {

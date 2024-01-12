@@ -36,7 +36,8 @@ public class ProdutoCatalogoService {
         return new ProdutoCatalogoDTO(
                 produtoCatalogo.getId(),
                 produtoCatalogo.getNomeProduto(),
-                produtoCatalogo.getFabricante().getUsername()
+                produtoCatalogo.getFabricante().getUsername(),
+                produtoCatalogo.getPeso()
         );
     }
 
@@ -49,7 +50,8 @@ public class ProdutoCatalogoService {
                 produtoCatalogo.getId(),
                 produtoCatalogo.getNomeProduto(),
                 produtoCatalogo.getFabricante().getUsername(),
-                produtosFisicosToDTOs(produtoCatalogo.getProdutos())
+                produtosFisicosToDTOs(produtoCatalogo.getProdutos()),
+                produtoCatalogo.getPeso()
         );
     }
 
@@ -66,10 +68,11 @@ public class ProdutoCatalogoService {
     @POST
     @Path("/")
     public Response create(ProdutoCatalogoDTO produtoCatalogoDTO)
-            throws MyEntityExistsException, MyEntityNotFoundException, MyConstraintViolationException {
+            throws Exception {
         ProdutoCatalogo produtoCatalogo = produtoCatalogoBean.create(
                 produtoCatalogoDTO.getNome(),
-                produtoCatalogoDTO.getFabricanteUsername()
+                produtoCatalogoDTO.getFabricanteUsername(),
+                produtoCatalogoDTO.getPeso()
         );
         return Response.status(Response.Status.CREATED).entity(toDTONoProdutos(produtoCatalogo)).build();
     }

@@ -61,8 +61,8 @@ public class ConfigBean {
             clienteBean.create("Emanuel", "123", "Emanuel Nunes", "emanuel@nunes.pt");
             clienteBean.create("Marco", "123", "Marco Nunes", "marco@mail.pt");
 
-            ProdutoCatalogo produtoCatalogo1 = produtoCatalogoBean.create("produto 1", "Fabrica1");
-            ProdutoCatalogo produtoCatalogo2 = produtoCatalogoBean.create("produto 2", "Fabrica2");
+            ProdutoCatalogo produtoCatalogo1 = produtoCatalogoBean.create("produto 1", "Fabrica1", 10);
+            ProdutoCatalogo produtoCatalogo2 = produtoCatalogoBean.create("produto 2", "Fabrica2", 6);
 
             EncomendaDTO encomendaDTO = new EncomendaDTO();
             encomendaDTO.setConsumidorFinal("Emanuel");
