@@ -68,19 +68,19 @@ public class ConfigBean {
             produtoFisicoBean.create("produto2Fisico", "Fabrica1", produtoCatalogo2.getId(), encomenda1.getId());
 
             // Embalagens
-            Embalagem embalagemPlastico = embalagemBean.create("Plastico");
-            Embalagem embalagemCartao = embalagemBean.create("Cartao");
-            Embalagem embalagemVidro = embalagemBean.create("Vidro");
-            Embalagem embalagemMetal = embalagemBean.create("Metal");
+            embalagemBean.create("Plastico");
+            embalagemBean.create("Cartao");
+            embalagemBean.create("Vidro");
+            embalagemBean.create("Metal");
 
             // Sensores
-            sensorBean.create(1, "Temperatura", "ºC", embalagemPlastico.getId());
-            sensorBean.create(2, "Humidade", "%", embalagemCartao.getId());
-            sensorBean.create(3, "Luminosidade", "LUX", embalagemVidro.getId());
-            sensorBean.create(4, "Pressao", "hPa", embalagemMetal.getId());
-            sensorBean.create(5, "Velocidade do Vento", "km/h", embalagemPlastico.getId());
-            sensorBean.create(6, "Direcao do Vento", "N", embalagemCartao.getId());
-            sensorBean.create(7, "Precipitacao", "mm", embalagemVidro.getId());
+            sensorBean.create(1, "Temperatura", "ºC");
+            sensorBean.create(2, "Humidade", "%");
+            sensorBean.create(3, "Luminosidade", "LUX");
+            sensorBean.create(4, "Pressao", "hPa");
+            sensorBean.create(5, "Velocidade do Vento", "km/h");
+            sensorBean.create(6, "Direcao do Vento", "N");
+            sensorBean.create(7, "Precipitacao", "mm");
 
             // Observacoes
             observacaoBean.create("20", 1L);

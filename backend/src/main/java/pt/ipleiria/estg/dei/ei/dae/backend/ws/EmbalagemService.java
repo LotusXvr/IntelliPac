@@ -52,8 +52,7 @@ public class EmbalagemService {
                 sensor.getId(),
                 sensor.getIdSensor(),
                 sensor.getTipo(),
-                sensor.getUnidade(),
-                sensor.getIdEmbalagem()
+                sensor.getUnidade()
         );
     }
 

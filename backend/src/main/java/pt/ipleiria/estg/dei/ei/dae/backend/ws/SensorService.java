@@ -29,8 +29,7 @@ public class SensorService {
                 sensor.getId(),
                 sensor.getIdSensor(),
                 sensor.getTipo(),
-                sensor.getUnidade(),
-                sensor.getIdEmbalagem()
+                sensor.getUnidade()
         );
     }
 
@@ -44,7 +43,6 @@ public class SensorService {
                 sensor.getIdSensor(),
                 sensor.getTipo(),
                 sensor.getUnidade(),
-                sensor.getIdEmbalagem(),
                 observacaoToDTOs(sensor.getObservacoes())
         );
     }
@@ -91,8 +89,7 @@ public class SensorService {
         sensorBean.create(
                 sensorDTO.getIdSensor(),
                 sensorDTO.getTipo(),
-                sensorDTO.getUnidade(),
-                sensorDTO.getIdEmbalagem()
+                sensorDTO.getUnidade()
         );
         Sensor sensor = sensorBean.findBySensorId(sensorDTO.getIdSensor());
         if (sensor == null) {
@@ -109,8 +106,7 @@ public class SensorService {
                     id,
                     sensorDTO.getIdSensor(),
                     sensorDTO.getTipo(),
-                    sensorDTO.getUnidade(),
-                    sensorDTO.getIdEmbalagem()
+                    sensorDTO.getUnidade()
             );
             return Response.status(Response.Status.OK).build();
         } catch (Exception e) {

@@ -30,9 +30,7 @@ public class Sensor {
     private String tipo;
     // unidade (ºC, %, etc)
     private String unidade;
-    // id_embalagem
-    private long idEmbalagem;
-    // id_encomenda
+
 
     // o sensor vai ter uma lista de observaçoes numa relaçao de one to many
     @OneToMany(mappedBy = "sensor", fetch = FetchType.LAZY)
@@ -48,11 +46,10 @@ public class Sensor {
         this.embalagens = new ArrayList<>();
     }
 
-    public Sensor(long idSensor, String tipo, String unidade, long idEmbalagem) {
+    public Sensor(long idSensor, String tipo, String unidade) {
         this.idSensor = idSensor;
         this.tipo = tipo;
         this.unidade = unidade;
-        this.idEmbalagem = idEmbalagem;
         this.observacoes = new ArrayList<>();
         this.embalagens = new ArrayList<>();
     }
@@ -112,14 +109,6 @@ public class Sensor {
 
     public void setTipo(String tipo) {
         this.tipo = tipo;
-    }
-
-    public long getIdEmbalagem() {
-        return idEmbalagem;
-    }
-
-    public void setIdEmbalagem(long idEmbalagem) {
-        this.idEmbalagem = idEmbalagem;
     }
 
     public String getUnidade() {
