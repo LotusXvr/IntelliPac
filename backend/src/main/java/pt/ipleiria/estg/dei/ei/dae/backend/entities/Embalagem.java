@@ -14,7 +14,7 @@ public class Embalagem {
     private String material;
 
     @OneToMany(mappedBy = "embalagem")
-    private List<EmbalagemSensor> sensores;
+    private List<EmbalagemSensor> sensores;*
 
     public Embalagem() {
         this.sensores = new ArrayList<>();
