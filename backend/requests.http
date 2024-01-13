@@ -295,5 +295,8 @@ Accept: application/json
 
 ### GET AUTHENTICATED USER
 GET http://localhost:8080/intellipac/api/auth/user
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJNYXJjbyIsImlhdCI6MTcwNTE3NjA3OSwiZXhwIjoxNzA1MTc5Njc5fQ._YgxFAMeKFUsCNBxQB0JfcfVBQq6aTX9hcJVL6Z9dn9ezoSp9s521K5e1q5h7ZmW
+
 
 

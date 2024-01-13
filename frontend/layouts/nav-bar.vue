@@ -12,6 +12,9 @@
                     <nuxt-link to="/auth-test" class="nav-link">Test</nuxt-link>
                     <nuxt-link to="/auth/login" class="nav-link">Login</nuxt-link>
                     <a href="#" @click-prevent="logout" class="nav-link">Logout</a>
+                    <div v-if="user" class="adjust-right">
+                        <p>Logged in as {{ user.username }}</p>
+                    </div>
                 </div>
             </nav>
         </div>
@@ -28,13 +31,17 @@ import { useRouter } from "vue-router"
 const router = useRouter()
 const authStore = useAuthStore()
 
+const { user } = authStore
+
 function logout() {
     authStore.logout()
     router.push("/")
 }
+
 </script>
 
 <style scoped>
+
 .container {
     background-color: darkcyan;
     border-radius: 10px;
