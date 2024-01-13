@@ -6,10 +6,7 @@ import jakarta.ejb.EJB;
 import jakarta.ejb.Singleton;
 import jakarta.ejb.Startup;
 import pt.ipleiria.estg.dei.ei.dae.backend.dtos.EncomendaDTO;
-import pt.ipleiria.estg.dei.ei.dae.backend.entities.Cliente;
-import pt.ipleiria.estg.dei.ei.dae.backend.entities.Embalagem;
-import pt.ipleiria.estg.dei.ei.dae.backend.entities.Encomenda;
-import pt.ipleiria.estg.dei.ei.dae.backend.entities.ProdutoCatalogo;
+import pt.ipleiria.estg.dei.ei.dae.backend.entities.*;
 
 import java.time.LocalDateTime;
 import java.util.logging.Logger;
@@ -82,7 +79,7 @@ public class ConfigBean {
             embalagemBean.create("Metal");
 
             // Sensores
-            sensorBean.create(1, "Temperatura", "ºC");
+            Sensor sensor1 = sensorBean.create(1, "Temperatura", "ºC");
             sensorBean.create(2, "Humidade", "%");
             sensorBean.create(3, "Luminosidade", "LUX");
             sensorBean.create(4, "Pressao", "hPa");
@@ -108,8 +105,10 @@ public class ConfigBean {
             observacaoBean.create("1000", 4L);
 
             //EmbalagensDeProduto
-            embalagemDeProdutoBean.create("Plastico", "1");
+            EmbalagemDeProduto embalagemDeProduto1 = embalagemDeProdutoBean.create("Plastico", "1");
             embalagemDeProdutoBean.create("Metal", "2");
+
+            embalagemDeProdutoBean.associateSensorToEmbalagem(embalagemDeProduto1.getId(),sensor1.getId());
 
 
         } catch (Exception e) {

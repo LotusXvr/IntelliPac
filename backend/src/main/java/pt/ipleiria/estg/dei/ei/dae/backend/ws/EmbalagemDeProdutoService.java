@@ -5,11 +5,10 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import pt.ipleiria.estg.dei.ei.dae.backend.dtos.EmbalagemDeProdutoDTO;
-import pt.ipleiria.estg.dei.ei.dae.backend.dtos.ProdutoCatalogoDTO;
+import pt.ipleiria.estg.dei.ei.dae.backend.dtos.SensorDTO;
 import pt.ipleiria.estg.dei.ei.dae.backend.ejbs.EmbalagemDeProdutoBean;
-import pt.ipleiria.estg.dei.ei.dae.backend.ejbs.ProdutoCatalogoBean;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.EmbalagemDeProduto;
-import pt.ipleiria.estg.dei.ei.dae.backend.entities.ProdutoCatalogo;
+import pt.ipleiria.estg.dei.ei.dae.backend.entities.Sensor;
 import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyEntityNotFoundException;
 
 import java.util.List;
@@ -22,7 +21,7 @@ public class EmbalagemDeProdutoService {
 
     @EJB
     private EmbalagemDeProdutoBean embalagemDeProdutoBean;
-    private EmbalagemDeProdutoDTO toDTO(EmbalagemDeProduto embalagemDeProduto) {
+    private EmbalagemDeProdutoDTO toDTONoSensors(EmbalagemDeProduto embalagemDeProduto) {
         return new EmbalagemDeProdutoDTO(
                 embalagemDeProduto.getId(),
                 embalagemDeProduto.getMaterial(),
@@ -30,17 +29,49 @@ public class EmbalagemDeProdutoService {
         );
     }
 
+    private List<EmbalagemDeProdutoDTO> toDTOsNoSensors(List<EmbalagemDeProduto> embalagemDeProdutos) {
+        return embalagemDeProdutos.stream().map(this::toDTONoSensors).collect(Collectors.toList());
+    }
+
+    private EmbalagemDeProdutoDTO toDTO(EmbalagemDeProduto embalagemDeProduto) {
+        EmbalagemDeProdutoDTO embalagemDeProdutoDTO = new EmbalagemDeProdutoDTO(
+                embalagemDeProduto.getId(),
+                embalagemDeProduto.getMaterial(),
+                embalagemDeProduto.getTipoEmbalagem()
+        );
+
+        embalagemDeProdutoDTO.setSensorDTOS(sensorsToDTOs(embalagemDeProduto.getSensores()));
+        return  embalagemDeProdutoDTO;
+    }
+
     private List<EmbalagemDeProdutoDTO> toDTOs(List<EmbalagemDeProduto> embalagemDeProdutos) {
         return embalagemDeProdutos.stream().map(this::toDTO).collect(Collectors.toList());
     }
-    @GET // means: to call this endpoint, we need to use the HTTP GET method
-    @Path("/") // means: the relative url path is “/api/students/”
+
+    private SensorDTO toDTO(Sensor sensor){
+        return new SensorDTO(
+                sensor.getId(),
+                sensor.getIdSensor(),
+                sensor.getTipo(),
+                sensor.getUnidade()
+        );
+    }
+
+    private List<SensorDTO> sensorsToDTOs (List<Sensor> sensors) {
+        return sensors.stream().map(this::toDTO).collect(Collectors.toList());
+    }
+
+
+
+
+    @GET
+    @Path("/")
     public List<EmbalagemDeProdutoDTO> getAll() {
-        return toDTOs(embalagemDeProdutoBean.getAllEmbalagensDeProduto());
+        return toDTOsNoSensors(embalagemDeProdutoBean.getAllEmbalagensDeProduto());
     }
 
     @POST
-    @Path("/") // means: the relative url path is “/api/students/”
+    @Path("/")
     public Response create(EmbalagemDeProdutoDTO embalagemDeProdutoDTO)
         throws Exception {
             EmbalagemDeProduto embalagemDeProduto = embalagemDeProdutoBean.create(
@@ -66,5 +97,18 @@ public class EmbalagemDeProdutoService {
     public Response deleteProdutoCatalogo(@PathParam("id") long id) throws MyEntityNotFoundException {
         embalagemDeProdutoBean.remove(id);
         return Response.ok().build();
+    }
+
+    @GET
+    @Path("{id}")
+    public Response getEmbalagemDeProdutoDetails(@PathParam("id") long id) throws MyEntityNotFoundException {
+        EmbalagemDeProduto embalagemDeProduto = embalagemDeProdutoBean.getEmbalagemDeProdutoWithSensor(id);
+        if (embalagemDeProduto != null) {
+            return Response.ok(toDTO(embalagemDeProduto)).build();
+        }
+        return Response.status(Response.Status.NOT_FOUND)
+                .entity("ERROR_FINDING_STUDENT")
+                .build();
+
     }
 }

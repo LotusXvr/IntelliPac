@@ -13,9 +13,10 @@ public class SensorBean {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public void create(long idSensor, String tipo, String unidade) {
+    public Sensor create(long idSensor, String tipo, String unidade) {
         Sensor sensor = new Sensor(idSensor, tipo, unidade);
         entityManager.persist(sensor);
+        return sensor;
     }
 
     public Sensor find(long id) {

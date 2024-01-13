@@ -263,3 +263,7 @@ Content-Type: application/json
 ### Eliminar Embalagem de Produto
 DELETE http://localhost:8080/intellipac/api/embalagensDeProduto/8
 Content-Type: application/json
+
+### Detalhes de uma embalagem de Produto
+GET http://localhost:8080/intellipac/api/embalagensDeProduto/5
+Accept: application/json
