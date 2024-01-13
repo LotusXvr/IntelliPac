@@ -85,6 +85,13 @@ public class EncomendaService {
         return toDTOs(encomendaBean.getAllEncomendas());
     }
 
+    // getEncomendaById
+    @GET
+    @Path("{id}")
+    public EncomendaDTO getEncomendaById(@PathParam("id") long id) throws MyEntityNotFoundException {
+        return toDTO(encomendaBean.getEncomendaById(id));
+    }
+
     // POST
     // createEncomenda (cliente)
     // Encomenda create(String consumidorFinal, String operadorLogistica)

@@ -64,13 +64,22 @@ public class ConfigBean {
             ProdutoCatalogo produtoCatalogo1 = produtoCatalogoBean.create("produto 1", "Fabrica1", 10);
             ProdutoCatalogo produtoCatalogo2 = produtoCatalogoBean.create("produto 2", "Fabrica2", 6);
 
+
+            // Encomendas
             EncomendaDTO encomendaDTO = new EncomendaDTO();
             encomendaDTO.setConsumidorFinal("Emanuel");
             encomendaDTO.setOperadorLogistica("ValterLogo");
             Encomenda encomenda1 = encomendaBean.create(encomendaDTO);
-
             produtoFisicoBean.create("produto1Fisico", "Fabrica1", produtoCatalogo1.getId(), encomenda1.getId());
             produtoFisicoBean.create("produto2Fisico", "Fabrica1", produtoCatalogo2.getId(), encomenda1.getId());
+
+            encomendaDTO = new EncomendaDTO();
+            encomendaDTO.setConsumidorFinal("Marco");
+            encomendaDTO.setOperadorLogistica("Joaoz");
+            Encomenda encomenda2 = encomendaBean.create(encomendaDTO);
+            produtoFisicoBean.create("produto3Fisico", "Fabrica2", produtoCatalogo1.getId(), encomenda2.getId());
+            produtoFisicoBean.create("produto4Fisico", "Fabrica2", produtoCatalogo2.getId(), encomenda2.getId());
+
 
             // Embalagens
             embalagemBean.create("Plastico");
@@ -108,7 +117,7 @@ public class ConfigBean {
             EmbalagemDeProduto embalagemDeProduto1 = embalagemDeProdutoBean.create("Plastico", "1");
             embalagemDeProdutoBean.create("Metal", "2");
 
-            embalagemDeProdutoBean.associateSensorToEmbalagem(embalagemDeProduto1.getId(),sensor1.getId());
+            embalagemDeProdutoBean.associateSensorToEmbalagem(embalagemDeProduto1.getId(), sensor1.getId());
 
 
         } catch (Exception e) {

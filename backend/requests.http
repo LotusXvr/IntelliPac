@@ -227,6 +227,10 @@ Content-Type: application/json
 GET http://localhost:8080/intellipac/api/encomendas
 Accept: application/json
 
+### GET ENCOMENDA
+GET http://localhost:8080/intellipac/api/encomendas/2
+Accept: application/json
+
 ### POST ENCOMENDA
 POST http://localhost:8080/intellipac/api/encomendas
 Content-Type: application/json

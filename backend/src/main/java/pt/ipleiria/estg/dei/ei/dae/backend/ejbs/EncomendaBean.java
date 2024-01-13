@@ -51,8 +51,8 @@ public class EncomendaBean {
             for (ProdutoFisicoDTO produtoDTO : encomendaDTO.getProdutos()) {
                 ProdutoCatalogo produtoCatalogo = entityManager.find(ProdutoCatalogo.class, produtoDTO.getId());
 
-                        // Agora, em vez de usar o DTO diretamente, crie uma instância de ProdutoFisico e persista-a
-                        produtoFisico = new ProdutoFisico(produtoCatalogo, encomenda);
+                // Agora, em vez de usar o DTO diretamente, crie uma instância de ProdutoFisico e persista-a
+                produtoFisico = new ProdutoFisico(produtoCatalogo, encomenda);
                 entityManager.persist(produtoFisico);
 
                 // Adicione o produtoFisico à encomenda
@@ -74,7 +74,7 @@ public class EncomendaBean {
         return entityManager.find(Encomenda.class, id);
     }
 
-    public void update(long id, String estado)  throws MyEntityNotFoundException{
+    public void update(long id, String estado) throws MyEntityNotFoundException {
         Encomenda encomenda = find(id);
         if (encomenda == null) {
             throw new MyEntityNotFoundException("Encomenda com id " + id + " não existe");
@@ -91,10 +91,12 @@ public class EncomendaBean {
         }
         entityManager.remove(encomenda);
     }
+
     public List<Encomenda> getAllEncomendasCliente(String clienteUsername) {
         var cliente = clienteBean.find(clienteUsername);
         return entityManager.createNamedQuery("getAllEncomendasCliente", Encomenda.class).setParameter("cliente", cliente).getResultList();
     }
+
     public List<Encomenda> getAllEncomendasOperadoresLogistica(String operadorUsername) {
         var operadorLogistica = operadorDeLogisticaBean.find(operadorUsername);
         return entityManager.createNamedQuery("getAllEncomendasOperadoresLogistica", Encomenda.class).setParameter("operador", operadorLogistica).getResultList();
@@ -118,5 +120,14 @@ public class EncomendaBean {
         return timestampToFormat.format(formatter);
     }
 
+    public Encomenda getEncomendaById(long id) {
+        Encomenda encomenda = entityManager.find(Encomenda.class, id);
+        if (encomenda != null) {
+            Hibernate.initialize(encomenda.getProdutos());
+            Hibernate.initialize(encomenda.getEmbalagensTransporte());
+        }
+        return encomenda;
+
+    }
 }
 
