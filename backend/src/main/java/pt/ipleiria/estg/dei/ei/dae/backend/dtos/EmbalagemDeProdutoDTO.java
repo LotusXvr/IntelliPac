@@ -10,7 +10,7 @@ public class EmbalagemDeProdutoDTO {
 
     private String material;
     private String tipoEmbalagem;
-    private List<ProdutoDTO> produtoDTOS;
+    private List<ProdutoFisicoDTO> produtoDTOS;
 
     private List<SensorDTO> sensorDTOS;
 
@@ -51,11 +51,11 @@ public class EmbalagemDeProdutoDTO {
         this.tipoEmbalagem = tipoEmbalagem;
     }
 
-    public List<ProdutoDTO> getProdutoDTOS() {
+    public List<ProdutoFisicoDTO> getProdutoDTOS() {
         return produtoDTOS;
     }
 
-    public void setProdutoDTOS(List<ProdutoDTO> produtoDTOS) {
+    public void setProdutoDTOS(List<ProdutoFisicoDTO> produtoDTOS) {
         this.produtoDTOS = produtoDTOS;
     }
 

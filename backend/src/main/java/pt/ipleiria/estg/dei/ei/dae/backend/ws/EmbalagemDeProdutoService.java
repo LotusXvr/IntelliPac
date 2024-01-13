@@ -5,9 +5,11 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import pt.ipleiria.estg.dei.ei.dae.backend.dtos.EmbalagemDeProdutoDTO;
+import pt.ipleiria.estg.dei.ei.dae.backend.dtos.ProdutoFisicoDTO;
 import pt.ipleiria.estg.dei.ei.dae.backend.dtos.SensorDTO;
 import pt.ipleiria.estg.dei.ei.dae.backend.ejbs.EmbalagemDeProdutoBean;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.EmbalagemDeProduto;
+import pt.ipleiria.estg.dei.ei.dae.backend.entities.ProdutoFisico;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.Sensor;
 import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyEntityNotFoundException;
 
@@ -21,7 +23,7 @@ public class EmbalagemDeProdutoService {
 
     @EJB
     private EmbalagemDeProdutoBean embalagemDeProdutoBean;
-    private EmbalagemDeProdutoDTO toDTONoSensors(EmbalagemDeProduto embalagemDeProduto) {
+    private EmbalagemDeProdutoDTO toDTONoDetails(EmbalagemDeProduto embalagemDeProduto) {
         return new EmbalagemDeProdutoDTO(
                 embalagemDeProduto.getId(),
                 embalagemDeProduto.getMaterial(),
@@ -29,8 +31,8 @@ public class EmbalagemDeProdutoService {
         );
     }
 
-    private List<EmbalagemDeProdutoDTO> toDTOsNoSensors(List<EmbalagemDeProduto> embalagemDeProdutos) {
-        return embalagemDeProdutos.stream().map(this::toDTONoSensors).collect(Collectors.toList());
+    private List<EmbalagemDeProdutoDTO> toDTOsNoDetails(List<EmbalagemDeProduto> embalagemDeProdutos) {
+        return embalagemDeProdutos.stream().map(this::toDTONoDetails).collect(Collectors.toList());
     }
 
     private EmbalagemDeProdutoDTO toDTO(EmbalagemDeProduto embalagemDeProduto) {
@@ -41,6 +43,7 @@ public class EmbalagemDeProdutoService {
         );
 
         embalagemDeProdutoDTO.setSensorDTOS(sensorsToDTOs(embalagemDeProduto.getSensores()));
+        embalagemDeProdutoDTO.setProdutoDTOS(produtosFisicosToDTOs(embalagemDeProduto.getProdutos()));
         return  embalagemDeProdutoDTO;
     }
 
@@ -61,13 +64,23 @@ public class EmbalagemDeProdutoService {
         return sensors.stream().map(this::toDTO).collect(Collectors.toList());
     }
 
+    private ProdutoFisicoDTO toDTO(ProdutoFisico produtoFisico){
+        return new ProdutoFisicoDTO(produtoFisico.getId(),
+                produtoFisico.getNomeProduto(),
+                produtoFisico.getFabricante().getUsername());
+    }
+
+    private List<ProdutoFisicoDTO> produtosFisicosToDTOs (List<ProdutoFisico> produtoFisicos){
+        return produtoFisicos.stream().map(this::toDTO).collect(Collectors.toList());
+    }
+
 
 
 
     @GET
     @Path("/")
     public List<EmbalagemDeProdutoDTO> getAll() {
-        return toDTOsNoSensors(embalagemDeProdutoBean.getAllEmbalagensDeProduto());
+        return toDTOsNoDetails(embalagemDeProdutoBean.getAllEmbalagensDeProduto());
     }
 
     @POST
@@ -102,8 +115,9 @@ public class EmbalagemDeProdutoService {
     @GET
     @Path("{id}")
     public Response getEmbalagemDeProdutoDetails(@PathParam("id") long id) throws MyEntityNotFoundException {
-        EmbalagemDeProduto embalagemDeProduto = embalagemDeProdutoBean.getEmbalagemDeProdutoWithSensor(id);
+        EmbalagemDeProduto embalagemDeProduto = embalagemDeProdutoBean.getEmbalagemDeProdutoWithDetails(id);
         if (embalagemDeProduto != null) {
+            System.out.println(embalagemDeProduto.getProdutos());
             return Response.ok(toDTO(embalagemDeProduto)).build();
         }
         return Response.status(Response.Status.NOT_FOUND)

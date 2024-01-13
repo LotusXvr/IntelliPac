@@ -70,7 +70,7 @@ public class ConfigBean {
             encomendaDTO.setConsumidorFinal("Emanuel");
             encomendaDTO.setOperadorLogistica("ValterLogo");
             Encomenda encomenda1 = encomendaBean.create(encomendaDTO);
-            produtoFisicoBean.create("produto1Fisico", "Fabrica1", produtoCatalogo1.getId(), encomenda1.getId());
+            ProdutoFisico produtoFisico1 =  produtoFisicoBean.create("produto1Fisico", "Fabrica1", produtoCatalogo1.getId(), encomenda1.getId());
             produtoFisicoBean.create("produto2Fisico", "Fabrica1", produtoCatalogo2.getId(), encomenda1.getId());
 
             encomendaDTO = new EncomendaDTO();
@@ -119,6 +119,7 @@ public class ConfigBean {
             embalagemDeProdutoBean.create("Metal", "2");
 
             embalagemDeProdutoBean.associateSensorToEmbalagem(embalagemDeProduto1.getId(), sensor1.getId());
+            embalagemDeProdutoBean.addProdutoToEmbalagem(embalagemDeProduto1.getId(),produtoFisico1.getId());
 
 
         } catch (Exception e) {

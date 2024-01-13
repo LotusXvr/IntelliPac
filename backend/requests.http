@@ -284,7 +284,6 @@ Content-Type: application/json
 GET http://localhost:8080/intellipac/api/embalagensDeProduto/5
 Accept: application/json
 
-
 ### ------AUTENTICAÇAO DE UTILIZADOR------
 ### LOGIN
 POST http://localhost:8080/intellipac/api/auth/login

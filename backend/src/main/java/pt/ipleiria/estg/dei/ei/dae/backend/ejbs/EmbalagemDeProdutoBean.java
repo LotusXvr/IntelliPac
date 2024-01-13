@@ -74,11 +74,40 @@ public class EmbalagemDeProdutoBean {
         entityManager.merge(embalagemDeProduto);
     }
 
-    public EmbalagemDeProduto getEmbalagemDeProdutoWithSensor(long id) {
+    public EmbalagemDeProduto getEmbalagemDeProdutoWithDetails(long id) {
         EmbalagemDeProduto embalagemDeProduto = find(id);
         if (embalagemDeProduto != null) {
             Hibernate.initialize(embalagemDeProduto.getSensores());
+            Hibernate.initialize(embalagemDeProduto.getProdutos());
         }
         return embalagemDeProduto;
+    }
+
+    public void addProdutoToEmbalagem(long idEmbalagem, long idProduto) throws MyEntityNotFoundException {
+        EmbalagemDeProduto embalagemDeProduto = find(idEmbalagem);
+        if (embalagemDeProduto == null) {
+            throw new MyEntityNotFoundException("Embalagem with id " + idEmbalagem + " not found");
+        }
+        ProdutoFisico produtoFisico = entityManager.find(ProdutoFisico.class, idProduto);
+        if (produtoFisico == null) {
+            throw new MyEntityNotFoundException("Produto with id " + idProduto + " not found");
+        }
+        embalagemDeProduto.addProduto(produtoFisico);
+        produtoFisico.addEmbalagem(embalagemDeProduto);
+        entityManager.merge(embalagemDeProduto);
+    }
+
+    public void removeProdutoToEmbalagem(long idEmbalagem, long idProduto) throws MyEntityNotFoundException {
+        EmbalagemDeProduto embalagemDeProduto = find(idEmbalagem);
+        if (embalagemDeProduto == null) {
+            throw new MyEntityNotFoundException("Embalagem with id " + idEmbalagem + " not found");
+        }
+        ProdutoFisico produtoFisico = entityManager.find(ProdutoFisico.class, idProduto);
+        if (produtoFisico == null) {
+            throw new MyEntityNotFoundException("Produto with id " + idProduto + " not found");
+        }
+        embalagemDeProduto.removeProduto(produtoFisico);
+        produtoFisico.removeEmbalagem(embalagemDeProduto);
+        entityManager.merge(embalagemDeProduto);
     }
 }
