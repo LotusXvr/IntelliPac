@@ -5,6 +5,7 @@ import jakarta.validation.ConstraintViolationException;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.SecurityContext;
 import pt.ipleiria.estg.dei.ei.dae.backend.dtos.EmbalagemDeTransporteDTO;
 import pt.ipleiria.estg.dei.ei.dae.backend.dtos.EncomendaDTO;
@@ -88,8 +89,9 @@ public class EncomendaService {
     // getEncomendaById
     @GET
     @Path("{id}")
-    public EncomendaDTO getEncomendaById(@PathParam("id") long id) throws MyEntityNotFoundException {
-        return toDTO(encomendaBean.getEncomendaById(id));
+    public Response getEncomendaById(@PathParam("id") long id) throws MyEntityNotFoundException {
+        Encomenda encomenda = encomendaBean.getEncomendaById(id);
+        return Response.status(Response.Status.OK).entity(toDTO(encomenda)).build();
     }
 
     // get encomendas by estado
@@ -104,9 +106,10 @@ public class EncomendaService {
     // Encomenda create(String consumidorFinal, String operadorLogistica)
     @POST
     @Path("/")
-    public EncomendaDTO createEncomenda(EncomendaDTO encomendaDTO) throws MyConstraintViolationException, MyEntityNotFoundException, MyEntityExistsException {
+    public Response createEncomenda(EncomendaDTO encomendaDTO) throws MyConstraintViolationException, MyEntityNotFoundException, MyEntityExistsException {
         try {
-            return toDTO(encomendaBean.create(encomendaDTO));
+            Encomenda encomenda = encomendaBean.create(encomendaDTO);
+            return Response.status(Response.Status.CREATED).entity(toDTO(encomenda)).build();
         } catch (ConstraintViolationException e) {
             throw new MyConstraintViolationException(e);
         }
@@ -114,13 +117,16 @@ public class EncomendaService {
 
     @DELETE
     @Path("{id}")
-    public void deleteEncomenda(@PathParam("id") long id) throws MyEntityNotFoundException {
+    public Response deleteEncomenda(@PathParam("id") long id) throws MyEntityNotFoundException {
         encomendaBean.remove(id);
+        return Response.status(Response.Status.OK).build();
     }
 
     @PUT
     @Path("{id}/estado")
-    public void updateEncomendaEstado(@PathParam("id") long id, EncomendaDTO encomendaDTO) throws MyEntityNotFoundException {
+    public Response updateEncomendaEstado(@PathParam("id") long id, EncomendaDTO encomendaDTO) throws MyEntityNotFoundException {
         encomendaBean.updateEstado(id, encomendaDTO.getEstado());
+        Encomenda encomenda = encomendaBean.getEncomendaById(id);
+        return Response.status(Response.Status.OK).entity(toDTO(encomenda)).build();
     }
 }

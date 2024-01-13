@@ -74,7 +74,7 @@ public class EncomendaBean {
         return entityManager.find(Encomenda.class, id);
     }
 
-    public void update(long id, String estado) throws MyEntityNotFoundException {
+    public Encomenda update(long id, String estado) throws MyEntityNotFoundException {
         Encomenda encomenda = find(id);
         if (encomenda == null) {
             throw new MyEntityNotFoundException("Encomenda com id " + id + " não existe");
@@ -82,14 +82,16 @@ public class EncomendaBean {
 
         encomenda.setEstado(estado);
         entityManager.merge(encomenda);
+        return encomenda;
     }
 
-    public void remove(long id) throws MyEntityNotFoundException {
+    public Encomenda remove(long id) throws MyEntityNotFoundException {
         Encomenda encomenda = find(id);
         if (encomenda == null) {
             throw new MyEntityNotFoundException("Encomenda com id " + id + " não existe");
         }
         entityManager.remove(encomenda);
+        return encomenda;
     }
 
     public List<Encomenda> getAllEncomendasCliente(String clienteUsername) {
@@ -151,13 +153,12 @@ public class EncomendaBean {
         return encomendas;
     }
 
-    public void updateEstado(long id, String estado) {
+    public Encomenda updateEstado(long id, String estado) {
         Encomenda encomenda = find(id);
         if (encomenda == null) {
             throw new IllegalArgumentException("Encomenda com id " + id + " não existe");
         }
 
-        System.out.println("Estado: " + estado);
         estado = estado.toLowerCase();
         // verificar se estado corresponde a um dos estados possíveis
         if (!estadoValido(estado)) {
@@ -166,10 +167,11 @@ public class EncomendaBean {
 
         encomenda.setEstado(estado);
         entityManager.merge(encomenda);
+        return encomenda;
     }
 
 
-    public boolean estadoValido(String estado){
+    public boolean estadoValido(String estado) {
         if (estado == null) {
             return false;
         }
