@@ -16,6 +16,8 @@
     "vue-router": "^4.2.5"
   },
   "dependencies": {
-    "@nuxtjs/composition-api": "^0.33.1"
+    "@nuxtjs/composition-api": "^0.33.1",
+    "@pinia/nuxt": "^0.5.1",
+    "pinia": "^2.1.7"
   }
 }

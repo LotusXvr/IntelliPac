@@ -29,7 +29,7 @@
     <nuxt-link to="/">Voltar à Home</nuxt-link>
 </template>
 <script setup>
-import Navbar from "/pages/navbar.vue"
+import Navbar from "~/layouts/nav-bar.vue";
 const config = useRuntimeConfig()
 const api = config.public.API_URL
 const { data: produtos, error, refresh } = await useFetch(`${api}/produtosCatalogo`)

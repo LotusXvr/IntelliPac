@@ -16,14 +16,15 @@
   </div>
 </template>
 <script setup>
+import { useAuthStore } from '~/store/auth-store.js'
 const config = useRuntimeConfig()
 const api = config.public.API_URL
 const loginFormData = ref({
   username: "",
   password: ""
 })
-const token = ref(null)
-const user = ref(null)
+const authStore = useAuthStore()
+const {token, user} = storeToRefs(authStore)
 const messages = ref([])
 async function login() {
   const {data, error} = await useFetch(`${api}/auth/login`, {

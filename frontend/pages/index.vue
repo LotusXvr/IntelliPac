@@ -1,9 +1,9 @@
 <script setup>
-import Navbar from "/pages/navbar.vue"
+import Navbar from "~/layouts/nav-bar.vue";
 </script>
 
 <template>
-    <navbar />
+    <Navbar/>
     <h1 class="display-4 mb-4">Welcome to Intellipac</h1>
 </template>
 

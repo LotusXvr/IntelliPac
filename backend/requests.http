@@ -283,3 +283,17 @@ Content-Type: application/json
 ### Detalhes de uma embalagem de Produto
 GET http://localhost:8080/intellipac/api/embalagensDeProduto/5
 Accept: application/json
+
+
+### ------AUTENTICAÇAO DE UTILIZADOR------
+### LOGIN
+POST http://localhost:8080/intellipac/api/auth/login
+Content-Type: application/json
+Accept: application/json
+
+{ "username": "Marco", "password": "123" }
+
+### GET AUTHENTICATED USER
+GET http://localhost:8080/intellipac/api/auth/user
+
+
