@@ -35,8 +35,6 @@ public class AuthService {
         return Response.ok(UserDTO.from(user)).build();
     }
 
-
-
     @POST
     @Path("/login")
     public Response authenticate(@Valid AuthDTO auth) {

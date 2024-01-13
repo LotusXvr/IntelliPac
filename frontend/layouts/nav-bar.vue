@@ -9,7 +9,7 @@
                     <nuxt-link to="/embalagens" class="nav-link">Embalagens</nuxt-link>
                     <nuxt-link to="/sensores" class="nav-link">Sensores</nuxt-link>
                     <nuxt-link to="/observacoes" class="nav-link">Observações</nuxt-link>
-                    <nuxt-link to="/auth-test" class="nav-link">Test</nuxt-link>
+                    <!-- <nuxt-link to="/auth-test" class="nav-link">Test</nuxt-link> -->
                     <nuxt-link to="/auth/login" class="nav-link">Login</nuxt-link>
                     <a href="#" @click-prevent="logout" class="nav-link">Logout</a>
                     <div v-if="user" class="adjust-right">
