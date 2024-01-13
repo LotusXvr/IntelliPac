@@ -45,6 +45,9 @@ public class ConfigBean {
     @EJB
     EmbalagemBean embalagemBean;
 
+    @EJB
+    EmbalagemDeProdutoBean embalagemDeProdutoBean;
+
     private Logger logger = Logger.getLogger("ejbs.ConfigBean");
 
     @PostConstruct
@@ -103,6 +106,10 @@ public class ConfigBean {
             observacaoBean.create("90", 2L);
             observacaoBean.create("400", 3L);
             observacaoBean.create("1000", 4L);
+
+            //EmbalagensDeProduto
+            embalagemDeProdutoBean.create("Plastico", "1");
+            embalagemDeProdutoBean.create("Metal", "2");
 
 
         } catch (Exception e) {

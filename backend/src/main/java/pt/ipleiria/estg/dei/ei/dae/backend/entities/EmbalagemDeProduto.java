@@ -1,17 +1,22 @@
 package pt.ipleiria.estg.dei.ei.dae.backend.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Pattern;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@NamedQueries({
+        @NamedQuery(
+                name = "getAllEmbalagensDeProduto",
+                query = "SELECT p FROM EmbalagemDeProduto p ORDER BY p.id"
+        )
+})
 public class EmbalagemDeProduto extends Embalagem implements Serializable {
 
+    @Pattern(regexp = "[1-3]", message = "A coluna deve ter apenas os valores 1, 2 ou 3") //1-Primaria, 2-Secundaria, 3-Terciaria
     private String tipoEmbalagem;
 
     @ManyToMany(mappedBy = "embalagemDeProdutos", fetch = FetchType.LAZY)

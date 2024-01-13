@@ -6,9 +6,8 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.SecurityContext;
-import pt.ipleiria.estg.dei.ei.dae.backend.dtos.EmbalagemTransporteDTO;
+import pt.ipleiria.estg.dei.ei.dae.backend.dtos.EmbalagemDeTransporteDTO;
 import pt.ipleiria.estg.dei.ei.dae.backend.dtos.EncomendaDTO;
-import pt.ipleiria.estg.dei.ei.dae.backend.dtos.ProdutoDTO;
 import pt.ipleiria.estg.dei.ei.dae.backend.dtos.ProdutoFisicoDTO;
 import pt.ipleiria.estg.dei.ei.dae.backend.ejbs.EncomendaBean;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.EmbalagemDeTransporte;
@@ -55,12 +54,12 @@ public class EncomendaService {
     private List<ProdutoFisicoDTO> produtosToDTOs(List<ProdutoFisico> produtos) {
         return produtos.stream().map(this::toDTO).collect(Collectors.toList());
     }
-    private List<EmbalagemTransporteDTO> embalagensTransporteToDTOs(List<EmbalagemDeTransporte> embalagemTransportes) {
+    private List<EmbalagemDeTransporteDTO> embalagensTransporteToDTOs(List<EmbalagemDeTransporte> embalagemTransportes) {
         return embalagemTransportes.stream().map(this::toDTO).collect(Collectors.toList());
     }
 
-    private EmbalagemTransporteDTO toDTO(EmbalagemDeTransporte embalagemDeTransporte) {
-        return new EmbalagemTransporteDTO(
+    private EmbalagemDeTransporteDTO toDTO(EmbalagemDeTransporte embalagemDeTransporte) {
+        return new EmbalagemDeTransporteDTO(
                 embalagemDeTransporte.getId(),
                 embalagemDeTransporte.getMaterial(),
                 toDTOs(embalagemDeTransporte.getEncomendas())

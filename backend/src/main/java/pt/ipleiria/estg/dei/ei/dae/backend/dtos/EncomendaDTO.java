@@ -1,7 +1,6 @@
 package pt.ipleiria.estg.dei.ei.dae.backend.dtos;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class EncomendaDTO{
@@ -10,7 +9,7 @@ public class EncomendaDTO{
     private String dataEncomenda;
     private List<ProdutoFisicoDTO> produtos; // Lista de produtos associados à encomenda
 
-    private List<EmbalagemTransporteDTO> embalagensTransporte;
+    private List<EmbalagemDeTransporteDTO> embalagensTransporte;
     private String operadorLogistica;
     private String estado;
 
@@ -19,7 +18,7 @@ public class EncomendaDTO{
         this.embalagensTransporte = new ArrayList<>();
     }
 
-    public EncomendaDTO(Long id, String consumidorFinal, String dataEncomenda, List<ProdutoFisicoDTO> produtos, List<EmbalagemTransporteDTO> embalagensTransporte, String operadorLogistica, String estado) {
+    public EncomendaDTO(Long id, String consumidorFinal, String dataEncomenda, List<ProdutoFisicoDTO> produtos, List<EmbalagemDeTransporteDTO> embalagensTransporte, String operadorLogistica, String estado) {
         this.id = id;
         this.consumidorFinal = consumidorFinal;
         this.dataEncomenda = dataEncomenda;
@@ -29,7 +28,7 @@ public class EncomendaDTO{
         this.estado = estado;
     }
 
-    public EncomendaDTO(Long id, String consumidorFinal, String dataEncomenda, List<ProdutoFisicoDTO> produtos, String operadorLogistica, List<EmbalagemTransporteDTO> embalagensTransporte) {
+    public EncomendaDTO(Long id, String consumidorFinal, String dataEncomenda, List<ProdutoFisicoDTO> produtos, String operadorLogistica, List<EmbalagemDeTransporteDTO> embalagensTransporte) {
         this.id = id;
         this.consumidorFinal = consumidorFinal;
         this.dataEncomenda = dataEncomenda;
@@ -38,7 +37,7 @@ public class EncomendaDTO{
         this.operadorLogistica = operadorLogistica;
     }
 
-    public EncomendaDTO(Long id, String consumidorFinal, String dataEncomenda, List<ProdutoFisicoDTO> produtos, List<EmbalagemTransporteDTO> embalagensTransporte) {
+    public EncomendaDTO(Long id, String consumidorFinal, String dataEncomenda, List<ProdutoFisicoDTO> produtos, List<EmbalagemDeTransporteDTO> embalagensTransporte) {
         this.id = id;
         this.consumidorFinal = consumidorFinal;
         this.dataEncomenda = dataEncomenda;
@@ -102,11 +101,11 @@ public class EncomendaDTO{
         this.estado = estado;
     }
 
-    public List<EmbalagemTransporteDTO> getEmbalagensTransporte() {
+    public List<EmbalagemDeTransporteDTO> getEmbalagensTransporte() {
         return embalagensTransporte;
     }
 
-    public void setEmbalagensTransporte(List<EmbalagemTransporteDTO> embalagensTransporte) {
+    public void setEmbalagensTransporte(List<EmbalagemDeTransporteDTO> embalagensTransporte) {
         this.embalagensTransporte = embalagensTransporte;
     }
 }

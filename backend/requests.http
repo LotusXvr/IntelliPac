@@ -236,3 +236,30 @@ Content-Type: application/json
   "operadorLogistica": "Joaoz",
   "produtos": []
 }
+
+
+### ------EMBALAGEM DE PRODUTOS------
+GET http://localhost:8080/intellipac/api/embalagensDeProduto
+Accept: application/json
+
+### Criar Embalagem De Produto
+POST http://localhost:8080/intellipac/api/embalagensDeProduto
+Content-Type: application/json
+
+{
+  "material" : "Plastico",
+  "tipoEmbalagem" : "3"
+}
+
+### Update Embalagem De Produto
+PUT http://localhost:8080/intellipac/api/embalagensDeProduto/7
+Content-Type: application/json
+
+{
+  "material" : "Borracha",
+  "tipoEmbalagem" : "2"
+}
+
+### Eliminar Embalagem de Produto
+DELETE http://localhost:8080/intellipac/api/embalagensDeProduto/8
+Content-Type: application/json
