@@ -129,5 +129,57 @@ public class EncomendaBean {
         return encomenda;
 
     }
+
+    public List<Encomenda> getEncomendasByEstado(String estado) {
+        if (estado == null) {
+            throw new IllegalArgumentException("Estado não pode ser null");
+        }
+
+        estado = estado.toLowerCase();
+        // verificar se estado corresponde a um dos estados possíveis
+        if (!estadoValido(estado)) {
+            throw new IllegalArgumentException("Estado inválido (Estado tem de ser pendente, processamento, transporte ou entregue)");
+        }
+
+        List<Encomenda> encomendas = entityManager.createNamedQuery("getEncomendasByEstado", Encomenda.class).setParameter("estado", estado).getResultList();
+
+        for (Encomenda encomenda : encomendas) {
+            Hibernate.initialize(encomenda.getProdutos());
+            Hibernate.initialize(encomenda.getEmbalagensTransporte());
+        }
+
+        return encomendas;
+    }
+
+    public void updateEstado(long id, String estado) {
+        Encomenda encomenda = find(id);
+        if (encomenda == null) {
+            throw new IllegalArgumentException("Encomenda com id " + id + " não existe");
+        }
+
+        System.out.println("Estado: " + estado);
+        estado = estado.toLowerCase();
+        // verificar se estado corresponde a um dos estados possíveis
+        if (!estadoValido(estado)) {
+            throw new IllegalArgumentException("Estado inválido (Estado tem de ser pendente, processamento, transporte ou entregue)");
+        }
+
+        encomenda.setEstado(estado);
+        entityManager.merge(encomenda);
+    }
+
+
+    public boolean estadoValido(String estado){
+        if (estado == null) {
+            return false;
+        }
+
+        // verificar se estado corresponde a um dos estados possíveis
+        if (!estado.equals("pendente") && !estado.equals("processamento") && !estado.equals("transporte") && !estado.equals("entregue")) {
+            return false;
+        }
+
+        return true;
+    }
 }
 

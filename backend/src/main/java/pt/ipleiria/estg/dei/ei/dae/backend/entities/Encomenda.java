@@ -17,6 +17,10 @@ import java.util.Objects;
         @NamedQuery(
                 name = "getAllEncomendasOperadoresLogistica",
                 query = "SELECT e FROM Encomenda e WHERE e.operadorLogistica = :operador"
+        ),
+        @NamedQuery(
+                name = "getEncomendasByEstado",
+                query = "SELECT e FROM Encomenda e WHERE e.estado = :estado"
         )
 })
 public class Encomenda {

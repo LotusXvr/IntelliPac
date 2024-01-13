@@ -92,6 +92,13 @@ public class EncomendaService {
         return toDTO(encomendaBean.getEncomendaById(id));
     }
 
+    // get encomendas by estado
+    @GET
+    @Path("/estado/{estado}")
+    public List<EncomendaDTO> getEncomendasByEstado(@PathParam("estado") String estado) throws MyEntityNotFoundException {
+        return toDTOs(encomendaBean.getEncomendasByEstado(estado));
+    }
+
     // POST
     // createEncomenda (cliente)
     // Encomenda create(String consumidorFinal, String operadorLogistica)
@@ -112,8 +119,8 @@ public class EncomendaService {
     }
 
     @PUT
-    @Path("{id}")
-    public void updateEncomenda(@PathParam("id") long id, EncomendaDTO encomendaDTO) throws MyEntityNotFoundException {
-        encomendaBean.update(id, encomendaDTO.getEstado());
+    @Path("{id}/estado")
+    public void updateEncomendaEstado(@PathParam("id") long id, EncomendaDTO encomendaDTO) throws MyEntityNotFoundException {
+        encomendaBean.updateEstado(id, encomendaDTO.getEstado());
     }
 }
