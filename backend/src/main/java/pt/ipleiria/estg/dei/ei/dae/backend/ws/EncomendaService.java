@@ -1,13 +1,13 @@
 package pt.ipleiria.estg.dei.ei.dae.backend.ws;
 
 import jakarta.ejb.EJB;
+import jakarta.mail.MessagingException;
 import jakarta.validation.ConstraintViolationException;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.SecurityContext;
-import org.hibernate.Hibernate;
 import pt.ipleiria.estg.dei.ei.dae.backend.dtos.EmbalagemDeTransporteDTO;
 import pt.ipleiria.estg.dei.ei.dae.backend.dtos.EncomendaDTO;
 import pt.ipleiria.estg.dei.ei.dae.backend.dtos.ProdutoFisicoDTO;
@@ -56,6 +56,7 @@ public class EncomendaService {
     private List<ProdutoFisicoDTO> produtosToDTOs(List<ProdutoFisico> produtos) {
         return produtos.stream().map(this::toDTO).collect(Collectors.toList());
     }
+
     private List<EmbalagemDeTransporteDTO> embalagensTransporteToDTOs(List<EmbalagemDeTransporte> embalagemTransportes) {
         return embalagemTransportes.stream().map(this::toDTO).collect(Collectors.toList());
     }
@@ -125,9 +126,8 @@ public class EncomendaService {
 
     @PATCH
     @Path("{id}/estado")
-    public Response updateEncomendaEstado(@PathParam("id") long id, EncomendaDTO encomendaDTO) throws MyEntityNotFoundException {
-        encomendaBean.updateEstado(id, encomendaDTO.getEstado());
-        Encomenda encomenda = encomendaBean.getEncomendaById(id);
-        return Response.status(Response.Status.OK).entity(toDTO(encomenda)).build();
+    public Response patchEncomendaEstado(@PathParam("id") long id, EncomendaDTO encomendaDTO) throws MyEntityNotFoundException, MessagingException {
+        encomendaBean.patchEstado(id, encomendaDTO.getEstado());
+        return Response.status(Response.Status.OK).entity("Estado alterado para " + encomendaDTO.getEstado() + " com sucesso").build();
     }
 }

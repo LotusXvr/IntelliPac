@@ -3,20 +3,22 @@ package pt.ipleiria.estg.dei.ei.dae.backend.ejbs;
 
 import jakarta.ejb.EJB;
 import jakarta.ejb.Stateless;
+import jakarta.mail.MessagingException;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.validation.ConstraintViolationException;
 import org.hibernate.Hibernate;
 import pt.ipleiria.estg.dei.ei.dae.backend.dtos.EncomendaDTO;
 import pt.ipleiria.estg.dei.ei.dae.backend.dtos.ProdutoFisicoDTO;
-import pt.ipleiria.estg.dei.ei.dae.backend.entities.*;
+import pt.ipleiria.estg.dei.ei.dae.backend.entities.Encomenda;
+import pt.ipleiria.estg.dei.ei.dae.backend.entities.ProdutoCatalogo;
+import pt.ipleiria.estg.dei.ei.dae.backend.entities.ProdutoFisico;
 import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyConstraintViolationException;
 import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyEntityExistsException;
 import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyEntityNotFoundException;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.List;
 
 @Stateless
@@ -29,6 +31,9 @@ public class EncomendaBean {
 
     @EJB
     private OperadorDeLogisticaBean operadorDeLogisticaBean;
+
+    @EJB
+    private EmailBean emailBean;
 
     public Encomenda create(EncomendaDTO encomendaDTO) throws MyEntityExistsException, MyEntityNotFoundException, MyConstraintViolationException {
 
@@ -153,10 +158,10 @@ public class EncomendaBean {
         return encomendas;
     }
 
-    public Encomenda updateEstado(long id, String estado) {
+    public void patchEstado(long id, String estado) throws MyEntityNotFoundException, MessagingException {
         Encomenda encomenda = find(id);
         if (encomenda == null) {
-            throw new IllegalArgumentException("Encomenda com id " + id + " não existe");
+            throw new MyEntityNotFoundException("Encomenda com id " + id + " não existe");
         }
 
         estado = estado.toLowerCase();
@@ -165,9 +170,14 @@ public class EncomendaBean {
             throw new IllegalArgumentException("Estado inválido (Estado tem de ser pendente, processamento, transporte ou entregue)");
         }
 
+        if (estado.equals("extraviada")) {
+            // TODO: enviar email para o cliente a informar que a encomenda foi extraviada
+            emailBean.send(encomenda.getConsumidorFinal().getEmail(), "Encomenda extraviada", "A sua encomenda foi extraviada");
+
+        }
+
         encomenda.setEstado(estado);
         entityManager.merge(encomenda);
-        return encomenda;
     }
 
 
@@ -177,7 +187,13 @@ public class EncomendaBean {
         }
 
         // verificar se estado corresponde a um dos estados possíveis
-        if (!estado.equals("pendente") && !estado.equals("processamento") && !estado.equals("transporte") && !estado.equals("entregue")) {
+        if (!estado.equals("pendente") &&
+                !estado.equals("processamento") &&
+                !estado.equals("transporte") &&
+                !estado.equals("entregue") &&
+                !estado.equals("cancelada") &&
+                !estado.equals("devolvida") &&
+                !estado.equals("extraviada") /* roubada, danificada ou perdida */) {
             return false;
         }
 
