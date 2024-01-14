@@ -1,6 +1,6 @@
 <template>
   <div v-if="observacao">
-    <h2 v-once>Editar observacao - {{ observacao.valor }}</h2>
+    <h2 v-once>Editar observacao - {{ observacao.id }}</h2>
 
     <form @submit.prevent="updateObservacao">
       <label for="valor">valor:</label>

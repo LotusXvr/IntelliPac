@@ -123,7 +123,7 @@ public class EncomendaService {
         return Response.status(Response.Status.OK).build();
     }
 
-    @PUT
+    @PATCH
     @Path("{id}/estado")
     public Response updateEncomendaEstado(@PathParam("id") long id, EncomendaDTO encomendaDTO) throws MyEntityNotFoundException {
         encomendaBean.updateEstado(id, encomendaDTO.getEstado());
