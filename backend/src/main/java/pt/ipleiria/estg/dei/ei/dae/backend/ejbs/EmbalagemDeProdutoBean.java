@@ -14,7 +14,7 @@ public class EmbalagemDeProdutoBean {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public EmbalagemDeProduto create(String material, String tipoEmbalagem) {
+    public EmbalagemDeProduto create(String material, long tipoEmbalagem) {
         EmbalagemDeProduto embalagemDeProduto = new EmbalagemDeProduto(material,tipoEmbalagem);
         entityManager.persist(embalagemDeProduto);
         return embalagemDeProduto;
@@ -24,7 +24,7 @@ public class EmbalagemDeProdutoBean {
         return entityManager.find(EmbalagemDeProduto.class, id);
     }
 
-    public void update(long id, String material, String tipoEmbalagem) throws MyEntityNotFoundException {
+    public void update(long id, String material, long tipoEmbalagem) throws MyEntityNotFoundException {
         EmbalagemDeProduto embalagemDeProduto = find(id);
         if (embalagemDeProduto == null) {
             throw new MyEntityNotFoundException("Embalagem de Produto com id " + id + " não existe");

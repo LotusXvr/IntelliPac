@@ -10,6 +10,7 @@ import jakarta.validation.ConstraintViolationException;
 import org.hibernate.Hibernate;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.FabricanteDeProdutos;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.ProdutoCatalogo;
+import pt.ipleiria.estg.dei.ei.dae.backend.entities.TipoEmbalagemProduto;
 import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyConstraintViolationException;
 import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyEntityExistsException;
 import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyEntityNotFoundException;
@@ -100,7 +101,42 @@ public class ProdutoCatalogoBean {
         ProdutoCatalogo produtoCatalogo = find(id);
         if (produtoCatalogo != null) {
             Hibernate.initialize(produtoCatalogo.getProdutos());
+            Hibernate.initialize(produtoCatalogo.getEmbalagensACriar());
         }
         return produtoCatalogo;
+    }
+
+    public void addTipoEmbalagem(long idTipoEmbalagem, long idProduto) {
+        // Find the student by username
+        ProdutoCatalogo produtoCatalogo = find(idProduto);
+        if (produtoCatalogo == null) {
+            throw new IllegalArgumentException("Produto with id " + idProduto + " not found.");
+        }
+
+        // Find the subject by subject code
+        TipoEmbalagemProduto tipoEmbalagemProduto = entityManager.find(TipoEmbalagemProduto.class, idTipoEmbalagem);
+        if (tipoEmbalagemProduto == null) {
+            throw new IllegalArgumentException("Tipo Embalagem with id " + idTipoEmbalagem + " not found.");
+        }
+
+        // Enroll the student in the subject
+        produtoCatalogo.addEmbalagemACriar(tipoEmbalagemProduto);
+    }
+
+    public void removeTipoEmbalagem(long idTipoEmbalagem, long idProduto) {
+        // Find the student by username
+        ProdutoCatalogo produtoCatalogo = find(idProduto);
+        if (produtoCatalogo == null) {
+            throw new IllegalArgumentException("Produto with id " + idProduto + " not found.");
+        }
+
+        // Find the subject by subject code
+        TipoEmbalagemProduto tipoEmbalagemProduto = entityManager.find(TipoEmbalagemProduto.class, idTipoEmbalagem);
+        if (tipoEmbalagemProduto == null) {
+            throw new IllegalArgumentException("Tipo Embalagem with id " + idTipoEmbalagem + " not found.");
+        }
+
+        // Enroll the student in the subject
+        produtoCatalogo.removeEmbalagemACriar(tipoEmbalagemProduto);
     }
 }

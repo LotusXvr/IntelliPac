@@ -1,6 +1,7 @@
 package pt.ipleiria.estg.dei.ei.dae.backend.dtos;
 
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.ProdutoFisico;
+import pt.ipleiria.estg.dei.ei.dae.backend.entities.TipoEmbalagemProduto;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,10 +13,13 @@ public class ProdutoCatalogoDTO {
     private String fabricanteUsername;
     private List<ProdutoFisicoDTO> produtos;
 
+    private List<TipoEmbalagemDTO> embalagensACriar;
+
     private long peso;
 
     public ProdutoCatalogoDTO() {
         this.produtos = new ArrayList<>();
+        this.embalagensACriar = new ArrayList<>();
     }
 
     public ProdutoCatalogoDTO(long id, String nome, String fabricanteUsername, long peso) {
@@ -23,6 +27,7 @@ public class ProdutoCatalogoDTO {
         this.nome = nome;
         this.fabricanteUsername = fabricanteUsername;
         this.produtos = new ArrayList<>();
+        this.embalagensACriar = new ArrayList<>();
         this.peso = peso;
     }
 
@@ -72,5 +77,13 @@ public class ProdutoCatalogoDTO {
 
     public void setPeso(long peso) {
         this.peso = peso;
+    }
+
+    public List<TipoEmbalagemDTO> getEmbalagensACriar() {
+        return embalagensACriar;
+    }
+
+    public void setEmbalagensACriar(List<TipoEmbalagemDTO> embalagensACriar) {
+        this.embalagensACriar = embalagensACriar;
     }
 }
