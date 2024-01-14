@@ -2,7 +2,8 @@
     <Navbar />
     <div v-if="error">Error: {{ error.message }}</div>
     <div v-else>
-        <nuxt-link to="produtosCatalogo/create">Criar novo Produto</nuxt-link>
+        <nuxt-link to="produtosCatalogo/create" v-if="user !== null && user.role != 'Cliente'">Criar novo
+            Produto</nuxt-link>
         <h2>Produtos</h2>
         <table>
             <tr>
@@ -10,15 +11,17 @@
                 <th>Fabricante</th>
                 <th>actions</th>
             </tr>
-            <tr v-for="produto in produtos">
+            <tr v-for=" produto  in  produtos ">
                 <td>{{ produto.nome }}</td>
                 <td>{{ produto.fabricanteUsername }}</td>
-                <td>
+                <td style="display: flex; align-items: center;">
                     <nuxt-link :to="`/produtosCatalogo/${produto.id}`">Detalhes</nuxt-link>
-                    |
-                    <nuxt-link :to="'/produtosCatalogo/edit/' + produto.id">Editar</nuxt-link>
-                    |
-                    <button @click="deleteProduto(produto.id)">Excluir</button>
+                    <div v-if="user !== null && user.role != 'Cliente'">
+                        |
+                        <nuxt-link :to="'/produtosCatalogo/edit/' + produto.id">Editar</nuxt-link>
+                        |
+                        <button @click="deleteProduto(produto.id)">Excluir</button>
+                    </div>
                 </td>
             </tr>
         </table>
@@ -29,8 +32,11 @@
     <nuxt-link to="/">Voltar à Home</nuxt-link>
 </template>
 <script setup>
+import { useAuthStore } from "../store/auth-store.js"
 import Navbar from "~/layouts/nav-bar.vue";
 const config = useRuntimeConfig()
+const authStore = useAuthStore()
+const { user } = authStore
 const api = config.public.API_URL
 const { data: produtos, error, refresh } = await useFetch(`${api}/produtosCatalogo`)
 

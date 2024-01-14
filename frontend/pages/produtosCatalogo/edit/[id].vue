@@ -22,7 +22,7 @@
 
       <button type="submit" :disabled="!isFormValid">Save</button>
     </form>
-    <nuxt-link to="/produtos">Back to produtos</nuxt-link>
+    <nuxt-link to="/produtosCatalogo">Back to produtos</nuxt-link>
   </div>
   <h2>Error messages:</h2>
   {{ messages }}

@@ -6,10 +6,10 @@ export const useAuthStore = defineStore("authStore", () => {
         token.value = null
         user.value = null
     }
-    function login(token, user) {
-        token.value = token
-        user.value = user
+    function login(newToken, newUser) {
+        token.value = newToken
+        user.value = newUser
     }
 
-    return { token, user, logout, login}
+    return { token, user, logout, login }
 })
