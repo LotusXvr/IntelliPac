@@ -27,7 +27,7 @@ public class EmbalagemDeProdutoBean {
     public void update(long id, String material, String tipoEmbalagem) throws MyEntityNotFoundException {
         EmbalagemDeProduto embalagemDeProduto = find(id);
         if (embalagemDeProduto == null) {
-            throw new MyEntityNotFoundException("Produto catálogo com id " + id + " não existe");
+            throw new MyEntityNotFoundException("Embalagem de Produto com id " + id + " não existe");
         }
 
         embalagemDeProduto.setMaterial(material);
@@ -38,7 +38,7 @@ public class EmbalagemDeProdutoBean {
     public void remove(long id) throws MyEntityNotFoundException {
         EmbalagemDeProduto embalagemDeProduto = find(id);
         if (embalagemDeProduto == null) {
-            throw new MyEntityNotFoundException("Produto catálogo com id " + id + " não existe");
+            throw new MyEntityNotFoundException("Embalagem de produto com id " + id + " não existe");
         }
         entityManager.remove(embalagemDeProduto);
     }
@@ -92,7 +92,6 @@ public class EmbalagemDeProdutoBean {
         if (produtoFisico == null) {
             throw new MyEntityNotFoundException("Produto with id " + idProduto + " not found");
         }
-        embalagemDeProduto.addProduto(produtoFisico);
         produtoFisico.addEmbalagem(embalagemDeProduto);
         entityManager.merge(embalagemDeProduto);
     }
@@ -106,7 +105,6 @@ public class EmbalagemDeProdutoBean {
         if (produtoFisico == null) {
             throw new MyEntityNotFoundException("Produto with id " + idProduto + " not found");
         }
-        embalagemDeProduto.removeProduto(produtoFisico);
         produtoFisico.removeEmbalagem(embalagemDeProduto);
         entityManager.merge(embalagemDeProduto);
     }

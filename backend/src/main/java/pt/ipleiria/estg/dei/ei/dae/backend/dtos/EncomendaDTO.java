@@ -18,6 +18,16 @@ public class EncomendaDTO{
         this.embalagensTransporte = new ArrayList<>();
     }
 
+    public EncomendaDTO(Long id, String consumidorFinal, String dataEncomenda, String operadorLogistica, String estado) {
+        this.id = id;
+        this.consumidorFinal = consumidorFinal;
+        this.dataEncomenda = dataEncomenda;
+        this.operadorLogistica = operadorLogistica;
+        this.estado = estado;
+        this.produtos = new ArrayList<>();
+        this.embalagensTransporte = new ArrayList<>();
+    }
+
     public EncomendaDTO(Long id, String consumidorFinal, String dataEncomenda, List<ProdutoFisicoDTO> produtos, List<EmbalagemDeTransporteDTO> embalagensTransporte, String operadorLogistica, String estado) {
         this.id = id;
         this.consumidorFinal = consumidorFinal;

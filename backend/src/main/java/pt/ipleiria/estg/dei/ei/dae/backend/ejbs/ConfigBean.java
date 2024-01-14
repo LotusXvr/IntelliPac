@@ -45,6 +45,9 @@ public class ConfigBean {
     @EJB
     EmbalagemDeProdutoBean embalagemDeProdutoBean;
 
+    @EJB
+    EmbalagemDeTransporteBean embalagemDeTransporteBean;
+
     private Logger logger = Logger.getLogger("ejbs.ConfigBean");
 
     @PostConstruct
@@ -117,10 +120,12 @@ public class ConfigBean {
             //EmbalagensDeProduto
             EmbalagemDeProduto embalagemDeProduto1 = embalagemDeProdutoBean.create("Plastico", "1");
             embalagemDeProdutoBean.create("Metal", "2");
+            EmbalagemDeTransporte embalagemDeTransporte1 = embalagemDeTransporteBean.create("Cartão");
 
             embalagemDeProdutoBean.associateSensorToEmbalagem(embalagemDeProduto1.getId(), sensor1.getId());
             embalagemDeProdutoBean.addProdutoToEmbalagem(embalagemDeProduto1.getId(),produtoFisico1.getId());
-
+            embalagemDeTransporteBean.associateSensorToEmbalagem(embalagemDeTransporte1.getId(), sensor1.getId());
+            embalagemDeTransporteBean.addEncomendaToEmbalagem(embalagemDeTransporte1.getId(),encomenda1.getId());
 
         } catch (Exception e) {
             logger.severe(e.getMessage());

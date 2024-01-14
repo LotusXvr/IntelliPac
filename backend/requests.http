@@ -298,4 +298,30 @@ Accept: application/json
 Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJNYXJjbyIsImlhdCI6MTcwNTE3NjA3OSwiZXhwIjoxNzA1MTc5Njc5fQ._YgxFAMeKFUsCNBxQB0JfcfVBQq6aTX9hcJVL6Z9dn9ezoSp9s521K5e1q5h7ZmW
 
 
+### ------EMBALAGEM DE TRANSPORTE------
+GET http://localhost:8080/intellipac/api/embalagensDeTransporte
+Accept: application/json
 
+### Criar Embalagem De Transporte
+POST http://localhost:8080/intellipac/api/embalagensDeTransporte
+Content-Type: application/json
+
+{
+  "material" : "Metal"
+}
+
+### Update Embalagem De Transporte
+PUT http://localhost:8080/intellipac/api/embalagensDeTransporte/7
+Content-Type: application/json
+
+{
+  "material" : "Borracha"
+}
+
+### Eliminar Embalagem de Transporte
+DELETE http://localhost:8080/intellipac/api/embalagensDeTransporte/8
+Content-Type: application/json
+
+### Detalhes de uma embalagem de Transporte
+GET http://localhost:8080/intellipac/api/embalagensDeTransporte/7
+Accept: application/json

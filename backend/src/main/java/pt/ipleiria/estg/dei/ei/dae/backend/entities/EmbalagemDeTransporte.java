@@ -7,6 +7,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@NamedQueries({
+        @NamedQuery(
+                name = "getAllEmbalagensDeTransporte",
+                query = "SELECT p FROM EmbalagemDeTransporte p ORDER BY p.id"
+        )
+})
 public class EmbalagemDeTransporte extends Embalagem implements Serializable {
     @ManyToMany(mappedBy = "embalagensTransporte")
     private List<Encomenda> encomendas;
@@ -15,7 +21,7 @@ public class EmbalagemDeTransporte extends Embalagem implements Serializable {
         this.encomendas = new ArrayList<>();
     }
 
-    public EmbalagemDeTransporte(String material, List<Encomenda> encomendas) {
+    public EmbalagemDeTransporte(String material) {
         super(material);
         this.encomendas = new ArrayList<>();
     }
