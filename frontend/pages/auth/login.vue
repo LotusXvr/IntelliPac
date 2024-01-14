@@ -25,6 +25,7 @@
 </template>
 <script setup>
 import { useAuthStore } from "~/store/auth-store.js"
+import { useRouter } from "vue-router";
 import Navbar from "~/layouts/nav-bar.vue"
 const config = useRuntimeConfig()
 const api = config.public.API_URL
@@ -33,6 +34,7 @@ const loginFormData = ref({
     password: "",
 })
 const authStore = useAuthStore()
+const router = useRouter()
 const { token, user } = storeToRefs(authStore)
 const messages = ref([])
 async function login() {
@@ -63,9 +65,8 @@ async function login() {
     }
 
     user.value = userData.value
-
-    sessionStorage.setItem("token", token.value)
-    sessionStorage.setItem("user", JSON.stringify(user.value))
-
+    console.log(user.value)
+    // redirect to home page
+    router.push("/")
 }
 </script>
