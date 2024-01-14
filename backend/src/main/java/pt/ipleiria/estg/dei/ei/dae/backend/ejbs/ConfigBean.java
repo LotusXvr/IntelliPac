@@ -9,6 +9,9 @@ import pt.ipleiria.estg.dei.ei.dae.backend.dtos.EncomendaDTO;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.logging.Logger;
 
 @Startup
@@ -47,6 +50,9 @@ public class ConfigBean {
 
     @EJB
     EmbalagemDeTransporteBean embalagemDeTransporteBean;
+
+    @EJB
+    TipoEmbalagemProdutoBean tipoEmbalagemProdutoBean;
 
     private Logger logger = Logger.getLogger("ejbs.ConfigBean");
 
@@ -118,8 +124,8 @@ public class ConfigBean {
             observacaoBean.create("1000", 4L);
 
             //EmbalagensDeProduto
-            EmbalagemDeProduto embalagemDeProduto1 = embalagemDeProdutoBean.create("Plastico", "1");
-            embalagemDeProdutoBean.create("Metal", "2");
+            EmbalagemDeProduto embalagemDeProduto1 = embalagemDeProdutoBean.create("Plastico", 1);
+            embalagemDeProdutoBean.create("Metal", 2);
             EmbalagemDeTransporte embalagemDeTransporte1 = embalagemDeTransporteBean.create("Cartão");
 
             embalagemDeProdutoBean.associateSensorToEmbalagem(embalagemDeProduto1.getId(), sensor1.getId());
@@ -127,6 +133,19 @@ public class ConfigBean {
             embalagemDeTransporteBean.associateSensorToEmbalagem(embalagemDeTransporte1.getId(), sensor1.getId());
             embalagemDeTransporteBean.addEncomendaToEmbalagem(embalagemDeTransporte1.getId(),encomenda1.getId());
 
+            List<Long> tipos = new ArrayList<>(Arrays.asList(1L, 2L, 3L));
+
+            List<String> materiais = new ArrayList<>(Arrays.asList("Plastico", "Metal", "Vidro", "Cartão"));
+
+            for (long tipo: tipos
+                 ) {
+                for (String material: materiais
+                     ) {
+                    tipoEmbalagemProdutoBean.create(tipo, material);
+                }
+            }
+
+            produtoCatalogoBean.addTipoEmbalagem(1, produtoCatalogo1.getId());
         } catch (Exception e) {
             logger.severe(e.getMessage());
         }

@@ -1,6 +1,8 @@
 package pt.ipleiria.estg.dei.ei.dae.backend.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Pattern;
 
 import java.io.Serializable;
@@ -16,8 +18,9 @@ import java.util.List;
 })
 public class EmbalagemDeProduto extends Embalagem implements Serializable {
 
-    @Pattern(regexp = "[1-3]", message = "A coluna deve ter apenas os valores 1, 2 ou 3") //1-Primaria, 2-Secundaria, 3-Terciaria
-    private String tipoEmbalagem;
+    @Min(value = 1, message = "A coluna deve ter apenas os valores 1, 2 ou 3")
+    @Max(value = 3, message = "A coluna deve ter apenas os valores 1, 2 ou 3")
+    private long tipoEmbalagem;
 
     @ManyToMany(mappedBy = "embalagemDeProdutos", fetch = FetchType.LAZY)
     private List<ProdutoFisico> produtos;
@@ -26,23 +29,23 @@ public class EmbalagemDeProduto extends Embalagem implements Serializable {
         this.produtos = new ArrayList<>();
     }
 
-    public EmbalagemDeProduto(String material, String tipoEmbalagem) {
+    public EmbalagemDeProduto(String material, long tipoEmbalagem) {
         super(material);
         this.tipoEmbalagem = tipoEmbalagem;
         this.produtos = new ArrayList<>();
     }
 
-    public EmbalagemDeProduto(String material, String tipoEmbalagem, List<ProdutoFisico> produtos) {
+    public EmbalagemDeProduto(String material, long tipoEmbalagem, List<ProdutoFisico> produtos) {
         super(material);
         this.tipoEmbalagem = tipoEmbalagem;
         this.produtos = produtos;
     }
 
-    public String getTipoEmbalagem() {
+    public long getTipoEmbalagem() {
         return tipoEmbalagem;
     }
 
-    public void setTipoEmbalagem(String tipoEmbalagem) {
+    public void setTipoEmbalagem(long tipoEmbalagem) {
         this.tipoEmbalagem = tipoEmbalagem;
     }
 

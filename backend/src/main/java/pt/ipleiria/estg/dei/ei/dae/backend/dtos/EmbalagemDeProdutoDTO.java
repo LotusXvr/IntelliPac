@@ -9,7 +9,7 @@ public class EmbalagemDeProdutoDTO {
     private Long id;
 
     private String material;
-    private String tipoEmbalagem;
+    private long tipoEmbalagem;
     private List<ProdutoFisicoDTO> produtoDTOS;
 
     private List<SensorDTO> sensorDTOS;
@@ -19,7 +19,7 @@ public class EmbalagemDeProdutoDTO {
         this.sensorDTOS = new ArrayList<>();
     }
 
-    public EmbalagemDeProdutoDTO(Long id, String material, String tipoEmbalagem) {
+    public EmbalagemDeProdutoDTO(Long id, String material, long tipoEmbalagem) {
         this.id = id;
         this.material = material;
         this.tipoEmbalagem = tipoEmbalagem;
@@ -43,11 +43,11 @@ public class EmbalagemDeProdutoDTO {
         this.material = material;
     }
 
-    public String getTipoEmbalagem() {
+    public long getTipoEmbalagem() {
         return tipoEmbalagem;
     }
 
-    public void setTipoEmbalagem(String tipoEmbalagem) {
+    public void setTipoEmbalagem(long tipoEmbalagem) {
         this.tipoEmbalagem = tipoEmbalagem;
     }
 

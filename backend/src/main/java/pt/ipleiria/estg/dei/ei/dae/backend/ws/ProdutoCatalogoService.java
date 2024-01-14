@@ -11,9 +11,11 @@ import org.hibernate.Hibernate;
 import pt.ipleiria.estg.dei.ei.dae.backend.dtos.ClienteDTO;
 import pt.ipleiria.estg.dei.ei.dae.backend.dtos.ProdutoCatalogoDTO;
 import pt.ipleiria.estg.dei.ei.dae.backend.dtos.ProdutoFisicoDTO;
+import pt.ipleiria.estg.dei.ei.dae.backend.dtos.TipoEmbalagemDTO;
 import pt.ipleiria.estg.dei.ei.dae.backend.ejbs.ProdutoCatalogoBean;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.ProdutoCatalogo;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.ProdutoFisico;
+import pt.ipleiria.estg.dei.ei.dae.backend.entities.TipoEmbalagemProduto;
 import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyConstraintViolationException;
 import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyEntityExistsException;
 import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyEntityNotFoundException;
@@ -46,17 +48,31 @@ public class ProdutoCatalogoService {
     }
 
     private ProdutoCatalogoDTO toDTO(ProdutoCatalogo produtoCatalogo) {
-        return new ProdutoCatalogoDTO(
+        ProdutoCatalogoDTO produtoCatalogoDTO = new ProdutoCatalogoDTO(
                 produtoCatalogo.getId(),
                 produtoCatalogo.getNomeProduto(),
                 produtoCatalogo.getFabricante().getUsername(),
-                produtosFisicosToDTOs(produtoCatalogo.getProdutos()),
                 produtoCatalogo.getPeso()
         );
+        produtoCatalogoDTO.setProdutos(produtosFisicosToDTOs(produtoCatalogo.getProdutos()));
+        produtoCatalogoDTO.setEmbalagensACriar(embalagenstoDTOs(produtoCatalogo.getEmbalagensACriar()));
+
+        return produtoCatalogoDTO;
     }
 
+    private TipoEmbalagemDTO toDTO(TipoEmbalagemProduto embalagensACriar) {
+        return new TipoEmbalagemDTO(
+                embalagensACriar.getId(),
+                embalagensACriar.getTipoEmbalagem(),
+                embalagensACriar.getMaterial()
+        );
+    }
     private List<ProdutoCatalogoDTO> toDTOs(List<ProdutoCatalogo> produtosCatalogo) {
         return produtosCatalogo.stream().map(this::toDTO).collect(Collectors.toList());
+    }
+
+    private List<TipoEmbalagemDTO> embalagenstoDTOs(List<TipoEmbalagemProduto> embalagensACriar) {
+        return embalagensACriar.stream().map(this::toDTO).collect(Collectors.toList());
     }
 
     @GET // means: to call this endpoint, we need to use the HTTP GET method
