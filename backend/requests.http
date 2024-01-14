@@ -228,7 +228,7 @@ GET http://localhost:8080/intellipac/api/encomendas
 Accept: application/json
 
 ### GET ENCOMENDA
-GET http://localhost:8080/intellipac/api/encomendas/2
+GET http://localhost:8080/intellipac/api/encomendas/1
 Accept: application/json
 
 ### POST ENCOMENDA

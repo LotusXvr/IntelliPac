@@ -7,6 +7,7 @@ import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.SecurityContext;
+import org.hibernate.Hibernate;
 import pt.ipleiria.estg.dei.ei.dae.backend.dtos.EmbalagemDeTransporteDTO;
 import pt.ipleiria.estg.dei.ei.dae.backend.dtos.EncomendaDTO;
 import pt.ipleiria.estg.dei.ei.dae.backend.dtos.ProdutoFisicoDTO;
@@ -62,8 +63,8 @@ public class EncomendaService {
     private EmbalagemDeTransporteDTO toDTO(EmbalagemDeTransporte embalagemDeTransporte) {
         return new EmbalagemDeTransporteDTO(
                 embalagemDeTransporte.getId(),
-                embalagemDeTransporte.getMaterial(),
-                toDTOs(embalagemDeTransporte.getEncomendas())
+                embalagemDeTransporte.getMaterial()
+                //toDTOs(embalagemDeTransporte.getEncomendas())
         );
     }
 

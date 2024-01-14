@@ -13,12 +13,11 @@
                 </option>
             </select>
             <span v-if="observacaoForm.sensorId !== null && !isSensorValid" class="error">
-                ERRO: {{ formFeedback.sensorId }}</span
-            >
+                ERRO: {{ formFeedback.sensorId }}</span>
         </div>
 
         <br />
-        <button type="submit" :disabled="!isFormValid">Criar produto</button>
+        <button type="submit" :disabled="!isFormValid">Criar encomenda</button>
     </form>
     {{ message }}
 </template>

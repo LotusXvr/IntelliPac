@@ -5,6 +5,7 @@
                 <div class="navbar-nav custom-center">
                     <nuxt-link to="/" class="nav-link">Home</nuxt-link>
                     <nuxt-link to="/produtosCatalogo" class="nav-link">Produtos</nuxt-link>
+                    <nuxt-link to="/encomendas" class="nav-link">Encomendas</nuxt-link>
                     <nuxt-link to="/fabricantes" class="nav-link">Fabricantes</nuxt-link>
                     <nuxt-link to="/embalagens" class="nav-link">Embalagens</nuxt-link>
                     <nuxt-link to="/sensores" class="nav-link">Sensores</nuxt-link>
@@ -41,7 +42,6 @@ function logout() {
 </script>
 
 <style scoped>
-
 .container {
     background-color: darkcyan;
     border-radius: 10px;
