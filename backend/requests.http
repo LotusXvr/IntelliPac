@@ -94,6 +94,10 @@ Accept: application/json
 
 { "username": "Fabrica1", "password": "123" }
 
+### User detail
+GET http://localhost:8080/intellipac/api/auth/user
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJGYWJyaWNhMSIsImlhdCI6MTcwNTI1NTczNSwiZXhwIjoxNzA1MjU5MzM1fQ.jPtRixA4qkyflsZZQAe85x4znOjsGsyPGOJ4QwBY3JFAdHrop6nPVT1fNnTj0flY
 
 ### GET Operadores de Logistica
 GET http://localhost:8080/intellipac/api/operadores

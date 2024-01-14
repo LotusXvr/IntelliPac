@@ -13,11 +13,11 @@ public class ProdutoBean {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public Produto find(String username) {
-        return entityManager.find(Produto.class, username);
+    public Produto find(long id) {
+        return entityManager.find(Produto.class, id);
     }
-    public Produto findOrFail(String nomeProduto) {
-        var produto = entityManager.getReference(Produto.class, nomeProduto);
+    public Produto findOrFail(long id) {
+        var produto = entityManager.getReference(Produto.class, id);
         Hibernate.initialize(produto);
         return produto;
     }

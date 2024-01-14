@@ -54,7 +54,7 @@ public class ProdutoFisicoBean {
             throw new MyEntityExistsException("Produto físico com nome " + nomeProduto + " já existe");
         }
 
-        var fabricante = fabricanteDeProdutosBean.find(fabrincanteUsername);
+        FabricanteDeProdutos fabricante = fabricanteDeProdutosBean.find(fabrincanteUsername);
         if (fabricante == null) {
             throw new MyEntityNotFoundException("Fabricante com id " + fabrincanteUsername + " não existe");
         }

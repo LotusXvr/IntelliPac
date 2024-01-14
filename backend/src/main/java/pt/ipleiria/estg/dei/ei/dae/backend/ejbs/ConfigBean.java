@@ -146,6 +146,7 @@ public class ConfigBean {
             }
 
             produtoCatalogoBean.addTipoEmbalagem(1, produtoCatalogo1.getId());
+
         } catch (Exception e) {
             logger.severe(e.getMessage());
         }

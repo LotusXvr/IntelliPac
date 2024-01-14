@@ -17,15 +17,15 @@ public class Produto implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "fabricante_id")
-    @NotNull
     private FabricanteDeProdutos fabricante;
+
+
+    public Produto() {
+    }
 
     public Produto(String nomeProduto, FabricanteDeProdutos fabricante) {
         this.nomeProduto = nomeProduto;
         this.fabricante = fabricante;
-    }
-
-    public Produto() {
     }
 
     public long getId() {

@@ -45,7 +45,7 @@ public class ProdutoCatalogoBean {
             throw new MyEntityExistsException("Produto catálogo com nome " + nomeProduto + " já existe");
         }
 
-        var fabricante = fabricanteDeProdutosBean.find(fabrincanteUsername);
+        FabricanteDeProdutos fabricante = fabricanteDeProdutosBean.find(fabrincanteUsername);
         if (fabricante == null) {
             throw new MyEntityNotFoundException("Fabricante com id " + fabrincanteUsername + " não existe");
         }

@@ -46,7 +46,7 @@ public class FabricanteDeProdutosBean {
     }
 
     public FabricanteDeProdutos find(String username) {
-        var fabricanteDeProdutos = entityManager.find(FabricanteDeProdutos.class, username);
+        FabricanteDeProdutos fabricanteDeProdutos = entityManager.find(FabricanteDeProdutos.class, username);
         if (fabricanteDeProdutos == null) {
             throw new IllegalArgumentException("FabricanteDeProdutos with id '" + username + "' not found");
         }
