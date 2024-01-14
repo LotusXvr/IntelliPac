@@ -290,12 +290,12 @@ POST http://localhost:8080/intellipac/api/auth/login
 Content-Type: application/json
 Accept: application/json
 
-{ "username": "Marco", "password": "123" }
+{ "username": "Fabrica1", "password": "123" }
 
 ### GET AUTHENTICATED USER
 GET http://localhost:8080/intellipac/api/auth/user
 Accept: application/json
-Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJNYXJjbyIsImlhdCI6MTcwNTE3NjA3OSwiZXhwIjoxNzA1MTc5Njc5fQ._YgxFAMeKFUsCNBxQB0JfcfVBQq6aTX9hcJVL6Z9dn9ezoSp9s521K5e1q5h7ZmW
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJGYWJyaWNhMSIsImlhdCI6MTcwNTI1NTk0NywiZXhwIjoxNzA1MjU5NTQ3fQ.uiuIPdAsrwtZd0RVSxR2tofqZxh1Ls4Rb77vP693UzaWb-laqGCwX2jgfyQ5p_QJ
 
 
 ### ------EMBALAGEM DE TRANSPORTE------
