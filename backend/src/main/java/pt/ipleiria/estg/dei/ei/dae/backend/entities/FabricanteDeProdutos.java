@@ -10,7 +10,7 @@ import java.util.Objects;
 
 @Entity
 public class FabricanteDeProdutos extends User implements Serializable {
-    @OneToMany(mappedBy = "fabricante")
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "fabricante")
     private List<Produto> produtos;
 
     public FabricanteDeProdutos() {

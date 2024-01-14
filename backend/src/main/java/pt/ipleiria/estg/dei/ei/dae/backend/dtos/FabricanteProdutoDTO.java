@@ -17,12 +17,12 @@ public class FabricanteProdutoDTO implements Serializable {
         this.produtos = new ArrayList<>();
     }
 
-    public FabricanteProdutoDTO(String username, String password, String nome, String email, List<ProdutoDTO> produtos) {
+    public FabricanteProdutoDTO(String username, String password, String nome, String email) {
         this.username = username;
         this.password = password;
         this.nome = nome;
         this.email = email;
-        this.produtos = produtos;
+        this.produtos = new ArrayList<>();
     }
 
     public String getNome() {

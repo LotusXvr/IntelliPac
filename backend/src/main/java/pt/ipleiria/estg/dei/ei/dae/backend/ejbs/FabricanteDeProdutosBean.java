@@ -8,7 +8,9 @@ import jakarta.persistence.Query;
 import jakarta.validation.ConstraintViolationException;
 import org.hibernate.Hibernate;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.FabricanteDeProdutos;
+import pt.ipleiria.estg.dei.ei.dae.backend.entities.ProdutoCatalogo;
 import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyEntityExistsException;
+import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyEntityNotFoundException;
 import pt.ipleiria.estg.dei.ei.dae.backend.security.Hasher;
 
 import java.util.List;
@@ -59,8 +61,15 @@ public class FabricanteDeProdutosBean {
         entityManager.merge(fabricanteDeProdutos);
     }
 
-    public void remove(FabricanteDeProdutos fabricanteDeProdutos) {
-        entityManager.remove(entityManager.contains(fabricanteDeProdutos) ? fabricanteDeProdutos : entityManager.merge(fabricanteDeProdutos));
+    public void remove(String username) throws Exception {
+        FabricanteDeProdutos fabricanteDeProdutos = find(username);
+        if (fabricanteDeProdutos == null) {
+            throw new MyEntityNotFoundException("Fabricante com username " + username + " não existe");
+        }
+        if(fabricanteDeProdutos.getProdutos().size() > 0){
+            throw new Exception("Nao pode eliminar fabricante com produtos");
+        }
+        entityManager.remove(fabricanteDeProdutos);
     }
 
     public List<FabricanteDeProdutos> getAllFabricantes() {
@@ -68,5 +77,11 @@ public class FabricanteDeProdutosBean {
         return query.getResultList();
     }
 
-
+    public FabricanteDeProdutos getFabricanteProdutoWithProdutos(String username) {
+        FabricanteDeProdutos fabricanteDeProdutos = find(username);
+        if (fabricanteDeProdutos != null) {
+            Hibernate.initialize(fabricanteDeProdutos.getProdutos());
+        }
+        return fabricanteDeProdutos;
+    }
 }

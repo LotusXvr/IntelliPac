@@ -63,6 +63,7 @@ public class ConfigBean {
         try {
             fabricanteDeProdutosBean.create("Fabrica1", "123", "fabricante 1", "fabricante1@mail.pt");
             fabricanteDeProdutosBean.create("Fabrica2", "123", "fabricante 2", "fabricante2@mail.pt");
+            fabricanteDeProdutosBean.create("Fabrica3", "123", "fabricante 3", "fabricante3@mail.pt");
 
             operadorDeLogisticaBean.create("ValterLogo", "123", "Valte", "valtefutebole@mail.pt");
             operadorDeLogisticaBean.create("Joaoz", "123", "Joao", "joao@mail.pt");

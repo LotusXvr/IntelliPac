@@ -30,13 +30,28 @@ public class FabricanteService {
     private EmailBean emailBean;
 
     private FabricanteProdutoDTO toDTO(FabricanteDeProdutos fabricante) {
+        FabricanteProdutoDTO fabricanteDeProdutosDTO = new FabricanteProdutoDTO(
+                fabricante.getUsername(),
+                fabricante.getPassword(),
+                fabricante.getName(),
+                fabricante.getEmail()
+        );
+
+        fabricanteDeProdutosDTO.setProdutos(produtosToDTOs(fabricante.getProdutos()));
+        return fabricanteDeProdutosDTO;
+    }
+
+    private FabricanteProdutoDTO toDTONoProdutos(FabricanteDeProdutos fabricante) {
         return new FabricanteProdutoDTO(
                 fabricante.getUsername(),
                 fabricante.getPassword(),
                 fabricante.getName(),
-                fabricante.getEmail(),
-                produtosToDTOs(fabricante.getProdutos())
+                fabricante.getEmail()
         );
+    }
+
+    private List<FabricanteProdutoDTO> toDTOsNoProdutos(List<FabricanteDeProdutos> fabricantes) {
+        return fabricantes.stream().map(this::toDTONoProdutos).collect(java.util.stream.Collectors.toList());
     }
 
     private ProdutoDTO toDTOProducts(Produto produto) {
@@ -59,7 +74,7 @@ public class FabricanteService {
     @GET
     @Path("/")
     public List<FabricanteProdutoDTO> getAllFabricantes() {
-        return toDTOs(fabricanteDeProdutosBean.getAllFabricantes());
+        return toDTOsNoProdutos(fabricanteDeProdutosBean.getAllFabricantes());
     }
 
     @POST
@@ -80,10 +95,8 @@ public class FabricanteService {
 
     @DELETE
     @Path("{username}")
-    public void deleteFabricante(@PathParam("username") String username) {
-        fabricanteDeProdutosBean.remove(
-                fabricanteDeProdutosBean.find(username)
-        );
+    public void deleteFabricante(@PathParam("username") String username) throws Exception {
+        fabricanteDeProdutosBean.remove(username);
     }
 
     @PUT
