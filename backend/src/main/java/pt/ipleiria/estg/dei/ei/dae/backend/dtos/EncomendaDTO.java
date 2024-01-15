@@ -3,7 +3,7 @@ package pt.ipleiria.estg.dei.ei.dae.backend.dtos;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EncomendaDTO{
+public class EncomendaDTO {
     private Long id;
     private String consumidorFinal;
     private String dataEncomenda;
@@ -36,31 +36,6 @@ public class EncomendaDTO{
         this.embalagensTransporte = embalagensTransporte;
         this.operadorLogistica = operadorLogistica;
         this.estado = estado;
-    }
-
-    public EncomendaDTO(Long id, String consumidorFinal, String dataEncomenda, List<ProdutoFisicoDTO> produtos, String operadorLogistica, List<EmbalagemDeTransporteDTO> embalagensTransporte) {
-        this.id = id;
-        this.consumidorFinal = consumidorFinal;
-        this.dataEncomenda = dataEncomenda;
-        this.produtos = produtos;
-        this.embalagensTransporte = embalagensTransporte;
-        this.operadorLogistica = operadorLogistica;
-    }
-
-    public EncomendaDTO(Long id, String consumidorFinal, String dataEncomenda, List<ProdutoFisicoDTO> produtos, List<EmbalagemDeTransporteDTO> embalagensTransporte) {
-        this.id = id;
-        this.consumidorFinal = consumidorFinal;
-        this.dataEncomenda = dataEncomenda;
-        this.produtos = produtos;
-        this.embalagensTransporte = embalagensTransporte;
-    }
-
-    public EncomendaDTO(Long id, String consumidorFinal, String dataEncomenda) {
-        this.id = id;
-        this.consumidorFinal = consumidorFinal;
-        this.dataEncomenda = dataEncomenda;
-        this.produtos = new ArrayList<>();
-        this.embalagensTransporte = new ArrayList<>();
     }
 
     public Long getId() {

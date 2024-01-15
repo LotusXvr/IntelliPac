@@ -1,7 +1,6 @@
 package pt.ipleiria.estg.dei.ei.dae.backend.entities;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -88,4 +87,5 @@ public class ProdutoCatalogo extends Produto implements Serializable {
     public void removeEmbalagemACriar(TipoEmbalagemProduto embalagem) {
         this.embalagensACriar.remove(embalagem);
     }
+
 }

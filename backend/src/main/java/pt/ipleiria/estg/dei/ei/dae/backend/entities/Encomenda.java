@@ -4,7 +4,6 @@ package pt.ipleiria.estg.dei.ei.dae.backend.entities;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -63,6 +62,15 @@ public class Encomenda {
         this.estado = estado;
         this.produtos = new ArrayList<>();
         this.embalagensTransporte = new ArrayList<>();
+    }
+
+    public Encomenda(Cliente consumidorFinal, String dataEncomenda, OperadorDeLogistica operadorLogistica, String estado, List<EmbalagemDeTransporte> embalagensTransporte, List<ProdutoFisico> produtos) {
+        this.consumidorFinal = consumidorFinal;
+        this.dataEncomenda = dataEncomenda;
+        this.operadorLogistica = operadorLogistica;
+        this.estado = estado;
+        this.embalagensTransporte = embalagensTransporte;
+        this.produtos = produtos;
     }
 
     public Long getId() {

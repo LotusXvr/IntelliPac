@@ -11,6 +11,7 @@ import org.hibernate.Hibernate;
 import pt.ipleiria.estg.dei.ei.dae.backend.dtos.EncomendaDTO;
 import pt.ipleiria.estg.dei.ei.dae.backend.dtos.ProdutoFisicoDTO;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.Encomenda;
+import pt.ipleiria.estg.dei.ei.dae.backend.entities.FabricanteDeProdutos;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.ProdutoCatalogo;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.ProdutoFisico;
 import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyConstraintViolationException;
@@ -54,10 +55,19 @@ public class EncomendaBean {
             ProdutoFisico produtoFisico = null;
             // Adicione lógica para associar os produtosCatalogo à encomenda
             for (ProdutoFisicoDTO produtoDTO : encomendaDTO.getProdutos()) {
-                ProdutoCatalogo produtoCatalogo = entityManager.find(ProdutoCatalogo.class, produtoDTO.getId());
+                System.out.println("123123ProdutoDTO: " + produtoDTO.getFabricanteUsername() + " " + produtoDTO.getProdutoCatalogoId());
+                ProdutoCatalogo produtoCatalogo = entityManager.find(ProdutoCatalogo.class, produtoDTO.getProdutoCatalogoId());
+                if (produtoCatalogo == null) {
+                    throw new MyEntityNotFoundException("ProdutoCatalogo com id " + produtoDTO.getProdutoCatalogoId() + " não existe");
+                }
+                System.out.println("123123ProdutoCatalogo: " + produtoCatalogo.getId() + " " + produtoCatalogo.getNomeProduto() + " " + produtoCatalogo.getFabricante().getUsername());
+
+                FabricanteDeProdutos fabricanteDeProdutos = entityManager.find(FabricanteDeProdutos.class, produtoCatalogo.getFabricante().getUsername());
+                System.out.println("123123Fabricante: " + fabricanteDeProdutos.getUsername());
 
                 // Agora, em vez de usar o DTO diretamente, crie uma instância de ProdutoFisico e persista-a
-                produtoFisico = new ProdutoFisico(produtoCatalogo, encomenda);
+                produtoFisico = new ProdutoFisico(produtoCatalogo.getNomeProduto(), fabricanteDeProdutos, produtoCatalogo, encomenda);
+                System.out.println("123123ProdutoFisico: " + produtoFisico.getFabricante() + " " + produtoFisico.getProdutoCatalogo().getNomeProduto() + " " + produtoFisico.getProdutoCatalogo().getFabricante().getUsername());
                 entityManager.persist(produtoFisico);
 
                 // Adicione o produtoFisico à encomenda
@@ -171,7 +181,7 @@ public class EncomendaBean {
         }
 
         if (estado.equals("extraviada")) {
-            // TODO: enviar email para o cliente a informar que a encomenda foi extraviada
+            // Enviar email ao cliente a informar que a encomenda foi extraviada
             emailBean.send(encomenda.getConsumidorFinal().getEmail(), "Encomenda extraviada", "A sua encomenda foi extraviada");
 
         }
@@ -187,17 +197,14 @@ public class EncomendaBean {
         }
 
         // verificar se estado corresponde a um dos estados possíveis
-        if (!estado.equals("pendente") &&
-                !estado.equals("processamento") &&
-                !estado.equals("transporte") &&
-                !estado.equals("entregue") &&
-                !estado.equals("cancelada") &&
-                !estado.equals("devolvida") &&
-                !estado.equals("extraviada") /* roubada, danificada ou perdida */) {
-            return false;
-        }
-
-        return true;
+        /* roubada, danificada ou perdida */
+        return estado.equals("pendente") ||
+                estado.equals("processamento") ||
+                estado.equals("transporte") ||
+                estado.equals("entregue") ||
+                estado.equals("cancelada") ||
+                estado.equals("devolvida") ||
+                estado.equals("extraviada");
     }
 }
 
