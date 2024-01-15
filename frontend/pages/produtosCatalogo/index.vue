@@ -16,7 +16,8 @@
                 <td>{{ produto.fabricanteUsername }}</td>
                 <td style="display: flex; align-items: center;">
                     <nuxt-link :to="`/produtosCatalogo/${produto.id}`">Detalhes</nuxt-link>
-                    <div v-if="user !== null && user.role != 'Cliente'">
+                    <div
+                        v-if="user !== null && user.role == 'FabricanteDeProdutos' && user.username == produto.fabricanteUsername">
                         |
                         <nuxt-link :to="'/produtosCatalogo/edit/' + produto.id">Editar</nuxt-link>
                         |

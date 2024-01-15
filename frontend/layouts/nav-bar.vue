@@ -8,7 +8,8 @@
                     <nuxt-link to="/encomendas" class="nav-link">Encomendas</nuxt-link>
                     <nuxt-link to="/fabricantes" class="nav-link">Fabricantes</nuxt-link>
                     <nuxt-link to="/embalagens" class="nav-link">Embalagens</nuxt-link>
-                    <nuxt-link to="/sensores" class="nav-link">Sensores</nuxt-link>
+                    <nuxt-link to="/sensores" class="nav-link"
+                        v-if="user !== null && user.role != 'Cliente'">Sensores</nuxt-link>
                     <nuxt-link to="/observacoes" class="nav-link">Observações</nuxt-link>
                     <!-- <nuxt-link to="/auth-test" class="nav-link">Test</nuxt-link> -->
                     <nuxt-link v-if="user === null" to="/auth/login" class="nav-link">Login</nuxt-link>
