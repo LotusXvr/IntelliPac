@@ -39,7 +39,7 @@ const authStore = useAuthStore();
 const { user } = authStore;
 const config = useRuntimeConfig()
 const api = config.public.API_URL
-const { data: encomendas, error, refresh } = await useFetch(`${api}/encomendas/${user.username}`)
+const { data: encomendas, error, refresh } = await useFetch(`${api}/encomendas/username/${user.username}`)
 
 const deleteEncomenda = async (id) => {
     try {

@@ -83,7 +83,7 @@ public class ConfigBean {
             Encomenda encomenda2 = encomendaBean.create(encomendaDTO);
             produtoFisicoBean.create(produtoCatalogo1.getNomeProduto(), fabricanteSamsung.getUsername(), produtoCatalogo1.getId(), encomenda2.getId());
             produtoFisicoBean.create(produtoCatalogo1.getNomeProduto(), fabricanteSamsung.getUsername(), produtoCatalogo2.getId(), encomenda2.getId());
-            encomendaBean.patchEstado(encomenda2.getId(), "entregue");
+            encomendaBean.patchEstado(encomenda2.getId(), "ENTREGUE");
 
 
             // Embalagens

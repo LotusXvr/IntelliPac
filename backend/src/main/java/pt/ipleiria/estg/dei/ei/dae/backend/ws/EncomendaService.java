@@ -96,7 +96,7 @@ public class EncomendaService {
 
     // getEncomendasByCliente
     @GET
-    @Path("{username}")
+    @Path("/username/{username}")
     public List<EncomendaDTO> getEncomendasByUsername(@PathParam("username") String username) throws MyEntityNotFoundException {
         Cliente cliente = clienteBean.find(username);
         if (cliente != null) {
@@ -113,7 +113,7 @@ public class EncomendaService {
 
     // getEncomendaById
     @GET
-    @Path("/detalhes/{id}")
+    @Path("/{id}")
     public Response getEncomendaById(@PathParam("id") long id) throws MyEntityNotFoundException {
         Encomenda encomenda = encomendaBean.getEncomendaById(id);
         return Response.status(Response.Status.OK).entity(toDTO(encomenda)).build();

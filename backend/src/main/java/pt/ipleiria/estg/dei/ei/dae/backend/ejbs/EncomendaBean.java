@@ -3,7 +3,6 @@ package pt.ipleiria.estg.dei.ei.dae.backend.ejbs;
 
 import jakarta.ejb.EJB;
 import jakarta.ejb.Stateless;
-import jakarta.mail.MessagingException;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.validation.ConstraintViolationException;
@@ -50,7 +49,7 @@ public class EncomendaBean {
         EmbalagemDeTransporte embalagemTransporte = null;
 
         try {
-            encomenda = new Encomenda(cliente, getTimestamp(), operadorDeLogistica, "pendente");
+            encomenda = new Encomenda(cliente, getTimestamp(), operadorDeLogistica, "PENDENTE");
             ProdutoFisico produtoFisico = null;
             // Adicione lógica para associar os produtosCatalogo à encomenda
             if (encomendaDTO.getProdutos() == null) {
@@ -189,13 +188,13 @@ public class EncomendaBean {
             throw new IllegalArgumentException("Estado não pode ser null");
         }
 
-        estado = estado.toLowerCase();
+        estado = estado.toUpperCase();
         // verificar se estado corresponde a um dos estados possíveis
         if (!estadoValido(estado)) {
             throw new IllegalArgumentException("Estado inválido (Estado tem de ser pendente, processamento, transporte ou entregue)");
         }
 
-        List<Encomenda> encomendas = entityManager.createNamedQuery("getEncomendasByEstado", Encomenda.class).setParameter("estado", estado).getResultList();
+        List<Encomenda> encomendas = entityManager.createNamedQuery("getEncomendasByEstado", Encomenda.class).setParameter("estado", estado.toUpperCase()).getResultList();
 
         for (Encomenda encomenda : encomendas) {
             Hibernate.initialize(encomenda.getProdutos());
@@ -205,21 +204,24 @@ public class EncomendaBean {
         return encomendas;
     }
 
-    public void patchEstado(long id, String estado) throws MyEntityNotFoundException, MessagingException {
+    public void patchEstado(long id, String estado) throws MyEntityNotFoundException {
         Encomenda encomenda = find(id);
         if (encomenda == null) {
             throw new MyEntityNotFoundException("Encomenda com id " + id + " não existe");
         }
 
-        estado = estado.toLowerCase();
+        estado = estado.toUpperCase();
+        System.out.println("123123 ESTADO: " + estado);
+        System.out.println("123123 ESTADO VALIDO: " + estadoValido(estado));
         // verificar se estado corresponde a um dos estados possíveis
         if (!estadoValido(estado)) {
-            throw new IllegalArgumentException("Estado inválido (Estado tem de ser pendente, processamento, transporte ou entregue)");
+            throw new IllegalArgumentException("Estado inválido (Estado tem de ser pendente, processamento, transporte, entrega, cancelada, devolvida, danificada ou perdida)");
         }
 
-        if (estado.equals("extraviada")) {
+        if (estado.equals("DANIFICADA") || estado.equals("PERDIDA")) {
             // Enviar email ao cliente a informar que a encomenda foi extraviada
-            emailBean.send(encomenda.getConsumidorFinal().getEmail(), "Encomenda extraviada", "A sua encomenda foi extraviada");
+            emailBean.send(encomenda.getConsumidorFinal().getEmail(), "Encomenda " + estado.toLowerCase(), "A sua encomenda foi " + estado.toLowerCase() + ".\n" +
+                    "Por favor, contacte o operador de logistica para mais informacoes.");
 
         }
 
@@ -233,15 +235,14 @@ public class EncomendaBean {
             return false;
         }
 
-        // verificar se estado corresponde a um dos estados possíveis
-        /* roubada, danificada ou perdida */
-        return estado.equals("pendente") ||
-                estado.equals("processamento") ||
-                estado.equals("transporte") ||
-                estado.equals("entregue") ||
-                estado.equals("cancelada") ||
-                estado.equals("devolvida") ||
-                estado.equals("extraviada");
+        return estado.equals("PENDENTE") ||
+                estado.equals("PROCESSAMENTO") ||
+                estado.equals("TRANSPORTE") ||
+                estado.equals("ENTREGUE") ||
+                estado.equals("CANCELADA") ||
+                estado.equals("DEVOLVIDA") ||
+                estado.equals("DANIFICADA") ||
+                estado.equals("PERDIDA");
     }
 }
 
