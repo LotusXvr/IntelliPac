@@ -1,7 +1,7 @@
 <template>
     <form @submit.prevent="create">
         <Navbar />
-        <!-- <div>
+        <div>
             Consumidor Final:
             <select v-model="encomendaForm.consumidorFinal">
                 <option value="">--- Please select Consumidor Final ---</option>
@@ -18,7 +18,7 @@
             >
                 ERRO: {{ formFeedback.consumidorFinal }}</span
             >
-        </div> -->
+        </div>
         <br />
         <div>
             Operador Logistica:
@@ -99,7 +99,7 @@ const formFeedback = reactive({
 const config = useRuntimeConfig()
 const api = config.public.API_URL
 const { data: operadoresLogistica } = await useFetch(`${api}/operadores`)
-//const { data: consumidoresFinais } = await useFetch(`${api}/clientes`)
+const { data: consumidoresFinais } = await useFetch(`${api}/clientes`)
 const { data: produtosCatalogo } = await useFetch(`${api}/produtosCatalogo`)
 const { data: embalagensTransporte } = await useFetch(`${api}/embalagensDeTransporte`)
 const message = ref("")
