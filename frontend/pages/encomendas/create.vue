@@ -46,6 +46,9 @@
                 />
                 {{ produto.nome }}
             </p>
+            <span v-if="!isProdutoSelected" class="error">
+                ERRO: {{ formFeedback.produtosCatalogo }}</span
+            >
         </div>
         <br />
         <div>
@@ -58,6 +61,9 @@
                 />
                 {{ embalagem.material }}
             </p>
+            <span v-if="!isEmbalagemSelected" class="error">
+                ERRO: {{ formFeedback.embalagensTransporte }}</span
+            >
         </div>
         <button type="submit" :disabled="!isFormValid">Criar encomenda</button>
     </form>
@@ -93,11 +99,10 @@ const formFeedback = reactive({
 const config = useRuntimeConfig()
 const api = config.public.API_URL
 const { data: operadoresLogistica } = await useFetch(`${api}/operadores`)
-const { data: consumidoresFinais } = await useFetch(`${api}/clientes`)
+//const { data: consumidoresFinais } = await useFetch(`${api}/clientes`)
 const { data: produtosCatalogo } = await useFetch(`${api}/produtosCatalogo`)
 const { data: embalagensTransporte } = await useFetch(`${api}/embalagensDeTransporte`)
 const message = ref("")
-
 
 const isOperadorValid = computed(() => {
     if (encomendaForm.operadorLogistica === null || encomendaForm.operadorLogistica === "") {
@@ -109,8 +114,28 @@ const isOperadorValid = computed(() => {
     return true
 })
 
+const isProdutoSelected = computed(() => {
+    if (encomendaForm.produtosCatalogo.length === 0) {
+        formFeedback.produtosCatalogo = "Escolha pelo menos um produto"
+        return false
+    }
+
+    formFeedback.produtosCatalogo = ""
+    return true
+})
+
+const isEmbalagemSelected = computed(() => {
+    if (encomendaForm.embalagensTransporte.length === 0) {
+        formFeedback.embalagensTransporte = "Escolha pelo menos uma embalagem"
+        return false
+    }
+
+    formFeedback.embalagensTransporte = ""
+    return true
+})
+
 const isFormValid = computed(() => {
-    return isOperadorValid.value
+    return isOperadorValid.value && isProdutoSelected.value && isEmbalagemSelected.value
 })
 
 async function create() {
