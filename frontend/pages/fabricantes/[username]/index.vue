@@ -14,11 +14,11 @@
 </template>
 <script setup>
 const route = useRoute();
-const id = route.params.id;
+const username = route.params.username;
 const config = useRuntimeConfig();
 const api = config.public.API_URL;
 const { data: fabricante, error: fabricanteErr } = await useFetch(
-  `${api}/fabricantes/${id}`
+  `${api}/fabricantes/${username}`
 );
 const messages = ref([]);
 if (fabricanteErr.value) messages.value.push(fabricanteErr.value);

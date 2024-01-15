@@ -23,7 +23,7 @@
 </style>
 <script setup>
 const route = useRoute();
-const id = route.params.id;
+const username = route.params.username;
 const config = useRuntimeConfig();
 const api = config.public.API_URL;
 
@@ -40,7 +40,7 @@ const formFeedback = reactive({
 
 const fetchFabricante = async () => {
   try {
-    const response = await fetch(`${api}/fabricantes/${id}`);
+    const response = await fetch(`${api}/fabricantes/${username}`);
     if (!response.ok) {
       throw new Error(response.statusText);
     }
@@ -79,7 +79,7 @@ const updateFabricante = async () => {
       body: JSON.stringify(fabricanteForm),
     };
 
-    const response = await fetch(`${api}/fabricantes/${id}`, requestOptions);
+    const response = await fetch(`${api}/fabricantes/${username}`, requestOptions);
     if (!response.ok) {
       throw new Error(response.statusText);
     }
