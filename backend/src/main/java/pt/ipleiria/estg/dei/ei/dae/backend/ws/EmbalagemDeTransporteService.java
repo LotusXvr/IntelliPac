@@ -4,19 +4,15 @@ import jakarta.ejb.EJB;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import pt.ipleiria.estg.dei.ei.dae.backend.dtos.EmbalagemDeProdutoDTO;
 import pt.ipleiria.estg.dei.ei.dae.backend.dtos.EmbalagemDeTransporteDTO;
 import pt.ipleiria.estg.dei.ei.dae.backend.dtos.EncomendaDTO;
 import pt.ipleiria.estg.dei.ei.dae.backend.dtos.SensorDTO;
-import pt.ipleiria.estg.dei.ei.dae.backend.ejbs.EmbalagemDeProdutoBean;
 import pt.ipleiria.estg.dei.ei.dae.backend.ejbs.EmbalagemDeTransporteBean;
-import pt.ipleiria.estg.dei.ei.dae.backend.entities.EmbalagemDeProduto;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.EmbalagemDeTransporte;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.Encomenda;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.Sensor;
 import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyEntityNotFoundException;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -45,16 +41,16 @@ public class EmbalagemDeTransporteService {
                 embalagemDeTransporte.getMaterial()
         );
 
-        embalagemDeTransporteDTO.setSensorDTOS(sensorsToDTOs(embalagemDeTransporte.getSensores()));
+        embalagemDeTransporteDTO.setSensores(sensorsToDTOs(embalagemDeTransporte.getSensores()));
         embalagemDeTransporteDTO.setEncomendas(encomendaToDTOs(embalagemDeTransporte.getEncomendas()));
-        return  embalagemDeTransporteDTO;
+        return embalagemDeTransporteDTO;
     }
 
     private List<EmbalagemDeTransporteDTO> toDTOs(List<EmbalagemDeTransporte> embalagemDeTransportes) {
         return embalagemDeTransportes.stream().map(this::toDTO).collect(Collectors.toList());
     }
 
-    private SensorDTO toDTO(Sensor sensor){
+    private SensorDTO toDTO(Sensor sensor) {
         return new SensorDTO(
                 sensor.getId(),
                 sensor.getIdSensor(),
@@ -63,11 +59,11 @@ public class EmbalagemDeTransporteService {
         );
     }
 
-    private List<SensorDTO> sensorsToDTOs (List<Sensor> sensors) {
+    private List<SensorDTO> sensorsToDTOs(List<Sensor> sensors) {
         return sensors.stream().map(this::toDTO).collect(Collectors.toList());
     }
 
-    private EncomendaDTO toDTO(Encomenda encomenda){
+    private EncomendaDTO toDTO(Encomenda encomenda) {
         return new EncomendaDTO(
                 encomenda.getId(),
                 encomenda.getConsumidorFinal().getUsername(),
@@ -77,7 +73,7 @@ public class EmbalagemDeTransporteService {
         );
     }
 
-    private List<EncomendaDTO> encomendaToDTOs (List<Encomenda> encomendas) {
+    private List<EncomendaDTO> encomendaToDTOs(List<Encomenda> encomendas) {
         return encomendas.stream().map(this::toDTO).collect(Collectors.toList());
     }
 

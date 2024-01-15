@@ -8,7 +8,6 @@ import jakarta.ejb.Startup;
 import pt.ipleiria.estg.dei.ei.dae.backend.dtos.EncomendaDTO;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.*;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -18,43 +17,31 @@ import java.util.logging.Logger;
 @Singleton
 public class ConfigBean {
 
-    @EJB
-    private ProdutoCatalogoBean produtoCatalogoBean;
-
+    private final Logger logger = Logger.getLogger("ejbs.ConfigBean");
     @EJB
     FabricanteDeProdutosBean fabricanteDeProdutosBean;
-
     @EJB
     OperadorDeLogisticaBean operadorDeLogisticaBean;
-
     @EJB
     SensorBean sensorBean;
-
     @EJB
     ObservacaoBean observacaoBean;
-
     @EJB
     ProdutoFisicoBean produtoFisicoBean;
-
     @EJB
     EncomendaBean encomendaBean;
-
     @EJB
     ClienteBean clienteBean;
-
     @EJB
     EmbalagemBean embalagemBean;
-
     @EJB
     EmbalagemDeProdutoBean embalagemDeProdutoBean;
-
     @EJB
     EmbalagemDeTransporteBean embalagemDeTransporteBean;
-
     @EJB
     TipoEmbalagemProdutoBean tipoEmbalagemProdutoBean;
-
-    private Logger logger = Logger.getLogger("ejbs.ConfigBean");
+    @EJB
+    private ProdutoCatalogoBean produtoCatalogoBean;
 
     @PostConstruct
     public void populateDB() {
@@ -80,7 +67,7 @@ public class ConfigBean {
             encomendaDTO.setConsumidorFinal("Emanuel");
             encomendaDTO.setOperadorLogistica("ValterLogo");
             Encomenda encomenda1 = encomendaBean.create(encomendaDTO);
-            ProdutoFisico produtoFisico1 =  produtoFisicoBean.create("produto1Fisico", "Fabrica1", produtoCatalogo1.getId(), encomenda1.getId());
+            ProdutoFisico produtoFisico1 = produtoFisicoBean.create("produto1Fisico", "Fabrica1", produtoCatalogo1.getId(), encomenda1.getId());
             produtoFisicoBean.create("produto2Fisico", "Fabrica1", produtoCatalogo2.getId(), encomenda1.getId());
 
             encomendaDTO = new EncomendaDTO();
@@ -130,18 +117,20 @@ public class ConfigBean {
             EmbalagemDeTransporte embalagemDeTransporte1 = embalagemDeTransporteBean.create("Cartão");
 
             embalagemDeProdutoBean.associateSensorToEmbalagem(embalagemDeProduto1.getId(), sensor1.getId());
-            embalagemDeProdutoBean.addProdutoToEmbalagem(embalagemDeProduto1.getId(),produtoFisico1.getId());
+            embalagemDeProdutoBean.addProdutoToEmbalagem(embalagemDeProduto1.getId(), produtoFisico1.getId());
             embalagemDeTransporteBean.associateSensorToEmbalagem(embalagemDeTransporte1.getId(), sensor1.getId());
-            embalagemDeTransporteBean.addEncomendaToEmbalagem(embalagemDeTransporte1.getId(),encomenda1.getId());
+            embalagemDeTransporteBean.addEncomendaToEmbalagem(embalagemDeTransporte1.getId(), encomenda1.getId());
+            embalagemDeTransporteBean.addEncomendaToEmbalagem(embalagemDeTransporte1.getId(), encomenda2.getId());
+
 
             List<Long> tipos = new ArrayList<>(Arrays.asList(1L, 2L, 3L));
 
             List<String> materiais = new ArrayList<>(Arrays.asList("Plastico", "Metal", "Vidro", "Cartão"));
 
-            for (long tipo: tipos
-                 ) {
-                for (String material: materiais
-                     ) {
+            for (long tipo : tipos
+            ) {
+                for (String material : materiais
+                ) {
                     tipoEmbalagemProdutoBean.create(tipo, material);
                 }
             }

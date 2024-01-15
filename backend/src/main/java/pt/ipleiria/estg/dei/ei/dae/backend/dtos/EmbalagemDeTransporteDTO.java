@@ -5,34 +5,28 @@ import java.util.List;
 
 public class EmbalagemDeTransporteDTO {
     private Long id;
-    private Long idEncomenda; // Referência à Encomenda
     private String material;
     private List<EncomendaDTO> encomendas;
 
-    private List<SensorDTO> sensorDTOS;
+    private List<SensorDTO> sensores;
 
     public EmbalagemDeTransporteDTO() {
         this.encomendas = new ArrayList<>();
-        this.sensorDTOS = new ArrayList<>();
+        this.sensores = new ArrayList<>();
     }
 
     public EmbalagemDeTransporteDTO(long id, String material) {
         this.id = id;
         this.material = material;
         this.encomendas = new ArrayList<>();
-        this.sensorDTOS = new ArrayList<>();
+        this.sensores = new ArrayList<>();
     }
+
     public EmbalagemDeTransporteDTO(Long id, String material, List<EncomendaDTO> encomendas) {
         this.id = id;
         this.material = material;
         this.encomendas = encomendas;
-        this.sensorDTOS = new ArrayList<>();
-    }
-
-    public EmbalagemDeTransporteDTO(Long id, Long idEncomenda) {
-        this.id = id;
-        this.idEncomenda = idEncomenda;
-        this.encomendas = new ArrayList<>();
+        this.sensores = new ArrayList<>();
     }
 
     public Long getId() {
@@ -41,14 +35,6 @@ public class EmbalagemDeTransporteDTO {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getIdEncomenda() {
-        return idEncomenda;
-    }
-
-    public void setIdEncomenda(Long idEncomenda) {
-        this.idEncomenda = idEncomenda;
     }
 
     public List<EncomendaDTO> getEncomendas() {
@@ -67,11 +53,11 @@ public class EmbalagemDeTransporteDTO {
         this.material = material;
     }
 
-    public List<SensorDTO> getSensorDTOS() {
-        return sensorDTOS;
+    public List<SensorDTO> getSensores() {
+        return sensores;
     }
 
-    public void setSensorDTOS(List<SensorDTO> sensorDTOS) {
-        this.sensorDTOS = sensorDTOS;
+    public void setSensores(List<SensorDTO> sensores) {
+        this.sensores = sensores;
     }
 }

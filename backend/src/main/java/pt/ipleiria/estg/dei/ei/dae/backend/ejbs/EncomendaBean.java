@@ -47,11 +47,15 @@ public class EncomendaBean {
         }
 
         Encomenda encomenda = null;
+        EmbalagemDeTransporte embalagemTransporte = null;
 
         try {
             encomenda = new Encomenda(cliente, getTimestamp(), operadorDeLogistica, "pendente");
             ProdutoFisico produtoFisico = null;
             // Adicione lógica para associar os produtosCatalogo à encomenda
+            if (encomendaDTO.getProdutos() == null) {
+                throw new MyConstraintViolationException(new ConstraintViolationException("A encomenda necessita ter pelo menos um produto", null));
+            }
             for (ProdutoFisicoDTO produtoDTO : encomendaDTO.getProdutos()) {
                 ProdutoCatalogo produtoCatalogo = entityManager.find(ProdutoCatalogo.class, produtoDTO.getProdutoCatalogoId());
                 if (produtoCatalogo == null) {
@@ -68,15 +72,19 @@ public class EncomendaBean {
                 encomenda.addProduto(produtoFisico);
             }
 
+            if (encomendaDTO.getEmbalagensTransporte() == null) {
+                throw new MyConstraintViolationException(new ConstraintViolationException("A encomenda necessita ter pelo menos uma embalagem", null));
+            }
             // Adicione lógica para associar as embalagensDeTransporte à encomenda
             for (EmbalagemDeTransporteDTO embalagemDTO : encomendaDTO.getEmbalagensTransporte()) {
-                EmbalagemDeTransporte embalagemDeTransporte = entityManager.find(EmbalagemDeTransporte.class, embalagemDTO.getId());
-                if (embalagemDeTransporte == null) {
+                embalagemTransporte = entityManager.find(EmbalagemDeTransporte.class, embalagemDTO.getId());
+                if (embalagemTransporte == null) {
                     throw new MyEntityNotFoundException("EmbalagemDeTransporte com id " + embalagemDTO.getId() + " não existe");
                 }
 
                 // Adicione a embalagemDeTransporte à encomenda
-                encomenda.addEmbalagemTransporte(embalagemDeTransporte);
+                encomenda.addEmbalagemTransporte(embalagemTransporte);
+                embalagemTransporte.addEncomenda(encomenda);
             }
 
             entityManager.persist(encomenda);
