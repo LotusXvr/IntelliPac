@@ -61,8 +61,8 @@ public class ConfigBean {
             clienteBean.create("Emanuel", "123", "Emanuel Nunes", "emanuel@nunes.pt");
             clienteBean.create("Marco", "123", "Marco Nunes", "marco@mail.pt");
 
-            ProdutoCatalogo produtoCatalogo1 = produtoCatalogoBean.create("iPhone 15", fabricanteApple.getUsername(), 10);
-            ProdutoCatalogo produtoCatalogo2 = produtoCatalogoBean.create("Arroz", fabricanteNacional.getUsername(), 6);
+            ProdutoCatalogo produtoCatalogoIphone = produtoCatalogoBean.create("iPhone 15", fabricanteApple.getUsername(), 10);
+            ProdutoCatalogo produtoCatalogoArroz = produtoCatalogoBean.create("Arroz", fabricanteNacional.getUsername(), 6);
             produtoCatalogoBean.create("Cereais", fabricanteNacional.getUsername(), 8);
             produtoCatalogoBean.create("Máquina de Lavar", fabricanteSamsung.getUsername(), 12);
             produtoCatalogoBean.create("Secador", fabricanteSamsung.getUsername(), 14);
@@ -74,15 +74,16 @@ public class ConfigBean {
             encomendaDTO.setConsumidorFinal("Emanuel");
             encomendaDTO.setOperadorLogistica(operadorAmazon.getUsername());
             Encomenda encomenda1 = encomendaBean.create(encomendaDTO);
-            ProdutoFisico produtoFisico1 = produtoFisicoBean.create(produtoCatalogo1.getNomeProduto(), fabricanteSamsung.getUsername(), produtoCatalogo1.getId(), encomenda1.getId());
-            produtoFisicoBean.create(produtoCatalogo2.getNomeProduto(), fabricanteNacional.getUsername(), produtoCatalogo2.getId(), encomenda1.getId());
+            ProdutoFisico produtoFisico1 = produtoFisicoBean.create(produtoCatalogoIphone.getNomeProduto(), fabricanteSamsung.getUsername(), produtoCatalogoIphone.getId(), encomenda1.getId());
+            produtoFisicoBean.create(produtoCatalogoArroz.getNomeProduto(), fabricanteNacional.getUsername(), produtoCatalogoArroz.getId(), encomenda1.getId());
+            
 
             encomendaDTO = new EncomendaDTO();
             encomendaDTO.setConsumidorFinal("Marco");
             encomendaDTO.setOperadorLogistica(operadorHM.getUsername());
             Encomenda encomenda2 = encomendaBean.create(encomendaDTO);
-            produtoFisicoBean.create(produtoCatalogo1.getNomeProduto(), fabricanteSamsung.getUsername(), produtoCatalogo1.getId(), encomenda2.getId());
-            produtoFisicoBean.create(produtoCatalogo1.getNomeProduto(), fabricanteSamsung.getUsername(), produtoCatalogo2.getId(), encomenda2.getId());
+            produtoFisicoBean.create(produtoCatalogoIphone.getNomeProduto(), fabricanteSamsung.getUsername(), produtoCatalogoIphone.getId(), encomenda2.getId());
+            produtoFisicoBean.create(produtoCatalogoIphone.getNomeProduto(), fabricanteSamsung.getUsername(), produtoCatalogoArroz.getId(), encomenda2.getId());
             encomendaBean.patchEstado(encomenda2.getId(), "ENTREGUE");
 
 
@@ -118,15 +119,18 @@ public class ConfigBean {
             observacaoBean.create("1000", 4L);
 
             //EmbalagensDeProduto
-            EmbalagemDeProduto embalagemDeProduto1 = embalagemDeProdutoBean.create("Plastico", 1);
-            embalagemDeProdutoBean.create("Metal", 2);
+            EmbalagemDeProduto embalagemDeProdutoPlastico = embalagemDeProdutoBean.create("Plastico", 1);
+            EmbalagemDeProduto embalagemDeProdutoMetal = embalagemDeProdutoBean.create("Metal", 2);
+            EmbalagemDeProduto embalagemDeProdutoCartao = embalagemDeProdutoBean.create("Cartão", 3);
+            EmbalagemDeProduto embalagemDeProdutoVidro = embalagemDeProdutoBean.create("Vidro", 2);
+
             EmbalagemDeTransporte embalagemDeTransporteCartao = embalagemDeTransporteBean.create("Cartão");
             EmbalagemDeTransporte embalagemDeTransporteVidro = embalagemDeTransporteBean.create("Vidro");
             EmbalagemDeTransporte embalagemDeTransportePlastico = embalagemDeTransporteBean.create("Plastico");
             EmbalagemDeTransporte embalagemDeTransporteEcoPlastico = embalagemDeTransporteBean.create("EcoPlastico");
 
-            embalagemDeProdutoBean.associateSensorToEmbalagem(embalagemDeProduto1.getId(), sensor1.getId());
-            embalagemDeProdutoBean.addProdutoToEmbalagem(embalagemDeProduto1.getId(), produtoFisico1.getId());
+            embalagemDeProdutoBean.associateSensorToEmbalagem(embalagemDeProdutoPlastico.getId(), sensor1.getId());
+            embalagemDeProdutoBean.addProdutoToEmbalagem(embalagemDeProdutoPlastico.getId(), produtoFisico1.getId());
             embalagemDeTransporteBean.associateSensorToEmbalagem(embalagemDeTransporteCartao.getId(), sensor1.getId());
             embalagemDeTransporteBean.addEncomendaToEmbalagem(embalagemDeTransporteCartao.getId(), encomenda1.getId());
             embalagemDeTransporteBean.addEncomendaToEmbalagem(embalagemDeTransporteVidro.getId(), encomenda2.getId());
@@ -144,7 +148,11 @@ public class ConfigBean {
                 }
             }
 
-            produtoCatalogoBean.addTipoEmbalagem(1, produtoCatalogo1.getId());
+            produtoCatalogoBean.addTipoEmbalagem(1, produtoCatalogoIphone.getId());
+            produtoCatalogoBean.addTipoEmbalagem(8, produtoCatalogoIphone.getId());
+            produtoCatalogoBean.addTipoEmbalagem(1, produtoCatalogoArroz.getId());
+            produtoCatalogoBean.addTipoEmbalagem(5, produtoCatalogoArroz.getId());
+
 
         } catch (Exception e) {
             logger.severe(e.getMessage());

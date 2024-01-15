@@ -24,7 +24,7 @@ Content-Type: application/json
 DELETE http://localhost:8080/intellipac/api/produtosCatalogo/2
 Accept: application/json
 
-##### Detalhes de um produtoCataloo
+##### Detalhes de um produtoCatalogo
 GET http://localhost:8080/intellipac/api/produtosCatalogo/1
 Accept: application/json
 
@@ -39,7 +39,7 @@ Content-Type: application/json
 
 {
   "nome": "Produto1Fisico (POST)",
-  "fabricanteUsername": "Fabrica1",
+  "fabricanteUsername": "Apple",
   "produtoCatalogoId": 1,
   "encomendaId": 1
 }
@@ -60,7 +60,7 @@ DELETE http://localhost:8080/intellipac/api/produtosFisicos/4
 Accept: application/json
 
 ##### Detalhes de um produtoFisico
-GET http://localhost:8080/intellipac/api/produtosFisicos/3
+GET http://localhost:8080/intellipac/api/produtosFisicos/13
 Accept: application/json
 
 ##### Fabricantes
@@ -239,7 +239,7 @@ GET http://localhost:8080/intellipac/api/encomendas
 Accept: application/json
 
 ### GET ENCOMENDA
-GET http://localhost:8080/intellipac/api/encomendas/1
+GET http://localhost:8080/intellipac/api/encomendas/3
 Accept: application/json
 
 ### GET ENCOMENDAS DE CLIENTE
@@ -252,18 +252,13 @@ Content-Type: application/json
 
 {
   "consumidorFinal": "Marco",
-  "operadorLogistica": "Joaoz",
+  "operadorLogistica": "Amazon",
   "produtos": [
     {
       "produtoCatalogoId": 1
     },
     {
       "produtoCatalogoId": 2
-    }
-  ],
-  "embalagensTransporte": [
-    {
-      "id": 7
     }
   ]
 }

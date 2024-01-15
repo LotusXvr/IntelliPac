@@ -10,12 +10,20 @@
         <ul>
             <li v-for="produto in encomenda.produtos" :key="produto.id">
                 {{ produto.nome }}
+                <ul>
+                    <li v-for="embalagem in produto.embalagensDeProduto" :key="embalagem.id">
+                        {{ embalagem.material }} ({{ embalagem.tipoEmbalagem }})
+                    </li>
+                </ul>
             </li>
         </ul>
 
         <p>Embalagens Transporte:</p>
         <ul v-for="embalagens in encomenda.embalagensTransporte" :key="embalagens.id">
-            Material: {{ embalagens.material }}
+            Material:
+            {{
+                embalagens.material
+            }}
         </ul>
     </div>
 

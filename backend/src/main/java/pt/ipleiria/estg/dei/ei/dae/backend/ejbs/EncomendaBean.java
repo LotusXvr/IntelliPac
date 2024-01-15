@@ -31,6 +31,9 @@ public class EncomendaBean {
     private OperadorDeLogisticaBean operadorDeLogisticaBean;
 
     @EJB
+    private ProdutoFisicoBean produtoFisicoBean;
+
+    @EJB
     private EmailBean emailBean;
 
     public Encomenda create(EncomendaDTO encomendaDTO) throws MyEntityExistsException, MyEntityNotFoundException, MyConstraintViolationException {
@@ -50,6 +53,7 @@ public class EncomendaBean {
 
         try {
             encomenda = new Encomenda(cliente, getTimestamp(), operadorDeLogistica, "PENDENTE");
+            entityManager.persist(encomenda);
             ProdutoFisico produtoFisico = null;
             // Adicione lógica para associar os produtosCatalogo à encomenda
             if (encomendaDTO.getProdutos() == null) {
@@ -64,7 +68,7 @@ public class EncomendaBean {
                 FabricanteDeProdutos fabricanteDeProdutos = entityManager.find(FabricanteDeProdutos.class, produtoCatalogo.getFabricante().getUsername());
 
                 // Agora, em vez de usar o DTO diretamente, crie uma instância de ProdutoFisico e persista-a
-                produtoFisico = new ProdutoFisico(produtoCatalogo.getNomeProduto(), fabricanteDeProdutos, produtoCatalogo, encomenda);
+                produtoFisico = produtoFisicoBean.create(produtoCatalogo.getNomeProduto(), fabricanteDeProdutos.getUsername(), produtoCatalogo.getId(), encomenda.getId());
                 entityManager.persist(produtoFisico);
 
                 // Adicione o produtoFisico à encomenda

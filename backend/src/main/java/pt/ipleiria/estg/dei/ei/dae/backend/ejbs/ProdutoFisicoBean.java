@@ -6,10 +6,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
 import jakarta.validation.ConstraintViolationException;
-import pt.ipleiria.estg.dei.ei.dae.backend.entities.Encomenda;
-import pt.ipleiria.estg.dei.ei.dae.backend.entities.FabricanteDeProdutos;
-import pt.ipleiria.estg.dei.ei.dae.backend.entities.ProdutoCatalogo;
-import pt.ipleiria.estg.dei.ei.dae.backend.entities.ProdutoFisico;
+import pt.ipleiria.estg.dei.ei.dae.backend.entities.*;
 import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyConstraintViolationException;
 import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyEntityExistsException;
 import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyEntityNotFoundException;
@@ -75,6 +72,16 @@ public class ProdutoFisicoBean {
 
         encomenda.addProduto(produtoFisico);
         produtoCatalogo.addProduto(produtoFisico);
+
+        if (!produtoCatalogo.getEmbalagensACriar().isEmpty()) {
+            for (TipoEmbalagemProduto embalagemACriar : produtoCatalogo.getEmbalagensACriar()) {
+                
+                EmbalagemDeProduto embalagem = new EmbalagemDeProduto(embalagemACriar.getMaterial(), embalagemACriar.getTipoEmbalagem());
+                entityManager.persist(embalagem);
+                produtoFisico.addEmbalagem(embalagem);
+            }
+        }
+
         return produtoFisico;
     }
 

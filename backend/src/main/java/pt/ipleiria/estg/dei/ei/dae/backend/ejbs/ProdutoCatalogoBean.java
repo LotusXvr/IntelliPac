@@ -32,16 +32,16 @@ public class ProdutoCatalogoBean {
         );
         query.setParameter("nomeProduto", nomeProduto);
         query.setParameter("fabrincanteUsername", fabrincanteUsername);
-        return (Long)query.getSingleResult() > 0L;
+        return (Long) query.getSingleResult() > 0L;
     }
 
 
     public ProdutoCatalogo create(String nomeProduto, String fabrincanteUsername, long peso) throws Exception {
 
-        if(peso <= 0){
-            throw new Exception("Peso "+peso+" Kg não é valido");
+        if (peso <= 0) {
+            throw new Exception("Peso " + peso + " Kg não é valido");
         }
-        if(exists(nomeProduto, fabrincanteUsername)) {
+        if (exists(nomeProduto, fabrincanteUsername)) {
             throw new MyEntityExistsException("Produto catálogo com nome " + nomeProduto + " já existe");
         }
 
@@ -55,8 +55,7 @@ public class ProdutoCatalogoBean {
         try {
             produtoCatalogo = new ProdutoCatalogo(nomeProduto, fabricante, peso);
             entityManager.persist(produtoCatalogo);
-        }
-        catch (ConstraintViolationException e) {
+        } catch (ConstraintViolationException e) {
             throw new MyConstraintViolationException(e);
         }
 
@@ -99,24 +98,27 @@ public class ProdutoCatalogoBean {
 
     public ProdutoCatalogo getProdutoCatalogoWithProdutos(long id) {
         ProdutoCatalogo produtoCatalogo = find(id);
+        List<TipoEmbalagemProduto> embalagensDeProduto = produtoCatalogo.getEmbalagensACriar();
+        for (TipoEmbalagemProduto embalagemDeProduto : embalagensDeProduto) {
+            System.out.println(embalagemDeProduto.getId() + " 123123 " + embalagemDeProduto.getMaterial());
+        }
         if (produtoCatalogo != null) {
             Hibernate.initialize(produtoCatalogo.getProdutos());
-            Hibernate.initialize(produtoCatalogo.getEmbalagensACriar());
+            Hibernate.initialize(embalagensDeProduto);
         }
         return produtoCatalogo;
     }
 
-    public void addTipoEmbalagem(long idTipoEmbalagem, long idProduto) {
-        // Find the student by username
+    public void addTipoEmbalagem(long idEmbalagem, long idProduto) {
+
         ProdutoCatalogo produtoCatalogo = find(idProduto);
         if (produtoCatalogo == null) {
             throw new IllegalArgumentException("Produto with id " + idProduto + " not found.");
         }
 
-        // Find the subject by subject code
-        TipoEmbalagemProduto tipoEmbalagemProduto = entityManager.find(TipoEmbalagemProduto.class, idTipoEmbalagem);
+        TipoEmbalagemProduto tipoEmbalagemProduto = entityManager.find(TipoEmbalagemProduto.class, idEmbalagem);
         if (tipoEmbalagemProduto == null) {
-            throw new IllegalArgumentException("Tipo Embalagem with id " + idTipoEmbalagem + " not found.");
+            throw new IllegalArgumentException("Tipo Embalagem with id " + idEmbalagem + " not found.");
         }
 
         // Enroll the student in the subject
