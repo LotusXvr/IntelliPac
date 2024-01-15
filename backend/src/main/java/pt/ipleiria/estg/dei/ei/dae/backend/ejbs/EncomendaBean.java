@@ -130,12 +130,7 @@ public class EncomendaBean {
 
         List<Encomenda> encomendas = entityManager.createNamedQuery("getAllEncomendasCliente", Encomenda.class).setParameter("cliente", cliente).getResultList();
 
-        for (Encomenda encomenda : encomendas) {
-            Hibernate.initialize(encomenda.getProdutos());
-            Hibernate.initialize(encomenda.getEmbalagensTransporte());
-        }
-
-        return encomendas;
+        return getEncomendasWithHibernateLists(encomendas);
     }
 
     public List<Encomenda> getAllEncomendasOperadoresLogistica(String operadorUsername) {
@@ -147,8 +142,16 @@ public class EncomendaBean {
 
         List<Encomenda> encomendas = entityManager.createNamedQuery("getAllEncomendasOperadoresLogistica", Encomenda.class).setParameter("operador", operadorLogistica).getResultList();
 
+        return getEncomendasWithHibernateLists(encomendas);
+    }
+
+    private List<Encomenda> getEncomendasWithHibernateLists(List<Encomenda> encomendas) {
         for (Encomenda encomenda : encomendas) {
-            Hibernate.initialize(encomenda.getProdutos());
+            List<ProdutoFisico> produtos = encomenda.getProdutos();
+            Hibernate.initialize(produtos);
+            for (ProdutoFisico produto : produtos) {
+                Hibernate.initialize(produto.getEmbalagensDeProduto());
+            }
             Hibernate.initialize(encomenda.getEmbalagensTransporte());
         }
 
@@ -159,12 +162,7 @@ public class EncomendaBean {
         List<Encomenda> encomendas = entityManager.createQuery("SELECT e FROM Encomenda e", Encomenda.class)
                 .getResultList();
 
-        for (Encomenda encomenda : encomendas) {
-            Hibernate.initialize(encomenda.getProdutos());
-            Hibernate.initialize(encomenda.getEmbalagensTransporte());
-        }
-
-        return encomendas;
+        return getEncomendasWithHibernateLists(encomendas);
     }
 
     public String getTimestamp() {
