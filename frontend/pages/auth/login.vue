@@ -25,7 +25,7 @@
 </template>
 <script setup>
 import { useAuthStore } from "~/store/auth-store.js"
-import { useRouter } from "vue-router";
+import { useRouter } from "vue-router"
 import Navbar from "~/layouts/nav-bar.vue"
 const config = useRuntimeConfig()
 const api = config.public.API_URL
