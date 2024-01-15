@@ -39,7 +39,7 @@ public class ProdutoFisicoBean {
         query.setParameter("nomeProduto", nomeProduto);
         query.setParameter("fabrincanteUsername", fabrincanteUsername);
         query.setParameter("produtoCatalogo", produtoCatalogo);
-        return (Long)query.getSingleResult() > 0L;
+        return (Long) query.getSingleResult() > 0L;
     }
 
     public ProdutoFisico create(String nomeProduto, String fabrincanteUsername, long produtoCatalogoId, long encomendaId) throws MyEntityExistsException, MyEntityNotFoundException, MyConstraintViolationException {
@@ -50,9 +50,9 @@ public class ProdutoFisicoBean {
             throw new MyEntityNotFoundException("Produto catálogo com id " + produtoCatalogo.getId() + " não existe");
         }
 
-        if(exists(nomeProduto, fabrincanteUsername, produtoCatalogo)) {
+        /*if(exists(nomeProduto, fabrincanteUsername, produtoCatalogo)) {
             throw new MyEntityExistsException("Produto físico com nome " + nomeProduto + " já existe");
-        }
+        }*/
 
         FabricanteDeProdutos fabricante = fabricanteDeProdutosBean.find(fabrincanteUsername);
         if (fabricante == null) {
@@ -60,7 +60,7 @@ public class ProdutoFisicoBean {
         }
 
         Encomenda encomenda = entityManager.find(Encomenda.class, encomendaId);
-        if(encomenda == null){
+        if (encomenda == null) {
             throw new MyEntityNotFoundException("Encomenda com id " + encomenda.getId() + " não existe");
         }
 
@@ -69,8 +69,7 @@ public class ProdutoFisicoBean {
         try {
             produtoFisico = new ProdutoFisico(nomeProduto, fabricante, produtoCatalogo, encomenda);
             entityManager.persist(produtoFisico);
-        }
-        catch (ConstraintViolationException e) {
+        } catch (ConstraintViolationException e) {
             throw new MyConstraintViolationException(e);
         }
 

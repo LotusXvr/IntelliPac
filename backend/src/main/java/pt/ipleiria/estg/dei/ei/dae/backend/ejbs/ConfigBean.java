@@ -48,34 +48,41 @@ public class ConfigBean {
         System.out.println("ConfigBean: PostConstruct");
 
         try {
-            fabricanteDeProdutosBean.create("Fabrica1", "123", "fabricante 1", "fabricante1@mail.pt");
-            fabricanteDeProdutosBean.create("Fabrica2", "123", "fabricante 2", "fabricante2@mail.pt");
-            fabricanteDeProdutosBean.create("Fabrica3", "123", "fabricante 3", "fabricante3@mail.pt");
+            FabricanteDeProdutos fabricanteApple = fabricanteDeProdutosBean.create("Apple", "123", "fabricante 1", "fabricante1@mail.pt");
+            FabricanteDeProdutos fabricanteSamsung = fabricanteDeProdutosBean.create("Samsung", "123", "fabricante 2", "fabricante2@mail.pt");
+            FabricanteDeProdutos fabricanteNacional = fabricanteDeProdutosBean.create("Nacional", "123", "fabricante 3", "fabricante3@mail.pt");
 
-            operadorDeLogisticaBean.create("ValterLogo", "123", "Valte", "valtefutebole@mail.pt");
-            operadorDeLogisticaBean.create("Joaoz", "123", "Joao", "joao@mail.pt");
+            OperadorDeLogistica operadorAmazon = operadorDeLogisticaBean.create("Amazon", "123", "Valte", "amazon@mail.pt");
+            OperadorDeLogistica operadorEbay = operadorDeLogisticaBean.create("Ebay", "123", "Joao", "ebay@mail.pt");
+            OperadorDeLogistica operadorContinente = operadorDeLogisticaBean.create("Continente", "123", "Joao", "continente@mail.pt");
+            OperadorDeLogistica operadorPullBear = operadorDeLogisticaBean.create("Pull and Bear", "123", "Joao", "pullandbear@mail.pt");
+            OperadorDeLogistica operadorHM = operadorDeLogisticaBean.create("H&M", "123", "Joao", "hm@mail.pt");
 
             clienteBean.create("Emanuel", "123", "Emanuel Nunes", "emanuel@nunes.pt");
             clienteBean.create("Marco", "123", "Marco Nunes", "marco@mail.pt");
 
-            ProdutoCatalogo produtoCatalogo1 = produtoCatalogoBean.create("produto 1", "Fabrica1", 10);
-            ProdutoCatalogo produtoCatalogo2 = produtoCatalogoBean.create("produto 2", "Fabrica2", 6);
+            ProdutoCatalogo produtoCatalogo1 = produtoCatalogoBean.create("iPhone 15", fabricanteApple.getUsername(), 10);
+            ProdutoCatalogo produtoCatalogo2 = produtoCatalogoBean.create("Arroz", fabricanteNacional.getUsername(), 6);
+            produtoCatalogoBean.create("Cereais", fabricanteNacional.getUsername(), 8);
+            produtoCatalogoBean.create("Máquina de Lavar", fabricanteSamsung.getUsername(), 12);
+            produtoCatalogoBean.create("Secador", fabricanteSamsung.getUsername(), 14);
+            produtoCatalogoBean.create("Teclado", fabricanteApple.getUsername(), 3);
 
 
             // Encomendas
             EncomendaDTO encomendaDTO = new EncomendaDTO();
             encomendaDTO.setConsumidorFinal("Emanuel");
-            encomendaDTO.setOperadorLogistica("ValterLogo");
+            encomendaDTO.setOperadorLogistica(operadorAmazon.getUsername());
             Encomenda encomenda1 = encomendaBean.create(encomendaDTO);
-            ProdutoFisico produtoFisico1 = produtoFisicoBean.create("produto1Fisico", "Fabrica1", produtoCatalogo1.getId(), encomenda1.getId());
-            produtoFisicoBean.create("produto2Fisico", "Fabrica1", produtoCatalogo2.getId(), encomenda1.getId());
+            ProdutoFisico produtoFisico1 = produtoFisicoBean.create(produtoCatalogo1.getNomeProduto(), fabricanteSamsung.getUsername(), produtoCatalogo1.getId(), encomenda1.getId());
+            produtoFisicoBean.create(produtoCatalogo2.getNomeProduto(), fabricanteNacional.getUsername(), produtoCatalogo2.getId(), encomenda1.getId());
 
             encomendaDTO = new EncomendaDTO();
             encomendaDTO.setConsumidorFinal("Marco");
-            encomendaDTO.setOperadorLogistica("Joaoz");
+            encomendaDTO.setOperadorLogistica(operadorHM.getUsername());
             Encomenda encomenda2 = encomendaBean.create(encomendaDTO);
-            produtoFisicoBean.create("produto3Fisico", "Fabrica2", produtoCatalogo1.getId(), encomenda2.getId());
-            produtoFisicoBean.create("produto4Fisico", "Fabrica2", produtoCatalogo2.getId(), encomenda2.getId());
+            produtoFisicoBean.create(produtoCatalogo1.getNomeProduto(), fabricanteSamsung.getUsername(), produtoCatalogo1.getId(), encomenda2.getId());
+            produtoFisicoBean.create(produtoCatalogo1.getNomeProduto(), fabricanteSamsung.getUsername(), produtoCatalogo2.getId(), encomenda2.getId());
             encomendaBean.patchEstado(encomenda2.getId(), "entregue");
 
 
@@ -90,9 +97,8 @@ public class ConfigBean {
             sensorBean.create(2, "Humidade", "%");
             sensorBean.create(3, "Luminosidade", "LUX");
             sensorBean.create(4, "Pressao", "hPa");
-            sensorBean.create(5, "Velocidade do Vento", "km/h");
-            sensorBean.create(6, "Direcao do Vento", "N");
-            sensorBean.create(7, "Precipitacao", "mm");
+            sensorBean.create(5, "Localizacao", "GPS");
+            sensorBean.create(6, "Danificado", "Boolean");
 
             // associar sensores a embalagens
             embalagemBean.associateSensorToEmbalagem(3L, 1L);
@@ -114,13 +120,16 @@ public class ConfigBean {
             //EmbalagensDeProduto
             EmbalagemDeProduto embalagemDeProduto1 = embalagemDeProdutoBean.create("Plastico", 1);
             embalagemDeProdutoBean.create("Metal", 2);
-            EmbalagemDeTransporte embalagemDeTransporte1 = embalagemDeTransporteBean.create("Cartão");
+            EmbalagemDeTransporte embalagemDeTransporteCartao = embalagemDeTransporteBean.create("Cartão");
+            EmbalagemDeTransporte embalagemDeTransporteVidro = embalagemDeTransporteBean.create("Vidro");
+            EmbalagemDeTransporte embalagemDeTransportePlastico = embalagemDeTransporteBean.create("Plastico");
+            EmbalagemDeTransporte embalagemDeTransporteEcoPlastico = embalagemDeTransporteBean.create("EcoPlastico");
 
             embalagemDeProdutoBean.associateSensorToEmbalagem(embalagemDeProduto1.getId(), sensor1.getId());
             embalagemDeProdutoBean.addProdutoToEmbalagem(embalagemDeProduto1.getId(), produtoFisico1.getId());
-            embalagemDeTransporteBean.associateSensorToEmbalagem(embalagemDeTransporte1.getId(), sensor1.getId());
-            embalagemDeTransporteBean.addEncomendaToEmbalagem(embalagemDeTransporte1.getId(), encomenda1.getId());
-            embalagemDeTransporteBean.addEncomendaToEmbalagem(embalagemDeTransporte1.getId(), encomenda2.getId());
+            embalagemDeTransporteBean.associateSensorToEmbalagem(embalagemDeTransporteCartao.getId(), sensor1.getId());
+            embalagemDeTransporteBean.addEncomendaToEmbalagem(embalagemDeTransporteCartao.getId(), encomenda1.getId());
+            embalagemDeTransporteBean.addEncomendaToEmbalagem(embalagemDeTransporteVidro.getId(), encomenda2.getId());
 
 
             List<Long> tipos = new ArrayList<>(Arrays.asList(1L, 2L, 3L));
