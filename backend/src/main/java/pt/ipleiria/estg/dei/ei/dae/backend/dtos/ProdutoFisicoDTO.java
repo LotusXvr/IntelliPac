@@ -1,7 +1,5 @@
 package pt.ipleiria.estg.dei.ei.dae.backend.dtos;
 
-import pt.ipleiria.estg.dei.ei.dae.backend.entities.ProdutoCatalogo;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,9 +9,12 @@ public class ProdutoFisicoDTO {
     private String fabricanteUsername;
     private long produtoCatalogoId;
 
-    private  long encomendaId;
+    private long encomendaId;
+
+    private List<EmbalagemDeProdutoDTO> embalagensDeProduto;
 
     public ProdutoFisicoDTO() {
+        this.embalagensDeProduto = new ArrayList<>();
     }
 
     public ProdutoFisicoDTO(long id, String nome, String fabricanteUsername, long produtoCatalogoId, long encomendaId) {
@@ -22,19 +23,38 @@ public class ProdutoFisicoDTO {
         this.fabricanteUsername = fabricanteUsername;
         this.produtoCatalogoId = produtoCatalogoId;
         this.encomendaId = encomendaId;
+        this.embalagensDeProduto = new ArrayList<>();
     }
 
-    public ProdutoFisicoDTO(long id, String nome, String fabricanteUsername, long produtoCatalogoId) {
+    public ProdutoFisicoDTO(long id, String nome, String fabricanteUsername, long produtoCatalogoId, long encomendaId, List<EmbalagemDeProdutoDTO> embalagensDeProduto) {
         this.id = id;
         this.nome = nome;
         this.fabricanteUsername = fabricanteUsername;
         this.produtoCatalogoId = produtoCatalogoId;
+        this.encomendaId = encomendaId;
+        this.embalagensDeProduto = embalagensDeProduto;
     }
 
     public ProdutoFisicoDTO(long id, String nome, String fabricanteUsername) {
         this.id = id;
         this.nome = nome;
         this.fabricanteUsername = fabricanteUsername;
+    }
+
+    public List<EmbalagemDeProdutoDTO> getEmbalagensDeProduto() {
+        return embalagensDeProduto;
+    }
+
+    public void setEmbalagensDeProduto(List<EmbalagemDeProdutoDTO> embalagensDeProduto) {
+        this.embalagensDeProduto = embalagensDeProduto;
+    }
+
+    public void addEmbalagemDeProduto(EmbalagemDeProdutoDTO embalagemDeProduto) {
+        this.embalagensDeProduto.add(embalagemDeProduto);
+    }
+
+    public void removeEmbalagemDeProduto(EmbalagemDeProdutoDTO embalagemDeProduto) {
+        this.embalagensDeProduto.remove(embalagemDeProduto);
     }
 
     public long getId() {

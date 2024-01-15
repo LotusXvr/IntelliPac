@@ -8,6 +8,7 @@ import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.SecurityContext;
+import pt.ipleiria.estg.dei.ei.dae.backend.dtos.EmbalagemDeProdutoDTO;
 import pt.ipleiria.estg.dei.ei.dae.backend.dtos.EmbalagemDeTransporteDTO;
 import pt.ipleiria.estg.dei.ei.dae.backend.dtos.EncomendaDTO;
 import pt.ipleiria.estg.dei.ei.dae.backend.dtos.ProdutoFisicoDTO;
@@ -58,10 +59,6 @@ public class EncomendaService {
         return encomendas.stream().map(this::toDTO).collect(Collectors.toList());
     }
 
-    // produtosToDTOs
-    private List<ProdutoFisicoDTO> produtosToDTOs(List<ProdutoFisico> produtos) {
-        return produtos.stream().map(this::toDTO).collect(Collectors.toList());
-    }
 
     private List<EmbalagemDeTransporteDTO> embalagensTransporteToDTOs(List<EmbalagemDeTransporte> embalagemTransportes) {
         return embalagemTransportes.stream().map(this::toDTO).collect(Collectors.toList());
@@ -81,9 +78,27 @@ public class EncomendaService {
                 produto.getId(),
                 produto.getNomeProduto(),
                 produto.getFabricante().getUsername(),
-                produto.getProdutoCatalogo().getId(),  // Adicione esta linha para obter o produtoCatalogoId
-                produto.getEncomenda().getId()        // Adicione esta linha para obter o encomendaId
+                produto.getProdutoCatalogo().getId(),
+                produto.getEncomenda().getId(),
+                embalagensDeProdutoToDTOs(produto.getEmbalagensDeProduto())
         );
+    }
+
+    private List<ProdutoFisicoDTO> produtosToDTOs(List<ProdutoFisico> produtos) {
+        return produtos.stream().map(this::toDTO).collect(Collectors.toList());
+    }
+
+    private EmbalagemDeProdutoDTO toDTO(EmbalagemDeProduto embalagemDeProduto) {
+        return new EmbalagemDeProdutoDTO(
+                embalagemDeProduto.getId(),
+                embalagemDeProduto.getMaterial(),
+                embalagemDeProduto.getTipoEmbalagem()
+                //toDTOs(embalagemDeTransporte.getEncomendas())
+        );
+    }
+
+    private List<EmbalagemDeProdutoDTO> embalagensDeProdutoToDTOs(List<EmbalagemDeProduto> embalagensProduto) {
+        return embalagensProduto.stream().map(this::toDTO).collect(Collectors.toList());
     }
 
 

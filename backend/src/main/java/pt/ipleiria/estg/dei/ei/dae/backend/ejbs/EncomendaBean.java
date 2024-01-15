@@ -176,8 +176,13 @@ public class EncomendaBean {
     public Encomenda getEncomendaById(long id) {
         Encomenda encomenda = entityManager.find(Encomenda.class, id);
         if (encomenda != null) {
-            Hibernate.initialize(encomenda.getProdutos());
+            List<ProdutoFisico> produtos = encomenda.getProdutos();
+            Hibernate.initialize(produtos);
+            for (ProdutoFisico produto : produtos) {
+                Hibernate.initialize(produto.getEmbalagensDeProduto());
+            }
             Hibernate.initialize(encomenda.getEmbalagensTransporte());
+
         }
         return encomenda;
 

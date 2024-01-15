@@ -1,7 +1,6 @@
 package pt.ipleiria.estg.dei.ei.dae.backend.entities;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -35,36 +34,36 @@ public class ProdutoFisico extends Produto implements Serializable {
                     referencedColumnName = "id"
             )
     )
-    private List<EmbalagemDeProduto> embalagemDeProdutos;
+    private List<EmbalagemDeProduto> embalagensDeProduto;
 
     @ManyToOne
     @JoinColumn(name = "encomenda_id")
     private Encomenda encomenda;
 
     public ProdutoFisico() {
-        embalagemDeProdutos = new ArrayList<>();
+        embalagensDeProduto = new ArrayList<>();
     }
 
     public ProdutoFisico(String nomeProduto, FabricanteDeProdutos fabricante, ProdutoCatalogo produtoCatalogo, Encomenda encomenda) {
         super(nomeProduto, fabricante);
         this.produtoCatalogo = produtoCatalogo;
-        this.embalagemDeProdutos = new ArrayList<>();
+        this.embalagensDeProduto = new ArrayList<>();
         this.encomenda = encomenda;
     }
 
     public ProdutoFisico(ProdutoCatalogo produtoCatalogo, Encomenda encomenda) {
         this.produtoCatalogo = produtoCatalogo;
-        this.embalagemDeProdutos = new ArrayList<>();
+        this.embalagensDeProduto = new ArrayList<>();
         this.encomenda = encomenda;
     }
 
 
-    public List<EmbalagemDeProduto> getEmbalagemDeProdutos() {
-        return embalagemDeProdutos;
+    public List<EmbalagemDeProduto> getEmbalagensDeProduto() {
+        return embalagensDeProduto;
     }
 
-    public void setEmbalagemDeProdutos(List<EmbalagemDeProduto> embalagemDeProdutos) {
-        this.embalagemDeProdutos = embalagemDeProdutos;
+    public void setEmbalagensDeProduto(List<EmbalagemDeProduto> embalagensDeProduto) {
+        this.embalagensDeProduto = embalagensDeProduto;
     }
 
     public ProdutoCatalogo getProdutoCatalogo() {
@@ -76,10 +75,11 @@ public class ProdutoFisico extends Produto implements Serializable {
     }
 
     public void addEmbalagem(EmbalagemDeProduto embalagemDeProduto) {
-        this.embalagemDeProdutos.add(embalagemDeProduto);
+        this.embalagensDeProduto.add(embalagemDeProduto);
     }
+
     public void removeEmbalagem(EmbalagemDeProduto embalagemDeProduto) {
-        this.embalagemDeProdutos.remove(embalagemDeProduto);
+        this.embalagensDeProduto.remove(embalagemDeProduto);
     }
 
     public Encomenda getEncomenda() {

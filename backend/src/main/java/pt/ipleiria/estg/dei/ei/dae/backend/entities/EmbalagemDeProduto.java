@@ -3,7 +3,6 @@ package pt.ipleiria.estg.dei.ei.dae.backend.entities;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.Pattern;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -22,7 +21,7 @@ public class EmbalagemDeProduto extends Embalagem implements Serializable {
     @Max(value = 3, message = "A coluna deve ter apenas os valores 1, 2 ou 3")
     private long tipoEmbalagem;
 
-    @ManyToMany(mappedBy = "embalagemDeProdutos", fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "embalagensDeProduto", fetch = FetchType.LAZY)
     private List<ProdutoFisico> produtos;
 
     public EmbalagemDeProduto() {
