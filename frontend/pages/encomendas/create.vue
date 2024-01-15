@@ -1,33 +1,64 @@
 <template>
     <form @submit.prevent="create">
-        <!-- <label for="consumidorFinal">Cliente: </label>
-        <input id="consumidorFinal" v-model="encomendaForm.consumidorFinal" />
-        <span class="error">{{ formFeedback.consumidorFinal }}</span> -->
-        <div>
+        <Navbar />
+        <!-- <div>
             Consumidor Final:
             <select v-model="encomendaForm.consumidorFinal">
                 <option value="">--- Please select Consumidor Final ---</option>
-                <option v-for="consumidorFinal in consumidoresFinais" :value="consumidorFinal.username">
+                <option
+                    v-for="consumidorFinal in consumidoresFinais"
+                    :value="consumidorFinal.username"
+                >
                     {{ consumidorFinal.username }}
                 </option>
             </select>
-            <span v-if="encomendaForm.consumidorFinal !== null && !isConsumidorFinalValid" class="error">
-                ERRO: {{ formFeedback.consumidorFinal }}</span>
-        </div>
+            <span
+                v-if="encomendaForm.consumidorFinal !== null && !isConsumidorFinalValid"
+                class="error"
+            >
+                ERRO: {{ formFeedback.consumidorFinal }}</span
+            >
+        </div> -->
         <br />
         <div>
             Operador Logistica:
             <select v-model="encomendaForm.operadorLogistica">
                 <option value="">--- Please select Operador ---</option>
-                <option v-for="operadorLogistica in operadoresLogistica" :value="operadorLogistica.username">
+                <option
+                    v-for="operadorLogistica in operadoresLogistica"
+                    :value="operadorLogistica.username"
+                >
                     {{ operadorLogistica.username }}
                 </option>
             </select>
             <span v-if="encomendaForm.operadorLogistica !== null && !isOperadorValid" class="error">
-                ERRO: {{ formFeedback.operadorLogistica }}</span>
+                ERRO: {{ formFeedback.operadorLogistica }}</span
+            >
         </div>
-
         <br />
+        <div>
+            Produtos:
+            <p v-for="produto in produtosCatalogo">
+                <input
+                    type="checkbox"
+                    :value="produto.id"
+                    v-model="encomendaForm.produtosCatalogo"
+                />
+                {{ produto.nome }}
+            </p>
+        </div>
+        <br />
+        <div>
+            Embalagens:
+            <p v-for="embalagem in embalagensTransporte">
+                <input
+                    type="checkbox"
+                    :value="embalagem.id"
+                    v-model="encomendaForm.embalagensTransporte"
+                />
+                {{ embalagem.material }}
+            </p>
+        </div>
         <button type="submit" :disabled="!isFormValid">Criar encomenda</button>
     </form>
     {{ message }}
@@ -39,30 +70,34 @@
 </style>
 <script setup>
 import { ref, reactive, computed } from "vue"
+import Navbar from "~/layouts/nav-bar.vue"
+import { useAuthStore } from "~/store/auth-store.js"
+
+const authStore = useAuthStore()
+const { user } = authStore
+
 const encomendaForm = reactive({
     consumidorFinal: "",
     operadorLogistica: "",
+    produtosCatalogo: [],
+    embalagensTransporte: [],
 })
 
 const formFeedback = reactive({
     consumidorFinal: "",
     operadorLogistica: "",
+    produtosCatalogo: "",
+    embalagensTransporte: "",
 })
 
 const config = useRuntimeConfig()
 const api = config.public.API_URL
 const { data: operadoresLogistica } = await useFetch(`${api}/operadores`)
 const { data: consumidoresFinais } = await useFetch(`${api}/clientes`)
+const { data: produtosCatalogo } = await useFetch(`${api}/produtosCatalogo`)
+const { data: embalagensTransporte } = await useFetch(`${api}/embalagensDeTransporte`)
 const message = ref("")
 
-const isConsumidorFinalValid = computed(() => {
-    if (encomendaForm.consumidorFinal === null || encomendaForm.consumidorFinal === "") {
-        formFeedback.consumidorFinal = "Escolha um consumidor final"
-        return false
-    }
-    formFeedback.consumidorFinal = ""
-    return true
-})
 
 const isOperadorValid = computed(() => {
     if (encomendaForm.operadorLogistica === null || encomendaForm.operadorLogistica === "") {
@@ -75,17 +110,26 @@ const isOperadorValid = computed(() => {
 })
 
 const isFormValid = computed(() => {
-    return isConsumidorFinalValid.value && isOperadorValid.value
+    return isOperadorValid.value
 })
 
 async function create() {
     console.log(encomendaForm)
-    encomendaForm.operadorLogistica = encomendaForm.operadorLogistica
+
+    // Map the form data to the desired payload structure
+    const requestBody = {
+        consumidorFinal: user.username,
+        operadorLogistica: encomendaForm.operadorLogistica,
+        produtos: encomendaForm.produtosCatalogo.map((id) => ({ produtoCatalogoId: id })),
+        embalagensTransporte: encomendaForm.embalagensTransporte.map((id) => ({ id })),
+    }
+
+    console.log(requestBody)
 
     const requestOptions = {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(encomendaForm),
+        body: JSON.stringify(requestBody),
     }
 
     const { error } = await useFetch(`${api}/encomendas`, requestOptions)
