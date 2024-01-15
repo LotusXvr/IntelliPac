@@ -111,12 +111,36 @@ public class EncomendaBean {
 
     public List<Encomenda> getAllEncomendasCliente(String clienteUsername) {
         var cliente = clienteBean.find(clienteUsername);
-        return entityManager.createNamedQuery("getAllEncomendasCliente", Encomenda.class).setParameter("cliente", cliente).getResultList();
+
+        if (cliente == null) {
+            throw new IllegalArgumentException("Cliente com username " + clienteUsername + " não existe");
+        }
+
+        List<Encomenda> encomendas = entityManager.createNamedQuery("getAllEncomendasCliente", Encomenda.class).setParameter("cliente", cliente).getResultList();
+
+        for (Encomenda encomenda : encomendas) {
+            Hibernate.initialize(encomenda.getProdutos());
+            Hibernate.initialize(encomenda.getEmbalagensTransporte());
+        }
+
+        return encomendas;
     }
 
     public List<Encomenda> getAllEncomendasOperadoresLogistica(String operadorUsername) {
         var operadorLogistica = operadorDeLogisticaBean.find(operadorUsername);
-        return entityManager.createNamedQuery("getAllEncomendasOperadoresLogistica", Encomenda.class).setParameter("operador", operadorLogistica).getResultList();
+
+        if (operadorLogistica == null) {
+            throw new IllegalArgumentException("Operador de logistica com username " + operadorUsername + " não existe");
+        }
+
+        List<Encomenda> encomendas = entityManager.createNamedQuery("getAllEncomendasOperadoresLogistica", Encomenda.class).setParameter("operador", operadorLogistica).getResultList();
+
+        for (Encomenda encomenda : encomendas) {
+            Hibernate.initialize(encomenda.getProdutos());
+            Hibernate.initialize(encomenda.getEmbalagensTransporte());
+        }
+
+        return encomendas;
     }
 
     public List<Encomenda> getAllEncomendas() {

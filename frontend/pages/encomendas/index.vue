@@ -34,9 +34,12 @@
 </template>
 <script setup>
 import Navbar from "~/layouts/nav-bar.vue";
+import { useAuthStore } from "~/store/auth-store";
+const authStore = useAuthStore();
+const { user } = authStore;
 const config = useRuntimeConfig()
 const api = config.public.API_URL
-const { data: encomendas, error, refresh } = await useFetch(`${api}/encomendas`)
+const { data: encomendas, error, refresh } = await useFetch(`${api}/encomendas/${user.username}`)
 
 const deleteEncomenda = async (id) => {
     try {

@@ -11,10 +11,10 @@ import jakarta.ws.rs.core.SecurityContext;
 import pt.ipleiria.estg.dei.ei.dae.backend.dtos.EmbalagemDeTransporteDTO;
 import pt.ipleiria.estg.dei.ei.dae.backend.dtos.EncomendaDTO;
 import pt.ipleiria.estg.dei.ei.dae.backend.dtos.ProdutoFisicoDTO;
+import pt.ipleiria.estg.dei.ei.dae.backend.ejbs.ClienteBean;
 import pt.ipleiria.estg.dei.ei.dae.backend.ejbs.EncomendaBean;
-import pt.ipleiria.estg.dei.ei.dae.backend.entities.EmbalagemDeTransporte;
-import pt.ipleiria.estg.dei.ei.dae.backend.entities.Encomenda;
-import pt.ipleiria.estg.dei.ei.dae.backend.entities.ProdutoFisico;
+import pt.ipleiria.estg.dei.ei.dae.backend.ejbs.OperadorDeLogisticaBean;
+import pt.ipleiria.estg.dei.ei.dae.backend.entities.*;
 import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyConstraintViolationException;
 import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyEntityExistsException;
 import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyEntityNotFoundException;
@@ -29,6 +29,12 @@ public class EncomendaService {
 
     @EJB
     private EncomendaBean encomendaBean;
+
+    @EJB
+    private ClienteBean clienteBean;
+
+    @EJB
+    private OperadorDeLogisticaBean opBean;
 
     @Context
     private SecurityContext securityContext;
@@ -88,9 +94,26 @@ public class EncomendaService {
         return toDTOs(encomendaBean.getAllEncomendas());
     }
 
+    // getEncomendasByCliente
+    @GET
+    @Path("{username}")
+    public List<EncomendaDTO> getEncomendasByUsername(@PathParam("username") String username) throws MyEntityNotFoundException {
+        Cliente cliente = clienteBean.find(username);
+        if (cliente != null) {
+            return toDTOs(encomendaBean.getAllEncomendasCliente(username));
+        }
+
+        OperadorDeLogistica operadorDeLogistica = opBean.find(username);
+        if (operadorDeLogistica != null) {
+            return toDTOs(encomendaBean.getAllEncomendasOperadoresLogistica(username));
+        }
+
+        throw new MyEntityNotFoundException("Cliente ou Operador de Logistica com username " + username + " não existe");
+    }
+
     // getEncomendaById
     @GET
-    @Path("{id}")
+    @Path("/detalhes/{id}")
     public Response getEncomendaById(@PathParam("id") long id) throws MyEntityNotFoundException {
         Encomenda encomenda = encomendaBean.getEncomendaById(id);
         return Response.status(Response.Status.OK).entity(toDTO(encomenda)).build();

@@ -27,7 +27,7 @@ const route = useRoute()
 const id = route.params.id
 const config = useRuntimeConfig()
 const api = config.public.API_URL
-const { data: encomenda, error: proErr } = await useFetch(`${api}/encomendas/${id}`)
+const { data: encomenda, error: proErr } = await useFetch(`${api}/encomendas/detalhes7${id}`)
 const messages = ref([])
 if (proErr.value) messages.value.push(proErr.value)
 </script>
