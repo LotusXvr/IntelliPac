@@ -12,11 +12,11 @@
             <tr v-for="fabricante in fabricantes">
                 <td>{{ fabricante.nome }}</td>
                 <td>
-                    <nuxt-link :to="`/fabricantes/${fabricante.id}`">Details</nuxt-link>
+                    <nuxt-link :to="`/fabricantes/${fabricante.username}`">Details</nuxt-link>
                     |
-                    <nuxt-link :to="'/fabricantes/edit/' + fabricante.id">Editar</nuxt-link>
+                    <nuxt-link :to="'/fabricantes/edit/' + fabricante.username">Editar</nuxt-link>
                     |
-                    <button @click="deleteFabricante(fabricante.id)">Excluir</button>
+                    <button @click="deleteFabricante(fabricante.username)">Excluir</button>
                 </td>
             </tr>
         </table>
@@ -32,9 +32,9 @@ const config = useRuntimeConfig()
 const api = config.public.API_URL
 const { data: fabricantes, error, refresh } = await useFetch(`${api}/fabricantes`)
 
-const deleteFabricante = async (id) => {
+const deleteFabricante = async (username) => {
     try {
-        const response = await fetch(`${api}/fabricantes/${id}`, {
+        const response = await fetch(`${api}/fabricantes/${username}`, {
             method: "DELETE",
         })
         if (response.ok) {
