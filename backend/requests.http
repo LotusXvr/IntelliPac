@@ -260,6 +260,11 @@ Content-Type: application/json
     {
       "produtoCatalogoId": 2
     }
+  ],
+  "embalagensTransporte": [
+    {
+      "id": 7
+    }
   ]
 }
 

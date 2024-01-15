@@ -8,12 +8,10 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.validation.ConstraintViolationException;
 import org.hibernate.Hibernate;
+import pt.ipleiria.estg.dei.ei.dae.backend.dtos.EmbalagemDeTransporteDTO;
 import pt.ipleiria.estg.dei.ei.dae.backend.dtos.EncomendaDTO;
 import pt.ipleiria.estg.dei.ei.dae.backend.dtos.ProdutoFisicoDTO;
-import pt.ipleiria.estg.dei.ei.dae.backend.entities.Encomenda;
-import pt.ipleiria.estg.dei.ei.dae.backend.entities.FabricanteDeProdutos;
-import pt.ipleiria.estg.dei.ei.dae.backend.entities.ProdutoCatalogo;
-import pt.ipleiria.estg.dei.ei.dae.backend.entities.ProdutoFisico;
+import pt.ipleiria.estg.dei.ei.dae.backend.entities.*;
 import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyConstraintViolationException;
 import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyEntityExistsException;
 import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyEntityNotFoundException;
@@ -68,6 +66,17 @@ public class EncomendaBean {
 
                 // Adicione o produtoFisico à encomenda
                 encomenda.addProduto(produtoFisico);
+            }
+
+            // Adicione lógica para associar as embalagensDeTransporte à encomenda
+            for (EmbalagemDeTransporteDTO embalagemDTO : encomendaDTO.getEmbalagensTransporte()) {
+                EmbalagemDeTransporte embalagemDeTransporte = entityManager.find(EmbalagemDeTransporte.class, embalagemDTO.getId());
+                if (embalagemDeTransporte == null) {
+                    throw new MyEntityNotFoundException("EmbalagemDeTransporte com id " + embalagemDTO.getId() + " não existe");
+                }
+
+                // Adicione a embalagemDeTransporte à encomenda
+                encomenda.addEmbalagemTransporte(embalagemDeTransporte);
             }
 
             entityManager.persist(encomenda);
