@@ -1,7 +1,5 @@
 package pt.ipleiria.estg.dei.ei.dae.backend.dtos;
 
-import pt.ipleiria.estg.dei.ei.dae.backend.entities.Sensor;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,21 +8,21 @@ public class EmbalagemDeProdutoDTO {
 
     private String material;
     private long tipoEmbalagem;
-    private List<ProdutoFisicoDTO> produtoDTOS;
+    private List<ProdutoFisicoDTO> produtos;
 
-    private List<SensorDTO> sensorDTOS;
+    private List<SensorDTO> sensores;
 
     public EmbalagemDeProdutoDTO() {
-        this.produtoDTOS = new ArrayList<>();
-        this.sensorDTOS = new ArrayList<>();
+        this.produtos = new ArrayList<>();
+        this.sensores = new ArrayList<>();
     }
 
     public EmbalagemDeProdutoDTO(Long id, String material, long tipoEmbalagem) {
         this.id = id;
         this.material = material;
         this.tipoEmbalagem = tipoEmbalagem;
-        this.produtoDTOS = new ArrayList<>();
-        this.sensorDTOS = new ArrayList<>();
+        this.produtos = new ArrayList<>();
+        this.sensores = new ArrayList<>();
     }
 
     public Long getId() {
@@ -51,19 +49,19 @@ public class EmbalagemDeProdutoDTO {
         this.tipoEmbalagem = tipoEmbalagem;
     }
 
-    public List<ProdutoFisicoDTO> getProdutoDTOS() {
-        return produtoDTOS;
+    public List<ProdutoFisicoDTO> getProdutos() {
+        return produtos;
     }
 
     public void setProdutoDTOS(List<ProdutoFisicoDTO> produtoDTOS) {
-        this.produtoDTOS = produtoDTOS;
+        this.produtos = produtoDTOS;
     }
 
-    public List<SensorDTO> getSensorDTOS() {
-        return sensorDTOS;
+    public List<SensorDTO> getSensores() {
+        return sensores;
     }
 
     public void setSensorDTOS(List<SensorDTO> sensorDTOS) {
-        this.sensorDTOS = sensorDTOS;
+        this.sensores = sensorDTOS;
     }
 }
