@@ -55,19 +55,15 @@ public class EncomendaBean {
             ProdutoFisico produtoFisico = null;
             // Adicione lógica para associar os produtosCatalogo à encomenda
             for (ProdutoFisicoDTO produtoDTO : encomendaDTO.getProdutos()) {
-                System.out.println("123123ProdutoDTO: " + produtoDTO.getFabricanteUsername() + " " + produtoDTO.getProdutoCatalogoId());
                 ProdutoCatalogo produtoCatalogo = entityManager.find(ProdutoCatalogo.class, produtoDTO.getProdutoCatalogoId());
                 if (produtoCatalogo == null) {
                     throw new MyEntityNotFoundException("ProdutoCatalogo com id " + produtoDTO.getProdutoCatalogoId() + " não existe");
                 }
-                System.out.println("123123ProdutoCatalogo: " + produtoCatalogo.getId() + " " + produtoCatalogo.getNomeProduto() + " " + produtoCatalogo.getFabricante().getUsername());
 
                 FabricanteDeProdutos fabricanteDeProdutos = entityManager.find(FabricanteDeProdutos.class, produtoCatalogo.getFabricante().getUsername());
-                System.out.println("123123Fabricante: " + fabricanteDeProdutos.getUsername());
 
                 // Agora, em vez de usar o DTO diretamente, crie uma instância de ProdutoFisico e persista-a
                 produtoFisico = new ProdutoFisico(produtoCatalogo.getNomeProduto(), fabricanteDeProdutos, produtoCatalogo, encomenda);
-                System.out.println("123123ProdutoFisico: " + produtoFisico.getFabricante() + " " + produtoFisico.getProdutoCatalogo().getNomeProduto() + " " + produtoFisico.getProdutoCatalogo().getFabricante().getUsername());
                 entityManager.persist(produtoFisico);
 
                 // Adicione o produtoFisico à encomenda
