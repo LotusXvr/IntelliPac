@@ -93,7 +93,12 @@ public class ProdutoCatalogoBean {
     }
 
     public List<ProdutoCatalogo> getAllProductsCatalogo() {
-        return entityManager.createNamedQuery("getAllProductsCatalogo", ProdutoCatalogo.class).getResultList();
+        List<ProdutoCatalogo> produtosCatalogo = entityManager.createNamedQuery("getAllProductsCatalogo", ProdutoCatalogo.class).getResultList();
+        for (ProdutoCatalogo produtoCatalogo : produtosCatalogo) {
+            Hibernate.initialize(produtoCatalogo.getProdutos());
+            Hibernate.initialize(produtoCatalogo.getEmbalagensACriar());
+        }
+        return produtosCatalogo;
     }
 
     public ProdutoCatalogo getProdutoCatalogoWithProdutos(long id) {

@@ -3,8 +3,29 @@
         <h2 v-once>Editar encomenda #{{ encomenda.id }}</h2>
 
         <form @submit.prevent="updateEncomenda">
+
+
+            
+            Embalagem de Transporte:
+            <br/>
+            <select v-model="encomendaForm.embalagemTransporte">
+                <option value="">--- Please select Embalagem de Transporte ---</option>
+                <option
+                    v-for="embalagemTransporte in embalagensTransporte"
+                    :value="embalagemTransporte.id"
+                >
+                    {{ embalagemTransporte.material }}
+                </option>
+            </select>
+            <span v-if="encomendaForm.embalagemTransporte !== null && !isEmbalagemSelected" class="error">
+                ERRO: {{ formFeedback.embalagemTransporte }}</span
+            >
+            <br />
+
+            <br/>
+            <br/>
+
             <label for="estado">Estado: </label>
-            <!-- select -->
             <select id="estado" v-model="encomendaForm.estado">
                 <option :disabled="encomendaForm.estado === 'PENDENTE'" value="pendente">
                     Pendente
@@ -31,10 +52,6 @@
                     Perdida
                 </option>
             </select>
-
-            <span v-if="encomendaForm.estado !== null && !isEstadoValid" class="error">
-                ERRO: {{ formFeedback.estado }}</span
-            >
             <br />
 
             <br />
@@ -57,14 +74,18 @@ const id = route.params.id
 const config = useRuntimeConfig()
 const api = config.public.API_URL
 
+const { data: embalagensTransporte } = await useFetch(`${api}/embalagensDeTransporte`)
+
 const encomenda = ref(null)
 const messages = ref([])
 
 const encomendaForm = reactive({
+    embalagemTransporte: null,
     estado: null,
 })
 
 const formFeedback = reactive({
+    embalagemTransporte: "",
     estado: "",
 })
 
@@ -82,28 +103,19 @@ const fetchEncomenda = async () => {
     }
 }
 
-const estadosPermitidos = [
-    "pendente",
-    "processamento",
-    "transporte",
-    "entregue",
-    "cancelada",
-    "devolvida",
-    "danificada",
-    "perdida",
-]
 
-const isEstadoValid = computed(() => {
-    if (!estadosPermitidos.includes(encomendaForm.estado)) {
-        formFeedback.estado = "O estado deve ser pendente, processamento, transporte ou entregue"
+const isEmbalagemSelected = computed(() => {
+    if (encomendaForm.embalagemTransporte === "") {
+        formFeedback.embalagemTransporte = "A embalagem de transporte deve ser selecionada"
         return false
     }
-    formFeedback.estado = ""
+    formFeedback.embalagemTransporte = ""
     return true
 })
 
+
 const isFormValid = computed(() => {
-    return isEstadoValid.value
+    return isEmbalagemSelected.value
 })
 
 const updateEncomenda = async () => {

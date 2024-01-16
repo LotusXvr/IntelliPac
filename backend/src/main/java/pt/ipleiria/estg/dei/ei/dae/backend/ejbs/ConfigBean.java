@@ -59,7 +59,13 @@ public class ConfigBean {
             OperadorDeLogistica operadorHM = operadorDeLogisticaBean.create("H&M", "123", "Joao", "hm@mail.pt");
 
             clienteBean.create("Emanuel", "123", "Emanuel Nunes", "emanuel@nunes.pt");
-            clienteBean.create("Marco", "123", "Marco Nunes", "marco@mail.pt");
+            clienteBean.create("Marco", "123", "Marco Oliveira", "marco@mail.pt");
+            clienteBean.create("Joao", "123", "Joao Silva", "joao@mail.pt");
+            clienteBean.create("Ricardo", "123", "Ricardo Santos", "ricardo@mail.pt");
+            clienteBean.create("Pedro", "123", "Pedro Santos", "pedro@mail.pt");
+            clienteBean.create("Maria", "123", "Maria Ferreira", "maria@mail.pt");
+            clienteBean.create("Ana", "123", "Ana João", "ana@mail.pt");
+            clienteBean.create("Marta", "123", "Marta Silva", "marta@mail.pt");
 
             ProdutoCatalogo produtoCatalogoIphone = produtoCatalogoBean.create("iPhone 15", fabricanteApple.getUsername(), 10);
             ProdutoCatalogo produtoCatalogoArroz = produtoCatalogoBean.create("Arroz", fabricanteNacional.getUsername(), 6);
@@ -76,7 +82,7 @@ public class ConfigBean {
             Encomenda encomenda1 = encomendaBean.create(encomendaDTO);
             ProdutoFisico produtoFisico1 = produtoFisicoBean.create(produtoCatalogoIphone.getNomeProduto(), fabricanteSamsung.getUsername(), produtoCatalogoIphone.getId(), encomenda1.getId());
             produtoFisicoBean.create(produtoCatalogoArroz.getNomeProduto(), fabricanteNacional.getUsername(), produtoCatalogoArroz.getId(), encomenda1.getId());
-            
+
 
             encomendaDTO = new EncomendaDTO();
             encomendaDTO.setConsumidorFinal("Marco");

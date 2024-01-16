@@ -218,8 +218,6 @@ public class EncomendaBean {
         }
 
         estado = estado.toUpperCase();
-        System.out.println("123123 ESTADO: " + estado);
-        System.out.println("123123 ESTADO VALIDO: " + estadoValido(estado));
         // verificar se estado corresponde a um dos estados possíveis
         if (!estadoValido(estado)) {
             throw new IllegalArgumentException("Estado inválido (Estado tem de ser pendente, processamento, transporte, entrega, cancelada, devolvida, danificada ou perdida)");
