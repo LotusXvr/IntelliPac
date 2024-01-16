@@ -1,14 +1,11 @@
 package pt.ipleiria.estg.dei.ei.dae.backend.ws;
 
 import jakarta.ejb.EJB;
-import jakarta.mail.MessagingException;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.SecurityContext;
-import org.hibernate.Hibernate;
-import pt.ipleiria.estg.dei.ei.dae.backend.dtos.ClienteDTO;
 import pt.ipleiria.estg.dei.ei.dae.backend.dtos.ProdutoCatalogoDTO;
 import pt.ipleiria.estg.dei.ei.dae.backend.dtos.ProdutoFisicoDTO;
 import pt.ipleiria.estg.dei.ei.dae.backend.dtos.TipoEmbalagemDTO;
@@ -16,8 +13,6 @@ import pt.ipleiria.estg.dei.ei.dae.backend.ejbs.ProdutoCatalogoBean;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.ProdutoCatalogo;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.ProdutoFisico;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.TipoEmbalagemProduto;
-import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyConstraintViolationException;
-import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyEntityExistsException;
 import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyEntityNotFoundException;
 
 import java.util.List;
@@ -67,6 +62,7 @@ public class ProdutoCatalogoService {
                 embalagensACriar.getMaterial()
         );
     }
+
     private List<ProdutoCatalogoDTO> toDTOs(List<ProdutoCatalogo> produtosCatalogo) {
         return produtosCatalogo.stream().map(this::toDTO).collect(Collectors.toList());
     }
@@ -78,7 +74,7 @@ public class ProdutoCatalogoService {
     @GET // means: to call this endpoint, we need to use the HTTP GET method
     @Path("/") // means: the relative url path is “/api/students/”
     public List<ProdutoCatalogoDTO> getAllProdutosCatalogo() {
-        return toDTOsNoProdutos(produtoCatalogoBean.getAllProductsCatalogo());
+        return toDTOs(produtoCatalogoBean.getAllProductsCatalogo());
     }
 
     @POST

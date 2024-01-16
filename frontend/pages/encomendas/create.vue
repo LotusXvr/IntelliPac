@@ -9,7 +9,7 @@
                     v-for="consumidorFinal in consumidoresFinais"
                     :value="consumidorFinal.username"
                 >
-                    {{ consumidorFinal.username }}
+                    {{ consumidorFinal.name }}
                 </option>
             </select>
             <span
@@ -31,7 +31,10 @@
                     {{ operadorLogistica.username }}
                 </option>
             </select>
-            <span v-if="encomendaForm.operadorLogistica !== null && !isOperadorValid" class="error">
+            <span
+                v-if="encomendaForm.operadorLogistica !== null && !isOperadorSelected"
+                class="error"
+            >
                 ERRO: {{ formFeedback.operadorLogistica }}</span
             >
         </div>
@@ -45,26 +48,16 @@
                     v-model="encomendaForm.produtosCatalogo"
                 />
                 {{ produto.nome }}
+            <ul> Embalagens:
+                <li v-for="embalagem in produto.embalagensACriar">{{ tipoNumeroParaString(embalagem.tipo) }}: {{ embalagem.material }}</li>
+            </ul>
             </p>
             <span v-if="!isProdutoSelected" class="error">
                 ERRO: {{ formFeedback.produtosCatalogo }}</span
             >
         </div>
         <br />
-        <div>
-            Embalagens:
-            <p v-for="embalagem in embalagensTransporte">
-                <input
-                    type="checkbox"
-                    :value="embalagem.id"
-                    v-model="encomendaForm.embalagensTransporte"
-                />
-                {{ embalagem.material }}
-            </p>
-            <span v-if="!isEmbalagemSelected" class="error">
-                ERRO: {{ formFeedback.embalagensTransporte }}</span
-            >
-        </div>
+        
         <button type="submit" :disabled="!isFormValid">Criar encomenda</button>
     </form>
     {{ message }}
@@ -101,10 +94,32 @@ const api = config.public.API_URL
 const { data: operadoresLogistica } = await useFetch(`${api}/operadores`)
 const { data: consumidoresFinais } = await useFetch(`${api}/clientes`)
 const { data: produtosCatalogo } = await useFetch(`${api}/produtosCatalogo`)
-const { data: embalagensTransporte } = await useFetch(`${api}/embalagensDeTransporte`)
 const message = ref("")
 
-const isOperadorValid = computed(() => {
+const tipoNumeroParaString = (tipo) => {
+    switch (tipo) {
+        case 1:
+            return "Primária"
+        case 2:
+            return "Secundária"
+        case 3:
+            return "Terceária"
+        default:
+            return "Tipo desconhecido"
+    }
+}
+
+const isConsumidorSelected = computed(() => {
+    if (encomendaForm.consumidorFinal === null || encomendaForm.consumidorFinal === "") {
+        formFeedback.consumidorFinal = "Escolha um consumidor final"
+        return false
+    }
+
+    formFeedback.consumidorFinal = ""
+    return true
+})
+
+const isOperadorSelected = computed(() => {
     if (encomendaForm.operadorLogistica === null || encomendaForm.operadorLogistica === "") {
         formFeedback.operadorLogistica = "Escolha um operador de logistica"
         return false
@@ -124,18 +139,12 @@ const isProdutoSelected = computed(() => {
     return true
 })
 
-const isEmbalagemSelected = computed(() => {
-    if (encomendaForm.embalagensTransporte.length === 0) {
-        formFeedback.embalagensTransporte = "Escolha pelo menos uma embalagem"
-        return false
-    }
-
-    formFeedback.embalagensTransporte = ""
-    return true
-})
-
 const isFormValid = computed(() => {
-    return isOperadorValid.value && isProdutoSelected.value && isEmbalagemSelected.value
+    return (
+        isConsumidorSelected.value &&
+        isOperadorSelected.value &&
+        isProdutoSelected.value
+    )
 })
 
 async function create() {
@@ -143,7 +152,7 @@ async function create() {
 
     // Map the form data to the desired payload structure
     const requestBody = {
-        consumidorFinal: user.username,
+        consumidorFinal: encomendaForm.consumidorFinal,
         operadorLogistica: encomendaForm.operadorLogistica,
         produtos: encomendaForm.produtosCatalogo.map((id) => ({ produtoCatalogoId: id })),
         embalagensTransporte: encomendaForm.embalagensTransporte.map((id) => ({ id })),

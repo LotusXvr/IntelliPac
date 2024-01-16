@@ -218,8 +218,6 @@ public class EncomendaBean {
         }
 
         estado = estado.toUpperCase();
-        System.out.println("123123 ESTADO: " + estado);
-        System.out.println("123123 ESTADO VALIDO: " + estadoValido(estado));
         // verificar se estado corresponde a um dos estados possíveis
         if (!estadoValido(estado)) {
             throw new IllegalArgumentException("Estado inválido (Estado tem de ser pendente, processamento, transporte, entrega, cancelada, devolvida, danificada ou perdida)");
@@ -250,6 +248,30 @@ public class EncomendaBean {
                 estado.equals("DEVOLVIDA") ||
                 estado.equals("DANIFICADA") ||
                 estado.equals("PERDIDA");
+    }
+
+    public void patchEmbalagensTransporte(long id, List<EmbalagemDeTransporteDTO> embalagensTransporte) throws MyEntityNotFoundException {
+        Encomenda encomenda = find(id);
+        if (encomenda == null) {
+            throw new MyEntityNotFoundException("Encomenda com id " + id + " não existe");
+        }
+
+        if (embalagensTransporte == null) {
+            throw new MyEntityNotFoundException("Lista de embalagens de transporte não pode vir vazia");
+        }
+
+        for (EmbalagemDeTransporteDTO embalagemDTO : embalagensTransporte) {
+            EmbalagemDeTransporte embalagem = entityManager.find(EmbalagemDeTransporte.class, embalagemDTO.getId());
+            if (embalagem == null) {
+                throw new MyEntityNotFoundException("Embalagem de transporte com id " + embalagemDTO.getId() + " não existe");
+            }
+
+            encomenda.addEmbalagemTransporte(embalagem);
+            embalagem.addEncomenda(encomenda);
+        }
+
+        encomenda.setEstado("PROCESSAMENTO");
+        entityManager.merge(encomenda);
     }
 }
 
