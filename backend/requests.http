@@ -60,7 +60,7 @@ DELETE http://localhost:8080/intellipac/api/produtosFisicos/4
 Accept: application/json
 
 ##### Detalhes de um produtoFisico
-GET http://localhost:8080/intellipac/api/produtosFisicos/13
+GET http://localhost:8080/intellipac/api/produtosFisicos/7
 Accept: application/json
 
 ##### Fabricantes
@@ -303,7 +303,7 @@ DELETE http://localhost:8080/intellipac/api/embalagensDeProduto/8
 Content-Type: application/json
 
 ### Detalhes de uma embalagem de Produto
-GET http://localhost:8080/intellipac/api/embalagensDeProduto/5
+GET http://localhost:8080/intellipac/api/embalagensDeProduto/13
 Accept: application/json
 
 ### ------AUTENTICAÇAO DE UTILIZADOR------

@@ -5,6 +5,7 @@ import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -26,12 +27,28 @@ public class TipoEmbalagemProduto implements Serializable {
     private String material;
     @ManyToMany(mappedBy = "embalagensACriar", fetch = FetchType.EAGER)
     private List<ProdutoCatalogo> produtoCatalogo;
+
+    @ManyToMany
+    @JoinTable(
+            name = "tipoEmbalagemProduto_TipoSensor",
+            joinColumns = @JoinColumn(
+                    name = "tipoEmbalagem_id",
+                    referencedColumnName = "id"
+            ),
+            inverseJoinColumns = @JoinColumn(
+                    name = "tipoSensor_id",
+                    referencedColumnName = "id"
+            )
+    )
+    private List<TipoSensor> tipoSensor;
     public TipoEmbalagemProduto(long tipoEmbalagem, String material) {
         this.tipoEmbalagem = tipoEmbalagem;
         this.material = material;
+        this.tipoSensor = new ArrayList<>();
     }
 
     public TipoEmbalagemProduto() {
+        this.tipoSensor = new ArrayList<>();
     }
 
     public long getId() {
@@ -56,5 +73,29 @@ public class TipoEmbalagemProduto implements Serializable {
 
     public void setMaterial(String material) {
         this.material = material;
+    }
+
+    public List<ProdutoCatalogo> getProdutoCatalogo() {
+        return produtoCatalogo;
+    }
+
+    public void setProdutoCatalogo(List<ProdutoCatalogo> produtoCatalogo) {
+        this.produtoCatalogo = produtoCatalogo;
+    }
+
+    public List<TipoSensor> getTipoSensor() {
+        return tipoSensor;
+    }
+
+    public void setTipoSensor(List<TipoSensor> tipoSensor) {
+        this.tipoSensor = tipoSensor;
+    }
+
+    public void addTipoSensor(TipoSensor sensor) {
+        this.tipoSensor.add(sensor);
+    }
+
+    public void removeTipoSensor(TipoSensor sensor) {
+        this.tipoSensor.remove(sensor);
     }
 }

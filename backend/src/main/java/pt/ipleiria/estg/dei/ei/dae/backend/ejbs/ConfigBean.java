@@ -40,6 +40,9 @@ public class ConfigBean {
     EmbalagemDeTransporteBean embalagemDeTransporteBean;
     @EJB
     TipoEmbalagemProdutoBean tipoEmbalagemProdutoBean;
+
+    @EJB
+    TipoSensorBean tipoSensorBean;
     @EJB
     private ProdutoCatalogoBean produtoCatalogoBean;
 
@@ -148,10 +151,17 @@ public class ConfigBean {
                 }
             }
 
+            TipoSensor testeSensor = tipoSensorBean.create("Vento", "ºC");
+
+            tipoEmbalagemProdutoBean.addTipoSensor(1,testeSensor.getId());
+
             produtoCatalogoBean.addTipoEmbalagem(1, produtoCatalogoIphone.getId());
             produtoCatalogoBean.addTipoEmbalagem(8, produtoCatalogoIphone.getId());
             produtoCatalogoBean.addTipoEmbalagem(1, produtoCatalogoArroz.getId());
             produtoCatalogoBean.addTipoEmbalagem(5, produtoCatalogoArroz.getId());
+
+            produtoFisicoBean.create("teste", "Apple", produtoCatalogoIphone.getId(), encomenda1.getId());
+
 
 
         } catch (Exception e) {

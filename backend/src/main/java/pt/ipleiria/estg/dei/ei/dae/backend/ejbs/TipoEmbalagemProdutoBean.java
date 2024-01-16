@@ -8,6 +8,7 @@ import jakarta.validation.ConstraintViolationException;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.FabricanteDeProdutos;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.ProdutoCatalogo;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.TipoEmbalagemProduto;
+import pt.ipleiria.estg.dei.ei.dae.backend.entities.TipoSensor;
 import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyConstraintViolationException;
 import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyEntityExistsException;
 import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyEntityNotFoundException;
@@ -45,7 +46,6 @@ public class TipoEmbalagemProdutoBean {
         catch (ConstraintViolationException e) {
             throw new MyConstraintViolationException(e);
         }
-
         return tipoEmbalagemProduto;
     }
 
@@ -78,5 +78,33 @@ public class TipoEmbalagemProdutoBean {
 
     public List<TipoEmbalagemProduto> getAllTipoEmbalagenm() {
         return entityManager.createNamedQuery("getAllTipoEmbalagem", TipoEmbalagemProduto.class).getResultList();
+    }
+
+    public void addTipoSensor(long idTipoEmbalagemProduto, long idTipoSensor) {
+
+        TipoEmbalagemProduto tipoEmbalagemProduto = find(idTipoEmbalagemProduto);
+        if (tipoEmbalagemProduto == null) {
+            throw new IllegalArgumentException("Tipo Embalagem with id " + idTipoEmbalagemProduto + " not found.");
+        }
+
+        TipoSensor tipoSensor = entityManager.find(TipoSensor.class, idTipoSensor);
+        if (tipoSensor == null) {
+            throw new IllegalArgumentException("Tipo Sensor with id " + idTipoSensor + " not found.");
+        }
+        tipoEmbalagemProduto.addTipoSensor(tipoSensor);
+    }
+
+    public void removeTipoSensor(long idTipoEmbalagemProduto, long idTipoSensor) {
+
+        TipoEmbalagemProduto tipoEmbalagemProduto = find(idTipoEmbalagemProduto);
+        if (tipoEmbalagemProduto == null) {
+            throw new IllegalArgumentException("Tipo Embalagem with id " + idTipoEmbalagemProduto + " not found.");
+        }
+
+        TipoSensor tipoSensor = entityManager.find(TipoSensor.class, idTipoSensor);
+        if (tipoSensor == null) {
+            throw new IllegalArgumentException("Tipo Sensor with id " + idTipoSensor + " not found.");
+        }
+        tipoEmbalagemProduto.removeTipoSensor(tipoSensor);
     }
 }

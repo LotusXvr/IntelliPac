@@ -75,10 +75,14 @@ public class ProdutoFisicoBean {
 
         if (!produtoCatalogo.getEmbalagensACriar().isEmpty()) {
             for (TipoEmbalagemProduto embalagemACriar : produtoCatalogo.getEmbalagensACriar()) {
-                
                 EmbalagemDeProduto embalagem = new EmbalagemDeProduto(embalagemACriar.getMaterial(), embalagemACriar.getTipoEmbalagem());
                 entityManager.persist(embalagem);
                 produtoFisico.addEmbalagem(embalagem);
+                for (TipoSensor tipoSensor : embalagemACriar.getTipoSensor()) {
+                    Sensor sensor = new Sensor(123,tipoSensor.getTipo(), tipoSensor.getUnidade());
+                    entityManager.persist(sensor);
+                    embalagem.addSensor(sensor);
+                }
             }
         }
 
