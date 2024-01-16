@@ -239,7 +239,7 @@ GET http://localhost:8080/intellipac/api/encomendas
 Accept: application/json
 
 ### GET ENCOMENDA
-GET http://localhost:8080/intellipac/api/encomendas/2
+GET http://localhost:8080/intellipac/api/encomendas/3
 Accept: application/json
 
 ### GET ENCOMENDAS DE CLIENTE
@@ -303,7 +303,7 @@ DELETE http://localhost:8080/intellipac/api/embalagensDeProduto/8
 Content-Type: application/json
 
 ### Detalhes de uma embalagem de Produto
-GET http://localhost:8080/intellipac/api/embalagensDeProduto/13
+GET http://localhost:8080/intellipac/api/embalagensDeProduto/15
 Accept: application/json
 
 ### ------AUTENTICAÇAO DE UTILIZADOR------

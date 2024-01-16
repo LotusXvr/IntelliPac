@@ -153,13 +153,16 @@ public class ConfigBean {
             ) {
                 for (String material : materiais
                 ) {
-                    tipoEmbalagemProdutoBean.create(tipo, material);
+                    TipoEmbalagemProduto tipoEmbalagem = tipoEmbalagemProdutoBean.create(tipo, material);
+
+                    TipoSensor tipoSensorDanificado = tipoSensorBean.create("Danificado", "Boolean");
+                    tipoEmbalagemProdutoBean.addTipoSensor(tipoEmbalagem.getId(), tipoSensorDanificado.getId());
                 }
             }
 
             TipoSensor testeSensor = tipoSensorBean.create("Vento", "ºC");
 
-            tipoEmbalagemProdutoBean.addTipoSensor(1,testeSensor.getId());
+            tipoEmbalagemProdutoBean.addTipoSensor(1, testeSensor.getId());
 
             produtoCatalogoBean.addTipoEmbalagem(1, produtoCatalogoIphone.getId());
             produtoCatalogoBean.addTipoEmbalagem(8, produtoCatalogoIphone.getId());
