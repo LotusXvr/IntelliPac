@@ -356,7 +356,7 @@ DELETE http://localhost:8080/intellipac/api/embalagensDeTransporte/8
 Content-Type: application/json
 
 ### Detalhes de uma embalagem de Transporte
-GET http://localhost:8080/intellipac/api/embalagensDeTransporte/7
+GET http://localhost:8080/intellipac/api/embalagensDeTransporte/9
 Accept: application/json
 
 ### ------TESTE DE TIPOSENSOR ------

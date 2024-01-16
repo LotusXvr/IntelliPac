@@ -14,8 +14,6 @@
         <input id="unidade" v-model="sensorForm.unidade" />
         <span class="error">{{ formFeedback.unidade }}</span>
         <br />
-        <label for="valor">Valor</label>
-        <input id="valor" v-model="sensorForm.valor" />
         <span class="error">{{ formFeedback.valor }}</span>
         <br />
         <button type="submit" :disabled="!isFormValid">Criar sensor</button>
@@ -33,14 +31,12 @@ const sensorForm = reactive({
     idSensor: null,
     tipo: null,
     unidade: null,
-    valor: null,
 })
 
 const formFeedback = reactive({
     idSensor: "",
     tipo: "",
     unidade: "",
-    valor: "",
 })
 
 const config = useRuntimeConfig()

@@ -56,6 +56,12 @@ public class EmbalagemDeTransporteBean {
         if (sensor == null) {
             throw new MyEntityNotFoundException("Sensor with id " + idSensor + " not found");
         }
+        for (Sensor sensorTipo: embalagemDeTransporte.getSensores()
+             ) {
+            if(sensor.getTipo().compareTo(sensorTipo.getTipo()) == 0){
+                throw new Exception("Embalagem já tem um sensor do mesmo tipo");
+            }
+        }
         if(sensor.getEstado() == 0){
             embalagemDeTransporte.addSensor(sensor);
             sensor.setEstado(1);

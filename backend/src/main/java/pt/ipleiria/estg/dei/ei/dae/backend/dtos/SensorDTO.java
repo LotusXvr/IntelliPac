@@ -13,6 +13,8 @@ public class SensorDTO {
     private long idSensor;
     private String tipo;
     private String unidade;
+
+    private long estado;
     private List<EmbalagemDTO> embalagens;
     private List<ObservacaoDTO> observacoes;
 
@@ -21,11 +23,12 @@ public class SensorDTO {
         this.observacoes = new ArrayList<>();
     }
 
-    public SensorDTO(long id, long idSensor, String tipo, String unidade) {
+    public SensorDTO(long id, long idSensor, String tipo, String unidade, long estado) {
         this.id = id;
         this.idSensor = idSensor;
         this.tipo = tipo;
         this.unidade = unidade;
+        this.estado = estado;
         this.embalagens = new ArrayList<>();
         this.observacoes = new ArrayList<>();
     }
@@ -85,5 +88,13 @@ public class SensorDTO {
 
     public void setUnidade(String unidade) {
         this.unidade = unidade;
+    }
+
+    public long getEstado() {
+        return estado;
+    }
+
+    public void setEstado(long estado) {
+        this.estado = estado;
     }
 }

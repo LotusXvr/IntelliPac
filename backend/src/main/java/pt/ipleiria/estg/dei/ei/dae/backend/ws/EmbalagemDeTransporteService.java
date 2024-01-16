@@ -55,7 +55,8 @@ public class EmbalagemDeTransporteService {
                 sensor.getId(),
                 sensor.getIdSensor(),
                 sensor.getTipo(),
-                sensor.getUnidade()
+                sensor.getUnidade(),
+                sensor.getEstado()
         );
     }
 
@@ -119,8 +120,15 @@ public class EmbalagemDeTransporteService {
 
     @DELETE
     @Path("{id}")
-    public Response deleteProdutoCatalogo(@PathParam("id") long id) throws MyEntityNotFoundException {
+    public Response delete(@PathParam("id") long id) throws MyEntityNotFoundException {
         embalagemDeTransporteBean.remove(id);
+        return Response.ok().build();
+    }
+
+    @POST
+    @Path("{id}/adicionarSensor")
+    public Response adicionarSensor(@PathParam("id") long id, long sensorId) throws Exception {
+        embalagemDeTransporteBean.associateSensorToEmbalagem(id,sensorId);
         return Response.ok().build();
     }
 }
