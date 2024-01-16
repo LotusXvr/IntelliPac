@@ -30,7 +30,8 @@ public class Sensor {
     private String tipo;
     // unidade (ºC, %, etc)
     private String unidade;
-
+    //0 = disponível, 1 = ocupado (esta associado a uma encomenda), 2 = sensorProduto (sem estado)
+    private long estado;
 
     // o sensor vai ter uma lista de observaçoes numa relaçao de one to many
     @OneToMany(mappedBy = "sensor", fetch = FetchType.EAGER)
@@ -50,6 +51,7 @@ public class Sensor {
         this.idSensor = idSensor;
         this.tipo = tipo;
         this.unidade = unidade;
+        this.estado = 0;
         this.observacoes = new ArrayList<>();
         this.embalagens = new ArrayList<>();
     }
@@ -117,5 +119,13 @@ public class Sensor {
 
     public void setUnidade(String unidade) {
         this.unidade = unidade;
+    }
+
+    public long getEstado() {
+        return estado;
+    }
+
+    public void setEstado(long estado) {
+        this.estado = estado;
     }
 }

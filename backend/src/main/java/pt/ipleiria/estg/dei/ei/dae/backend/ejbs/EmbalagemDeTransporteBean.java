@@ -47,7 +47,7 @@ public class EmbalagemDeTransporteBean {
         return entityManager.createNamedQuery("getAllEmbalagensDeTransporte", EmbalagemDeTransporte.class).getResultList();
     }
 
-    public void associateSensorToEmbalagem(long idEmbalagem, long idSensor) throws MyEntityNotFoundException {
+    public void associateSensorToEmbalagem(long idEmbalagem, long idSensor) throws Exception {
         EmbalagemDeTransporte embalagemDeTransporte = find(idEmbalagem);
         if (embalagemDeTransporte == null) {
             throw new MyEntityNotFoundException("Embalagem with id " + idEmbalagem + " not found");
@@ -56,11 +56,21 @@ public class EmbalagemDeTransporteBean {
         if (sensor == null) {
             throw new MyEntityNotFoundException("Sensor with id " + idSensor + " not found");
         }
-        embalagemDeTransporte.addSensor(sensor);
-        entityManager.merge(embalagemDeTransporte);
+        if(sensor.getEstado() == 0){
+            embalagemDeTransporte.addSensor(sensor);
+            sensor.setEstado(1);
+            entityManager.merge(embalagemDeTransporte);
+        }else{
+            if(sensor.getEstado() == 1){
+                throw new Exception("Sensor está em uso na encomenda "+ sensor.getEmbalagens().get(sensor.getEmbalagens().size() - 1).getId());
+            }
+            if(sensor.getEstado() == 2){
+                throw new Exception("O sensor está associado a uma embalagem produto pelo que não pode ser reutilizado");
+            }
+        }
     }
 
-    public void removeSensorFromEmbalagem(long idEmbalagem, long idSensor) throws MyEntityNotFoundException {
+    public void removeSensorFromEmbalagem(long idEmbalagem, long idSensor) throws Exception {
         EmbalagemDeTransporte embalagemDeTransporte = find(idEmbalagem);
         if (embalagemDeTransporte == null) {
             throw new MyEntityNotFoundException("Embalagem with id " + idEmbalagem + " not found");
@@ -69,8 +79,14 @@ public class EmbalagemDeTransporteBean {
         if (sensor == null) {
             throw new MyEntityNotFoundException("Sensor with id " + idSensor + " not found");
         }
-        embalagemDeTransporte.removeSensor(sensor);
-        entityManager.merge(embalagemDeTransporte);
+        if(embalagemDeTransporte.getSensores().contains(sensor)){
+            embalagemDeTransporte.removeSensor(sensor);
+            sensor.setEstado(0);
+            entityManager.merge(embalagemDeTransporte);
+        }else{
+            throw new Exception("O sensor "+ sensor.getId() +" não está associado à embalagem de transporte "+ embalagemDeTransporte.getId());
+        }
+
     }
 
     public void addEncomendaToEmbalagem(long idEmbalagem, long idEncomenda) throws MyEntityNotFoundException {

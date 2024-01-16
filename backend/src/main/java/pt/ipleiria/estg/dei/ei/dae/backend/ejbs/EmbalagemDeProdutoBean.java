@@ -58,6 +58,7 @@ public class EmbalagemDeProdutoBean {
             throw new MyEntityNotFoundException("Sensor with id " + idSensor + " not found");
         }
         embalagemDeProduto.addSensor(sensor);
+        sensor.setEstado(2);
         entityManager.merge(embalagemDeProduto);
     }
 

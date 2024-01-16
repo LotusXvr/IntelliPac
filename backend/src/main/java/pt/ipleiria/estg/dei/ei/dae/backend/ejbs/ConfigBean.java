@@ -170,9 +170,11 @@ public class ConfigBean {
             EmbalagemDeTransporte embalagemDeTransportePlastico = embalagemDeTransporteBean.create("Plastico");
             EmbalagemDeTransporte embalagemDeTransporteEcoPlastico = embalagemDeTransporteBean.create("EcoPlastico");
 
-            embalagemDeProdutoBean.associateSensorToEmbalagem(embalagemDeProdutoPlastico.getId(), sensor1.getId());
+            //embalagemDeProdutoBean.associateSensorToEmbalagem(embalagemDeProdutoPlastico.getId(), sensor1.getId());
             embalagemDeProdutoBean.addProdutoToEmbalagem(embalagemDeProdutoPlastico.getId(), produtoFisico1.getId());
             embalagemDeTransporteBean.associateSensorToEmbalagem(embalagemDeTransporteCartao.getId(), sensor1.getId());
+            embalagemDeTransporteBean.removeSensorFromEmbalagem(embalagemDeTransporteCartao.getId(), sensor1.getId());
+            embalagemDeTransporteBean.associateSensorToEmbalagem(embalagemDeTransporteCartao.getId(), sensor1.getId()); 
             embalagemDeTransporteBean.addEncomendaToEmbalagem(embalagemDeTransporteCartao.getId(), encomenda1.getId());
             embalagemDeTransporteBean.addEncomendaToEmbalagem(embalagemDeTransporteVidro.getId(), encomenda2.getId());
 
@@ -181,13 +183,14 @@ public class ConfigBean {
 
             List<String> materiais = new ArrayList<>(Arrays.asList("Plastico", "Metal", "Vidro", "Cartão"));
 
+            TipoSensor tipoSensorDanificado = tipoSensorBean.create("Danificado", "Boolean");
+
             for (long tipo : tipos
             ) {
                 for (String material : materiais
                 ) {
                     TipoEmbalagemProduto tipoEmbalagem = tipoEmbalagemProdutoBean.create(tipo, material);
 
-                    TipoSensor tipoSensorDanificado = tipoSensorBean.create("Danificado", "Boolean");
                     tipoEmbalagemProdutoBean.addTipoSensor(tipoEmbalagem.getId(), tipoSensorDanificado.getId());
                 }
             }
