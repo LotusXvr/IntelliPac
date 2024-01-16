@@ -18,13 +18,14 @@
             </li>
         </ul>
 
-        <p>Embalagens Transporte:</p>
-        <ul v-for="embalagens in encomenda.embalagensTransporte" :key="embalagens.id">
+        <p v-if="encomenda.embalagensTransporte.length > 0">Embalagens Transporte:</p>
+        <ul v-if="encomenda.embalagensTransporte.length > 0" v-for="embalagens in encomenda.embalagensTransporte" :key="embalagens.id">
             Material:
             {{
                 embalagens.material
             }}
         </ul>
+        <h3 v-if="encomenda.embalagensTransporte.length == 0" style="color:darkcyan">A encomenda aguarda a colocação de uma embalagem de transporte</h3>
     </div>
 
     <h2>Error messages:</h2>

@@ -9,18 +9,19 @@
                 <th>Cliente</th>
                 <th>Data Encomenda</th>
                 <th>Operador</th>
-                <th>Estado</th>
-                <th>actions</th>
+                <th style="padding-right:50px">Estado</th>
+                <th >actions</th>
             </tr>
             <tr v-for="encomenda in encomendas">
                 <td>{{ encomenda.consumidorFinal }}</td>
                 <td>{{ encomenda.dataEncomenda }}</td>
                 <td>{{ encomenda.operadorLogistica }}</td>
-                <td>{{ encomenda.estado }}</td>
+                <td style="padding-right:50px">{{ encomenda.estado }} </td>
                 <td>
                     <nuxt-link :to="`/encomendas/${encomenda.id}`">Detalhes</nuxt-link>
                     |
-                    <nuxt-link :to="'/encomendas/edit/' + encomenda.id">Editar</nuxt-link>
+                    <nuxt-link v-if="encomenda.embalagensTransporte.length > 0" :to="'/encomendas/edit/' + encomenda.id">Editar Estado</nuxt-link>
+                    <nuxt-link v-if="encomenda.embalagensTransporte.length == 0" :to="'/encomendas/edit/' + encomenda.id">Adicionar Embalagem</nuxt-link>
                     |
                     <button @click="deleteEncomenda(encomenda.id)">Excluir</button>
                 </td>
