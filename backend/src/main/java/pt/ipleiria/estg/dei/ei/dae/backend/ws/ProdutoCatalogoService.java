@@ -81,11 +81,7 @@ public class ProdutoCatalogoService {
     @Path("/")
     public Response create(ProdutoCatalogoDTO produtoCatalogoDTO)
             throws Exception {
-        ProdutoCatalogo produtoCatalogo = produtoCatalogoBean.create(
-                produtoCatalogoDTO.getNome(),
-                produtoCatalogoDTO.getFabricanteUsername(),
-                produtoCatalogoDTO.getPeso()
-        );
+        ProdutoCatalogo produtoCatalogo = produtoCatalogoBean.create(produtoCatalogoDTO);
         return Response.status(Response.Status.CREATED).entity(toDTONoProdutos(produtoCatalogo)).build();
     }
 

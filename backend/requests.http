@@ -7,8 +7,16 @@ POST http://localhost:8080/intellipac/api/produtosCatalogo
 Content-Type: application/json
 
 {
-  "nome": "Produto (POST)",
-  "fabricanteUsername": "Fabrica1"
+  "nome": "Produto123",
+  "fabricanteUsername": "Apple",
+  "embalagensACriar": [
+    {
+      "id": 1,
+      "tipo": 1,
+      "material": "Plastico"
+    }
+  ],
+  "peso": 3
 }
 
 ###
@@ -25,7 +33,7 @@ DELETE http://localhost:8080/intellipac/api/produtosCatalogo/2
 Accept: application/json
 
 ##### Detalhes de um produtoCatalogo
-GET http://localhost:8080/intellipac/api/produtosCatalogo/1
+GET http://localhost:8080/intellipac/api/produtosCatalogo/11
 Accept: application/json
 
 ##### Produtos Fisicos

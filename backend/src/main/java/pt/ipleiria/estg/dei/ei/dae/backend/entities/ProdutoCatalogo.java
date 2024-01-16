@@ -48,6 +48,13 @@ public class ProdutoCatalogo extends Produto implements Serializable {
         this.embalagensACriar = new ArrayList<>();
     }
 
+    public ProdutoCatalogo(String nomeProduto, FabricanteDeProdutos fabricante, long peso, List<TipoEmbalagemProduto> embalagensACriar) {
+        super(nomeProduto, fabricante);
+        this.peso = peso;
+        this.produtos = new ArrayList<>();
+        this.embalagensACriar = embalagensACriar;
+    }
+
     public List<ProdutoFisico> getProdutos() {
         return produtos;
     }
