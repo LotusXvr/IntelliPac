@@ -51,9 +51,9 @@ public class ConfigBean {
         System.out.println("ConfigBean: PostConstruct");
 
         try {
-            FabricanteDeProdutos fabricanteApple = fabricanteDeProdutosBean.create("Apple", "123", "fabricante 1", "fabricante1@mail.pt");
-            FabricanteDeProdutos fabricanteSamsung = fabricanteDeProdutosBean.create("Samsung", "123", "fabricante 2", "fabricante2@mail.pt");
-            FabricanteDeProdutos fabricanteNacional = fabricanteDeProdutosBean.create("Nacional", "123", "fabricante 3", "fabricante3@mail.pt");
+            FabricanteDeProdutos fabricanteApple = fabricanteDeProdutosBean.create("Apple", "123", "Apple Silicon", "apple@mail.pt");
+            FabricanteDeProdutos fabricanteSamsung = fabricanteDeProdutosBean.create("Samsung", "123", "Samsung Enterprise", "samsung@mail.pt");
+            FabricanteDeProdutos fabricanteNacional = fabricanteDeProdutosBean.create("Nacional", "123", "É Nacional", "nacional@mail.pt");
 
             OperadorDeLogistica operadorAmazon = operadorDeLogisticaBean.create("Amazon", "123", "Valte", "amazon@mail.pt");
             OperadorDeLogistica operadorEbay = operadorDeLogisticaBean.create("Ebay", "123", "Joao", "ebay@mail.pt");
