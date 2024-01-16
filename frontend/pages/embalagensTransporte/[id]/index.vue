@@ -20,7 +20,7 @@
             </li>
         </ul>
     </div>
-
+    <nuxt-link to="/embalagensTransporte">Back to Embalagens de transporte</nuxt-link>
     <h2>Error messages:</h2>
     {{ messages }}
 </template>
