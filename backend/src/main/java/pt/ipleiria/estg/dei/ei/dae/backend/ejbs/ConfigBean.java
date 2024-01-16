@@ -6,6 +6,7 @@ import jakarta.ejb.EJB;
 import jakarta.ejb.Singleton;
 import jakarta.ejb.Startup;
 import pt.ipleiria.estg.dei.ei.dae.backend.dtos.EncomendaDTO;
+import pt.ipleiria.estg.dei.ei.dae.backend.dtos.ProdutoCatalogoDTO;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.*;
 
 import java.util.ArrayList;
@@ -70,12 +71,43 @@ public class ConfigBean {
             clienteBean.create("Ana", "123", "Ana João", "ana@mail.pt");
             clienteBean.create("Marta", "123", "Marta Silva", "marta@mail.pt");
 
-            ProdutoCatalogo produtoCatalogoIphone = produtoCatalogoBean.create("iPhone 15", fabricanteApple.getUsername(), 10);
-            ProdutoCatalogo produtoCatalogoArroz = produtoCatalogoBean.create("Arroz", fabricanteNacional.getUsername(), 6);
-            produtoCatalogoBean.create("Cereais", fabricanteNacional.getUsername(), 8);
-            produtoCatalogoBean.create("Máquina de Lavar", fabricanteSamsung.getUsername(), 12);
-            produtoCatalogoBean.create("Secador", fabricanteSamsung.getUsername(), 14);
-            produtoCatalogoBean.create("Teclado", fabricanteApple.getUsername(), 3);
+
+            //Produtos
+            ProdutoCatalogoDTO produtoCatalogoDTOiPhone = new ProdutoCatalogoDTO();
+            produtoCatalogoDTOiPhone.setNome("iPhone 15");
+            produtoCatalogoDTOiPhone.setFabricanteUsername(fabricanteApple.getUsername());
+            produtoCatalogoDTOiPhone.setPeso(10);
+            ProdutoCatalogo produtoCatalogoIphone = produtoCatalogoBean.create(produtoCatalogoDTOiPhone);
+
+            ProdutoCatalogoDTO produtoCatalogoDTOArroz = new ProdutoCatalogoDTO();
+            produtoCatalogoDTOArroz.setNome("Arroz");
+            produtoCatalogoDTOArroz.setFabricanteUsername(fabricanteNacional.getUsername());
+            produtoCatalogoDTOArroz.setPeso(10);
+            ProdutoCatalogo produtoCatalogoArroz = produtoCatalogoBean.create(produtoCatalogoDTOArroz);
+
+            ProdutoCatalogoDTO produtoCatalogoDTOCereais = new ProdutoCatalogoDTO();
+            produtoCatalogoDTOCereais.setNome("Cereais");
+            produtoCatalogoDTOCereais.setFabricanteUsername(fabricanteNacional.getUsername());
+            produtoCatalogoDTOCereais.setPeso(10);
+            ProdutoCatalogo produtoCatalogoCereais = produtoCatalogoBean.create(produtoCatalogoDTOCereais);
+
+            ProdutoCatalogoDTO produtoCatalogoDTOMaquinaLavar = new ProdutoCatalogoDTO();
+            produtoCatalogoDTOMaquinaLavar.setNome("Máquina de Lavar");
+            produtoCatalogoDTOMaquinaLavar.setFabricanteUsername(fabricanteSamsung.getUsername());
+            produtoCatalogoDTOMaquinaLavar.setPeso(10);
+            ProdutoCatalogo produtoCatalogoMaquinaLavar = produtoCatalogoBean.create(produtoCatalogoDTOMaquinaLavar);
+
+            ProdutoCatalogoDTO produtoCatalogoDTOSecador = new ProdutoCatalogoDTO();
+            produtoCatalogoDTOSecador.setNome("Secador");
+            produtoCatalogoDTOSecador.setFabricanteUsername(fabricanteSamsung.getUsername());
+            produtoCatalogoDTOSecador.setPeso(10);
+            ProdutoCatalogo produtoCatalogoSecador = produtoCatalogoBean.create(produtoCatalogoDTOSecador);
+
+            ProdutoCatalogoDTO produtoCatalogoDTOFogao = new ProdutoCatalogoDTO();
+            produtoCatalogoDTOFogao.setNome("Fogão");
+            produtoCatalogoDTOFogao.setFabricanteUsername(fabricanteSamsung.getUsername());
+            produtoCatalogoDTOFogao.setPeso(10);
+            ProdutoCatalogo produtoCatalogoFogao = produtoCatalogoBean.create(produtoCatalogoDTOFogao);
 
 
             // Encomendas

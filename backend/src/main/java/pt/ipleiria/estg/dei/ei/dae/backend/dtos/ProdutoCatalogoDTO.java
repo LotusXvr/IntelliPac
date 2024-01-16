@@ -31,14 +31,14 @@ public class ProdutoCatalogoDTO {
         this.peso = peso;
     }
 
-    public ProdutoCatalogoDTO(long id, String nome, String fabricanteUsername, List<ProdutoFisicoDTO> produtos, long peso) {
+    public ProdutoCatalogoDTO(long id, String nome, String fabricanteUsername, long peso, List<TipoEmbalagemDTO> embalagensACriar) {
         this.id = id;
         this.nome = nome;
         this.fabricanteUsername = fabricanteUsername;
-        this.produtos = produtos;
+        this.produtos = new ArrayList<>();
+        this.embalagensACriar = embalagensACriar;
         this.peso = peso;
     }
-
     public long getId() {
         return id;
     }

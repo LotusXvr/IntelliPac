@@ -8,6 +8,8 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
 import jakarta.validation.ConstraintViolationException;
 import org.hibernate.Hibernate;
+import pt.ipleiria.estg.dei.ei.dae.backend.dtos.ProdutoCatalogoDTO;
+import pt.ipleiria.estg.dei.ei.dae.backend.dtos.TipoEmbalagemDTO;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.FabricanteDeProdutos;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.ProdutoCatalogo;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.TipoEmbalagemProduto;
@@ -36,32 +38,32 @@ public class ProdutoCatalogoBean {
     }
 
 
-    public ProdutoCatalogo create(String nomeProduto, String fabrincanteUsername, long peso) throws Exception {
-
-        if (peso <= 0) {
-            throw new Exception("Peso " + peso + " Kg não é valido");
-        }
-        if (exists(nomeProduto, fabrincanteUsername)) {
-            throw new MyEntityExistsException("Produto catálogo com nome " + nomeProduto + " já existe");
-        }
-
-        FabricanteDeProdutos fabricante = fabricanteDeProdutosBean.find(fabrincanteUsername);
-        if (fabricante == null) {
-            throw new MyEntityNotFoundException("Fabricante com id " + fabrincanteUsername + " não existe");
-        }
-
-        ProdutoCatalogo produtoCatalogo = null;
-
+    public ProdutoCatalogo create(ProdutoCatalogoDTO produtoCatalogoDTO) throws Exception {
         try {
-            produtoCatalogo = new ProdutoCatalogo(nomeProduto, fabricante, peso);
+            FabricanteDeProdutos fabricante = fabricanteDeProdutosBean.find(produtoCatalogoDTO.getFabricanteUsername());
+            if (fabricante == null) {
+                throw new MyEntityNotFoundException("Fabricante com id " + produtoCatalogoDTO.getFabricanteUsername() + " não existe");
+            }
+
+            ProdutoCatalogo produtoCatalogo = new ProdutoCatalogo(
+                    produtoCatalogoDTO.getNome(),
+                    fabricante,
+                    produtoCatalogoDTO.getPeso()
+            );
+
+            for (TipoEmbalagemDTO tipoEmbalagemDTO : produtoCatalogoDTO.getEmbalagensACriar()) {
+                TipoEmbalagemProduto tipoEmbalagemProduto = entityManager.find(TipoEmbalagemProduto.class, tipoEmbalagemDTO.getId());
+                if (tipoEmbalagemProduto == null) {
+                    throw new MyEntityNotFoundException("Tipo Embalagem with id " + tipoEmbalagemDTO.getId() + " not found.");
+                }
+                produtoCatalogo.addEmbalagemACriar(tipoEmbalagemProduto);
+            }
+
             entityManager.persist(produtoCatalogo);
+            return produtoCatalogo;
         } catch (ConstraintViolationException e) {
             throw new MyConstraintViolationException(e);
         }
-
-        fabricante.addProduto(produtoCatalogo);
-        return produtoCatalogo;
-
     }
 
     public ProdutoCatalogo find(long id) {
