@@ -20,8 +20,8 @@
                         :to="'/embalagensTransporte/edit/' + embalagemDeTransporte.id"
                         >Editar</nuxt-link>
                     |
-                    <nuxt-link :to="`/embalagensTransporte/${embalagemDeTransporte.id}` + '/adicionarSensores'">
-                        Adicionar Sensores</nuxt-link>
+                    <nuxt-link :to="`/embalagensTransporte/${embalagemDeTransporte.id}` + '/Sensores'">
+                        Sensores</nuxt-link>
                     |
                     <button @click="deleteEncomenda(embalagemDeTransporte.id)">Excluir</button>
                     |

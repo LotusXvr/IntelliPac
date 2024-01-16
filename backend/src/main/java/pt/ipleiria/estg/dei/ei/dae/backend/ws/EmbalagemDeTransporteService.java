@@ -131,4 +131,11 @@ public class EmbalagemDeTransporteService {
         embalagemDeTransporteBean.associateSensorToEmbalagem(id,sensorId);
         return Response.ok().build();
     }
+
+    @POST
+    @Path("{id}/removerSensor")
+    public Response removerSensor(@PathParam("id") long id, long sensorId) throws Exception {
+        embalagemDeTransporteBean.removeSensorFromEmbalagem(id,sensorId);
+        return Response.ok().build();
+    }
 }

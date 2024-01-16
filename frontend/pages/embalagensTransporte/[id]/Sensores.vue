@@ -25,6 +25,7 @@
         <ul>
             <li v-for="sensor in embalagem.sensores" :key="sensor.idSensor">
                 {{ sensor.idSensor }} - {{ sensor.tipo }} ({{ sensor.unidade }})
+                <button @click="removerSensor(sensor.id)">Eliminar</button>
             </li>
         </ul>
         
@@ -98,4 +99,23 @@ const filteredSensores = computed(() => {
         return [];
     }
 });
+
+const removerSensor = async (idSensor) => {
+    try {
+        const requestOptions = {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(idSensor),
+        }
+
+        const response = await fetch(`${api}/embalagensDeTransporte/${id}/removerSensor`, requestOptions)
+        if (!response.ok) {
+            throw new Error(response.statusText)
+        }
+        refreshEmbalagem()
+        refreshSensor()
+    } catch (error) {
+        messages.value.push(error.message)
+    }
+}
 </script>
