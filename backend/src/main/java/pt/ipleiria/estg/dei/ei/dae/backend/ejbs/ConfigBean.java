@@ -169,7 +169,6 @@ public class ConfigBean {
             produtoFisicoBean.create("teste", "Apple", produtoCatalogoIphone.getId(), encomenda1.getId());
 
 
-
         } catch (Exception e) {
             logger.severe(e.getMessage());
         }

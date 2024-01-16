@@ -350,3 +350,19 @@ Content-Type: application/json
 ### Detalhes de uma embalagem de Transporte
 GET http://localhost:8080/intellipac/api/embalagensDeTransporte/7
 Accept: application/json
+
+### ------TESTE DE TIPOSENSOR ------
+### Criar produto fisico que tem um sensor "Vento" no tipoSensor do Catalogo associado
+POST http://localhost:8080/intellipac/api/produtosFisicos
+Content-Type: application/json
+
+{
+  "nome": "TESTE 2",
+  "fabricanteUsername": "Apple",
+  "produtoCatalogoId": 1,
+  "encomendaId": 1
+}
+
+### Get da embalagem desse novo produto
+GET http://localhost:8080/intellipac/api/embalagensDeProduto/15
+Accept: application/json
