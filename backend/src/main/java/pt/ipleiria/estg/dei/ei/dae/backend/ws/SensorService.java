@@ -99,18 +99,17 @@ public class SensorService {
     @Path("/")
     public Response createNewSensor(SensorDTO sensorDTO) {
         // check if idSensor has already been assigned
-        if (sensorBean.findBySensorId(sensorDTO.getIdSensor()) != null) {
+        /*if (sensorBean.findBySensorId(sensorDTO.getIdSensor()) != null) {
             return Response.status(Response.Status.CONFLICT).build();
-        }
-        sensorBean.create(
-                sensorDTO.getIdSensor(),
+        }*/
+        Sensor sensor = sensorBean.create(
                 sensorDTO.getTipo(),
                 sensorDTO.getUnidade()
         );
-        Sensor sensor = sensorBean.findBySensorId(sensorDTO.getIdSensor());
+        /*Sensor sensor = sensorBean.findBySensorId(sensorDTO.getIdSensor());
         if (sensor == null) {
             return Response.status(Response.Status.NOT_FOUND).build();
-        }
+        }*/
         return Response.status(Response.Status.CREATED).entity(toDTO(sensor)).build();
     }
 

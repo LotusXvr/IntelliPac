@@ -171,7 +171,7 @@ GET http://localhost:8080/intellipac/api/sensores
 Accept: application/json
 
 ### GET SENSOR DETAILS
-GET http://localhost:8080/intellipac/api/sensores/14
+GET http://localhost:8080/intellipac/api/sensores/1
 Accept: application/json
 
 ### POST SENSORES
@@ -179,8 +179,7 @@ POST http://localhost:8080/intellipac/api/sensores
 Content-Type: application/json
 
 {
-  "idSensor": 8,
-  "tipo": "Temperatura",
+  "tipo": "xpto2",
   "unidade": "Celsius"
 }
 
@@ -395,3 +394,28 @@ Content-Type: application/json
 ### Get da embalagem desse novo produto
 GET http://localhost:8080/intellipac/api/embalagensDeProduto/15
 Accept: application/json
+
+### ----TESTE-----
+GET http://localhost:8080/intellipac/api/encomendas
+Accept: application/json
+
+### Get
+GET http://localhost:8080/intellipac/api/encomendas/1
+Accept: application/json
+
+### GET SENSOR DETAILS
+GET http://localhost:8080/intellipac/api/sensores/2
+Accept: application/json
+
+### Update estado encomenda
+PATCH http://localhost:8080/intellipac/api/encomendas/1/estado
+Content-Type: application/json
+
+{
+"estado": "ENTREGUE"
+}
+
+### GET SENSOR DETAILS
+GET http://localhost:8080/intellipac/api/sensores/1
+Accept: application/json
+

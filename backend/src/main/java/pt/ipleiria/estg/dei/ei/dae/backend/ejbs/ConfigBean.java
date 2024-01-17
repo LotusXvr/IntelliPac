@@ -127,7 +127,6 @@ public class ConfigBean {
             Encomenda encomenda2 = encomendaBean.create(encomendaDTO);
             produtoFisicoBean.create(produtoCatalogoIphone.getId(), encomenda2.getId());
             produtoFisicoBean.create(produtoCatalogoArroz.getId(), encomenda2.getId());
-            encomendaBean.patchEstado(encomenda2.getId(), "ENTREGUE");
 
             // Embalagens
             embalagemBean.create("Plastico", 150, 10, 40);
@@ -136,12 +135,12 @@ public class ConfigBean {
             embalagemBean.create("Metal", 150, 10, 40);
 
             // Sensores
-            Sensor sensor1 = sensorBean.create(1, "Temperatura", "ºC");
-            sensorBean.create(2, "Humidade", "%");
-            sensorBean.create(3, "Luminosidade", "LUX");
-            sensorBean.create(4, "Pressao", "hPa");
-            sensorBean.create(5, "Localizacao", "GPS");
-            sensorBean.create(6, "Danificado", "Boolean");
+            Sensor sensor1 = sensorBean.create( "Temperatura", "ºC");
+            sensorBean.create( "Humidade", "%");
+            sensorBean.create( "Luminosidade", "LUX");
+            sensorBean.create( "Pressao", "hPa");
+            sensorBean.create( "Localizacao", "GPS");
+            sensorBean.create( "Danificado", "Boolean");
 
             // associar sensores a embalagens
             embalagemBean.associateSensorToEmbalagem(3L, 1L);
@@ -182,6 +181,8 @@ public class ConfigBean {
             embalagemDeTransporteBean.associateSensorToEmbalagem(embalagemDeTransporteCartao.getId(), sensor1.getId());
             embalagemDeTransporteBean.addEncomendaToEmbalagem(embalagemDeTransporteCartao.getId(), encomenda1.getId());
             embalagemDeTransporteBean.addEncomendaToEmbalagem(embalagemDeTransporteVidro.getId(), encomenda2.getId());
+
+            encomendaBean.patchEstado(encomenda2.getId(), "ENTREGUE");
 
             List<Long> tipos = new ArrayList<>(Arrays.asList(1L, 2L, 3L));
 

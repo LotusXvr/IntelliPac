@@ -47,13 +47,17 @@ public class Sensor {
         this.embalagens = new ArrayList<>();
     }
 
-    public Sensor(long idSensor, String tipo, String unidade, long estado) {
-        this.idSensor = idSensor;
+    public Sensor(String tipo, String unidade, long estado) {
         this.tipo = tipo;
         this.unidade = unidade;
         this.estado = estado;
         this.observacoes = new ArrayList<>();
         this.embalagens = new ArrayList<>();
+    }
+
+    @PostPersist
+    private void afterPersist() {
+        this.idSensor = this.id;
     }
 
 

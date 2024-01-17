@@ -244,8 +244,13 @@ public class EncomendaBean {
                     "Por favor, contacte o operador de logistica para mais informacoes.");
 
         }
-        if (encomenda.getEstado() == "ENTREGUE") {
+        if (estado.equals("ENTREGUE")) {
             EmbalagemDeTransporte embalagemDeTransporte = embalagemDeTransporteBean.find(encomenda.getEmbalagensTransporte().get(encomenda.getEmbalagensTransporte().size() - 1).getId());
+            long lastId = 0;
+            for (Sensor sensor : embalagemDeTransporte.getSensores()) {
+                lastId = (Long) entityManager.createQuery("SELECT MAX(s.id) FROM Sensor s").getSingleResult();
+                sensor.setIdSensor(lastId+1);
+            }
             encomenda.removeEmbalagemTransporte(embalagemDeTransporte);
         }
         encomenda.setEstado(estado);

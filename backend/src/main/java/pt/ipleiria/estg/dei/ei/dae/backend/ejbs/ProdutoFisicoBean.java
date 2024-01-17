@@ -82,7 +82,7 @@ public class ProdutoFisicoBean {
                 embalagemDeProdutoBean.addEmbalagemToProduto(embalagem.getId(), produtoFisico.getId());
 
                 for (TipoSensor tipoSensor : embalagemACriar.getTipoSensor()) {
-                    Sensor sensor = new Sensor(123, tipoSensor.getTipo(), tipoSensor.getUnidade(), 2);
+                    Sensor sensor = new Sensor(tipoSensor.getTipo(), tipoSensor.getUnidade(), 2);
                     entityManager.persist(sensor);
                     embalagem.addSensor(sensor);
                 }
