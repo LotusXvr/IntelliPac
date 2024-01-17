@@ -276,10 +276,8 @@ public class EncomendaBean {
             }
 
         }
-        System.out.println("1515antes do setEstado ");
         encomenda.setEstado(estado);
         entityManager.merge(encomenda);
-        System.out.println("1515depois do setEstado ");
     }
 
 

@@ -96,6 +96,8 @@ const { data: encomenda, error: proErr } = await useFetch(`${api}/encomendas/${i
 const messages = ref([])
 if (proErr.value) messages.value.push(proErr.value)
 
+
+
 const tipoEmbalagemToString = (tipo) => {
     switch (tipo) {
         case 1:

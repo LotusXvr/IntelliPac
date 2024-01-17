@@ -12,6 +12,7 @@ import pt.ipleiria.estg.dei.ei.dae.backend.entities.Embalagem;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.Observacao;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.Sensor;
 
+import java.util.Collections;
 import java.util.List;
 
 @Path("sensores") // relative url web path for this service
@@ -83,13 +84,18 @@ public class SensorService {
     @GET
     @Path("/") // means: the relative url path is “/api/sensores/”
     public List<SensorDTO> getAllSensores() {
-        return toDTOs(sensorBean.getAll());
+        List<Sensor> sensores = sensorBean.getAll();
+        for (Sensor sensor : sensores) {
+            Collections.reverse(sensor.getObservacoes());
+        }
+        return toDTOs(sensores);
     }
 
     @GET
     @Path("/{id}")
     public Response getSensorDetails(@PathParam("id") long id) {
         Sensor sensor = sensorBean.findSensorDetails(id);
+        Collections.reverse(sensor.getObservacoes());
         return Response.status(Response.Status.OK).entity(toDTO(sensor)).build();
     }
 
