@@ -20,14 +20,13 @@
                 <td>
                     <nuxt-link :to="`/encomendas/${encomenda.id}`">Detalhes</nuxt-link>
                     |
-                    <nuxt-link
-                        v-if="encomenda.embalagensTransporte.length > 0"
-                        :to="'/encomendas/edit/' + encomenda.id"
+                    <nuxt-link v-if="encomenda.estado !== 'PENDENTE'"
+                        :to="'/encomendas/edit/' + encomenda.id + '/estado'"
                         >Editar Estado</nuxt-link
                     >
-                    <nuxt-link
-                        v-if="encomenda.embalagensTransporte.length == 0"
-                        :to="'/encomendas/edit/' + encomenda.id"
+                    |
+                    <nuxt-link v-if="encomenda.estado === 'PENDENTE'"
+                        :to="'/encomendas/edit/' + encomenda.id + '/embalagemTransporte'"
                         >Adicionar Embalagem</nuxt-link
                     >
                     |

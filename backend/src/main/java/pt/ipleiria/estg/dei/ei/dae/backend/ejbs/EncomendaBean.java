@@ -260,6 +260,7 @@ public class EncomendaBean {
             throw new MyEntityNotFoundException("Lista de embalagens de transporte não pode vir vazia");
         }
 
+
         for (EmbalagemDeTransporteDTO embalagemDTO : embalagensTransporte) {
             EmbalagemDeTransporte embalagem = entityManager.find(EmbalagemDeTransporte.class, embalagemDTO.getId());
             if (embalagem == null) {
