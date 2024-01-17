@@ -115,16 +115,16 @@ public class ConfigBean {
             encomendaDTO.setConsumidorFinal("Emanuel");
             encomendaDTO.setOperadorLogistica(operadorAmazon.getUsername());
             Encomenda encomenda1 = encomendaBean.create(encomendaDTO);
-            ProdutoFisico produtoFisico1 = produtoFisicoBean.create(produtoCatalogoIphone.getNomeProduto(), fabricanteSamsung.getUsername(), produtoCatalogoIphone.getId(), encomenda1.getId());
-            produtoFisicoBean.create(produtoCatalogoArroz.getNomeProduto(), fabricanteNacional.getUsername(), produtoCatalogoArroz.getId(), encomenda1.getId());
+            ProdutoFisico produtoFisico1 = produtoFisicoBean.create(produtoCatalogoIphone.getId(), encomenda1.getId());
+            produtoFisicoBean.create(produtoCatalogoArroz.getId(), encomenda1.getId());
 
 
             encomendaDTO = new EncomendaDTO();
             encomendaDTO.setConsumidorFinal("Marco");
             encomendaDTO.setOperadorLogistica(operadorHM.getUsername());
             Encomenda encomenda2 = encomendaBean.create(encomendaDTO);
-            produtoFisicoBean.create(produtoCatalogoIphone.getNomeProduto(), fabricanteSamsung.getUsername(), produtoCatalogoIphone.getId(), encomenda2.getId());
-            produtoFisicoBean.create(produtoCatalogoIphone.getNomeProduto(), fabricanteSamsung.getUsername(), produtoCatalogoArroz.getId(), encomenda2.getId());
+            produtoFisicoBean.create( produtoCatalogoIphone.getId(), encomenda2.getId());
+            produtoFisicoBean.create( produtoCatalogoArroz.getId(), encomenda2.getId());
             encomendaBean.patchEstado(encomenda2.getId(), "ENTREGUE");
 
 
@@ -204,7 +204,7 @@ public class ConfigBean {
             produtoCatalogoBean.addTipoEmbalagem(1, produtoCatalogoArroz.getId());
             produtoCatalogoBean.addTipoEmbalagem(5, produtoCatalogoArroz.getId());
 
-            produtoFisicoBean.create("teste", "Apple", produtoCatalogoIphone.getId(), encomenda1.getId());
+            produtoFisicoBean.create( produtoCatalogoIphone.getId(), encomenda1.getId());
 
 
         } catch (Exception e) {

@@ -26,6 +26,8 @@ public class EncomendaBean {
 
     @EJB
     private ClienteBean clienteBean;
+    @EJB
+    private EmbalagemDeTransporteBean embalagemDeTransporteBean;
 
     @EJB
     private OperadorDeLogisticaBean operadorDeLogisticaBean;
@@ -68,7 +70,7 @@ public class EncomendaBean {
                 FabricanteDeProdutos fabricanteDeProdutos = entityManager.find(FabricanteDeProdutos.class, produtoCatalogo.getFabricante().getUsername());
 
                 // Agora, em vez de usar o DTO diretamente, crie uma instância de ProdutoFisico e persista-a
-                produtoFisico = produtoFisicoBean.create(produtoCatalogo.getNomeProduto(), fabricanteDeProdutos.getUsername(), produtoCatalogo.getId(), encomenda.getId());
+                produtoFisico = produtoFisicoBean.create(produtoCatalogo.getId(), encomenda.getId());
                 entityManager.persist(produtoFisico);
 
                 // Adicione o produtoFisico à encomenda
@@ -103,17 +105,6 @@ public class EncomendaBean {
 
     public Encomenda find(long id) {
         return entityManager.find(Encomenda.class, id);
-    }
-
-    public Encomenda update(long id, String estado) throws MyEntityNotFoundException {
-        Encomenda encomenda = find(id);
-        if (encomenda == null) {
-            throw new MyEntityNotFoundException("Encomenda com id " + id + " não existe");
-        }
-
-        encomenda.setEstado(estado);
-        entityManager.merge(encomenda);
-        return encomenda;
     }
 
     public Encomenda remove(long id) throws MyEntityNotFoundException {
@@ -254,7 +245,10 @@ public class EncomendaBean {
                     "Por favor, contacte o operador de logistica para mais informacoes.");
 
         }
-
+        if (encomenda.getEstado() == "ENTREGUE"){
+            EmbalagemDeTransporte embalagemDeTransporte = embalagemDeTransporteBean.find(encomenda.getEmbalagensTransporte().get(encomenda.getEmbalagensTransporte().size() - 1).getId());
+            encomenda.removeEmbalagemTransporte(embalagemDeTransporte);
+        }
         encomenda.setEstado(estado);
         entityManager.merge(encomenda);
     }
