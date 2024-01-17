@@ -6,6 +6,10 @@ import java.util.List;
 public class EmbalagemDeTransporteDTO {
     private Long id;
     private String material;
+
+    private long altura;
+    private long largura;
+    private long comprimento;
     private List<EncomendaDTO> encomendas;
 
     private List<SensorDTO> sensores;
@@ -15,9 +19,12 @@ public class EmbalagemDeTransporteDTO {
         this.sensores = new ArrayList<>();
     }
 
-    public EmbalagemDeTransporteDTO(long id, String material) {
+    public EmbalagemDeTransporteDTO(long id, String material, long altura, long largura, long comprimento) {
         this.id = id;
         this.material = material;
+        this.altura = altura;
+        this.largura = largura;
+        this.comprimento = comprimento;
         this.encomendas = new ArrayList<>();
         this.sensores = new ArrayList<>();
     }
@@ -66,5 +73,29 @@ public class EmbalagemDeTransporteDTO {
 
     public void setSensores(List<SensorDTO> sensores) {
         this.sensores = sensores;
+    }
+
+    public long getAltura() {
+        return altura;
+    }
+
+    public void setAltura(long altura) {
+        this.altura = altura;
+    }
+
+    public long getLargura() {
+        return largura;
+    }
+
+    public void setLargura(long largura) {
+        this.largura = largura;
+    }
+
+    public long getComprimento() {
+        return comprimento;
+    }
+
+    public void setComprimento(long comprimento) {
+        this.comprimento = comprimento;
     }
 }

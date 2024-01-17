@@ -31,7 +31,7 @@ public class TipoEmbalagemProdutoBean {
         return (Long)query.getSingleResult() > 0L;
     }
 
-    public TipoEmbalagemProduto create(long tipo, String material) throws Exception {
+    public TipoEmbalagemProduto create(long tipo, String material, long altura, long largura, long comprimento) throws Exception {
 
         if(exists(tipo, material)) {
             throw new MyEntityExistsException("Tipo Embalagem com tipo " + tipo + " e material"+material+" já existe");
@@ -40,7 +40,7 @@ public class TipoEmbalagemProdutoBean {
         TipoEmbalagemProduto tipoEmbalagemProduto = null;
 
         try {
-            tipoEmbalagemProduto = new TipoEmbalagemProduto(tipo, material);
+            tipoEmbalagemProduto = new TipoEmbalagemProduto(tipo, material, altura, largura, comprimento);
             entityManager.persist(tipoEmbalagemProduto);
         }
         catch (ConstraintViolationException e) {

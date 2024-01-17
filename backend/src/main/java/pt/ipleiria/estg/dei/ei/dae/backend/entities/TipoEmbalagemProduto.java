@@ -25,6 +25,10 @@ public class TipoEmbalagemProduto implements Serializable {
     private long tipoEmbalagem;
 
     private String material;
+
+    private long altura;
+    private long largura;
+    private long comprimento;
     @ManyToMany(mappedBy = "embalagensACriar", fetch = FetchType.EAGER)
     private List<ProdutoCatalogo> produtoCatalogo;
 
@@ -41,9 +45,12 @@ public class TipoEmbalagemProduto implements Serializable {
             )
     )
     private List<TipoSensor> tipoSensor;
-    public TipoEmbalagemProduto(long tipoEmbalagem, String material) {
+    public TipoEmbalagemProduto(long tipoEmbalagem, String material, long altura, long largura, long comprimento) {
         this.tipoEmbalagem = tipoEmbalagem;
         this.material = material;
+        this.altura = altura;
+        this.largura = largura;
+        this.comprimento = comprimento;
         this.tipoSensor = new ArrayList<>();
     }
 
@@ -97,5 +104,29 @@ public class TipoEmbalagemProduto implements Serializable {
 
     public void removeTipoSensor(TipoSensor sensor) {
         this.tipoSensor.remove(sensor);
+    }
+
+    public long getAltura() {
+        return altura;
+    }
+
+    public void setAltura(long altura) {
+        this.altura = altura;
+    }
+
+    public long getLargura() {
+        return largura;
+    }
+
+    public void setLargura(long largura) {
+        this.largura = largura;
+    }
+
+    public long getComprimento() {
+        return comprimento;
+    }
+
+    public void setComprimento(long comprimento) {
+        this.comprimento = comprimento;
     }
 }

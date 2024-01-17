@@ -8,6 +8,10 @@ public class EmbalagemDeProdutoDTO {
 
     private String material;
     private long tipoEmbalagem;
+
+    private long altura;
+    private long largura;
+    private long comprimento;
     private List<ProdutoFisicoDTO> produtos;
 
     private List<SensorDTO> sensores;
@@ -17,19 +21,25 @@ public class EmbalagemDeProdutoDTO {
         this.sensores = new ArrayList<>();
     }
 
-    public EmbalagemDeProdutoDTO(Long id, String material, long tipoEmbalagem) {
+    public EmbalagemDeProdutoDTO(Long id, String material, long tipoEmbalagem, long altura, long largura, long comprimento) {
         this.id = id;
         this.material = material;
         this.tipoEmbalagem = tipoEmbalagem;
+        this.altura = altura;
+        this.largura = largura;
+        this.comprimento = comprimento;
         this.produtos = new ArrayList<>();
         this.sensores = new ArrayList<>();
     }
 
-    public EmbalagemDeProdutoDTO(long id, String material, long tipoEmbalagem, List<SensorDTO> sensores) {
+    public EmbalagemDeProdutoDTO(long id, String material, long tipoEmbalagem, List<SensorDTO> sensores, long altura, long largura, long comprimento) {
         this.id = id;
         this.material = material;
         this.tipoEmbalagem = tipoEmbalagem;
         this.sensores = sensores;
+        this.altura = altura;
+        this.largura = largura;
+        this.comprimento = comprimento;
     }
 
     public Long getId() {
@@ -70,5 +80,29 @@ public class EmbalagemDeProdutoDTO {
 
     public void setSensorDTOS(List<SensorDTO> sensorDTOS) {
         this.sensores = sensorDTOS;
+    }
+
+    public long getAltura() {
+        return altura;
+    }
+
+    public void setAltura(long altura) {
+        this.altura = altura;
+    }
+
+    public long getLargura() {
+        return largura;
+    }
+
+    public void setLargura(long largura) {
+        this.largura = largura;
+    }
+
+    public long getComprimento() {
+        return comprimento;
+    }
+
+    public void setComprimento(long comprimento) {
+        this.comprimento = comprimento;
     }
 }

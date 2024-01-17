@@ -15,8 +15,8 @@ public class EmbalagemDeTransporteBean {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public EmbalagemDeTransporte create(String material) {
-        EmbalagemDeTransporte embalagemDeTransporte = new EmbalagemDeTransporte(material);
+    public EmbalagemDeTransporte create(String material, long altura, long largura, long comprimento) {
+        EmbalagemDeTransporte embalagemDeTransporte = new EmbalagemDeTransporte(material, altura, largura, comprimento);
         entityManager.persist(embalagemDeTransporte);
         return embalagemDeTransporte;
     }
@@ -25,13 +25,16 @@ public class EmbalagemDeTransporteBean {
         return entityManager.find(EmbalagemDeTransporte.class, id);
     }
 
-    public void update(long id, String material) throws MyEntityNotFoundException {
+    public void update(long id, String material, long altura, long largura, long comprimento) throws MyEntityNotFoundException {
         EmbalagemDeTransporte embalagemDeTransporte = find(id);
         if (embalagemDeTransporte == null) {
             throw new MyEntityNotFoundException("Embalagem de transporte com id " + id + " não existe");
         }
 
         embalagemDeTransporte.setMaterial(material);
+        embalagemDeTransporte.setAltura(altura);
+        embalagemDeTransporte.setLargura(largura);
+        embalagemDeTransporte.setComprimento(comprimento);
         entityManager.merge(embalagemDeTransporte);
     }
 

@@ -129,10 +129,10 @@ public class ConfigBean {
 
 
             // Embalagens
-            embalagemBean.create("Plastico");
-            embalagemBean.create("Cartao");
-            embalagemBean.create("Vidro");
-            embalagemBean.create("Metal");
+            embalagemBean.create("Plastico", 150, 10, 40);
+            embalagemBean.create("Cartao", 150, 10, 40);
+            embalagemBean.create("Vidro", 150, 10, 40);
+            embalagemBean.create("Metal", 150, 10, 40);
 
             // Sensores
             Sensor sensor1 = sensorBean.create(1, "Temperatura", "ºC");
@@ -160,15 +160,15 @@ public class ConfigBean {
             observacaoBean.create("1000", 4L);
 
             //EmbalagensDeProduto
-            EmbalagemDeProduto embalagemDeProdutoPlastico = embalagemDeProdutoBean.create("Plastico", 1);
-            EmbalagemDeProduto embalagemDeProdutoMetal = embalagemDeProdutoBean.create("Metal", 2);
-            EmbalagemDeProduto embalagemDeProdutoCartao = embalagemDeProdutoBean.create("Cartão", 3);
-            EmbalagemDeProduto embalagemDeProdutoVidro = embalagemDeProdutoBean.create("Vidro", 2);
+            EmbalagemDeProduto embalagemDeProdutoPlastico = embalagemDeProdutoBean.create("Plastico", 40, 100, 150,1);
+            EmbalagemDeProduto embalagemDeProdutoMetal = embalagemDeProdutoBean.create("Metal",20, 50, 50, 2);
+            EmbalagemDeProduto embalagemDeProdutoCartao = embalagemDeProdutoBean.create("Cartão",10, 10, 40, 3);
+            EmbalagemDeProduto embalagemDeProdutoVidro = embalagemDeProdutoBean.create("Vidro",20, 20, 20, 2);
 
-            EmbalagemDeTransporte embalagemDeTransporteCartao = embalagemDeTransporteBean.create("Cartão");
-            EmbalagemDeTransporte embalagemDeTransporteVidro = embalagemDeTransporteBean.create("Vidro");
-            EmbalagemDeTransporte embalagemDeTransportePlastico = embalagemDeTransporteBean.create("Plastico");
-            EmbalagemDeTransporte embalagemDeTransporteEcoPlastico = embalagemDeTransporteBean.create("EcoPlastico");
+            EmbalagemDeTransporte embalagemDeTransporteCartao = embalagemDeTransporteBean.create("Cartão",150, 150, 150);
+            EmbalagemDeTransporte embalagemDeTransporteVidro = embalagemDeTransporteBean.create("Vidro", 200, 200, 200);
+            EmbalagemDeTransporte embalagemDeTransportePlastico = embalagemDeTransporteBean.create("Plastico",50, 50, 50);
+            EmbalagemDeTransporte embalagemDeTransporteEcoPlastico = embalagemDeTransporteBean.create("EcoPlastico", 5000, 5000, 500);
 
             //embalagemDeProdutoBean.associateSensorToEmbalagem(embalagemDeProdutoPlastico.getId(), sensor1.getId());
             embalagemDeProdutoBean.addProdutoToEmbalagem(embalagemDeProdutoPlastico.getId(), produtoFisico1.getId());
@@ -189,7 +189,7 @@ public class ConfigBean {
             ) {
                 for (String material : materiais
                 ) {
-                    TipoEmbalagemProduto tipoEmbalagem = tipoEmbalagemProdutoBean.create(tipo, material);
+                    TipoEmbalagemProduto tipoEmbalagem = tipoEmbalagemProdutoBean.create(tipo, material, 100,100,100);
 
                     tipoEmbalagemProdutoBean.addTipoSensor(tipoEmbalagem.getId(), tipoSensorDanificado.getId());
                 }

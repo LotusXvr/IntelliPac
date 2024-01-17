@@ -25,7 +25,10 @@ public class EmbalagemService {
     private EmbalagemDTO toDTONoSensores(Embalagem embalagem) {
         return new EmbalagemDTO(
                 embalagem.getId(),
-                embalagem.getMaterial()
+                embalagem.getMaterial(),
+                embalagem.getAltura(),
+                embalagem.getLargura(),
+                embalagem.getComprimento()
         );
     }
 
@@ -78,7 +81,7 @@ public class EmbalagemService {
     @POST
     @Path("/")
     public Response createNewEmbalagem(EmbalagemDTO embalagemDTO) throws MyEntityNotFoundException {
-        embalagemBean.create(embalagemDTO.getMaterial());
+        embalagemBean.create(embalagemDTO.getMaterial(), embalagemDTO.getAltura(), embalagemDTO.getLargura(), embalagemDTO.getComprimento());
         return Response.status(Response.Status.CREATED).build();
     }
 

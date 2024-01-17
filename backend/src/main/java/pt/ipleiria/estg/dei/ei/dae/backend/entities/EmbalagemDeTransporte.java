@@ -21,8 +21,8 @@ public class EmbalagemDeTransporte extends Embalagem implements Serializable {
         this.encomendas = new ArrayList<>();
     }
 
-    public EmbalagemDeTransporte(String material) {
-        super(material);
+    public EmbalagemDeTransporte(String material, long altura, long largura, long comprimento) {
+        super(material, altura, largura, comprimento);
         this.encomendas = new ArrayList<>();
     }
 

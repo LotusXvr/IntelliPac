@@ -8,11 +8,17 @@
             <tr>
                 <th>Id</th>
                 <th>Material</th>
+                <th>Altura(cm)</th>
+                <th>Largura(cm)</th>
+                <th>Comprimento(cm)</th>
                 <th>actions</th>
             </tr>
             <tr v-for="embalagemDeTransporte in embalagensDeTransporte">
                 <td>{{ embalagemDeTransporte.id }}</td>
                 <td>{{ embalagemDeTransporte.material }}</td>
+                <td>{{ embalagemDeTransporte.altura }}</td>
+                <td>{{ embalagemDeTransporte.largura }}</td>
+                <td>{{ embalagemDeTransporte.comprimento }}</td>
                 <td>
                     <nuxt-link :to="`/embalagensTransporte/${embalagemDeTransporte.id}`">Detalhes</nuxt-link>
                     |

@@ -16,6 +16,10 @@ public class Embalagem {
     private long id;
     private String material;
 
+    private long altura;
+    private long largura;
+    private long comprimento;
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "embalagem_sensor",
@@ -37,7 +41,10 @@ public class Embalagem {
         this.sensores = new ArrayList<>();
     }
 
-    public Embalagem(String material) {
+    public Embalagem(String material, long altura, long largura, long comprimento) {
+        this.largura = largura;
+        this.altura = altura;
+        this.comprimento = comprimento;
         this.material = material;
         this.sensores = new ArrayList<>();
     }
@@ -74,7 +81,27 @@ public class Embalagem {
         this.material = material;
     }
 
+    public long getAltura() {
+        return altura;
+    }
 
+    public void setAltura(long altura) {
+        this.altura = altura;
+    }
 
+    public long getLargura() {
+        return largura;
+    }
 
+    public void setLargura(long largura) {
+        this.largura = largura;
+    }
+
+    public long getComprimento() {
+        return comprimento;
+    }
+
+    public void setComprimento(long comprimento) {
+        this.comprimento = comprimento;
+    }
 }

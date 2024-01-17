@@ -298,8 +298,12 @@ POST http://localhost:8080/intellipac/api/embalagensDeProduto
 Content-Type: application/json
 
 {
-  "material": "Plastico",
-  "tipoEmbalagem": "3"
+  "material": "Teste",
+  "largura" : 10,
+  "altura" : 10,
+  "comprimento" : 10,
+  "tipoEmbalagem": 3
+
 }
 
 ### Update Embalagem De Produto
@@ -345,15 +349,21 @@ POST http://localhost:8080/intellipac/api/embalagensDeTransporte
 Content-Type: application/json
 
 {
-  "material": "Metal"
+  "material": "Metal",
+  "largura" : 10,
+  "altura" : 10,
+  "comprimento" : 10
 }
 
 ### Update Embalagem De Transporte
-PUT http://localhost:8080/intellipac/api/embalagensDeTransporte/7
+PUT http://localhost:8080/intellipac/api/embalagensDeTransporte/9
 Content-Type: application/json
 
 {
-  "material": "Borracha"
+  "material": "Borracha",
+  "largura" : 10,
+  "altura" : 10,
+  "comprimento" : 10
 }
 
 ### Eliminar Embalagem de Transporte

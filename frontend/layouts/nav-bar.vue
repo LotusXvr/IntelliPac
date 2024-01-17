@@ -9,7 +9,7 @@
                         v-if="user !== null && user.role != 'FabricanteDeProdutos'">Encomendas</nuxt-link>
                     <nuxt-link to="/fabricantes" class="nav-link">Fabricantes</nuxt-link>
                     <nuxt-link to="/embalagens" class="nav-link">Embalagens</nuxt-link>
-                    <nuxt-link to="/embalagensTransporte" class="nav-link" v-if="user !==null && user.role == 'FabricanteDeProdutos'">
+                    <nuxt-link to="/embalagensTransporte" class="nav-link" v-if="user !==null && user.role == 'OperadorDeLogistica'">
                         Embalagens Transporte</nuxt-link>
                     <nuxt-link to="/sensores" class="nav-link"
                         v-if="user !== null">Sensores</nuxt-link>

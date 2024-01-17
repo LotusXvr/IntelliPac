@@ -10,13 +10,22 @@ public class EmbalagemDTO {
 
     private List<SensorDTO> sensores;
 
+    private long altura;
+
+    private long largura;
+
+    private long comprimento;
+
     public EmbalagemDTO() {
         this.sensores = new ArrayList<>();
     }
 
-    public EmbalagemDTO(long id, String material) {
+    public EmbalagemDTO(long id, String material, long altura, long largura, long comprimento) {
         this.id = id;
         this.material = material;
+        this.altura = altura;
+        this.largura = largura;
+        this.comprimento = comprimento;
         this.sensores = new ArrayList<>();
     }
 
@@ -42,14 +51,6 @@ public class EmbalagemDTO {
         this.sensores.remove(sensor);
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getMaterial() {
         return material;
     }
@@ -58,5 +59,31 @@ public class EmbalagemDTO {
         this.material = material;
     }
 
+    public void setId(long id) {
+        this.id = id;
+    }
 
+    public long getAltura() {
+        return altura;
+    }
+
+    public void setAltura(long altura) {
+        this.altura = altura;
+    }
+
+    public long getLargura() {
+        return largura;
+    }
+
+    public void setLargura(long largura) {
+        this.largura = largura;
+    }
+
+    public long getComprimento() {
+        return comprimento;
+    }
+
+    public void setComprimento(long comprimento) {
+        this.comprimento = comprimento;
+    }
 }

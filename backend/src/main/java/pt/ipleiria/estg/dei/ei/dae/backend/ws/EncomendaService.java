@@ -90,7 +90,10 @@ public class EncomendaService {
                 embalagemDeProduto.getId(),
                 embalagemDeProduto.getMaterial(),
                 embalagemDeProduto.getTipoEmbalagem(),
-                sensoresToDTOs(embalagemDeProduto.getSensores())
+                sensoresToDTOs(embalagemDeProduto.getSensores()),
+                embalagemDeProduto.getAltura(),
+                embalagemDeProduto.getLargura(),
+                embalagemDeProduto.getComprimento()
         );
     }
 

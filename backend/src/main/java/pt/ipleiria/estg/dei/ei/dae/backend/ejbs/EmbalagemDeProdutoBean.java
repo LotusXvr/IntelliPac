@@ -14,8 +14,8 @@ public class EmbalagemDeProdutoBean {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public EmbalagemDeProduto create(String material, long tipoEmbalagem) {
-        EmbalagemDeProduto embalagemDeProduto = new EmbalagemDeProduto(material,tipoEmbalagem);
+    public EmbalagemDeProduto create(String material,long altura, long largura, long comprimento, long tipoEmbalagem) {
+        EmbalagemDeProduto embalagemDeProduto = new EmbalagemDeProduto(material,altura,largura,comprimento, tipoEmbalagem);
         entityManager.persist(embalagemDeProduto);
         return embalagemDeProduto;
     }

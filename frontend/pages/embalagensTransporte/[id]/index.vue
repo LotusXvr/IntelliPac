@@ -3,6 +3,9 @@
         <h2>Detalhes de {{ embalagemDeTransporte.id }} {{ embalagemDeTransporte.material }}</h2>
         <p>Id: {{ embalagemDeTransporte.id }}</p>
         <p>Material: {{ embalagemDeTransporte.material }}</p>
+        <p>Altura: {{ embalagemDeTransporte.altura }} cm</p>
+        <p>Largura: {{ embalagemDeTransporte.largura }} cm</p>
+        <p>Comprimento: {{ embalagemDeTransporte.comprimento }} cm</p>
         <p>Encomendas:</p>
         <ul>
             <li v-for="encomenda in embalagemDeTransporte.encomendas" :key="encomenda.id">

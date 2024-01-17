@@ -28,7 +28,10 @@ public class EmbalagemDeProdutoService {
         return new EmbalagemDeProdutoDTO(
                 embalagemDeProduto.getId(),
                 embalagemDeProduto.getMaterial(),
-                embalagemDeProduto.getTipoEmbalagem()
+                embalagemDeProduto.getTipoEmbalagem(),
+                embalagemDeProduto.getAltura(),
+                embalagemDeProduto.getLargura(),
+                embalagemDeProduto.getComprimento()
         );
     }
 
@@ -40,7 +43,10 @@ public class EmbalagemDeProdutoService {
         EmbalagemDeProdutoDTO embalagemDeProdutoDTO = new EmbalagemDeProdutoDTO(
                 embalagemDeProduto.getId(),
                 embalagemDeProduto.getMaterial(),
-                embalagemDeProduto.getTipoEmbalagem()
+                embalagemDeProduto.getTipoEmbalagem(),
+                embalagemDeProduto.getAltura(),
+                embalagemDeProduto.getLargura(),
+                embalagemDeProduto.getComprimento()
         );
 
         embalagemDeProdutoDTO.setSensorDTOS(sensorsToDTOs(embalagemDeProduto.getSensores()));
@@ -89,7 +95,11 @@ public class EmbalagemDeProdutoService {
             throws Exception {
         EmbalagemDeProduto embalagemDeProduto = embalagemDeProdutoBean.create(
                 embalagemDeProdutoDTO.getMaterial(),
+                embalagemDeProdutoDTO.getAltura(),
+                embalagemDeProdutoDTO.getLargura(),
+                embalagemDeProdutoDTO.getComprimento(),
                 embalagemDeProdutoDTO.getTipoEmbalagem()
+
         );
         return Response.status(Response.Status.CREATED).entity(toDTO(embalagemDeProduto)).build();
     }

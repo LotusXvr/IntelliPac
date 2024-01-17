@@ -28,14 +28,14 @@ public class EmbalagemDeProduto extends Embalagem implements Serializable {
         this.produtos = new ArrayList<>();
     }
 
-    public EmbalagemDeProduto(String material, long tipoEmbalagem) {
-        super(material);
+    public EmbalagemDeProduto(String material,long altura, long largura, long comprimento ,long tipoEmbalagem) {
+        super(material, altura, largura, comprimento);
         this.tipoEmbalagem = tipoEmbalagem;
         this.produtos = new ArrayList<>();
     }
 
-    public EmbalagemDeProduto(String material, long tipoEmbalagem, List<ProdutoFisico> produtos) {
-        super(material);
+    public EmbalagemDeProduto(String material, long altura, long largura, long comprimento ,long tipoEmbalagem, List<ProdutoFisico> produtos) {
+        super(material, altura, largura, comprimento);
         this.tipoEmbalagem = tipoEmbalagem;
         this.produtos = produtos;
     }

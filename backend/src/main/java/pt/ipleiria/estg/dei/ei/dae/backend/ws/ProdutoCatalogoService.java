@@ -59,7 +59,10 @@ public class ProdutoCatalogoService {
         return new TipoEmbalagemDTO(
                 embalagensACriar.getId(),
                 embalagensACriar.getTipoEmbalagem(),
-                embalagensACriar.getMaterial()
+                embalagensACriar.getMaterial(),
+                embalagensACriar.getAltura(),
+                embalagensACriar.getLargura(),
+                embalagensACriar.getComprimento()
         );
     }
 

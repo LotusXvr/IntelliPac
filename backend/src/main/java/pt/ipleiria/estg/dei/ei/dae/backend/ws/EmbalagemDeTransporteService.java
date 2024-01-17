@@ -27,7 +27,10 @@ public class EmbalagemDeTransporteService {
     private EmbalagemDeTransporteDTO toDTONoDetails(EmbalagemDeTransporte embalagemDeTransporte) {
         return new EmbalagemDeTransporteDTO(
                 embalagemDeTransporte.getId(),
-                embalagemDeTransporte.getMaterial()
+                embalagemDeTransporte.getMaterial(),
+                embalagemDeTransporte.getAltura(),
+                embalagemDeTransporte.getLargura(),
+                embalagemDeTransporte.getComprimento()
         );
     }
 
@@ -38,7 +41,10 @@ public class EmbalagemDeTransporteService {
     private EmbalagemDeTransporteDTO toDTO(EmbalagemDeTransporte embalagemDeTransporte) {
         EmbalagemDeTransporteDTO embalagemDeTransporteDTO = new EmbalagemDeTransporteDTO(
                 embalagemDeTransporte.getId(),
-                embalagemDeTransporte.getMaterial()
+                embalagemDeTransporte.getMaterial(),
+                embalagemDeTransporte.getAltura(),
+                embalagemDeTransporte.getLargura(),
+                embalagemDeTransporte.getComprimento()
         );
 
         embalagemDeTransporteDTO.setSensores(sensorsToDTOs(embalagemDeTransporte.getSensores()));
@@ -102,7 +108,10 @@ public class EmbalagemDeTransporteService {
     public Response create(EmbalagemDeTransporteDTO embalagemDeTransporteDTO)
             throws Exception {
         EmbalagemDeTransporte embalagemDeTransporte = embalagemDeTransporteBean.create(
-                embalagemDeTransporteDTO.getMaterial()
+                embalagemDeTransporteDTO.getMaterial(),
+                embalagemDeTransporteDTO.getAltura(),
+                embalagemDeTransporteDTO.getLargura(),
+                embalagemDeTransporteDTO.getComprimento()
         );
         return Response.status(Response.Status.CREATED).entity(toDTO(embalagemDeTransporte)).build();
     }
@@ -114,7 +123,7 @@ public class EmbalagemDeTransporteService {
         if (embalagemDeTransporte == null) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
-        embalagemDeTransporteBean.update(id, embalagemDeTransporteDTO.getMaterial());
+        embalagemDeTransporteBean.update(id, embalagemDeTransporteDTO.getMaterial(), embalagemDeTransporteDTO.getAltura(), embalagemDeTransporteDTO.getLargura(), embalagemDeTransporteDTO.getComprimento());
         return Response.ok().build();
     }
 

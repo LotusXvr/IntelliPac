@@ -25,7 +25,10 @@ public class TipoEmbalagemService {
         return new TipoEmbalagemDTO(
                 tipoEmbalagem.getId(),
                 tipoEmbalagem.getTipoEmbalagem(),
-                tipoEmbalagem.getMaterial()
+                tipoEmbalagem.getMaterial(),
+                tipoEmbalagem.getAltura(),
+                tipoEmbalagem.getLargura(),
+                tipoEmbalagem.getComprimento()
         );
     }
 

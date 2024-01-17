@@ -72,7 +72,10 @@ public class SensorService {
     private EmbalagemDTO embalagemToDTO(Embalagem embalagem) {
         return new EmbalagemDTO(
                 embalagem.getId(),
-                embalagem.getMaterial()
+                embalagem.getMaterial(),
+                embalagem.getAltura(),
+                embalagem.getLargura(),
+                embalagem.getComprimento()
         );
     }
 

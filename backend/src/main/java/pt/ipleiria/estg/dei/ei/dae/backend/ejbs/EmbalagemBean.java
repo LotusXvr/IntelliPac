@@ -37,8 +37,8 @@ public class EmbalagemBean {
         return embalagem;
     }
 
-    public Embalagem create(String material) {
-        Embalagem embalagem = new Embalagem(material);
+    public Embalagem create(String material, long altura, long largura, long comprimento) {
+        Embalagem embalagem = new Embalagem(material, altura,largura,comprimento);
         entityManager.persist(embalagem);
         return embalagem;
     }
