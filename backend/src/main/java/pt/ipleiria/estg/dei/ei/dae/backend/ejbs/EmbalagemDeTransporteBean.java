@@ -5,7 +5,9 @@ import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.hibernate.Hibernate;
-import pt.ipleiria.estg.dei.ei.dae.backend.entities.*;
+import pt.ipleiria.estg.dei.ei.dae.backend.entities.EmbalagemDeTransporte;
+import pt.ipleiria.estg.dei.ei.dae.backend.entities.Encomenda;
+import pt.ipleiria.estg.dei.ei.dae.backend.entities.Sensor;
 import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyEntityNotFoundException;
 
 import java.util.List;
@@ -47,7 +49,12 @@ public class EmbalagemDeTransporteBean {
     }
 
     public List<EmbalagemDeTransporte> getAllEmbalagensDeTransporte() {
-        return entityManager.createNamedQuery("getAllEmbalagensDeTransporte", EmbalagemDeTransporte.class).getResultList();
+        List<EmbalagemDeTransporte> embalagensTransporte = entityManager.createNamedQuery("getAllEmbalagensDeTransporte", EmbalagemDeTransporte.class).getResultList();
+        for (EmbalagemDeTransporte embalagemDeTransporte : embalagensTransporte) {
+            Hibernate.initialize(embalagemDeTransporte.getSensores());
+            Hibernate.initialize(embalagemDeTransporte.getEncomendas());
+        }
+        return embalagensTransporte;
     }
 
     public void associateSensorToEmbalagem(long idEmbalagem, long idSensor) throws Exception {
@@ -59,21 +66,21 @@ public class EmbalagemDeTransporteBean {
         if (sensor == null) {
             throw new MyEntityNotFoundException("Sensor with id " + idSensor + " not found");
         }
-        for (Sensor sensorTipo: embalagemDeTransporte.getSensores()
-             ) {
-            if(sensor.getTipo().compareTo(sensorTipo.getTipo()) == 0){
+        for (Sensor sensorTipo : embalagemDeTransporte.getSensores()
+        ) {
+            if (sensor.getTipo().compareTo(sensorTipo.getTipo()) == 0) {
                 throw new Exception("Embalagem já tem um sensor do mesmo tipo");
             }
         }
-        if(sensor.getEstado() == 0){
+        if (sensor.getEstado() == 0) {
             embalagemDeTransporte.addSensor(sensor);
             sensor.setEstado(1);
             entityManager.merge(embalagemDeTransporte);
-        }else{
-            if(sensor.getEstado() == 1){
-                throw new Exception("Sensor está em uso na encomenda "+ sensor.getEmbalagens().get(sensor.getEmbalagens().size() - 1).getId());
+        } else {
+            if (sensor.getEstado() == 1) {
+                throw new Exception("Sensor está em uso na encomenda " + sensor.getEmbalagens().get(sensor.getEmbalagens().size() - 1).getId());
             }
-            if(sensor.getEstado() == 2){
+            if (sensor.getEstado() == 2) {
                 throw new Exception("O sensor está associado a uma embalagem produto pelo que não pode ser reutilizado");
             }
         }
@@ -88,12 +95,12 @@ public class EmbalagemDeTransporteBean {
         if (sensor == null) {
             throw new MyEntityNotFoundException("Sensor with id " + idSensor + " not found");
         }
-        if(embalagemDeTransporte.getSensores().contains(sensor)){
+        if (embalagemDeTransporte.getSensores().contains(sensor)) {
             embalagemDeTransporte.removeSensor(sensor);
             sensor.setEstado(0);
             entityManager.merge(embalagemDeTransporte);
-        }else{
-            throw new Exception("O sensor "+ sensor.getId() +" não está associado à embalagem de transporte "+ embalagemDeTransporte.getId());
+        } else {
+            throw new Exception("O sensor " + sensor.getId() + " não está associado à embalagem de transporte " + embalagemDeTransporte.getId());
         }
 
     }

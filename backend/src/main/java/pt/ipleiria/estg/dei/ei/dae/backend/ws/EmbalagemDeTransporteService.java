@@ -88,7 +88,7 @@ public class EmbalagemDeTransporteService {
     @GET
     @Path("/")
     public List<EmbalagemDeTransporteDTO> getAll() {
-        return toDTOsNoDetails(embalagemDeTransporteBean.getAllEmbalagensDeTransporte());
+        return toDTOs(embalagemDeTransporteBean.getAllEmbalagensDeTransporte());
     }
 
     @GET
