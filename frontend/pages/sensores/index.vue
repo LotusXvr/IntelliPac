@@ -10,6 +10,8 @@
                 <th>Tipo</th>
                 <th>Unidade</th>
                 <th>Estado</th>
+                <th>Embalagens</th>
+                <th>Observações</th>
                 <th>Ações</th>
             </tr>
             <h4>Sensores Disponiveis</h4>
@@ -18,6 +20,8 @@
                 <td>{{ sensor.tipo }}</td>
                 <td>{{ sensor.unidade }}</td>
                 <td>{{ sensor.estado }}</td>
+                <td>{{ sensor.embalagens.length }}</td>
+                <td>{{ sensor.observacoes.length }}</td>
                 <td>
                     <nuxt-link :to="`/sensores/${sensor.id}`">Detalhes</nuxt-link>
                     |
@@ -32,6 +36,9 @@
                 <td>{{ sensor.tipo }}</td>
                 <td>{{ sensor.unidade }}</td>
                 <td>{{ sensor.estado }}</td>
+
+                <td>{{ sensor.embalagens.length }}</td>
+                <td>{{ sensor.observacoes.length }}</td>
                 <td>
                     <nuxt-link :to="`/sensores/${sensor.id}`">Detalhes</nuxt-link>
                     |
@@ -46,6 +53,9 @@
                 <td>{{ sensor.tipo }}</td>
                 <td>{{ sensor.unidade }}</td>
                 <td>{{ sensor.estado }}</td>
+
+                <td>{{ sensor.embalagens.length }}</td>
+                <td>{{ sensor.observacoes.length }}</td>
                 <td>
                     <nuxt-link :to="`/sensores/${sensor.id}`">Detalhes</nuxt-link>
                     |
@@ -77,7 +87,6 @@ console.log("sensores disponiveis " + sensoresDisponiveis)
 
 // sensores com estado a 1 significa que são reutilizáveis e estão em uso
 const sensoresEmUso = sensores.value.filter((sensor) => sensor.estado == 1)
-
 
 const deleteProduto = async (id) => {
     try {

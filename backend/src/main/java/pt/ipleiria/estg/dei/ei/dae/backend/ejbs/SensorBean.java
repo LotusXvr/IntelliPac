@@ -42,7 +42,12 @@ public class SensorBean {
     }
 
     public List<Sensor> getAll() {
-        return entityManager.createNamedQuery("getAllSensor", Sensor.class).getResultList();
+        List<Sensor> sensores = entityManager.createNamedQuery("getAllSensor", Sensor.class).getResultList();
+        for (Sensor sensor : sensores) {
+            Hibernate.initialize(sensor.getObservacoes());
+            Hibernate.initialize(sensor.getEmbalagens());
+        }
+        return sensores;
     }
 
     public Sensor findSensorDetails(long id) {

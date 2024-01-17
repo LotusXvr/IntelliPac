@@ -171,7 +171,7 @@ GET http://localhost:8080/intellipac/api/sensores
 Accept: application/json
 
 ### GET SENSOR DETAILS
-GET http://localhost:8080/intellipac/api/sensores/1
+GET http://localhost:8080/intellipac/api/sensores/14
 Accept: application/json
 
 ### POST SENSORES
@@ -308,11 +308,10 @@ Content-Type: application/json
 
 {
   "material": "Teste",
-  "largura" : 10,
-  "altura" : 10,
-  "comprimento" : 10,
+  "largura": 10,
+  "altura": 10,
+  "comprimento": 10,
   "tipoEmbalagem": 3
-
 }
 
 ### Update Embalagem De Produto
@@ -359,9 +358,9 @@ Content-Type: application/json
 
 {
   "material": "Metal",
-  "largura" : 10,
-  "altura" : 10,
-  "comprimento" : 10
+  "largura": 10,
+  "altura": 10,
+  "comprimento": 10
 }
 
 ### Update Embalagem De Transporte
@@ -370,9 +369,9 @@ Content-Type: application/json
 
 {
   "material": "Borracha",
-  "largura" : 10,
-  "altura" : 10,
-  "comprimento" : 10
+  "largura": 10,
+  "altura": 10,
+  "comprimento": 10
 }
 
 ### Eliminar Embalagem de Transporte

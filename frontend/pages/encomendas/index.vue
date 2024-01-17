@@ -29,6 +29,9 @@
                         :to="'/encomendas/edit/' + encomenda.id + '/embalagemTransporte'"
                         >Adicionar Embalagem</nuxt-link
                     >
+                    <nuxt-link v-if=" encomenda.estado === 'PROCESSAMENTO'"
+                        :to="'/encomendas/edit/' + encomenda.id + '/embalagemTransporte'"
+                        >Alterar Embalagem</nuxt-link>
                     |
                     <button @click="deleteEncomenda(encomenda.id)">Excluir</button>
                 </td>

@@ -200,6 +200,8 @@ public class ConfigBean {
                 i += 10;
             }
 
+            TipoEmbalagemProduto tipoEmbalagem = tipoEmbalagemProdutoBean.create(2, "NeoPlastico", 50, 100, 100);
+
             TipoSensor testeSensor = tipoSensorBean.create("Vento", "ºC");
 
             tipoEmbalagemProdutoBean.addTipoSensor(1, testeSensor.getId());

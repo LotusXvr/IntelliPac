@@ -14,8 +14,8 @@ public class EmbalagemDeProdutoBean {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public EmbalagemDeProduto create(String material,long altura, long largura, long comprimento, long tipoEmbalagem) {
-        EmbalagemDeProduto embalagemDeProduto = new EmbalagemDeProduto(material,altura,largura,comprimento, tipoEmbalagem);
+    public EmbalagemDeProduto create(String material, long altura, long largura, long comprimento, long tipoEmbalagem) {
+        EmbalagemDeProduto embalagemDeProduto = new EmbalagemDeProduto(material, altura, largura, comprimento, tipoEmbalagem);
         entityManager.persist(embalagemDeProduto);
         return embalagemDeProduto;
     }
@@ -84,7 +84,7 @@ public class EmbalagemDeProdutoBean {
         return embalagemDeProduto;
     }
 
-    public void addProdutoToEmbalagem(long idEmbalagem, long idProduto) throws Exception {
+    public void addEmbalagemToProduto(long idEmbalagem, long idProduto) throws Exception {
         EmbalagemDeProduto embalagemDeProduto = find(idEmbalagem);
         if (embalagemDeProduto == null) {
             throw new MyEntityNotFoundException("Embalagem with id " + idEmbalagem + " not found");
@@ -93,27 +93,59 @@ public class EmbalagemDeProdutoBean {
         if (produtoFisico == null) {
             throw new MyEntityNotFoundException("Produto with id " + idProduto + " not found");
         }
-        if(embalagemDeProduto.getTipoEmbalagem() != 1 && produtoFisico.getEmbalagensDeProduto().size() == 0){
+        if (embalagemDeProduto.getTipoEmbalagem() != 1 && produtoFisico.getEmbalagensDeProduto().size() == 0) {
             throw new Exception("O produto não tem embalagem primária");
         }
 
-        if (embalagemDeProduto.getTipoEmbalagem() == 1 && produtoFisico.getEmbalagensDeProduto().size() == 0){
+        if (embalagemDeProduto.getTipoEmbalagem() == 1 && produtoFisico.getEmbalagensDeProduto().size() == 0) {
             produtoFisico.addEmbalagem(embalagemDeProduto);
             entityManager.merge(embalagemDeProduto);
             return;
         }
 
         EmbalagemDeProduto anterior = produtoFisico.getEmbalagensDeProduto().get(produtoFisico.getEmbalagensDeProduto().size() - 1);
-        if(anterior.getTipoEmbalagem() != (embalagemDeProduto.getTipoEmbalagem() - 1)){
+        if (anterior.getTipoEmbalagem() != (embalagemDeProduto.getTipoEmbalagem() - 1)) {
             throw new Exception("O produto tem de seguir o padrão: Primária > Secundária > terciária");
         }
 
-        if(anterior.getAltura() >= embalagemDeProduto.getAltura() || anterior.getLargura() >= embalagemDeProduto.getLargura() || anterior.getComprimento() >= embalagemDeProduto.getComprimento()){
-            throw new Exception("A embalagem a adicionar têm de ser maior que: "+anterior.getComprimento()+"X"+anterior.getLargura()+"X"+anterior.getAltura());
+        if (anterior.getAltura() >= embalagemDeProduto.getAltura() || anterior.getLargura() >= embalagemDeProduto.getLargura() || anterior.getComprimento() >= embalagemDeProduto.getComprimento()) {
+            throw new Exception("A embalagem a adicionar têm de ser maior que: " + anterior.getComprimento() + "X" + anterior.getLargura() + "X" + anterior.getAltura());
         }
 
         produtoFisico.addEmbalagem(embalagemDeProduto);
         entityManager.merge(embalagemDeProduto);
+    }
+
+    public void addTipoEmbalagemToProdutoCatalogo(long idEmbalagem, long idProduto) throws Exception {
+        TipoEmbalagemProduto embalagemACriar = entityManager.find(TipoEmbalagemProduto.class, idEmbalagem);
+        if (embalagemACriar == null) {
+            throw new MyEntityNotFoundException("Embalagem with id " + idEmbalagem + " not found");
+        }
+        ProdutoCatalogo produtoCatalogo = entityManager.find(ProdutoCatalogo.class, idProduto);
+        if (produtoCatalogo == null) {
+            throw new MyEntityNotFoundException("Produto with id " + idProduto + " not found");
+        }
+        if (embalagemACriar.getTipoEmbalagem() != 1 && produtoCatalogo.getEmbalagensACriar().size() == 0) {
+            throw new Exception("O produto não tem embalagem primária");
+        }
+
+        if (embalagemACriar.getTipoEmbalagem() == 1 && produtoCatalogo.getEmbalagensACriar().size() == 0) {
+            produtoCatalogo.addEmbalagemACriar(embalagemACriar);
+            entityManager.merge(embalagemACriar);
+            return;
+        }
+
+        TipoEmbalagemProduto anterior = produtoCatalogo.getEmbalagensACriar().get(produtoCatalogo.getEmbalagensACriar().size() - 1);
+        if (anterior.getTipoEmbalagem() != (embalagemACriar.getTipoEmbalagem() - 1)) {
+            throw new Exception("O produto tem de seguir o padrão: Primária > Secundária > terciária");
+        }
+
+        if (anterior.getAltura() >= embalagemACriar.getAltura() || anterior.getLargura() >= embalagemACriar.getLargura() || anterior.getComprimento() >= embalagemACriar.getComprimento()) {
+            throw new Exception("A embalagem a adicionar têm de ser maior que: " + anterior.getComprimento() + "X" + anterior.getLargura() + "X" + anterior.getAltura());
+        }
+
+        produtoCatalogo.addEmbalagemACriar(embalagemACriar);
+        entityManager.merge(embalagemACriar);
     }
 
     private String tipoEmbalagemToString(long tipo) {

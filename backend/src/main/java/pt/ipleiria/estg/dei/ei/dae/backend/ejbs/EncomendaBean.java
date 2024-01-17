@@ -12,7 +12,6 @@ import pt.ipleiria.estg.dei.ei.dae.backend.dtos.EncomendaDTO;
 import pt.ipleiria.estg.dei.ei.dae.backend.dtos.ProdutoFisicoDTO;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.*;
 import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyConstraintViolationException;
-import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyEntityExistsException;
 import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyEntityNotFoundException;
 
 import java.time.LocalDateTime;
@@ -245,7 +244,7 @@ public class EncomendaBean {
                     "Por favor, contacte o operador de logistica para mais informacoes.");
 
         }
-        if (encomenda.getEstado() == "ENTREGUE"){
+        if (encomenda.getEstado() == "ENTREGUE") {
             EmbalagemDeTransporte embalagemDeTransporte = embalagemDeTransporteBean.find(encomenda.getEmbalagensTransporte().get(encomenda.getEmbalagensTransporte().size() - 1).getId());
             encomenda.removeEmbalagemTransporte(embalagemDeTransporte);
         }
@@ -279,6 +278,7 @@ public class EncomendaBean {
             throw new MyEntityNotFoundException("Lista de embalagens de transporte não pode vir vazia");
         }
 
+        encomenda.getEmbalagensTransporte().clear();
 
         for (EmbalagemDeTransporteDTO embalagemDTO : embalagensTransporte) {
             EmbalagemDeTransporte embalagem = entityManager.find(EmbalagemDeTransporte.class, embalagemDTO.getId());

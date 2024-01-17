@@ -88,6 +88,7 @@ public class ProdutoCatalogo extends Produto implements Serializable {
     }
 
     public void addEmbalagemACriar(TipoEmbalagemProduto embalagem) {
+
         this.embalagensACriar.add(embalagem);
     }
 
