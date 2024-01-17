@@ -21,6 +21,16 @@
                         <ul>
                             <li v-for="sensor in embalagem.sensores" :key="sensor.id">
                                 {{ sensor.tipo }} - {{ sensor.unidade }}
+                                <br>
+                                Ultima obserção:
+                                <ul>
+                                    <li
+                                        v-for="observacao in sensor.observacoes"
+                                        :key="observacao.id"
+                                    >
+                                        {{ observacao.timestamp }} - {{ observacao.valor }}
+                                    </li>
+                                </ul>
                             </li>
                         </ul>
                     </li>
@@ -37,9 +47,18 @@
             >
                 Material:
                 {{ embalagens.material }}
+                <br>
+                Sensores:
                 <ul>
                     <li v-for="sensor in embalagens.sensores" :key="sensor.id">
                         {{ sensor.tipo }} - {{ sensor.unidade }}
+                        <br>
+                        Ultima obserção:
+                        <ul>
+                            <li v-for="observacao in sensor.observacoes" :key="observacao.id">
+                                {{ observacao.timestamp }} - {{ observacao.valor }}
+                            </li>
+                        </ul>
                     </li>
                 </ul>
             </li>

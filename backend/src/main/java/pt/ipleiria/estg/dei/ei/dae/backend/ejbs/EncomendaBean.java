@@ -184,13 +184,26 @@ public class EncomendaBean {
                 List<EmbalagemDeProduto> embalagensProduto = produto.getEmbalagensDeProduto();
                 Hibernate.initialize(embalagensProduto);
                 for (EmbalagemDeProduto embalagemProduto : embalagensProduto) {
-                    Hibernate.initialize(embalagemProduto.getSensores());
+                    List<Sensor> sensores = embalagemProduto.getSensores();
+                    Hibernate.initialize(sensores);
+                    for (Sensor sensor : sensores) {
+                        // apenas se carrega a ultima observação
+                        // visto não ser necessário carregar todas as observações
+                        // evitando demasiada carga no servidor
+                        Observacao observacao = sensor.getObservacoes().get(0);
+                        Hibernate.initialize(observacao);
+                    }
                 }
             }
             List<EmbalagemDeTransporte> embalagensTransporte = encomenda.getEmbalagensTransporte();
             Hibernate.initialize(embalagensTransporte);
             for (EmbalagemDeTransporte embalagemTransporte : embalagensTransporte) {
-                Hibernate.initialize(embalagemTransporte.getSensores());
+                List<Sensor> sensores = embalagemTransporte.getSensores();
+                Hibernate.initialize(sensores);
+                for (Sensor sensor : sensores) {
+                    Observacao observacao = sensor.getObservacoes().get(0);
+                    Hibernate.initialize(observacao);
+                }
             }
 
         }

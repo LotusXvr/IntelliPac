@@ -104,12 +104,26 @@ public class EncomendaService {
                 sensor.getIdSensor(),
                 sensor.getTipo(),
                 sensor.getUnidade(),
-                sensor.getEstado()
+                sensor.getEstado(),
+                observacoesToDTOs(sensor.getObservacoes())
         );
     }
 
     private List<SensorDTO> sensoresToDTOs(List<Sensor> sensors) {
         return sensors.stream().map(this::toDTO).collect(Collectors.toList());
+    }
+
+    private ObservacaoDTO toDTO(Observacao observacao) {
+        return new ObservacaoDTO(
+                observacao.getId(),
+                observacao.getTimestamp(),
+                observacao.getValor(),
+                observacao.getSensor().getId()
+        );
+    }
+
+    private List<ObservacaoDTO> observacoesToDTOs(List<Observacao> observacoes) {
+        return observacoes.stream().map(this::toDTO).collect(Collectors.toList());
     }
 
 
