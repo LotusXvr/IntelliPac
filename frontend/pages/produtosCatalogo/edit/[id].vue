@@ -21,6 +21,10 @@
           " />
         {{ tipoNumeroParaString(embalagem.tipo) }}: {{ embalagem.material }}
       </span>
+      <br>
+      <span class="error" v-if="!isEmbalagemSelected">
+        ERRO: {{ formFeedback.embalagensACriar }}
+      </span>
       <br />
       <span v-for="embalagem in tiposEmbalagemSecundaria">
         <br />
@@ -73,6 +77,7 @@ const produtoForm = reactive({
 const formFeedback = reactive({
   nome: "",
   peso: "",
+  embalagensACriar: "",
 });
 
 const { data: embalagensACriar } = await useFetch(`${api}/tipoEmbalagens`)
@@ -173,8 +178,18 @@ const isPesoValid = computed(() => {
   return false;
 });
 
+const isEmbalagemSelected = computed(() => {
+  console.log(isTipoEmbalagemPrimariaSelected.value)
+  if (!isTipoEmbalagemPrimariaSelected.value) {
+    formFeedback.embalagensACriar = "Escolha pelo menos uma embalagem primária"
+    return false
+  }
+  formFeedback.embalagensACriar = ""
+  return true
+})
+
 const isFormValid = computed(() => {
-  return isNameValid.value && isFabricanteValid.value && isPesoValid.value && produtoForm.embalagensACriar.length > 0;
+  return isNameValid.value && isFabricanteValid.value && isPesoValid.value && produtoForm.embalagensACriar.length > 0 && isEmbalagemSelected.value;
 });
 
 const updateProduto = async () => {

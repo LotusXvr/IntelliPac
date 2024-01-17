@@ -156,7 +156,7 @@ const isEmbalagemSelected = computed(() => {
 })
 
 const isFormValid = computed(() => {
-    return isNameValid.value && isPesoValid.value && produtoForm.embalagensACriar.length > 0
+    return isNameValid.value && isPesoValid.value && produtoForm.embalagensACriar.length > 0 && isEmbalagemSelected.value
 })
 
 const tipoNumeroParaString = (tipo) => {
