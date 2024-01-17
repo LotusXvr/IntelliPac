@@ -70,20 +70,40 @@ public class ProdutoCatalogoBean {
         return entityManager.find(ProdutoCatalogo.class, id);
     }
 
-    public void update(long id, String nomeProduto, String fabrincanteUsername) throws MyEntityNotFoundException {
-        ProdutoCatalogo produtoCatalogo = find(id);
-        if (produtoCatalogo == null) {
-            throw new MyEntityNotFoundException("Produto catálogo com id " + id + " não existe");
-        }
+    public ProdutoCatalogo update(long id, ProdutoCatalogoDTO produtoCatalogoDTO) throws MyEntityNotFoundException, MyConstraintViolationException {
+        try {
+            ProdutoCatalogo produtoCatalogo = find(id);
+            if (produtoCatalogo == null) {
+                throw new MyEntityNotFoundException("Produto catálogo com id " + produtoCatalogoDTO.getId() + " não existe");
+            }
 
-        FabricanteDeProdutos fabricante = entityManager.find(FabricanteDeProdutos.class, fabrincanteUsername);
-        if (fabricante == null) {
-            throw new MyEntityNotFoundException("Fabricante com id " + fabrincanteUsername + " não existe");
-        }
+            FabricanteDeProdutos fabricante = fabricanteDeProdutosBean.find(produtoCatalogoDTO.getFabricanteUsername());
+            if (fabricante == null) {
+                throw new MyEntityNotFoundException("Fabricante com id " + produtoCatalogoDTO.getFabricanteUsername() + " não existe");
+            }
 
-        produtoCatalogo.setNomeProduto(nomeProduto);
-        produtoCatalogo.setFabricante(fabricante);
-        entityManager.merge(produtoCatalogo);
+            produtoCatalogo.setNomeProduto(produtoCatalogoDTO.getNome());
+            produtoCatalogo.setFabricante(fabricante);
+            produtoCatalogo.setPeso(produtoCatalogoDTO.getPeso());
+            produtoCatalogo.getEmbalagensACriar().clear();
+
+            for (TipoEmbalagemDTO tipoEmbalagemDTO : produtoCatalogoDTO.getEmbalagensACriar()) {
+                TipoEmbalagemProduto tipoEmbalagemProduto = entityManager.find(TipoEmbalagemProduto.class, tipoEmbalagemDTO.getId());
+
+                if (tipoEmbalagemProduto == null) {
+                    throw new MyEntityNotFoundException("Tipo Embalagem with id " + tipoEmbalagemDTO.getId() + " not found.");
+                }
+
+                // dar overwrite às embalagens a criar
+                produtoCatalogo.addEmbalagemACriar(tipoEmbalagemProduto);
+
+            }
+
+            entityManager.merge(produtoCatalogo);
+            return produtoCatalogo;
+        } catch (ConstraintViolationException e) {
+            throw new MyConstraintViolationException(e);
+        }
     }
 
     public void remove(long id) throws MyEntityNotFoundException {
