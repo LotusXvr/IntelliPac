@@ -14,8 +14,7 @@
     <p v-for="tipo in tiposEmbalagem">
       <span v-for="embalagem in embalagensACriar">
         <div v-if="tipo == embalagem.tipo">
-          <input type="checkbox" :value="embalagem.id" v-model="produtoForm.embalagensACriar"
-            @click="desativarRestantes(embalagem.tipo, embalagem.id)">
+          <input type="checkbox" :value="embalagem.id" v-model="produtoForm.embalagensACriar">
           {{ tipoNumeroParaString(embalagem.tipo) }}: {{ embalagem.material }}
         </div>
 
