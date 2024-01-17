@@ -380,8 +380,6 @@ POST http://localhost:8080/intellipac/api/produtosFisicos
 Content-Type: application/json
 
 {
-  "nome": "TESTE 2",
-  "fabricanteUsername": "Apple",
   "produtoCatalogoId": 1,
   "encomendaId": 1
 }
