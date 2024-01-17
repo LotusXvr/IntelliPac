@@ -32,15 +32,6 @@ public class EmbalagemDeProdutoDTO {
         this.sensores = new ArrayList<>();
     }
 
-    public EmbalagemDeProdutoDTO(long id, String material, long tipoEmbalagem, List<SensorDTO> sensores, long altura, long largura, long comprimento) {
-        this.id = id;
-        this.material = material;
-        this.tipoEmbalagem = tipoEmbalagem;
-        this.sensores = sensores;
-        this.altura = altura;
-        this.largura = largura;
-        this.comprimento = comprimento;
-    }
 
     public Long getId() {
         return id;
@@ -70,7 +61,7 @@ public class EmbalagemDeProdutoDTO {
         return produtos;
     }
 
-    public void setProdutoDTOS(List<ProdutoFisicoDTO> produtoDTOS) {
+    public void setProdutos(List<ProdutoFisicoDTO> produtoDTOS) {
         this.produtos = produtoDTOS;
     }
 
@@ -78,7 +69,7 @@ public class EmbalagemDeProdutoDTO {
         return sensores;
     }
 
-    public void setSensorDTOS(List<SensorDTO> sensorDTOS) {
+    public void setSensores(List<SensorDTO> sensorDTOS) {
         this.sensores = sensorDTOS;
     }
 

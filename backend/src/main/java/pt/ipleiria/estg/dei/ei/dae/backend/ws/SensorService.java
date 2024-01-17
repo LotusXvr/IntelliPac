@@ -42,9 +42,10 @@ public class SensorService {
                 sensor.getIdSensor(),
                 sensor.getTipo(),
                 sensor.getUnidade(),
-                embalagemToDTOs(sensor.getEmbalagens()),
-                observacaoToDTOs(sensor.getObservacoes())
+                sensor.getEstado()
         );
+        sensorDTO.setEmbalagens(embalagemToDTOs(sensor.getEmbalagens()));
+        sensorDTO.setObservacoes(observacaoToDTOs(sensor.getObservacoes()));
         return sensorDTO;
     }
 
@@ -88,10 +89,8 @@ public class SensorService {
     @GET
     @Path("/{id}")
     public Response getSensorDetails(@PathParam("id") long id) {
-
         Sensor sensor = sensorBean.findSensorDetails(id);
         return Response.status(Response.Status.OK).entity(toDTO(sensor)).build();
-
     }
 
 
