@@ -9,7 +9,6 @@ import jakarta.validation.ConstraintViolationException;
 import org.hibernate.Hibernate;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.*;
 import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyConstraintViolationException;
-import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyEntityExistsException;
 import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyEntityNotFoundException;
 
 import java.util.List;
@@ -51,13 +50,6 @@ public class ProdutoFisicoBean {
             throw new MyEntityNotFoundException("Produto catálogo com id " + produtoCatalogo.getId() + " não existe");
         }
 
-        /*
-         * if(exists(nomeProduto, fabrincanteUsername, produtoCatalogo)) {
-         * throw new MyEntityExistsException("Produto físico com nome " + nomeProduto +
-         * " já existe");
-         * }
-         */
-
         FabricanteDeProdutos fabricante = fabricanteDeProdutosBean.find(produtoCatalogo.getFabricante().getUsername());
         if (fabricante == null) {
             throw new MyEntityNotFoundException(
@@ -88,6 +80,7 @@ public class ProdutoFisicoBean {
                         embalagemACriar.getTipoEmbalagem());
                 entityManager.persist(embalagem);
                 embalagemDeProdutoBean.addProdutoToEmbalagem(embalagem.getId(), produtoFisico.getId());
+
                 for (TipoSensor tipoSensor : embalagemACriar.getTipoSensor()) {
                     Sensor sensor = new Sensor(123, tipoSensor.getTipo(), tipoSensor.getUnidade(), 2);
                     entityManager.persist(sensor);

@@ -14,7 +14,6 @@ import pt.ipleiria.estg.dei.ei.dae.backend.entities.FabricanteDeProdutos;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.ProdutoCatalogo;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.TipoEmbalagemProduto;
 import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyConstraintViolationException;
-import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyEntityExistsException;
 import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyEntityNotFoundException;
 
 import java.util.List;
@@ -26,6 +25,9 @@ public class ProdutoCatalogoBean {
 
     @EJB
     private FabricanteDeProdutosBean fabricanteDeProdutosBean;
+
+    @EJB
+    private EmbalagemDeProdutoBean embalagemProdutoBean;
 
     public boolean exists(String nomeProduto, String fabrincanteUsername) {
         Query query = entityManager.createQuery(
@@ -56,7 +58,8 @@ public class ProdutoCatalogoBean {
                 if (tipoEmbalagemProduto == null) {
                     throw new MyEntityNotFoundException("Tipo Embalagem with id " + tipoEmbalagemDTO.getId() + " not found.");
                 }
-                produtoCatalogo.addEmbalagemACriar(tipoEmbalagemProduto);
+                entityManager.persist(produtoCatalogo);
+                embalagemProdutoBean.addTipoEmbalagemToProdutoCatalogo(tipoEmbalagemProduto.getId(), produtoCatalogo.getId());
             }
 
             entityManager.persist(produtoCatalogo);
@@ -94,15 +97,15 @@ public class ProdutoCatalogoBean {
                     throw new MyEntityNotFoundException("Tipo Embalagem with id " + tipoEmbalagemDTO.getId() + " not found.");
                 }
 
-                // dar overwrite às embalagens a criar
-                produtoCatalogo.addEmbalagemACriar(tipoEmbalagemProduto);
+                entityManager.persist(tipoEmbalagemProduto);
+                embalagemProdutoBean.addTipoEmbalagemToProdutoCatalogo(tipoEmbalagemProduto.getId(), produtoCatalogo.getId());
 
             }
 
             entityManager.merge(produtoCatalogo);
             return produtoCatalogo;
-        } catch (ConstraintViolationException e) {
-            throw new MyConstraintViolationException(e);
+        } catch (Exception e) {
+            throw new MyConstraintViolationException((ConstraintViolationException) e);
         }
     }
 
