@@ -5,59 +5,41 @@
             Consumidor Final:
             <select v-model="encomendaForm.consumidorFinal">
                 <option value="">--- Please select Consumidor Final ---</option>
-                <option
-                    v-for="consumidorFinal in consumidoresFinais"
-                    :value="consumidorFinal.username"
-                >
+                <option v-for="consumidorFinal in consumidoresFinais" :value="consumidorFinal.username">
                     {{ consumidorFinal.name }}
                 </option>
             </select>
-            <span
-                v-if="encomendaForm.consumidorFinal !== null && !isConsumidorFinalValid"
-                class="error"
-            >
-                ERRO: {{ formFeedback.consumidorFinal }}</span
-            >
+            <span v-if="encomendaForm.consumidorFinal !== null && !isConsumidorFinalValid" class="error">
+                ERRO: {{ formFeedback.consumidorFinal }}</span>
         </div>
         <br />
         <div>
             Operador Logistica:
             <select v-model="encomendaForm.operadorLogistica">
                 <option value="">--- Please select Operador ---</option>
-                <option
-                    v-for="operadorLogistica in operadoresLogistica"
-                    :value="operadorLogistica.username"
-                >
+                <option v-for="operadorLogistica in operadoresLogistica" :value="operadorLogistica.username">
                     {{ operadorLogistica.username }}
                 </option>
             </select>
-            <span
-                v-if="encomendaForm.operadorLogistica !== null && !isOperadorSelected"
-                class="error"
-            >
-                ERRO: {{ formFeedback.operadorLogistica }}</span
-            >
+            <span v-if="encomendaForm.operadorLogistica !== null && !isOperadorSelected" class="error">
+                ERRO: {{ formFeedback.operadorLogistica }}</span>
         </div>
         <br />
         <div>
             Produtos:
             <p v-for="produto in produtosCatalogo">
-                <input
-                    type="checkbox"
-                    :value="produto.id"
-                    v-model="encomendaForm.produtosCatalogo"
-                />
+                <input type="checkbox" :value="produto.id" v-model="encomendaForm.produtosCatalogo" />
                 {{ produto.nome }}
             <ul> Embalagens:
-                <li v-for="embalagem in produto.embalagensACriar">{{ tipoNumeroParaString(embalagem.tipo) }}: {{ embalagem.material }}</li>
+                <li v-for="embalagem in produto.embalagensACriar">{{ tipoNumeroParaString(embalagem.tipo) }}: {{
+                    embalagem.material }}</li>
             </ul>
             </p>
             <span v-if="!isProdutoSelected" class="error">
-                ERRO: {{ formFeedback.produtosCatalogo }}</span
-            >
+                ERRO: {{ formFeedback.produtosCatalogo }}</span>
         </div>
         <br />
-        
+
         <button type="submit" :disabled="!isFormValid">Criar encomenda</button>
     </form>
     {{ message }}

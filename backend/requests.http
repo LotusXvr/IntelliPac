@@ -7,13 +7,14 @@ POST http://localhost:8080/intellipac/api/produtosCatalogo
 Content-Type: application/json
 
 {
-  "nome": "Produto123",
+  "nome": "Produto1234",
   "fabricanteUsername": "Apple",
   "embalagensACriar": [
     {
-      "id": 1,
-      "tipo": 1,
-      "material": "Plastico"
+      "id": 1
+    },
+    {
+      "id": 2
     }
   ],
   "peso": 3
@@ -199,6 +200,10 @@ Accept: application/json
 GET http://localhost:8080/intellipac/api/embalagens/1
 Accept: application/json
 
+
+### GET TIPO EMBALAGEM
+GET http://localhost:8080/intellipac/api/tipoEmbalagens
+Accept: application/json
 
 
 ### ------------- OBSERVACOES -------------
