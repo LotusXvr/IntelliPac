@@ -14,7 +14,6 @@ import pt.ipleiria.estg.dei.ei.dae.backend.ejbs.EncomendaBean;
 import pt.ipleiria.estg.dei.ei.dae.backend.ejbs.OperadorDeLogisticaBean;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.*;
 import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyConstraintViolationException;
-import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyEntityExistsException;
 import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyEntityNotFoundException;
 
 import java.util.List;
@@ -39,16 +38,17 @@ public class EncomendaService {
 
     // toDTO
     private EncomendaDTO toDTO(Encomenda encomenda) {
-        return new EncomendaDTO(
-                // Long id, String consumidorFinal, Date dataEncomenda, List<ProdutoDTO> produtos
+        EncomendaDTO encomendaDTO = new EncomendaDTO(
                 encomenda.getId(),
                 encomenda.getConsumidorFinal().getUsername(),
                 encomenda.getDataEncomenda(),
-                produtosToDTOs(encomenda.getProdutos()),
-                embalagensTransporteToDTOs(encomenda.getEmbalagensTransporte()),
                 encomenda.getOperadorLogistica().getUsername(),
                 encomenda.getEstado()
         );
+
+        encomendaDTO.setProdutos(produtosToDTOs(encomenda.getProdutos()));
+        encomendaDTO.setEmbalagensTransporte(embalagensTransporteToDTOs(encomenda.getEmbalagensTransporte()));
+        return encomendaDTO;
     }
 
     // toDTOs
@@ -62,23 +62,29 @@ public class EncomendaService {
     }
 
     private EmbalagemDeTransporteDTO toDTO(EmbalagemDeTransporte embalagemDeTransporte) {
-        return new EmbalagemDeTransporteDTO(
+        EmbalagemDeTransporteDTO embalagemDeTransporteDTO = new EmbalagemDeTransporteDTO(
                 embalagemDeTransporte.getId(),
                 embalagemDeTransporte.getMaterial(),
-                sensoresToDTOs(embalagemDeTransporte.getSensores())
+                embalagemDeTransporte.getAltura(),
+                embalagemDeTransporte.getLargura(),
+                embalagemDeTransporte.getComprimento()
         );
+        embalagemDeTransporteDTO.setSensores(sensoresToDTOs(embalagemDeTransporte.getSensores()));
+        return embalagemDeTransporteDTO;
     }
 
     // toDTO
     private ProdutoFisicoDTO toDTO(ProdutoFisico produto) {
-        return new ProdutoFisicoDTO(
+        ProdutoFisicoDTO produtoFisicoDTO = new ProdutoFisicoDTO(
                 produto.getId(),
                 produto.getNomeProduto(),
                 produto.getFabricante().getUsername(),
                 produto.getProdutoCatalogo().getId(),
-                produto.getEncomenda().getId(),
-                embalagensDeProdutoToDTOs(produto.getEmbalagensDeProduto())
+                produto.getEncomenda().getId()
         );
+
+        produtoFisicoDTO.setEmbalagensDeProduto(embalagensDeProdutoToDTOs(produto.getEmbalagensDeProduto()));
+        return produtoFisicoDTO;
     }
 
     private List<ProdutoFisicoDTO> produtosToDTOs(List<ProdutoFisico> produtos) {
@@ -86,15 +92,17 @@ public class EncomendaService {
     }
 
     private EmbalagemDeProdutoDTO toDTO(EmbalagemDeProduto embalagemDeProduto) {
-        return new EmbalagemDeProdutoDTO(
+        EmbalagemDeProdutoDTO embalagemDeProdutoDTO = new EmbalagemDeProdutoDTO(
                 embalagemDeProduto.getId(),
                 embalagemDeProduto.getMaterial(),
                 embalagemDeProduto.getTipoEmbalagem(),
-                sensoresToDTOs(embalagemDeProduto.getSensores()),
                 embalagemDeProduto.getAltura(),
                 embalagemDeProduto.getLargura(),
                 embalagemDeProduto.getComprimento()
         );
+        embalagemDeProdutoDTO.setSensores(sensoresToDTOs(embalagemDeProduto.getSensores()));
+        return embalagemDeProdutoDTO;
+
     }
 
     private List<EmbalagemDeProdutoDTO> embalagensDeProdutoToDTOs(List<EmbalagemDeProduto> embalagensProduto) {
@@ -102,14 +110,16 @@ public class EncomendaService {
     }
 
     private SensorDTO toDTO(Sensor sensor) {
-        return new SensorDTO(
+        SensorDTO sensorDTO = new SensorDTO(
                 sensor.getId(),
                 sensor.getIdSensor(),
                 sensor.getTipo(),
                 sensor.getUnidade(),
-                sensor.getEstado(),
-                observacoesToDTOs(sensor.getObservacoes())
+                sensor.getEstado()
         );
+        sensorDTO.setObservacoes(observacoesToDTOs(sensor.getObservacoes()));
+        return sensorDTO;
+
     }
 
     private List<SensorDTO> sensoresToDTOs(List<Sensor> sensors) {
@@ -174,7 +184,7 @@ public class EncomendaService {
     // Encomenda create(String consumidorFinal, String operadorLogistica)
     @POST
     @Path("/")
-    public Response createEncomenda(EncomendaDTO encomendaDTO) throws Exception, MyEntityNotFoundException, MyEntityExistsException {
+    public Response createEncomenda(EncomendaDTO encomendaDTO) throws Exception {
         try {
             Encomenda encomenda = encomendaBean.create(encomendaDTO);
             return Response.status(Response.Status.CREATED).entity(toDTO(encomenda)).build();

@@ -43,12 +43,15 @@ public class EmbalagemBean {
         return embalagem;
     }
 
-    public Embalagem update(long id, String material) throws MyEntityNotFoundException {
+    public Embalagem update(long id, String material, long altura, long largura, long comprimento) throws MyEntityNotFoundException {
         Embalagem embalagem = find(id);
         if (embalagem == null) {
             throw new MyEntityNotFoundException("Embalagem with id " + id + " not found");
         }
         embalagem.setMaterial(material);
+        embalagem.setAltura(altura);
+        embalagem.setLargura(largura);
+        embalagem.setComprimento(comprimento);
         entityManager.merge(embalagem);
         return embalagem;
     }

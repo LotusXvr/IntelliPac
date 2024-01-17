@@ -92,7 +92,7 @@ public class EmbalagemService {
     @PUT
     @Path("/{id}")
     public Response updateEmbalagem(@PathParam("id") long id, EmbalagemDTO embalagemDTO) throws MyEntityNotFoundException {
-        embalagemBean.update(id, embalagemDTO.getMaterial());
+        embalagemBean.update(id, embalagemDTO.getMaterial(), embalagemDTO.getAltura(), embalagemDTO.getLargura(), embalagemDTO.getComprimento());
         return Response.status(Response.Status.OK).build();
     }
 

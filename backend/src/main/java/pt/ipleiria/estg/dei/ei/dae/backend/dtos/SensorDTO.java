@@ -30,25 +30,6 @@ public class SensorDTO {
         this.observacoes = new ArrayList<>();
     }
 
-    public SensorDTO(long id, long idSensor, String tipo, String unidade, List<EmbalagemDTO> embalagens, List<ObservacaoDTO> observacoes) {
-        this.id = id;
-        this.idSensor = idSensor;
-        this.tipo = tipo;
-        this.unidade = unidade;
-        this.embalagens = embalagens;
-        this.observacoes = observacoes;
-    }
-
-    public SensorDTO(long id, long idSensor, String tipo, String unidade, long estado, List<ObservacaoDTO> observacoes) {
-        this.id = id;
-        this.idSensor = idSensor;
-        this.tipo = tipo;
-        this.unidade = unidade;
-        this.estado = estado;
-        this.embalagens = new ArrayList<>();
-        this.observacoes = observacoes;
-    }
-
     public List<EmbalagemDTO> getEmbalagens() {
         return embalagens;
     }

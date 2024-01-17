@@ -205,9 +205,30 @@ GET http://localhost:8080/intellipac/api/embalagens
 Accept: application/json
 
 ### GET EMBALAGEM
-GET http://localhost:8080/intellipac/api/embalagens/1
+GET http://localhost:8080/intellipac/api/embalagens/15
 Accept: application/json
 
+### POST EMBALAGEM
+POST http://localhost:8080/intellipac/api/embalagens
+Content-Type: application/json
+
+{
+  "material": "Teste",
+  "largura": 10,
+  "altura": 10,
+  "comprimento": 10
+}
+
+### PUT EMBALAGEM
+PUT http://localhost:8080/intellipac/api/embalagens/15
+Content-Type: application/json
+
+{
+  "material": "Borracha",
+  "largura": 5,
+  "altura": 5,
+  "comprimento": 5
+}
 
 ### GET TIPO EMBALAGEM
 GET http://localhost:8080/intellipac/api/tipoEmbalagens

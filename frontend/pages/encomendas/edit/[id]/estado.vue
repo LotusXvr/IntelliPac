@@ -117,7 +117,5 @@ const updateEncomenda = async () => {
     }
 }
 
-console.log("ENTREI EM ESTADO")
-
 fetchEncomenda()
 </script>

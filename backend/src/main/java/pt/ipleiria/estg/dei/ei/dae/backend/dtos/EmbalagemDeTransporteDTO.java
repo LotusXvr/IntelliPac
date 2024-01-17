@@ -29,20 +29,6 @@ public class EmbalagemDeTransporteDTO {
         this.sensores = new ArrayList<>();
     }
 
-    /*public EmbalagemDeTransporteDTO(Long id, String material, List<EncomendaDTO> encomendas) {
-        this.id = id;
-        this.material = material;
-        this.encomendas = encomendas;
-        this.sensores = new ArrayList<>();
-    }*/
-
-    public EmbalagemDeTransporteDTO(Long id, String material, List<SensorDTO> sensores) {
-        this.id = id;
-        this.material = material;
-        this.encomendas = new ArrayList<>();
-        this.sensores = sensores;
-    }
-
     public Long getId() {
         return id;
     }
