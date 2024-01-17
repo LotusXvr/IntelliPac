@@ -14,7 +14,10 @@ public class SensorBean {
     private EntityManager entityManager;
 
     public Sensor create(String tipo, String unidade) {
-        Sensor sensor = new Sensor(tipo, unidade, 0);
+        Long maxIdSensor = (Long) entityManager.createQuery("SELECT MAX(s.idSensor) FROM Sensor s").getSingleResult();
+
+        long idSensor = (maxIdSensor != null) ? maxIdSensor + 1 : 1;
+        Sensor sensor = new Sensor(idSensor, tipo, unidade, 0);
         entityManager.persist(sensor);
         return sensor;
     }

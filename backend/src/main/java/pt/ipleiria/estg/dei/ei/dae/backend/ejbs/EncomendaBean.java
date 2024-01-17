@@ -248,7 +248,7 @@ public class EncomendaBean {
             EmbalagemDeTransporte embalagemDeTransporte = embalagemDeTransporteBean.find(encomenda.getEmbalagensTransporte().get(encomenda.getEmbalagensTransporte().size() - 1).getId());
             long lastId = 0;
             for (Sensor sensor : embalagemDeTransporte.getSensores()) {
-                lastId = (Long) entityManager.createQuery("SELECT MAX(s.id) FROM Sensor s").getSingleResult();
+                lastId = (Long) entityManager.createQuery("SELECT MAX(s.idSensor) FROM Sensor s").getSingleResult();
                 sensor.setIdSensor(lastId+1);
             }
             encomenda.removeEmbalagemTransporte(embalagemDeTransporte);

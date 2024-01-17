@@ -179,7 +179,7 @@ POST http://localhost:8080/intellipac/api/sensores
 Content-Type: application/json
 
 {
-  "tipo": "xpto2",
+  "tipo": "xpto",
   "unidade": "Celsius"
 }
 

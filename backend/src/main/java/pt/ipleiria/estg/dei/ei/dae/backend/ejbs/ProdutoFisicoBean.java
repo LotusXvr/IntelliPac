@@ -21,6 +21,8 @@ public class ProdutoFisicoBean {
 
     @EJB
     private FabricanteDeProdutosBean fabricanteDeProdutosBean;
+    @EJB
+    private SensorBean sensorBean;
 
     @EJB
     private EmbalagemDeProdutoBean embalagemDeProdutoBean;
@@ -82,7 +84,7 @@ public class ProdutoFisicoBean {
                 embalagemDeProdutoBean.addEmbalagemToProduto(embalagem.getId(), produtoFisico.getId());
 
                 for (TipoSensor tipoSensor : embalagemACriar.getTipoSensor()) {
-                    Sensor sensor = new Sensor(tipoSensor.getTipo(), tipoSensor.getUnidade(), 2);
+                    Sensor sensor = sensorBean.create(tipoSensor.getTipo(), tipoSensor.getUnidade());
                     entityManager.persist(sensor);
                     embalagem.addSensor(sensor);
                 }
