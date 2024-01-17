@@ -7,7 +7,7 @@
         <table>
             <tr>
                 <th>Material</th>
-                <th>Dimensão</th>
+                <th>Dimensão (cm)</th>
                 <th>Actions</th>
             </tr>
             <tr v-for="embalagem in embalagens">
