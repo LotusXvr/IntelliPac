@@ -1,20 +1,14 @@
 <template>
   <form @submit.prevent="create">
-    <label for="username">Nome</label>
+    <label for="username">Nome: </label>
     <input id="username" v-model="produtoForm.nome" />
     <span class="error">{{ formFeedback.nome }}</span>
     <br />
-    <div>
-      Fabricante:
-      <select v-model="produtoForm.fabricanteUsername">
-        <option value=''>--- Please select Fabricante ---</option>
-        <option v-for="fabricante in fabricantes" :value="fabricante.username">
-          {{ fabricante.nome }}
-        </option>
-      </select>
-      <span v-if="produtoForm.fabricanteUsername !== null && !isFabricanteValid" class="error">
-        ERRO: {{ formFeedback.fabricanteUsername }}</span>
-    </div>
+    <label for="peso">Peso: </label>
+    <input id="peso" v-model="produtoForm.peso">
+    <span class="error">{{ formFeedback.peso }}</span>
+    <br />
+    
 
     <br />
     <button type="submit" :disabled="!isFormValid">Criar produto</button>
@@ -28,19 +22,23 @@
 </style>
 <script setup>
 import { ref, reactive, computed } from "vue";
+import { useAuthStore } from "../store/auth-store.js"
+
+const auhtStore = useAuthStore()
 const produtoForm = reactive({
   nome: null,
-  fabricanteUsername: '', // Alterado de Number para aceitar nulos
+  fabricanteUsername: auhtStore.user.username, // Alterado de Number para aceitar nulos
+  peso: null,
 });
 
 const formFeedback = reactive({
   nome: "",
   fabricanteUsername: "",
+  peso: "",
 });
 
 const config = useRuntimeConfig();
 const api = config.public.API_URL;
-const { data: fabricantes } = await useFetch(`${api}/fabricantes`);
 const message = ref("");
 
 const isNameValid = computed(() => {
@@ -59,23 +57,21 @@ const isNameValid = computed(() => {
   return true;
 });
 
-const isFabricanteValid = computed(() => {
-  if (produtoForm.fabricanteUsername === null) {
-    return false;
+const isPesoValid = computed(() => {
+  if (produtoForm.peso !== null && !isNaN(produtoForm.peso) && produtoForm.peso > 0){
+    formFeedback.peso = "";
+    return true;
+    
   }
-
-  formFeedback.fabricanteUsername = "";
-  return true;
-});
+  formFeedback.peso = "O peso tem de ser maior que 0"
+  return false;
+})
 
 const isFormValid = computed(() => {
-  return isNameValid.value && isFabricanteValid.value;
+  return isNameValid.value && isPesoValid.value;
 });
 
 async function create() {
-  console.log(produtoForm)
-  produtoForm.fabricanteUsername = produtoForm.fabricanteUsername;
-
   const requestOptions = {
     method: "POST",
     headers: { "Content-Type": "application/json" },

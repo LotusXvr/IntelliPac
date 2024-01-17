@@ -33,7 +33,7 @@ DELETE http://localhost:8080/intellipac/api/produtosCatalogo/2
 Accept: application/json
 
 ##### Detalhes de um produtoCatalogo
-GET http://localhost:8080/intellipac/api/produtosCatalogo/11
+GET http://localhost:8080/intellipac/api/produtosCatalogo/1
 Accept: application/json
 
 ##### Produtos Fisicos

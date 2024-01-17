@@ -3,10 +3,17 @@
       <h2>Detalhes de {{ produtoCatalogo.nome }}</h2>
       <p>Id: {{ produtoCatalogo.id }}</p>
       <p>Fabricante Username: {{ produtoCatalogo.fabricanteUsername }}</p>
+      <p>Peso: {{ produtoCatalogo.peso }}</p>
       <p>Produtos:</p>
       <ul>
         <li v-for="produto in produtoCatalogo.produtos" :key="produto.id">
           {{ produto.nome }}
+        </li>
+      </ul>
+      <p>Embalagens do Produto:</p>
+      <ul>
+        <li v-for="embalagem in produtoCatalogo.embalagensACriar" :key="embalagem.id">
+          {{ tipoEmbalagemString(embalagem.tipo) }} - {{ embalagem.material }}
         </li>
       </ul>
     </div>
@@ -24,5 +31,16 @@
   );
   const messages = ref([]);
   if (proErr.value) messages.value.push(proErr.value);
+
+  const tipoEmbalagemString = (tipo) => {
+    switch (tipo) {
+      case 1:
+        return 'Primaria';
+      case 2:
+        return 'Secundaria';
+      case 3:
+        return 'Terciaria';
+    }
+  };
   </script>
   
