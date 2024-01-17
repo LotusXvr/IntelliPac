@@ -26,21 +26,6 @@ public class ProdutoFisicoDTO {
         this.embalagensDeProduto = new ArrayList<>();
     }
 
-    public ProdutoFisicoDTO(long id, String nome, String fabricanteUsername, long produtoCatalogoId, long encomendaId, List<EmbalagemDeProdutoDTO> embalagensDeProduto) {
-        this.id = id;
-        this.nome = nome;
-        this.fabricanteUsername = fabricanteUsername;
-        this.produtoCatalogoId = produtoCatalogoId;
-        this.encomendaId = encomendaId;
-        this.embalagensDeProduto = embalagensDeProduto;
-    }
-
-    public ProdutoFisicoDTO(long id, String nome, String fabricanteUsername) {
-        this.id = id;
-        this.nome = nome;
-        this.fabricanteUsername = fabricanteUsername;
-    }
-
     public List<EmbalagemDeProdutoDTO> getEmbalagensDeProduto() {
         return embalagensDeProduto;
     }

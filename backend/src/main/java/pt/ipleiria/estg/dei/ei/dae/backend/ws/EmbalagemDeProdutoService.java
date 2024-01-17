@@ -73,9 +73,16 @@ public class EmbalagemDeProdutoService {
     }
 
     private ProdutoFisicoDTO toDTO(ProdutoFisico produtoFisico) {
-        return new ProdutoFisicoDTO(produtoFisico.getId(),
+
+        // TODO: verificar se este ficou sem problema
+        return new ProdutoFisicoDTO(
+                produtoFisico.getId(),
                 produtoFisico.getNomeProduto(),
-                produtoFisico.getFabricante().getUsername());
+                produtoFisico.getFabricante().getUsername(),
+                produtoFisico.getProdutoCatalogo().getId(),
+                produtoFisico.getEncomenda().getId()
+        );
+
     }
 
     private List<ProdutoFisicoDTO> produtosFisicosToDTOs(List<ProdutoFisico> produtoFisicos) {

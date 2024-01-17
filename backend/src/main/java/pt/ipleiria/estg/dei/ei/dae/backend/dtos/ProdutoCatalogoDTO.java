@@ -1,8 +1,5 @@
 package pt.ipleiria.estg.dei.ei.dae.backend.dtos;
 
-import pt.ipleiria.estg.dei.ei.dae.backend.entities.ProdutoFisico;
-import pt.ipleiria.estg.dei.ei.dae.backend.entities.TipoEmbalagemProduto;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,19 +23,11 @@ public class ProdutoCatalogoDTO {
         this.id = id;
         this.nome = nome;
         this.fabricanteUsername = fabricanteUsername;
+        this.peso = peso;
         this.produtos = new ArrayList<>();
         this.embalagensACriar = new ArrayList<>();
-        this.peso = peso;
     }
 
-    public ProdutoCatalogoDTO(long id, String nome, String fabricanteUsername, long peso, List<TipoEmbalagemDTO> embalagensACriar) {
-        this.id = id;
-        this.nome = nome;
-        this.fabricanteUsername = fabricanteUsername;
-        this.produtos = new ArrayList<>();
-        this.embalagensACriar = embalagensACriar;
-        this.peso = peso;
-    }
     public long getId() {
         return id;
     }
