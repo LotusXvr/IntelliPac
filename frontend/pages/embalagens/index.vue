@@ -6,19 +6,20 @@
         <h2>Embalagens</h2>
         <table>
             <tr>
-                <th>id</th>
                 <th>Material</th>
+                <th>Dimensão</th>
+                <th>Actions</th>
             </tr>
             <tr v-for="embalagem in embalagens">
-                <td>{{ embalagem.id }}</td>
                 <td>{{ embalagem.material }}</td>
+                <td>{{ embalagem.comprimento }}x{{ embalagem.largura }}x{{ embalagem.altura }} </td>
 
                 <td>
                     <nuxt-link :to="`/embalagens/${embalagem.id}`">Detalhes</nuxt-link>
                     |
                     <nuxt-link :to="'/embalagens/edit/' + embalagem.id">Editar</nuxt-link>
                     |
-                    <button @click="deleteembalagem(embalagem.id)">Excluir</button>
+                    <button @click="deleteEmbalagem(embalagem.id)">Excluir</button>
                 </td>
             </tr>
         </table>
@@ -34,7 +35,7 @@ const config = useRuntimeConfig()
 const api = config.public.API_URL
 const { data: embalagens, error, refresh } = await useFetch(`${api}/embalagens`)
 
-const deleteembalagem = async (id) => {
+const deleteEmbalagem = async (id) => {
     try {
         const response = await fetch(`${api}/embalagens/${id}`, {
             method: "DELETE",

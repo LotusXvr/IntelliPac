@@ -22,7 +22,7 @@ public class EmbalagemService {
     @EJB
     private EmbalagemBean embalagemBean;
 
-    private EmbalagemDTO toDTONoSensores(Embalagem embalagem) {
+    private EmbalagemDTO toDTOSnoSensor(Embalagem embalagem) {
         return new EmbalagemDTO(
                 embalagem.getId(),
                 embalagem.getMaterial(),
@@ -32,14 +32,17 @@ public class EmbalagemService {
         );
     }
 
-    private List<EmbalagemDTO> toDTOsNoSensores(List<Embalagem> embalagens) {
-        return embalagens.stream().map(this::toDTONoSensores).collect(java.util.stream.Collectors.toList());
+    private List<EmbalagemDTO> toDTOSnoSensor(List<Embalagem> embalagens) {
+        return embalagens.stream().map(this::toDTOSnoSensor).collect(java.util.stream.Collectors.toList());
     }
 
     private EmbalagemDTO toDTO(Embalagem embalagem) {
         return new EmbalagemDTO(
                 embalagem.getId(),
                 embalagem.getMaterial(),
+                embalagem.getAltura(),
+                embalagem.getLargura(),
+                embalagem.getComprimento(),
                 sensorToDTOs(embalagem.getSensores())
         );
     }
@@ -67,8 +70,9 @@ public class EmbalagemService {
     @GET
     @Path("/")
     public List<EmbalagemDTO> getAllEmbalagens() {
-        return toDTOsNoSensores(embalagemBean.getAll());
+        return toDTOSnoSensor(embalagemBean.getAll());
     }
+
 
     @GET
     @Path("/{id}")
