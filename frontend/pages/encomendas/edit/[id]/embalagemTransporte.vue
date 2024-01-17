@@ -5,23 +5,37 @@
         <form @submit.prevent="updateEncomenda">
             <div>
                 Embalagens de Transporte:
-                <p v-for="embalagem in embalagensTransporte">
-                    <input
-                        type="checkbox"
-                        :value="embalagem.id"
-                        v-model="encomendaForm.embalagensTransporte"
-                    />
-                    {{ embalagem.material }}
-                </p>
+                <div v-for="embalagem in embalagensTransporte">
+                    <br />
+                    <div>
+                        <input
+                            type="checkbox"
+                            :value="embalagem.id"
+                            v-model="encomendaForm.embalagensTransporte"
+                        />
+                        {{ embalagem.material }} -
+                        {{
+                            construirTamanhoString(
+                                embalagem.comprimento,
+                                embalagem.largura,
+                                embalagem.altura
+                            )
+                        }}
+                        <ul v-if="embalagem.sensores.length > 0">
+                            <span style="margin-left: -20px; font-weight: 600">Sensores:</span>
+                            <li v-for="sensor in embalagem.sensores">
+                                {{ sensor.tipo }} - {{ sensor.unidade }}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <br />
                 <span v-if="!isEmbalagemSelected" class="error">
                     ERRO: {{ formFeedback.embalagensTransporte }}</span
                 >
             </div>
-
             <br />
-
             <br />
-
             <button type="submit" :disabled="!isFormValid">Save</button>
         </form>
         <nuxt-link to="/encomendas">Back to encomendas</nuxt-link>
@@ -53,6 +67,10 @@ const encomendaForm = reactive({
 const formFeedback = reactive({
     embalagensTransporte: "",
 })
+
+const construirTamanhoString = (comprimento, largura, altura) => {
+    return `${comprimento}x${largura}x${altura}`
+}
 
 const fetchEncomenda = async () => {
     try {
@@ -87,7 +105,8 @@ const isFormValid = computed(() => {
 const updateEncomenda = async () => {
     try {
         embalagensAInserir.value = encomendaForm.embalagensTransporte.filter(
-            (id) => !encomenda.value.embalagensTransporte.map((embalagem) => embalagem.id).includes(id)
+            (id) =>
+                !encomenda.value.embalagensTransporte.map((embalagem) => embalagem.id).includes(id)
         )
 
         let requestBody = {

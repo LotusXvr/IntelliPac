@@ -4,56 +4,50 @@
 
         <label for="username">Nome: </label>
         <input id="username" v-model="produtoForm.nome" />
-        <span class="error">{{ formFeedback.nome }}</span>
+        <span class="error" v-if="!isNameValid"> ERRO: {{ formFeedback.nome }} </span>
         <br />
         <label for="peso">Peso: </label>
         <input id="peso" v-model="produtoForm.peso" />
-        <span class="error">{{ formFeedback.peso }}</span>
+        <span class="error" v-if="!isPesoValid">ERRO: {{ formFeedback.peso }}</span>
         <br />
-        Embalagens a criar:
-
+        <h5>Embalagens a criar:</h5>
+        Primárias:
         <span v-for="embalagem in tiposEmbalagemPrimaria">
             <br />
-            <input
-                type="checkbox"
-                :value="embalagem.id"
-                v-model="produtoForm.embalagensACriar"
-                :disabled="
-                    isTipoEmbalagemPrimariaSelected &&
-                    !produtoForm.embalagensACriar.includes(embalagem.id)
-                "
-            />
-            {{ tipoNumeroParaString(embalagem.tipo) }}: {{ embalagem.material }}
-        </span>
-        <br />
-        <span v-for="embalagem in tiposEmbalagemSecundaria">
-            <br />
-            <input
-                type="checkbox"
-                :value="embalagem.id"
-                v-model="produtoForm.embalagensACriar"
-                :disabled="
-                    isTipoEmbalagemSecundariaSelected &&
-                    !produtoForm.embalagensACriar.includes(embalagem.id)
-                "
-            />
-            {{ tipoNumeroParaString(embalagem.tipo) }}: {{ embalagem.material }}
-        </span>
-        <br />
-        <span v-for="embalagem in tiposEmbalagemTercearia">
-            <br />
-            <input
-                type="checkbox"
-                :value="embalagem.id"
-                v-model="produtoForm.embalagensACriar"
-                :disabled="
-                    isTipoEmbalagemTerceariaSelected &&
-                    !produtoForm.embalagensACriar.includes(embalagem.id)
-                "
-            />
-            {{ tipoNumeroParaString(embalagem.tipo) }}: {{ embalagem.material }}
+            <input type="checkbox" :value="embalagem.id" v-model="produtoForm.embalagensACriar" :disabled="isTipoEmbalagemPrimariaSelected &&
+                !produtoForm.embalagensACriar.includes(embalagem.id)
+                " />
+            {{ embalagem.material }} -
+            {{ construirTamanhoString(embalagem.comprimento, embalagem.largura, embalagem.altura) }}
         </span>
 
+        <br />
+        <span class="error" v-if="!isEmbalagemSelected">
+            ERRO: {{ formFeedback.embalagensACriar }}
+        </span>
+        <br />
+        Secundárias:
+        <span v-for="embalagem in tiposEmbalagemSecundaria">
+            <br />
+            <input type="checkbox" :value="embalagem.id" v-model="produtoForm.embalagensACriar" :disabled="isTipoEmbalagemSecundariaSelected &&
+                !produtoForm.embalagensACriar.includes(embalagem.id)
+                " />
+            {{ embalagem.material }} -
+            {{ construirTamanhoString(embalagem.comprimento, embalagem.largura, embalagem.altura) }}
+        </span>
+        <br />
+        <br />
+        Terciárias:
+        <span v-for="embalagem in tiposEmbalagemTercearia">
+            <br />
+            <input type="checkbox" :value="embalagem.id" v-model="produtoForm.embalagensACriar" :disabled="isTipoEmbalagemTerceariaSelected &&
+                !produtoForm.embalagensACriar.includes(embalagem.id)
+                " />
+            {{ embalagem.material }} -
+            {{ construirTamanhoString(embalagem.comprimento, embalagem.largura, embalagem.altura) }}
+        </span>
+
+        <br />
         <br />
         <button type="submit" :disabled="!isFormValid">Criar produto</button>
     </form>
@@ -69,8 +63,8 @@ import Navbar from "~/layouts/nav-bar.vue"
 import { ref, reactive, computed } from "vue"
 import { useAuthStore } from "../store/auth-store.js"
 
-const auhtStore = useAuthStore()
-const { user } = auhtStore
+const authStore = useAuthStore()
+const { user } = authStore
 
 const produtoForm = reactive({
     nome: null,
@@ -91,8 +85,6 @@ const api = config.public.API_URL
 const message = ref("")
 
 const { data: embalagensACriar } = await useFetch(`${api}/tipoEmbalagens`)
-
-const tiposEmbalagem = [1, 2, 3]
 
 const tiposEmbalagemPrimaria = computed(() => {
     return embalagensACriar.value.filter((embalagem) => embalagem.tipo == 1)
@@ -129,6 +121,7 @@ const isTipoEmbalagemTerceariaSelected = computed(() => {
 
 const isNameValid = computed(() => {
     if (produtoForm.nome === null) {
+        formFeedback.nome = "O nome não pode ser vazio"
         return false
     }
     if (produtoForm.nome.length < 3) {
@@ -152,8 +145,18 @@ const isPesoValid = computed(() => {
     return false
 })
 
+const isEmbalagemSelected = computed(() => {
+    console.log(isTipoEmbalagemPrimariaSelected.value)
+    if (!isTipoEmbalagemPrimariaSelected.value) {
+        formFeedback.embalagensACriar = "Escolha pelo menos uma embalagem primária"
+        return false
+    }
+    formFeedback.embalagensACriar = ""
+    return true
+})
+
 const isFormValid = computed(() => {
-    return isNameValid.value && isPesoValid.value && produtoForm.embalagensACriar.length > 0
+    return isNameValid.value && isPesoValid.value && produtoForm.embalagensACriar.length > 0 && isEmbalagemSelected.value
 })
 
 const tipoNumeroParaString = (tipo) => {
@@ -169,6 +172,10 @@ const tipoNumeroParaString = (tipo) => {
     }
 }
 
+const construirTamanhoString = (comprimento, largura, altura) => {
+    return `${comprimento}x${largura}x${altura}`
+}
+
 async function create() {
     const requestBody = {
         nome: produtoForm.nome,
@@ -176,8 +183,6 @@ async function create() {
         peso: produtoForm.peso,
         embalagensACriar: produtoForm.embalagensACriar.map((id) => ({ id })),
     }
-    console.log("requestBody")
-    console.log(requestBody)
 
     const requestOptions = {
         method: "POST",

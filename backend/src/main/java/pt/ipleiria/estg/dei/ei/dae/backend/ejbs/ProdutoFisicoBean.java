@@ -35,15 +35,15 @@ public class ProdutoFisicoBean {
     public boolean exists(String nomeProduto, String fabrincanteUsername, ProdutoCatalogo produtoCatalogo) {
         Query query = entityManager.createQuery(
                 "SELECT COUNT(p.nomeProduto) FROM ProdutoFisico p WHERE p.nomeProduto = :nomeProduto AND p.fabricante.username = :fabrincanteUsername AND p.produtoCatalogo = :produtoCatalogo",
-                Long.class
-        );
+                Long.class);
         query.setParameter("nomeProduto", nomeProduto);
         query.setParameter("fabrincanteUsername", fabrincanteUsername);
         query.setParameter("produtoCatalogo", produtoCatalogo);
         return (Long) query.getSingleResult() > 0L;
     }
 
-    public ProdutoFisico create(String nomeProduto, String fabrincanteUsername, long produtoCatalogoId, long encomendaId) throws Exception {
+    public ProdutoFisico create(long produtoCatalogoId, long encomendaId)
+            throws Exception {
 
         ProdutoCatalogo produtoCatalogo = entityManager.find(ProdutoCatalogo.class, produtoCatalogoId);
 
@@ -51,13 +51,17 @@ public class ProdutoFisicoBean {
             throw new MyEntityNotFoundException("Produto catálogo com id " + produtoCatalogo.getId() + " não existe");
         }
 
-        /*if(exists(nomeProduto, fabrincanteUsername, produtoCatalogo)) {
-            throw new MyEntityExistsException("Produto físico com nome " + nomeProduto + " já existe");
-        }*/
+        /*
+         * if(exists(nomeProduto, fabrincanteUsername, produtoCatalogo)) {
+         * throw new MyEntityExistsException("Produto físico com nome " + nomeProduto +
+         * " já existe");
+         * }
+         */
 
-        FabricanteDeProdutos fabricante = fabricanteDeProdutosBean.find(fabrincanteUsername);
+        FabricanteDeProdutos fabricante = fabricanteDeProdutosBean.find(produtoCatalogo.getFabricante().getUsername());
         if (fabricante == null) {
-            throw new MyEntityNotFoundException("Fabricante com id " + fabrincanteUsername + " não existe");
+            throw new MyEntityNotFoundException(
+                    "Fabricante com id " + produtoCatalogo.getFabricante().getUsername() + " não existe");
         }
 
         Encomenda encomenda = entityManager.find(Encomenda.class, encomendaId);
@@ -68,7 +72,7 @@ public class ProdutoFisicoBean {
         ProdutoFisico produtoFisico = null;
 
         try {
-            produtoFisico = new ProdutoFisico(nomeProduto, fabricante, produtoCatalogo, encomenda);
+            produtoFisico = new ProdutoFisico(produtoCatalogo.getNomeProduto(), fabricante, produtoCatalogo, encomenda);
             entityManager.persist(produtoFisico);
         } catch (ConstraintViolationException e) {
             throw new MyConstraintViolationException(e);
@@ -79,7 +83,9 @@ public class ProdutoFisicoBean {
 
         if (!produtoCatalogo.getEmbalagensACriar().isEmpty()) {
             for (TipoEmbalagemProduto embalagemACriar : produtoCatalogo.getEmbalagensACriar()) {
-                EmbalagemDeProduto embalagem = new EmbalagemDeProduto(embalagemACriar.getMaterial(),embalagemACriar.getAltura(), embalagemACriar.getLargura(), embalagemACriar.getComprimento(), embalagemACriar.getTipoEmbalagem());
+                EmbalagemDeProduto embalagem = new EmbalagemDeProduto(embalagemACriar.getMaterial(),
+                        embalagemACriar.getAltura(), embalagemACriar.getLargura(), embalagemACriar.getComprimento(),
+                        embalagemACriar.getTipoEmbalagem());
                 entityManager.persist(embalagem);
                 embalagemDeProdutoBean.addProdutoToEmbalagem(embalagem.getId(), produtoFisico.getId());
                 for (TipoSensor tipoSensor : embalagemACriar.getTipoSensor()) {
@@ -97,7 +103,8 @@ public class ProdutoFisicoBean {
         return entityManager.find(ProdutoFisico.class, id);
     }
 
-    public void update(long id, String nomeProduto, String fabricanteUsername, long produtoCatalogoId) throws MyEntityNotFoundException {
+    public void update(long id, String nomeProduto, String fabricanteUsername, long produtoCatalogoId)
+            throws MyEntityNotFoundException {
         ProdutoFisico produtoFisico = find(id);
         if (produtoFisico == null) {
             throw new MyEntityNotFoundException("Produto físico com id " + id + " não existe");

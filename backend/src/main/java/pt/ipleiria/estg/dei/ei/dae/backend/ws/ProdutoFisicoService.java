@@ -85,8 +85,6 @@ public class ProdutoFisicoService {
     @Path("/")
     public Response createNewProdutoFisico (ProdutoFisicoDTO produtoFisicoDTO) throws Exception {
         produtoFisicoBean.create(
-                produtoFisicoDTO.getNome(),
-                produtoFisicoDTO.getFabricanteUsername(),
                 produtoFisicoDTO.getProdutoCatalogoId(),
                 produtoFisicoDTO.getEncomendaId()
         );

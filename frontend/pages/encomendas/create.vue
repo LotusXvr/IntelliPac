@@ -14,15 +14,15 @@
         </div>
         <br />
         <div>
-            Operador Logistica:
-            <select v-model="encomendaForm.operadorLogistica">
+            Operador Logistica: {{ user.username }}
+            <!-- <select v-model="encomendaForm.operadorLogistica">
                 <option value="">--- Please select Operador ---</option>
                 <option v-for="operadorLogistica in operadoresLogistica" :value="operadorLogistica.username">
                     {{ operadorLogistica.username }}
                 </option>
             </select>
             <span v-if="encomendaForm.operadorLogistica !== null && !isOperadorSelected" class="error">
-                ERRO: {{ formFeedback.operadorLogistica }}</span>
+                ERRO: {{ formFeedback.operadorLogistica }}</span> -->
         </div>
         <br />
         <div>
@@ -101,15 +101,15 @@ const isConsumidorSelected = computed(() => {
     return true
 })
 
-const isOperadorSelected = computed(() => {
-    if (encomendaForm.operadorLogistica === null || encomendaForm.operadorLogistica === "") {
-        formFeedback.operadorLogistica = "Escolha um operador de logistica"
-        return false
-    }
+// const isOperadorSelected = computed(() => {
+//     if (encomendaForm.operadorLogistica === null || encomendaForm.operadorLogistica === "") {
+//         formFeedback.operadorLogistica = "Escolha um operador de logistica"
+//         return false
+//     }
 
-    formFeedback.operadorLogistica = ""
-    return true
-})
+//     formFeedback.operadorLogistica = ""
+//     return true
+// })
 
 const isProdutoSelected = computed(() => {
     if (encomendaForm.produtosCatalogo.length === 0) {
@@ -124,7 +124,6 @@ const isProdutoSelected = computed(() => {
 const isFormValid = computed(() => {
     return (
         isConsumidorSelected.value &&
-        isOperadorSelected.value &&
         isProdutoSelected.value
     )
 })
@@ -135,7 +134,8 @@ async function create() {
     // Map the form data to the desired payload structure
     const requestBody = {
         consumidorFinal: encomendaForm.consumidorFinal,
-        operadorLogistica: encomendaForm.operadorLogistica,
+        //operadorLogistica: encomendaForm.operadorLogistica,
+        operadorLogistica: user.username,
         produtos: encomendaForm.produtosCatalogo.map((id) => ({ produtoCatalogoId: id })),
         embalagensTransporte: encomendaForm.embalagensTransporte.map((id) => ({ id })),
     }
