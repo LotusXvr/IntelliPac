@@ -190,8 +190,10 @@ public class EncomendaBean {
                         // apenas se carrega a ultima observação
                         // visto não ser necessário carregar todas as observações
                         // evitando demasiada carga no servidor
-                        Observacao observacao = sensor.getObservacoes().get(0);
-                        Hibernate.initialize(observacao);
+                        if (sensor.getObservacoes().size() > 0) {
+                            Observacao observacao = sensor.getObservacoes().get(sensor.getObservacoes().size() - 1);
+                            Hibernate.initialize(observacao);
+                        }
                     }
                 }
             }
@@ -201,8 +203,10 @@ public class EncomendaBean {
                 List<Sensor> sensores = embalagemTransporte.getSensores();
                 Hibernate.initialize(sensores);
                 for (Sensor sensor : sensores) {
-                    Observacao observacao = sensor.getObservacoes().get(0);
-                    Hibernate.initialize(observacao);
+                    if (sensor.getObservacoes().size() > 0) {
+                        Observacao observacao = sensor.getObservacoes().get(sensor.getObservacoes().size() - 1);
+                        Hibernate.initialize(observacao);
+                    }
                 }
             }
 

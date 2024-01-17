@@ -10,7 +10,7 @@
         <p>Embalagens:</p>
         <ul>
             <li v-for="embalagem in sensor.embalagens" :key="embalagem.id">
-                {{ embalagem.material }}
+                <span>{{ embalagem.id }} - {{ embalagem.material }}</span>
             </li>
         </ul>
         <div v-if="sensor.observacoes.length > 0">
