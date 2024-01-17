@@ -23,6 +23,7 @@ public class EmbalagemDeProdutoService {
 
     @EJB
     private EmbalagemDeProdutoBean embalagemDeProdutoBean;
+
     private EmbalagemDeProdutoDTO toDTONoDetails(EmbalagemDeProduto embalagemDeProduto) {
         return new EmbalagemDeProdutoDTO(
                 embalagemDeProduto.getId(),
@@ -44,14 +45,14 @@ public class EmbalagemDeProdutoService {
 
         embalagemDeProdutoDTO.setSensorDTOS(sensorsToDTOs(embalagemDeProduto.getSensores()));
         embalagemDeProdutoDTO.setProdutoDTOS(produtosFisicosToDTOs(embalagemDeProduto.getProdutos()));
-        return  embalagemDeProdutoDTO;
+        return embalagemDeProdutoDTO;
     }
 
     private List<EmbalagemDeProdutoDTO> toDTOs(List<EmbalagemDeProduto> embalagemDeProdutos) {
         return embalagemDeProdutos.stream().map(this::toDTO).collect(Collectors.toList());
     }
 
-    private SensorDTO toDTO(Sensor sensor){
+    private SensorDTO toDTO(Sensor sensor) {
         return new SensorDTO(
                 sensor.getId(),
                 sensor.getIdSensor(),
@@ -61,21 +62,19 @@ public class EmbalagemDeProdutoService {
         );
     }
 
-    private List<SensorDTO> sensorsToDTOs (List<Sensor> sensors) {
+    private List<SensorDTO> sensorsToDTOs(List<Sensor> sensors) {
         return sensors.stream().map(this::toDTO).collect(Collectors.toList());
     }
 
-    private ProdutoFisicoDTO toDTO(ProdutoFisico produtoFisico){
+    private ProdutoFisicoDTO toDTO(ProdutoFisico produtoFisico) {
         return new ProdutoFisicoDTO(produtoFisico.getId(),
                 produtoFisico.getNomeProduto(),
                 produtoFisico.getFabricante().getUsername());
     }
 
-    private List<ProdutoFisicoDTO> produtosFisicosToDTOs (List<ProdutoFisico> produtoFisicos){
+    private List<ProdutoFisicoDTO> produtosFisicosToDTOs(List<ProdutoFisico> produtoFisicos) {
         return produtoFisicos.stream().map(this::toDTO).collect(Collectors.toList());
     }
-
-
 
 
     @GET
@@ -87,12 +86,12 @@ public class EmbalagemDeProdutoService {
     @POST
     @Path("/")
     public Response create(EmbalagemDeProdutoDTO embalagemDeProdutoDTO)
-        throws Exception {
-            EmbalagemDeProduto embalagemDeProduto = embalagemDeProdutoBean.create(
-                    embalagemDeProdutoDTO.getMaterial(),
-                    embalagemDeProdutoDTO.getTipoEmbalagem()
-            );
-            return Response.status(Response.Status.CREATED).entity(toDTO(embalagemDeProduto)).build();
+            throws Exception {
+        EmbalagemDeProduto embalagemDeProduto = embalagemDeProdutoBean.create(
+                embalagemDeProdutoDTO.getMaterial(),
+                embalagemDeProdutoDTO.getTipoEmbalagem()
+        );
+        return Response.status(Response.Status.CREATED).entity(toDTO(embalagemDeProduto)).build();
     }
 
     @PUT

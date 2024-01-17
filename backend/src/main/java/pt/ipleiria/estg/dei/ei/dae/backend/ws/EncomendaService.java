@@ -8,10 +8,7 @@ import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.SecurityContext;
-import pt.ipleiria.estg.dei.ei.dae.backend.dtos.EmbalagemDeProdutoDTO;
-import pt.ipleiria.estg.dei.ei.dae.backend.dtos.EmbalagemDeTransporteDTO;
-import pt.ipleiria.estg.dei.ei.dae.backend.dtos.EncomendaDTO;
-import pt.ipleiria.estg.dei.ei.dae.backend.dtos.ProdutoFisicoDTO;
+import pt.ipleiria.estg.dei.ei.dae.backend.dtos.*;
 import pt.ipleiria.estg.dei.ei.dae.backend.ejbs.ClienteBean;
 import pt.ipleiria.estg.dei.ei.dae.backend.ejbs.EncomendaBean;
 import pt.ipleiria.estg.dei.ei.dae.backend.ejbs.OperadorDeLogisticaBean;
@@ -67,8 +64,8 @@ public class EncomendaService {
     private EmbalagemDeTransporteDTO toDTO(EmbalagemDeTransporte embalagemDeTransporte) {
         return new EmbalagemDeTransporteDTO(
                 embalagemDeTransporte.getId(),
-                embalagemDeTransporte.getMaterial()
-                //toDTOs(embalagemDeTransporte.getEncomendas())
+                embalagemDeTransporte.getMaterial(),
+                sensoresToDTOs(embalagemDeTransporte.getSensores())
         );
     }
 
@@ -92,13 +89,27 @@ public class EncomendaService {
         return new EmbalagemDeProdutoDTO(
                 embalagemDeProduto.getId(),
                 embalagemDeProduto.getMaterial(),
-                embalagemDeProduto.getTipoEmbalagem()
-                //toDTOs(embalagemDeTransporte.getEncomendas())
+                embalagemDeProduto.getTipoEmbalagem(),
+                sensoresToDTOs(embalagemDeProduto.getSensores())
         );
     }
 
     private List<EmbalagemDeProdutoDTO> embalagensDeProdutoToDTOs(List<EmbalagemDeProduto> embalagensProduto) {
         return embalagensProduto.stream().map(this::toDTO).collect(Collectors.toList());
+    }
+
+    private SensorDTO toDTO(Sensor sensor) {
+        return new SensorDTO(
+                sensor.getId(),
+                sensor.getIdSensor(),
+                sensor.getTipo(),
+                sensor.getUnidade(),
+                sensor.getEstado()
+        );
+    }
+
+    private List<SensorDTO> sensoresToDTOs(List<Sensor> sensors) {
+        return sensors.stream().map(this::toDTO).collect(Collectors.toList());
     }
 
 

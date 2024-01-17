@@ -128,14 +128,14 @@ public class EmbalagemDeTransporteService {
     @POST
     @Path("{id}/adicionarSensor")
     public Response adicionarSensor(@PathParam("id") long id, long sensorId) throws Exception {
-        embalagemDeTransporteBean.associateSensorToEmbalagem(id,sensorId);
+        embalagemDeTransporteBean.associateSensorToEmbalagem(id, sensorId);
         return Response.ok().build();
     }
 
     @POST
     @Path("{id}/removerSensor")
     public Response removerSensor(@PathParam("id") long id, long sensorId) throws Exception {
-        embalagemDeTransporteBean.removeSensorFromEmbalagem(id,sensorId);
+        embalagemDeTransporteBean.removeSensorFromEmbalagem(id, sensorId);
         return Response.ok().build();
     }
 }

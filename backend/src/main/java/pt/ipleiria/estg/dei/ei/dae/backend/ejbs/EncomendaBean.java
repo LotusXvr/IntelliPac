@@ -181,9 +181,17 @@ public class EncomendaBean {
             List<ProdutoFisico> produtos = encomenda.getProdutos();
             Hibernate.initialize(produtos);
             for (ProdutoFisico produto : produtos) {
-                Hibernate.initialize(produto.getEmbalagensDeProduto());
+                List<EmbalagemDeProduto> embalagensProduto = produto.getEmbalagensDeProduto();
+                Hibernate.initialize(embalagensProduto);
+                for (EmbalagemDeProduto embalagemProduto : embalagensProduto) {
+                    Hibernate.initialize(embalagemProduto.getSensores());
+                }
             }
-            Hibernate.initialize(encomenda.getEmbalagensTransporte());
+            List<EmbalagemDeTransporte> embalagensTransporte = encomenda.getEmbalagensTransporte();
+            Hibernate.initialize(embalagensTransporte);
+            for (EmbalagemDeTransporte embalagemTransporte : embalagensTransporte) {
+                Hibernate.initialize(embalagemTransporte.getSensores());
+            }
 
         }
         return encomenda;

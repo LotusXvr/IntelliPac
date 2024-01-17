@@ -25,6 +25,13 @@ public class EmbalagemDeProdutoDTO {
         this.sensores = new ArrayList<>();
     }
 
+    public EmbalagemDeProdutoDTO(long id, String material, long tipoEmbalagem, List<SensorDTO> sensores) {
+        this.id = id;
+        this.material = material;
+        this.tipoEmbalagem = tipoEmbalagem;
+        this.sensores = sensores;
+    }
+
     public Long getId() {
         return id;
     }
