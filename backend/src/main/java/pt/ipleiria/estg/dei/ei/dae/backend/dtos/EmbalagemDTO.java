@@ -29,9 +29,12 @@ public class EmbalagemDTO {
         this.sensores = new ArrayList<>();
     }
 
-    public EmbalagemDTO(long id, String material, List<SensorDTO> sensores) {
+    public EmbalagemDTO(long id, String material, long altura, long largura, long comprimento, List<SensorDTO> sensores) {
         this.id = id;
         this.material = material;
+        this.altura = altura;
+        this.largura = largura;
+        this.comprimento = comprimento;
         this.sensores = sensores;
     }
 
@@ -57,6 +60,10 @@ public class EmbalagemDTO {
 
     public void setMaterial(String material) {
         this.material = material;
+    }
+
+    public long getId() {
+        return id;
     }
 
     public void setId(long id) {
