@@ -49,8 +49,8 @@ public class EmbalagemDeProdutoService {
                 embalagemDeProduto.getComprimento()
         );
 
-        embalagemDeProdutoDTO.setSensorDTOS(sensorsToDTOs(embalagemDeProduto.getSensores()));
-        embalagemDeProdutoDTO.setProdutoDTOS(produtosFisicosToDTOs(embalagemDeProduto.getProdutos()));
+        embalagemDeProdutoDTO.setSensores(sensorsToDTOs(embalagemDeProduto.getSensores()));
+        embalagemDeProdutoDTO.setProdutos(produtosFisicosToDTOs(embalagemDeProduto.getProdutos()));
         return embalagemDeProdutoDTO;
     }
 
