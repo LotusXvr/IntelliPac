@@ -31,8 +31,6 @@
                     >
                     |
                     <button @click="deleteEncomenda(encomenda.id)">Excluir</button>
-                    |
-                    <nuxt-link v-if="encomenda.estado !== 'PENDENTE'" :to="`/encomendas/${encomenda.id}/sensores`">Sensores</nuxt-link>
                 </td>
             </tr>
         </table>

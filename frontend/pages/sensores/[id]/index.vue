@@ -13,12 +13,17 @@
                 {{ embalagem.material }}
             </li>
         </ul>
-        <p>Observações</p>
-        <ul>
-            <li v-for="observacao in sensor.observacoes" :key="sensor.id">
-                ({{ observacao.timestamp }}) {{ observacao.valor }} {{ sensor.unidade }}
-            </li>
-        </ul>
+        <div v-if="sensor.observacoes.length > 0">
+            <p>Observações</p>
+            <ul>
+                <li v-for="observacao in sensor.observacoes" :key="sensor.id">
+                    ({{ observacao.timestamp }}) {{ observacao.valor }} {{ sensor.unidade }}
+                </li>
+            </ul>
+        </div>
+        <div v-else>
+            <h4>Nenhuma observação registada</h4>
+        </div>
     </div>
 
     <h2>Error messages:</h2>

@@ -21,16 +21,25 @@
                         <ul>
                             <li v-for="sensor in embalagem.sensores" :key="sensor.id">
                                 {{ sensor.tipo }} - {{ sensor.unidade }}
-                                <br>
-                                Ultima obserção:
-                                <ul>
-                                    <li
-                                        v-for="observacao in sensor.observacoes"
-                                        :key="observacao.id"
-                                    >
-                                        {{ observacao.timestamp }} - {{ observacao.valor }}
-                                    </li>
-                                </ul>
+                                <br />
+                                <nuxt-link :to="`/sensores/${sensor.id}`"
+                                    >Ver mais detalhes</nuxt-link
+                                >
+                                <br />
+                                <div v-if="sensor.observacoes.length > 0">
+                                    Ultima observação:
+                                    <ul>
+                                        <li
+                                            v-for="observacao in sensor.observacoes"
+                                            :key="observacao.id"
+                                        >
+                                            {{ observacao.timestamp }} - {{ observacao.valor }}
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div v-else>
+                                    Nenhuma observação registada
+                                </div>
                             </li>
                         </ul>
                     </li>
@@ -47,18 +56,25 @@
             >
                 Material:
                 {{ embalagens.material }}
-                <br>
+                <br />
                 Sensores:
                 <ul>
                     <li v-for="sensor in embalagens.sensores" :key="sensor.id">
                         {{ sensor.tipo }} - {{ sensor.unidade }}
-                        <br>
-                        Ultima obserção:
-                        <ul>
-                            <li v-for="observacao in sensor.observacoes" :key="observacao.id">
-                                {{ observacao.timestamp }} - {{ observacao.valor }}
-                            </li>
-                        </ul>
+                        <br />
+                        <nuxt-link :to="`/sensores/${sensor.id}`">Ver mais detalhes</nuxt-link>
+                        <br />
+                        <div v-if="sensor.observacoes.length > 0">
+                            Ultima observação:
+                            <ul>
+                                <li v-for="observacao in sensor.observacoes" :key="observacao.id">
+                                    {{ observacao.timestamp }} - {{ observacao.valor }}
+                                </li>
+                            </ul>
+                        </div>
+                        <div v-else>
+                            <h4>Ainda nenhuma observação registada</h4>
+                        </div>
                     </li>
                 </ul>
             </li>
