@@ -135,12 +135,12 @@ public class ConfigBean {
             embalagemBean.create("Metal", 150, 10, 40);
 
             // Sensores
-            Sensor sensor1 = sensorBean.create( "Temperatura", "ºC");
-            sensorBean.create( "Humidade", "%");
-            sensorBean.create( "Luminosidade", "LUX");
-            sensorBean.create( "Pressao", "hPa");
-            sensorBean.create( "Localizacao", "GPS");
-            sensorBean.create( "Danificado", "Boolean");
+            Sensor sensor1 = sensorBean.create("Temperatura", "ºC");
+            sensorBean.create("Humidade", "%");
+            sensorBean.create("Luminosidade", "LUX");
+            sensorBean.create("Pressao", "hPa");
+            sensorBean.create("Localizacao", "GPS");
+            sensorBean.create("Danificado", "Boolean");
 
             // associar sensores a embalagens
             embalagemBean.associateSensorToEmbalagem(3L, 1L);
@@ -182,7 +182,7 @@ public class ConfigBean {
             embalagemDeTransporteBean.addEncomendaToEmbalagem(embalagemDeTransporteCartao.getId(), encomenda1.getId());
             embalagemDeTransporteBean.addEncomendaToEmbalagem(embalagemDeTransporteVidro.getId(), encomenda2.getId());
 
-            encomendaBean.patchEstado(encomenda2.getId(), "ENTREGUE");
+            // encomendaBean.patchEstado(encomenda2.getId(), "ENTREGUE");
 
             List<Long> tipos = new ArrayList<>(Arrays.asList(1L, 2L, 3L));
 

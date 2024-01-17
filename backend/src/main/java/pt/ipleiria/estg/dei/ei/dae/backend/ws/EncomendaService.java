@@ -1,7 +1,6 @@
 package pt.ipleiria.estg.dei.ei.dae.backend.ws;
 
 import jakarta.ejb.EJB;
-import jakarta.mail.MessagingException;
 import jakarta.validation.ConstraintViolationException;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Context;
@@ -202,7 +201,7 @@ public class EncomendaService {
 
     @PATCH
     @Path("{id}/estado")
-    public Response patchEncomendaEstado(@PathParam("id") long id, EncomendaDTO encomendaDTO) throws MyEntityNotFoundException, MessagingException {
+    public Response patchEncomendaEstado(@PathParam("id") long id, EncomendaDTO encomendaDTO) throws Exception {
         encomendaBean.patchEstado(id, encomendaDTO.getEstado());
         return Response.status(Response.Status.OK).entity("Estado alterado para " + encomendaDTO.getEstado() + " com sucesso").build();
     }

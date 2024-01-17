@@ -226,7 +226,7 @@ public class EncomendaBean {
         return encomendas;
     }
 
-    public void patchEstado(long id, String estado) throws MyEntityNotFoundException {
+    public void patchEstado(long id, String estado) throws Exception {
         Encomenda encomenda = find(id);
         if (encomenda == null) {
             throw new MyEntityNotFoundException("Encomenda com id " + id + " não existe");
@@ -245,16 +245,41 @@ public class EncomendaBean {
 
         }
         if (estado.equals("ENTREGUE")) {
-            EmbalagemDeTransporte embalagemDeTransporte = embalagemDeTransporteBean.find(encomenda.getEmbalagensTransporte().get(encomenda.getEmbalagensTransporte().size() - 1).getId());
-            long lastId = 0;
-            for (Sensor sensor : embalagemDeTransporte.getSensores()) {
-                lastId = (Long) entityManager.createQuery("SELECT MAX(s.idSensor) FROM Sensor s").getSingleResult();
-                sensor.setIdSensor(lastId+1);
+
+            if (encomenda.getEmbalagensTransporte().isEmpty()) {
+                throw new Exception("Encomenda não tem embalagens de transporte associadas");
             }
-            encomenda.removeEmbalagemTransporte(embalagemDeTransporte);
+
+
+            List<EmbalagemDeTransporte> embalagensTransporte = encomenda.getEmbalagensTransporte();
+            for (EmbalagemDeTransporte embalagemDeTransporte : embalagensTransporte) {
+                if (embalagemDeTransporte.getSensores().isEmpty()) {
+                    continue;
+                }
+
+                long lastId = (Long) entityManager.createQuery("SELECT MAX(s.idSensor) FROM Sensor s").getSingleResult();
+
+                List<Sensor> sensores = embalagemDeTransporte.getSensores();
+                for (Sensor sensor : sensores) {
+
+                    lastId += 1;
+                    sensor.setIdSensor(lastId);
+                }
+
+            }
+
+            int tamanhoEmbalagens = encomenda.getEmbalagensTransporte().size();
+            while (tamanhoEmbalagens > 0) {
+                EmbalagemDeTransporte embalagemDeTransporte = encomenda.getEmbalagensTransporte().get(tamanhoEmbalagens - 1);
+                encomenda.removeEmbalagemTransporte(embalagemDeTransporte);
+                tamanhoEmbalagens--;
+            }
+
         }
+        System.out.println("1515antes do setEstado ");
         encomenda.setEstado(estado);
         entityManager.merge(encomenda);
+        System.out.println("1515depois do setEstado ");
     }
 
 

@@ -13,7 +13,7 @@ import java.util.List;
         @NamedQuery(
                 name = "getAllSensor",
                 query = "SELECT s FROM Sensor s ORDER BY s.id" // JPQL
-        )
+        ),
 })
 @Entity
 public class Sensor {
