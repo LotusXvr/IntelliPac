@@ -59,7 +59,13 @@ public class ProdutoCatalogoBean {
                     throw new MyEntityNotFoundException("Tipo Embalagem with id " + tipoEmbalagemDTO.getId() + " not found.");
                 }
                 entityManager.persist(produtoCatalogo);
-                embalagemProdutoBean.addTipoEmbalagemToProdutoCatalogo(tipoEmbalagemProduto.getId(), produtoCatalogo.getId());
+                try {
+
+                    embalagemProdutoBean.addTipoEmbalagemToProdutoCatalogo(tipoEmbalagemProduto.getId(), produtoCatalogo.getId());
+                } catch (Exception e) {
+                    entityManager.remove(produtoCatalogo);
+                    throw new MyConstraintViolationException((ConstraintViolationException) e);
+                }
             }
 
             entityManager.persist(produtoCatalogo);
