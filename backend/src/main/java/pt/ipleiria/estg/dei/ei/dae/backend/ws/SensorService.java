@@ -4,18 +4,14 @@ import jakarta.ejb.EJB;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import org.hibernate.Hibernate;
 import pt.ipleiria.estg.dei.ei.dae.backend.dtos.EmbalagemDTO;
+import pt.ipleiria.estg.dei.ei.dae.backend.dtos.ObservacaoDTO;
 import pt.ipleiria.estg.dei.ei.dae.backend.dtos.SensorDTO;
 import pt.ipleiria.estg.dei.ei.dae.backend.ejbs.SensorBean;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.Embalagem;
-import pt.ipleiria.estg.dei.ei.dae.backend.entities.Sensor;
-import pt.ipleiria.estg.dei.ei.dae.backend.dtos.ObservacaoDTO;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.Observacao;
-import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyEntityExistsException;
-import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyEntityNotFoundException;
+import pt.ipleiria.estg.dei.ei.dae.backend.entities.Sensor;
 
-import java.nio.file.ReadOnlyFileSystemException;
 import java.util.List;
 
 @Path("sensores") // relative url web path for this service
@@ -86,7 +82,7 @@ public class SensorService {
     @GET
     @Path("/") // means: the relative url path is “/api/sensores/”
     public List<SensorDTO> getAllSensores() {
-        return toDTOsNoObservacoes(sensorBean.getAll());
+        return toDTOs(sensorBean.getAll());
     }
 
     @GET
