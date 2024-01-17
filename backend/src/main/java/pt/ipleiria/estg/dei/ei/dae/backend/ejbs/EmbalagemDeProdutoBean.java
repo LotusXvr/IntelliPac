@@ -84,7 +84,7 @@ public class EmbalagemDeProdutoBean {
         return embalagemDeProduto;
     }
 
-    public void addProdutoToEmbalagem(long idEmbalagem, long idProduto) throws Exception {
+    public void addEmbalagemToProduto(long idEmbalagem, long idProduto) throws Exception {
         EmbalagemDeProduto embalagemDeProduto = find(idEmbalagem);
         if (embalagemDeProduto == null) {
             throw new MyEntityNotFoundException("Embalagem with id " + idEmbalagem + " not found");
@@ -117,7 +117,6 @@ public class EmbalagemDeProdutoBean {
     }
 
     public void addTipoEmbalagemToProdutoCatalogo(long idEmbalagem, long idProduto) throws Exception {
-        System.out.println("ID Embalagem: " + idEmbalagem + " ID Produto: " + idProduto);
         TipoEmbalagemProduto embalagemACriar = entityManager.find(TipoEmbalagemProduto.class, idEmbalagem);
         if (embalagemACriar == null) {
             throw new MyEntityNotFoundException("Embalagem with id " + idEmbalagem + " not found");
@@ -137,12 +136,10 @@ public class EmbalagemDeProdutoBean {
         }
 
         TipoEmbalagemProduto anterior = produtoCatalogo.getEmbalagensACriar().get(produtoCatalogo.getEmbalagensACriar().size() - 1);
-        System.out.println("Anterior: " + anterior.getTipoEmbalagem() + " " + anterior.getAltura() + " " + anterior.getLargura() + " " + anterior.getComprimento());
         if (anterior.getTipoEmbalagem() != (embalagemACriar.getTipoEmbalagem() - 1)) {
             throw new Exception("O produto tem de seguir o padrão: Primária > Secundária > terciária");
         }
 
-        System.out.println("Embalagem a criar: " + embalagemACriar.getTipoEmbalagem() + " " + embalagemACriar.getAltura() + " " + embalagemACriar.getLargura() + " " + embalagemACriar.getComprimento());
         if (anterior.getAltura() >= embalagemACriar.getAltura() || anterior.getLargura() >= embalagemACriar.getLargura() || anterior.getComprimento() >= embalagemACriar.getComprimento()) {
             throw new Exception("A embalagem a adicionar têm de ser maior que: " + anterior.getComprimento() + "X" + anterior.getLargura() + "X" + anterior.getAltura());
         }
