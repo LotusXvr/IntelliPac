@@ -69,7 +69,7 @@ DELETE http://localhost:8080/intellipac/api/produtosFisicos/4
 Accept: application/json
 
 ##### Detalhes de um produtoFisico
-GET http://localhost:8080/intellipac/api/produtosFisicos/7
+GET http://localhost:8080/intellipac/api/produtosFisicos/11
 Accept: application/json
 
 ##### Fabricantes

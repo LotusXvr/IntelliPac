@@ -38,7 +38,7 @@ public class EncomendaBean {
     @EJB
     private EmailBean emailBean;
 
-    public Encomenda create(EncomendaDTO encomendaDTO) throws MyEntityExistsException, MyEntityNotFoundException, MyConstraintViolationException {
+    public Encomenda create(EncomendaDTO encomendaDTO) throws Exception {
 
         var cliente = clienteBean.find(encomendaDTO.getConsumidorFinal());
         if (cliente == null) {

@@ -4,8 +4,11 @@ import jakarta.ejb.EJB;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import pt.ipleiria.estg.dei.ei.dae.backend.dtos.EmbalagemDeProdutoDTO;
 import pt.ipleiria.estg.dei.ei.dae.backend.dtos.ProdutoFisicoDTO;
 import pt.ipleiria.estg.dei.ei.dae.backend.ejbs.ProdutoFisicoBean;
+import pt.ipleiria.estg.dei.ei.dae.backend.entities.Embalagem;
+import pt.ipleiria.estg.dei.ei.dae.backend.entities.EmbalagemDeProduto;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.ProdutoFisico;
 import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyConstraintViolationException;
 import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyEntityExistsException;
@@ -21,6 +24,18 @@ public class ProdutoFisicoService {
     private ProdutoFisicoBean produtoFisicoBean;
 
     private ProdutoFisicoDTO toDTO(ProdutoFisico produtoFisico) {
+        ProdutoFisicoDTO produtoFisicoDTO = new ProdutoFisicoDTO(
+                produtoFisico.getId(),
+                produtoFisico.getNomeProduto(),
+                produtoFisico.getFabricante().getUsername(),
+                produtoFisico.getProdutoCatalogo().getId(),
+                produtoFisico.getEncomenda().getId()
+        );
+        produtoFisicoDTO.setEmbalagensDeProduto(embalagemToDTOs(produtoFisico.getEmbalagensDeProduto()));
+        return produtoFisicoDTO;
+    }
+
+    private ProdutoFisicoDTO toDTONoEmbalagens(ProdutoFisico produtoFisico) {
         return new ProdutoFisicoDTO(
                 produtoFisico.getId(),
                 produtoFisico.getNomeProduto(),
@@ -30,26 +45,45 @@ public class ProdutoFisicoService {
         );
     }
 
+    private EmbalagemDeProdutoDTO toDTO(EmbalagemDeProduto embalagemDeProduto) {
+        return new EmbalagemDeProdutoDTO(
+                embalagemDeProduto.getId(),
+                embalagemDeProduto.getMaterial(),
+                embalagemDeProduto.getTipoEmbalagem(),
+                embalagemDeProduto.getAltura(),
+                embalagemDeProduto.getLargura(),
+                embalagemDeProduto.getComprimento()
+        );
+    }
+
+    private List<EmbalagemDeProdutoDTO> embalagemToDTOs(List<EmbalagemDeProduto> embalagemDeProdutos) {
+        return embalagemDeProdutos.stream().map(this::toDTO).collect(java.util.stream.Collectors.toList());
+    }
+
     private List<ProdutoFisicoDTO> toDTOs(List<ProdutoFisico> produtosFisicos) {
         return produtosFisicos.stream().map(this::toDTO).collect(java.util.stream.Collectors.toList());
+    }
+
+    private List<ProdutoFisicoDTO> toDTOsNoEmbalagens(List<ProdutoFisico> produtosFisicos) {
+        return produtosFisicos.stream().map(this::toDTONoEmbalagens).collect(java.util.stream.Collectors.toList());
     }
 
     @GET
     @Path("/")
     public List<ProdutoFisicoDTO> getAllProdutos() {
-        return toDTOs(produtoFisicoBean.getAllProductsFisico());
+        return toDTOsNoEmbalagens(produtoFisicoBean.getAllProductsFisico());
     }
 
     @GET
     @Path("{id}")
     public ProdutoFisicoDTO getProdutoFisicoDetails(@PathParam("id") long id) {
-        ProdutoFisico produtoFisico = produtoFisicoBean.find(id);
+        ProdutoFisico produtoFisico = produtoFisicoBean.getProdutoWithEmbalagens(id);
         return toDTO(produtoFisico);
     }
 
     @POST
     @Path("/")
-    public Response createNewProdutoFisico (ProdutoFisicoDTO produtoFisicoDTO) throws MyConstraintViolationException, MyEntityNotFoundException, MyEntityExistsException {
+    public Response createNewProdutoFisico (ProdutoFisicoDTO produtoFisicoDTO) throws Exception {
         produtoFisicoBean.create(
                 produtoFisicoDTO.getNome(),
                 produtoFisicoDTO.getFabricanteUsername(),

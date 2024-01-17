@@ -171,7 +171,7 @@ public class ConfigBean {
             EmbalagemDeTransporte embalagemDeTransporteEcoPlastico = embalagemDeTransporteBean.create("EcoPlastico", 5000, 5000, 500);
 
             //embalagemDeProdutoBean.associateSensorToEmbalagem(embalagemDeProdutoPlastico.getId(), sensor1.getId());
-            embalagemDeProdutoBean.addProdutoToEmbalagem(embalagemDeProdutoPlastico.getId(), produtoFisico1.getId());
+            //embalagemDeProdutoBean.addProdutoToEmbalagem(embalagemDeProdutoPlastico.getId(), produtoFisico1.getId());
             embalagemDeTransporteBean.associateSensorToEmbalagem(embalagemDeTransporteCartao.getId(), sensor1.getId());
             embalagemDeTransporteBean.removeSensorFromEmbalagem(embalagemDeTransporteCartao.getId(), sensor1.getId());
             embalagemDeTransporteBean.associateSensorToEmbalagem(embalagemDeTransporteCartao.getId(), sensor1.getId()); 
@@ -185,14 +185,16 @@ public class ConfigBean {
 
             TipoSensor tipoSensorDanificado = tipoSensorBean.create("Danificado", "Boolean");
 
+            int i = 0;
             for (long tipo : tipos
             ) {
                 for (String material : materiais
                 ) {
-                    TipoEmbalagemProduto tipoEmbalagem = tipoEmbalagemProdutoBean.create(tipo, material, 100,100,100);
+                    TipoEmbalagemProduto tipoEmbalagem = tipoEmbalagemProdutoBean.create(tipo, material, 100+i,100+i,100+i);
 
                     tipoEmbalagemProdutoBean.addTipoSensor(tipoEmbalagem.getId(), tipoSensorDanificado.getId());
                 }
+                i+=10;
             }
 
             TipoSensor testeSensor = tipoSensorBean.create("Vento", "ºC");
@@ -204,8 +206,7 @@ public class ConfigBean {
             produtoCatalogoBean.addTipoEmbalagem(1, produtoCatalogoArroz.getId());
             produtoCatalogoBean.addTipoEmbalagem(5, produtoCatalogoArroz.getId());
 
-            produtoFisicoBean.create("teste", "Apple", produtoCatalogoIphone.getId(), encomenda1.getId());
-
+            ProdutoFisico produtoTeste = produtoFisicoBean.create("teste", "Apple", produtoCatalogoIphone.getId(), encomenda1.getId());
 
         } catch (Exception e) {
             logger.severe(e.getMessage());

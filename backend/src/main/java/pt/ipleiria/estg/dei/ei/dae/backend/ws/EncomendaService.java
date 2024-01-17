@@ -174,7 +174,7 @@ public class EncomendaService {
     // Encomenda create(String consumidorFinal, String operadorLogistica)
     @POST
     @Path("/")
-    public Response createEncomenda(EncomendaDTO encomendaDTO) throws MyConstraintViolationException, MyEntityNotFoundException, MyEntityExistsException {
+    public Response createEncomenda(EncomendaDTO encomendaDTO) throws Exception, MyEntityNotFoundException, MyEntityExistsException {
         try {
             Encomenda encomenda = encomendaBean.create(encomendaDTO);
             return Response.status(Response.Status.CREATED).entity(toDTO(encomenda)).build();

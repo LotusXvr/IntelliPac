@@ -84,7 +84,7 @@ public class EmbalagemDeProdutoBean {
         return embalagemDeProduto;
     }
 
-    public void addProdutoToEmbalagem(long idEmbalagem, long idProduto) throws MyEntityNotFoundException {
+    public void addProdutoToEmbalagem(long idEmbalagem, long idProduto) throws Exception {
         EmbalagemDeProduto embalagemDeProduto = find(idEmbalagem);
         if (embalagemDeProduto == null) {
             throw new MyEntityNotFoundException("Embalagem with id " + idEmbalagem + " not found");
@@ -93,8 +93,40 @@ public class EmbalagemDeProdutoBean {
         if (produtoFisico == null) {
             throw new MyEntityNotFoundException("Produto with id " + idProduto + " not found");
         }
+        if(embalagemDeProduto.getTipoEmbalagem() != 1 && produtoFisico.getEmbalagensDeProduto().size() == 0){
+            throw new Exception("O produto não tem embalagem primária");
+        }
+
+        if (embalagemDeProduto.getTipoEmbalagem() == 1 && produtoFisico.getEmbalagensDeProduto().size() == 0){
+            produtoFisico.addEmbalagem(embalagemDeProduto);
+            entityManager.merge(embalagemDeProduto);
+            return;
+        }
+
+        EmbalagemDeProduto anterior = produtoFisico.getEmbalagensDeProduto().get(produtoFisico.getEmbalagensDeProduto().size() - 1);
+        if(anterior.getTipoEmbalagem() != (embalagemDeProduto.getTipoEmbalagem() - 1)){
+            throw new Exception("O produto tem de seguir o padrão: Primária > Secundária > terciária");
+        }
+
+        if(anterior.getAltura() >= embalagemDeProduto.getAltura() || anterior.getLargura() >= embalagemDeProduto.getLargura() || anterior.getComprimento() >= embalagemDeProduto.getComprimento()){
+            throw new Exception("A embalagem a adicionar têm de ser maior que: "+anterior.getComprimento()+"X"+anterior.getLargura()+"X"+anterior.getAltura());
+        }
+
         produtoFisico.addEmbalagem(embalagemDeProduto);
         entityManager.merge(embalagemDeProduto);
+    }
+
+    private String tipoEmbalagemToString(long tipo) {
+        switch ((int) tipo) {
+            case 1:
+                return "Primária";
+            case 2:
+                return "Secundária";
+            case 3:
+                return "Terciária";
+            default:
+                return "Desconhecido";
+        }
     }
 
     public void removeProdutoToEmbalagem(long idEmbalagem, long idProduto) throws MyEntityNotFoundException {

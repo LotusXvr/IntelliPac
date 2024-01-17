@@ -6,6 +6,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
 import jakarta.validation.ConstraintViolationException;
+import org.hibernate.Hibernate;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.*;
 import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyConstraintViolationException;
 import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyEntityExistsException;
@@ -21,6 +22,9 @@ public class ProdutoFisicoBean {
 
     @EJB
     private FabricanteDeProdutosBean fabricanteDeProdutosBean;
+
+    @EJB
+    private EmbalagemDeProdutoBean embalagemDeProdutoBean;
 
     @EJB
     private EncomendaBean encomendaBean;
@@ -39,7 +43,7 @@ public class ProdutoFisicoBean {
         return (Long) query.getSingleResult() > 0L;
     }
 
-    public ProdutoFisico create(String nomeProduto, String fabrincanteUsername, long produtoCatalogoId, long encomendaId) throws MyEntityExistsException, MyEntityNotFoundException, MyConstraintViolationException {
+    public ProdutoFisico create(String nomeProduto, String fabrincanteUsername, long produtoCatalogoId, long encomendaId) throws Exception {
 
         ProdutoCatalogo produtoCatalogo = entityManager.find(ProdutoCatalogo.class, produtoCatalogoId);
 
@@ -77,7 +81,7 @@ public class ProdutoFisicoBean {
             for (TipoEmbalagemProduto embalagemACriar : produtoCatalogo.getEmbalagensACriar()) {
                 EmbalagemDeProduto embalagem = new EmbalagemDeProduto(embalagemACriar.getMaterial(),embalagemACriar.getAltura(), embalagemACriar.getLargura(), embalagemACriar.getComprimento(), embalagemACriar.getTipoEmbalagem());
                 entityManager.persist(embalagem);
-                produtoFisico.addEmbalagem(embalagem);
+                embalagemDeProdutoBean.addProdutoToEmbalagem(embalagem.getId(), produtoFisico.getId());
                 for (TipoSensor tipoSensor : embalagemACriar.getTipoSensor()) {
                     Sensor sensor = new Sensor(123, tipoSensor.getTipo(), tipoSensor.getUnidade(), 2);
                     entityManager.persist(sensor);
@@ -130,4 +134,11 @@ public class ProdutoFisicoBean {
         return entityManager.createNamedQuery("getAllProductsFisico", ProdutoFisico.class).getResultList();
     }
 
+    public ProdutoFisico getProdutoWithEmbalagens(long id) {
+        ProdutoFisico produtoFisico = find(id);
+        if (produtoFisico != null) {
+            Hibernate.initialize(produtoFisico.getEmbalagensDeProduto());
+        }
+        return produtoFisico;
+    }
 }
