@@ -47,11 +47,11 @@ public class Sensor {
         this.embalagens = new ArrayList<>();
     }
 
-    public Sensor(long idSensor, String tipo, String unidade) {
+    public Sensor(long idSensor, String tipo, String unidade, long estado) {
         this.idSensor = idSensor;
         this.tipo = tipo;
         this.unidade = unidade;
-        this.estado = 0;
+        this.estado = estado;
         this.observacoes = new ArrayList<>();
         this.embalagens = new ArrayList<>();
     }

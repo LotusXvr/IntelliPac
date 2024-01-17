@@ -10,6 +10,7 @@
                 <th>Tipo</th>
                 <th>Unidade</th>
                 <th>Valor</th>
+                <th>Estado</th>
                 <th>Ações</th>
             </tr>
             <tr v-for="sensor in sensores">
@@ -17,6 +18,7 @@
                 <td>{{ sensor.tipo }}</td>
                 <td>{{ sensor.unidade }}</td>
                 <td>{{ sensor.valor }}</td>
+                <td>{{ sensor.estado }}</td>
                 <td>
                     <nuxt-link :to="`/sensores/${sensor.id}`">Detalhes</nuxt-link>
                     |

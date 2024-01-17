@@ -1,6 +1,5 @@
 package pt.ipleiria.estg.dei.ei.dae.backend.entities;
 
-import jakarta.ejb.Stateless;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -16,13 +15,15 @@ import java.util.List;
 })
 public class TipoSensor implements Serializable {
 
+    //0 = disponível, 1 = ocupado (esta associado a uma encomenda), 2 = sensorProduto (sem estado)
+    // Como o tipo sensor só pode ser associado a embalagens de produto, este valor vai ser sempre 2
+    private final long estado = 2;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String tipo;
     // unidade (ºC, %, etc)
     private String unidade;
-
     @ManyToMany(mappedBy = "tipoSensor", fetch = FetchType.EAGER)
     private List<TipoEmbalagemProduto> tipoEmbalagemProdutos;
 
@@ -40,12 +41,12 @@ public class TipoSensor implements Serializable {
         return tipo;
     }
 
-    public String getUnidade() {
-        return unidade;
-    }
-
     public void setTipo(String tipo) {
         this.tipo = tipo;
+    }
+
+    public String getUnidade() {
+        return unidade;
     }
 
     public void setUnidade(String unidade) {
@@ -67,4 +68,9 @@ public class TipoSensor implements Serializable {
     public void setTipoEmbalagemProdutos(List<TipoEmbalagemProduto> tipoEmbalagemProdutos) {
         this.tipoEmbalagemProdutos = tipoEmbalagemProdutos;
     }
+
+    public long getEstado() {
+        return estado;
+    }
+
 }

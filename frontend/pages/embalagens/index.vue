@@ -32,7 +32,7 @@
 import Navbar from "~/layouts/nav-bar.vue";
 const config = useRuntimeConfig()
 const api = config.public.API_URL
-const { data: embalagens, error, refresh } = await useFetch(`${api}/embalagensDeTransporte`)
+const { data: embalagens, error, refresh } = await useFetch(`${api}/embalagens`)
 
 const deleteembalagem = async (id) => {
     try {

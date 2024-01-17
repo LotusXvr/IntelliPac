@@ -5,13 +5,13 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
 import jakarta.validation.ConstraintViolationException;
-import pt.ipleiria.estg.dei.ei.dae.backend.entities.TipoEmbalagemProduto;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.TipoSensor;
 import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyConstraintViolationException;
 import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyEntityExistsException;
 import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyEntityNotFoundException;
 
 import java.util.List;
+
 @Stateless
 public class TipoSensorBean {
 
@@ -26,13 +26,13 @@ public class TipoSensorBean {
         );
         query.setParameter("tipo", tipo);
         query.setParameter("unidade", unidade);
-        return (Long)query.getSingleResult() > 0L;
+        return (Long) query.getSingleResult() > 0L;
     }
 
     public TipoSensor create(String tipo, String unidade) throws Exception {
 
-        if(exists(tipo, unidade)) {
-            throw new MyEntityExistsException("Tipo Sensor com tipo " + tipo + " e unidade"+ unidade +" já existe");
+        if (exists(tipo, unidade)) {
+            throw new MyEntityExistsException("Tipo Sensor com tipo " + tipo + " e unidade" + unidade + " já existe");
         }
 
         TipoSensor tipoSensor = null;
@@ -40,10 +40,11 @@ public class TipoSensorBean {
         try {
             tipoSensor = new TipoSensor(tipo, unidade);
             entityManager.persist(tipoSensor);
-        }
-        catch (ConstraintViolationException e) {
+        } catch (ConstraintViolationException e) {
             throw new MyConstraintViolationException(e);
         }
+
+
         return tipoSensor;
     }
 
@@ -57,8 +58,8 @@ public class TipoSensorBean {
             throw new MyEntityNotFoundException("Tipo Sensor com id " + id + " não existe");
         }
 
-        if(exists(tipo, unidade)) {
-            throw new MyEntityExistsException("Tipo Sensor com tipo " + tipo + " e unidade "+ unidade +" já existe");
+        if (exists(tipo, unidade)) {
+            throw new MyEntityExistsException("Tipo Sensor com tipo " + tipo + " e unidade " + unidade + " já existe");
         }
         tipoSensor.setTipo(tipo);
         tipoSensor.setUnidade(unidade);

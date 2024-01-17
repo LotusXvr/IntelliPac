@@ -14,7 +14,7 @@ public class SensorBean {
     private EntityManager entityManager;
 
     public Sensor create(long idSensor, String tipo, String unidade) {
-        Sensor sensor = new Sensor(idSensor, tipo, unidade);
+        Sensor sensor = new Sensor(idSensor, tipo, unidade, 0);
         entityManager.persist(sensor);
         return sensor;
     }
