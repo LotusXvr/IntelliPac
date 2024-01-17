@@ -76,7 +76,7 @@ public class TipoEmbalagemProdutoBean {
         entityManager.remove(tipoEmbalagemProduto);
     }
 
-    public List<TipoEmbalagemProduto> getAllTipoEmbalagenm() {
+    public List<TipoEmbalagemProduto> getAllTipoEmbalagem() {
         return entityManager.createNamedQuery("getAllTipoEmbalagem", TipoEmbalagemProduto.class).getResultList();
     }
 
