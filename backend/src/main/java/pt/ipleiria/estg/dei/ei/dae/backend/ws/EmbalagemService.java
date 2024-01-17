@@ -37,14 +37,15 @@ public class EmbalagemService {
     }
 
     private EmbalagemDTO toDTO(Embalagem embalagem) {
-        return new EmbalagemDTO(
+        EmbalagemDTO embalagemDTO = new EmbalagemDTO(
                 embalagem.getId(),
                 embalagem.getMaterial(),
                 embalagem.getAltura(),
                 embalagem.getLargura(),
-                embalagem.getComprimento(),
-                sensorToDTOs(embalagem.getSensores())
+                embalagem.getComprimento()
         );
+        embalagemDTO.setSensores(sensorToDTOs(embalagem.getSensores()));
+        return embalagemDTO;
     }
 
     private List<EmbalagemDTO> toDTOs(List<Embalagem> embalagens) {
