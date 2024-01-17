@@ -21,6 +21,9 @@
                     </option>
                     <option :disabled="estado === 'PERDIDA'" value="perdida">Perdida</option>
                 </select>
+                <br>
+                <span v-if="isGoingToMail" class="info"> Irá ser enviado um mail para {{ encomenda.consumidorFinal }}</span>
+                <br>
                 <span v-if="!isEstadoSelected" class="error"> ERRO: {{ formFeedback.estado }}</span>
             </div>
             <br />
@@ -37,6 +40,10 @@
 <style scoped>
 .error {
     color: red;
+}
+
+.info {
+    color: blue;
 }
 </style>
 <script setup>
@@ -83,6 +90,13 @@ const isEstadoSelected = computed(() => {
 
 const isFormValid = computed(() => {
     return isEstadoSelected.value
+})
+
+const isGoingToMail = computed(() => {
+    if (encomendaForm.estado == "danificada" || encomendaForm.estado == "perdida") {
+        return true
+    }
+    return false
 })
 
 const updateEncomenda = async () => {
