@@ -13,6 +13,7 @@ import pt.ipleiria.estg.dei.ei.dae.backend.ejbs.ProdutoCatalogoBean;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.ProdutoCatalogo;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.ProdutoFisico;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.TipoEmbalagemProduto;
+import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyConstraintViolationException;
 import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyEntityNotFoundException;
 
 import java.util.List;
@@ -88,6 +89,19 @@ public class ProdutoCatalogoService {
         return Response.status(Response.Status.CREATED).entity(toDTONoProdutos(produtoCatalogo)).build();
     }
 
+    @PUT
+    @Path("{id}")
+    public Response updateProdutoCatalogo(@PathParam("id") long id, ProdutoCatalogoDTO produtoCatalogoDTO) throws MyEntityNotFoundException, MyConstraintViolationException {
+        var produtoCatalogo = produtoCatalogoBean.find(id);
+        if (produtoCatalogo != null) {
+            produtoCatalogoBean.update(id, produtoCatalogoDTO);
+            return Response.ok().build();
+        }
+        return Response.status(Response.Status.NOT_FOUND)
+                .entity("ERROR_FINDING_PRODUTOCATALOGO")
+                .build();
+    }
+
     @GET
     @Path("{id}")
     public Response getProdutoCatalogoDetails(@PathParam("id") long id) {
@@ -137,14 +151,4 @@ public class ProdutoCatalogoService {
         return Response.ok().build();
     }
 
-    @PUT
-    @Path("{id}")
-    public Response updateProdutoCatalogo(@PathParam("id") long id, ProdutoCatalogoDTO produtoCatalogoDTO) throws MyEntityNotFoundException {
-        var produto = produtoCatalogoBean.find(id);
-        if (produto == null) {
-            return Response.status(Response.Status.NOT_FOUND).build();
-        }
-        produtoCatalogoBean.update(id, produtoCatalogoDTO.getNome(), produtoCatalogoDTO.getFabricanteUsername());
-        return Response.ok().build();
-    }
 }

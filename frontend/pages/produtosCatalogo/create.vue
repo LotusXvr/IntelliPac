@@ -14,36 +14,24 @@
         Primárias:
         <span v-for="embalagem in tiposEmbalagemPrimaria">
             <br />
-            <input
-                type="checkbox"
-                :value="embalagem.id"
-                v-model="produtoForm.embalagensACriar"
-                :disabled="
-                    isTipoEmbalagemPrimariaSelected &&
-                    !produtoForm.embalagensACriar.includes(embalagem.id)
-                "
-            />
+            <input type="checkbox" :value="embalagem.id" v-model="produtoForm.embalagensACriar" :disabled="isTipoEmbalagemPrimariaSelected &&
+                !produtoForm.embalagensACriar.includes(embalagem.id)
+                " />
             {{ embalagem.material }} -
             {{ construirTamanhoString(embalagem.comprimento, embalagem.largura, embalagem.altura) }}
         </span>
-        
+
         <br />
         <span class="error" v-if="!isEmbalagemSelected">
-          ERRO: {{ formFeedback.embalagensACriar }}
+            ERRO: {{ formFeedback.embalagensACriar }}
         </span>
         <br />
         Secundárias:
         <span v-for="embalagem in tiposEmbalagemSecundaria">
             <br />
-            <input
-                type="checkbox"
-                :value="embalagem.id"
-                v-model="produtoForm.embalagensACriar"
-                :disabled="
-                    isTipoEmbalagemSecundariaSelected &&
-                    !produtoForm.embalagensACriar.includes(embalagem.id)
-                "
-            />
+            <input type="checkbox" :value="embalagem.id" v-model="produtoForm.embalagensACriar" :disabled="isTipoEmbalagemSecundariaSelected &&
+                !produtoForm.embalagensACriar.includes(embalagem.id)
+                " />
             {{ embalagem.material }} -
             {{ construirTamanhoString(embalagem.comprimento, embalagem.largura, embalagem.altura) }}
         </span>
@@ -52,15 +40,9 @@
         Terciárias:
         <span v-for="embalagem in tiposEmbalagemTercearia">
             <br />
-            <input
-                type="checkbox"
-                :value="embalagem.id"
-                v-model="produtoForm.embalagensACriar"
-                :disabled="
-                    isTipoEmbalagemTerceariaSelected &&
-                    !produtoForm.embalagensACriar.includes(embalagem.id)
-                "
-            />
+            <input type="checkbox" :value="embalagem.id" v-model="produtoForm.embalagensACriar" :disabled="isTipoEmbalagemTerceariaSelected &&
+                !produtoForm.embalagensACriar.includes(embalagem.id)
+                " />
             {{ embalagem.material }} -
             {{ construirTamanhoString(embalagem.comprimento, embalagem.largura, embalagem.altura) }}
         </span>
@@ -103,8 +85,6 @@ const api = config.public.API_URL
 const message = ref("")
 
 const { data: embalagensACriar } = await useFetch(`${api}/tipoEmbalagens`)
-
-const tiposEmbalagem = [1, 2, 3]
 
 const tiposEmbalagemPrimaria = computed(() => {
     return embalagensACriar.value.filter((embalagem) => embalagem.tipo == 1)
@@ -166,7 +146,7 @@ const isPesoValid = computed(() => {
 })
 
 const isEmbalagemSelected = computed(() => {
-  console.log(isTipoEmbalagemPrimariaSelected.value)
+    console.log(isTipoEmbalagemPrimariaSelected.value)
     if (!isTipoEmbalagemPrimariaSelected.value) {
         formFeedback.embalagensACriar = "Escolha pelo menos uma embalagem primária"
         return false
@@ -203,8 +183,6 @@ async function create() {
         peso: produtoForm.peso,
         embalagensACriar: produtoForm.embalagensACriar.map((id) => ({ id })),
     }
-    console.log("requestBody")
-    console.log(requestBody)
 
     const requestOptions = {
         method: "POST",
