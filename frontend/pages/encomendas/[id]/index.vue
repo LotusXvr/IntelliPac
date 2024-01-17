@@ -10,22 +10,43 @@
         <ul>
             <li v-for="produto in encomenda.produtos" :key="produto.id">
                 {{ produto.nome }}
+                <br />
+                Embalagens de Produto:
                 <ul>
                     <li v-for="embalagem in produto.embalagensDeProduto" :key="embalagem.id">
-                        {{ embalagem.material }} ({{ embalagem.tipoEmbalagem }})
+                        {{ tipoEmbalagemToString(embalagem.tipoEmbalagem) }} -
+                        {{ embalagem.material }}
+                        <br />
+                        Sensores:
+                        <ul>
+                            <li v-for="sensor in embalagem.sensores" :key="sensor.id">
+                                {{ sensor.tipo }} - {{ sensor.unidade }}
+                            </li>
+                        </ul>
                     </li>
                 </ul>
             </li>
         </ul>
 
         <p v-if="encomenda.embalagensTransporte.length > 0">Embalagens Transporte:</p>
-        <ul v-if="encomenda.embalagensTransporte.length > 0" v-for="embalagens in encomenda.embalagensTransporte" :key="embalagens.id">
-            Material:
-            {{
-                embalagens.material
-            }}
+        <ul>
+            <li
+                v-if="encomenda.embalagensTransporte.length > 0"
+                v-for="embalagens in encomenda.embalagensTransporte"
+                :key="embalagens.id"
+            >
+                Material:
+                {{ embalagens.material }}
+                <ul>
+                    <li v-for="sensor in embalagens.sensores" :key="sensor.id">
+                        {{ sensor.tipo }} - {{ sensor.unidade }}
+                    </li>
+                </ul>
+            </li>
         </ul>
-        <h3 v-if="encomenda.embalagensTransporte.length == 0" style="color:darkcyan">A encomenda aguarda a colocação de uma embalagem de transporte</h3>
+        <h3 v-if="encomenda.embalagensTransporte.length == 0" style="color: darkcyan">
+            A encomenda aguarda a colocação de uma embalagem de transporte
+        </h3>
     </div>
 
     <h2>Error messages:</h2>
@@ -39,4 +60,17 @@ const api = config.public.API_URL
 const { data: encomenda, error: proErr } = await useFetch(`${api}/encomendas/${id}`)
 const messages = ref([])
 if (proErr.value) messages.value.push(proErr.value)
+
+const tipoEmbalagemToString = (tipo) => {
+    switch (tipo) {
+        case 1:
+            return "Primária"
+        case 2:
+            return "Secundária"
+        case 3:
+            return "Terciária"
+        default:
+            return "Tipo de embalagem desconhecido"
+    }
+}
 </script>
