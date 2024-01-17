@@ -10,11 +10,12 @@
     <input id="peso" v-model="produtoForm.peso">
     <span class="error">{{ formFeedback.peso }}</span>
     <br />
-    Embalagens de Transporte:
+    Embalagens a criar:
     <p v-for="tipo in tiposEmbalagem">
       <span v-for="embalagem in embalagensACriar">
         <div v-if="tipo == embalagem.tipo">
-          <input type="checkbox" :value="embalagem.id" v-model="produtoForm.embalagensACriar">
+          <input type="checkbox" :value="embalagem.id" v-model="produtoForm.embalagensACriar"
+            @click="desativarRestantes(embalagem.tipo, embalagem.id)">
           {{ tipoNumeroParaString(embalagem.tipo) }}: {{ embalagem.material }}
         </div>
 
@@ -40,11 +41,11 @@ import { ref, reactive, computed } from "vue";
 import { useAuthStore } from "../store/auth-store.js"
 
 const auhtStore = useAuthStore()
+const { user } = auhtStore
 
 const produtoForm = reactive({
   nome: null,
-  // fabricanteUsername: auhtStore.user.username, // Alterado de Number para aceitar nulos
-  fabricanteUsername: 'Apple',
+  fabricanteUsername: user.username,
   peso: null,
   embalagensACriar: [],
 });
@@ -63,7 +64,6 @@ const message = ref("");
 const { data: embalagensACriar } = useFetch(`${api}/tipoEmbalagens`);
 
 const tiposEmbalagem = [1, 2, 3];
-
 
 const isNameValid = computed(() => {
   if (produtoForm.nome === null) {
