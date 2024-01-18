@@ -79,7 +79,7 @@
         </table>
     </div>
     <br />
-    <button @click.prevent="refresh">Refresh Data</button> <br />
+    <button @click.prevent="refreshData">Refresh Data</button> <br />
     <br />
     <nuxt-link to="/">Voltar à Home</nuxt-link>
 </template>
@@ -129,4 +129,10 @@ const estadoToString = (estado) => {
             return "Em Produto"
     }
 }
+
+watch(sensores, (newSensores) => {
+  sensoresDisponiveis.value = newSensores.filter((sensor) => sensor.estado == 0);
+  sensoresEmUso.value = newSensores.filter((sensor) => sensor.estado == 1);
+  sensoresProduto.value = newSensores.filter((sensor) => sensor.estado == 2);
+});
 </script>
