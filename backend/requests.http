@@ -101,8 +101,8 @@ PUT http://localhost:8080/intellipac/api/fabricantes/teste
 Content-Type: application/json
 
 {
-    "nome": "Fabricante (PUT)",
-    "email": "put@mail.pt"
+  "nome": "Fabricante (PUT)",
+  "email": "put@mail.pt"
 }
 
 ###
@@ -175,7 +175,7 @@ GET http://localhost:8080/intellipac/api/sensores
 Accept: application/json
 
 ### GET SENSOR DETAILS
-GET http://localhost:8080/intellipac/api/sensores/1
+GET http://localhost:8080/intellipac/api/sensores/7
 Accept: application/json
 
 ### POST SENSORES

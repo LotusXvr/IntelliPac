@@ -14,7 +14,8 @@
             </li>
         </ul>
 
-        
+        <button @click="gerarObservacao(sensor.id)">Gerar Observação</button>
+
         <div v-if="sensor.observacoes.length > 0">
             <h4>Observações</h4>
             <canvas ref="chartEl"></canvas>
@@ -23,8 +24,6 @@
                     ({{ observacao.timestamp }}) {{ observacao.valor }} {{ sensor.unidade }}
                 </li>
             </ul>
-
-            
         </div>
         <div v-else>
             <h4>Nenhuma observação registada</h4>
@@ -96,6 +95,19 @@ const createChart = () => {
             },
         })
     })
+}
+
+const gerarObservacao = async (id) => {
+    try {
+        const response = await fetch(`${api}/sensores/${id}/gerarObservacao`, {
+            method: "POST",
+        })
+        if (response.status == 200) {
+            refresh()
+        }
+    } catch (error) {
+        console.error(error)
+    }
 }
 
 fetchSensor()

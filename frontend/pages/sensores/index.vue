@@ -88,17 +88,10 @@ import Navbar from "~/layouts/nav-bar.vue"
 const config = useRuntimeConfig()
 const api = config.public.API_URL
 const { data: sensores, error, refresh } = await useFetch(`${api}/sensores`)
-console.log(sensores)
 
-// sensores que estiverem com estado a 2 significa que são de produto (não reutilizáveis)
-const sensoresProduto = sensores.value.filter((sensor) => sensor.estado == 2)
-
-// sensores com estado a 0 significa que são reutilizáveis e estão disponíveis
-const sensoresDisponiveis = sensores.value.filter((sensor) => sensor.estado == 0)
-console.log("sensores disponiveis " + sensoresDisponiveis)
-
-// sensores com estado a 1 significa que são reutilizáveis e estão em uso
-const sensoresEmUso = sensores.value.filter((sensor) => sensor.estado == 1)
+const sensoresDisponiveis = ref(sensores.value.filter((sensor) => sensor.estado == 0))
+const sensoresEmUso = ref(sensores.value.filter((sensor) => sensor.estado == 1))
+const sensoresProduto = ref(sensores.value.filter((sensor) => sensor.estado == 2))
 
 const deleteProduto = async (id) => {
     try {
@@ -118,7 +111,7 @@ const gerarObservacao = async (id) => {
         const response = await fetch(`${api}/sensores/${id}/gerarObservacao`, {
             method: "POST",
         })
-        if (response.ok) {
+        if (response.status == 200) {
             refresh()
         }
     } catch (error) {

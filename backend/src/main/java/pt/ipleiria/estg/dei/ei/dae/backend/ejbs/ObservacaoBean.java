@@ -77,6 +77,12 @@ public class ObservacaoBean {
 
                 // Em caso de embalagem de produto, envia-se email ao operador de logistica a notificar
                 emailBean.send(emailOperadorLogistica, "Encomenda " + produto.getEncomenda().getId() + " possui um produto danificado", "A encomenda " + produto.getEncomenda().getId() + " possui o produto " + produto.getNomeProduto() + " danificado");
+
+                Observacao observacao = new Observacao(getTimestamp(), valor, sensor);
+                sensor.addObservacao(observacao);
+
+                entityManager.persist(observacao);
+
                 return;
             }
 
