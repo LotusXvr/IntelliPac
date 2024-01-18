@@ -260,7 +260,8 @@ public class EncomendaBean {
 
             List<EmbalagemDeTransporte> embalagensTransporte = encomenda.getEmbalagensTransporte();
 
-            for (EmbalagemDeTransporte embalagemDeTransporte : embalagensTransporte) {
+            while (!embalagensTransporte.isEmpty()) {
+                EmbalagemDeTransporte embalagemDeTransporte = embalagensTransporte.get(embalagensTransporte.size() - 1);
                 if (embalagemDeTransporte.getSensores().isEmpty()) {
                     continue;
                 }
@@ -274,6 +275,8 @@ public class EncomendaBean {
                     sensor.setIdSensor(lastId);
                 }
 
+                embalagemDeTransporteBean.removeEncomendaToEmbalagem(embalagemDeTransporte.getId(), encomenda.getId());
+                embalagensTransporte.remove(embalagemDeTransporte);
             }
 
             int tamanhoEmbalagens = encomenda.getEmbalagensTransporte().size();

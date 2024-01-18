@@ -211,7 +211,6 @@ public class EncomendaService {
     @PATCH
     @Path("{id}/embalagensDeTransporte")
     public Response patchEncomendaEmbalagensTransporte(@PathParam("id") long id, EncomendaDTO encomendaDTO) throws MyEntityNotFoundException {
-        System.out.println("565656 " + encomendaDTO.getEmbalagensTransporte());
         encomendaBean.patchEmbalagensTransporte(id, encomendaDTO.getEmbalagensTransporte());
         return Response.status(Response.Status.OK).entity("Embalagens de Transporte alteradas com sucesso").build();
     }

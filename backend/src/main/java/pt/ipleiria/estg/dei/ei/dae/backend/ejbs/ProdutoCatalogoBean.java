@@ -17,6 +17,7 @@ import pt.ipleiria.estg.dei.ei.dae.backend.entities.TipoEmbalagemProduto;
 import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyConstraintViolationException;
 import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyEntityNotFoundException;
 
+import java.util.Comparator;
 import java.util.List;
 
 @Stateless
@@ -127,6 +128,7 @@ public class ProdutoCatalogoBean {
     public List<ProdutoCatalogo> getAllProductsCatalogo() {
         List<ProdutoCatalogo> produtosCatalogo = entityManager.createNamedQuery("getAllProductsCatalogo", ProdutoCatalogo.class).getResultList();
         for (ProdutoCatalogo produtoCatalogo : produtosCatalogo) {
+            produtoCatalogo.getEmbalagensACriar().sort(Comparator.comparingLong(TipoEmbalagemProduto::getTipoEmbalagem));
             Hibernate.initialize(produtoCatalogo.getProdutos());
             Hibernate.initialize(produtoCatalogo.getEmbalagensACriar());
         }
@@ -136,6 +138,7 @@ public class ProdutoCatalogoBean {
     public ProdutoCatalogo getProdutoCatalogoWithProdutos(long id) {
         ProdutoCatalogo produtoCatalogo = find(id);
         List<TipoEmbalagemProduto> embalagensDeProduto = produtoCatalogo.getEmbalagensACriar();
+        produtoCatalogo.getEmbalagensACriar().sort(Comparator.comparingLong(TipoEmbalagemProduto::getTipoEmbalagem));
         for (TipoEmbalagemProduto embalagemDeProduto : embalagensDeProduto) {
             System.out.println(embalagemDeProduto.getId() + " 123123 " + embalagemDeProduto.getMaterial());
         }
@@ -155,6 +158,7 @@ public class ProdutoCatalogoBean {
 
         List<ProdutoCatalogo> produtoCatalogos = entityManager.createNamedQuery("getAllProductsFromFabricante", ProdutoCatalogo.class).setParameter("username", username).getResultList();
         for (ProdutoCatalogo produtoCatalogo : produtoCatalogos) {
+            produtoCatalogo.getEmbalagensACriar().sort(Comparator.comparingLong(TipoEmbalagemProduto::getTipoEmbalagem));
             Hibernate.initialize(produtoCatalogo.getProdutos());
             Hibernate.initialize(produtoCatalogo.getEmbalagensACriar());
         }
