@@ -11,6 +11,10 @@ import java.util.List;
         @NamedQuery(
                 name = "getAllProductsCatalogo",
                 query = "SELECT p FROM ProdutoCatalogo p ORDER BY p.nomeProduto"
+        ),
+        @NamedQuery(
+                name = "getAllProductsFromFabricante",
+                query = "SELECT p FROM ProdutoCatalogo p WHERE p.fabricante.username = :username ORDER BY p.nomeProduto"
         )
 })
 public class ProdutoCatalogo extends Produto implements Serializable {

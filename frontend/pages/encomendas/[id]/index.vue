@@ -68,6 +68,7 @@
                                     {{ sensor.observacoes[0].timestamp }} - {{ sensor.observacoes[0].valor }} {{ sensor.unidade }}
                                 </li>
                             </ul>
+                            
                         </div>
                         <div v-else>
                             <h4>Ainda nenhuma observação registada</h4>
@@ -92,8 +93,6 @@ const api = config.public.API_URL
 const { data: encomenda, error: proErr } = await useFetch(`${api}/encomendas/${id}`)
 const messages = ref([])
 if (proErr.value) messages.value.push(proErr.value)
-
-
 
 const tipoEmbalagemToString = (tipo) => {
     switch (tipo) {

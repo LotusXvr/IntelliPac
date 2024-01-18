@@ -151,4 +151,10 @@ public class ProdutoCatalogoService {
         return Response.ok().build();
     }
 
+    @GET
+    @Path("fabricante/{username}")
+    public List<ProdutoCatalogoDTO> getProdutosFromFabricante(@PathParam("username") String username) {
+        return toDTOs(produtoCatalogoBean.getProdutosCatalogoFromFabricante(username));
+    }
+
 }

@@ -10,6 +10,7 @@ import jakarta.validation.ConstraintViolationException;
 import org.hibernate.Hibernate;
 import pt.ipleiria.estg.dei.ei.dae.backend.dtos.ProdutoCatalogoDTO;
 import pt.ipleiria.estg.dei.ei.dae.backend.dtos.TipoEmbalagemDTO;
+import pt.ipleiria.estg.dei.ei.dae.backend.entities.Encomenda;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.FabricanteDeProdutos;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.ProdutoCatalogo;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.TipoEmbalagemProduto;
@@ -143,6 +144,21 @@ public class ProdutoCatalogoBean {
             Hibernate.initialize(embalagensDeProduto);
         }
         return produtoCatalogo;
+    }
+
+    public List<ProdutoCatalogo> getProdutosCatalogoFromFabricante(String username){
+        FabricanteDeProdutos fabricanteDeProdutos = fabricanteDeProdutosBean.find(username);
+
+        if (fabricanteDeProdutos == null) {
+            throw new IllegalArgumentException("Fabricante com username " + username + " não existe");
+        }
+
+        List<ProdutoCatalogo> produtoCatalogos = entityManager.createNamedQuery("getAllProductsFromFabricante", ProdutoCatalogo.class).setParameter("username", username).getResultList();
+        for (ProdutoCatalogo produtoCatalogo : produtoCatalogos) {
+            Hibernate.initialize(produtoCatalogo.getProdutos());
+            Hibernate.initialize(produtoCatalogo.getEmbalagensACriar());
+        }
+        return produtoCatalogos;
     }
 
     public void addTipoEmbalagem(long idEmbalagem, long idProduto) {
