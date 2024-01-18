@@ -17,7 +17,7 @@
         <button @click="gerarObservacao(sensor.id)">Gerar Observação</button>
 
         <div v-if="sensor.observacoes.length > 0">
-            <h4>Observações</h4>
+            <h4>Observações ({{ sensor.observacoes.length }})</h4>
             <canvas ref="chartEl"></canvas>
             <ul>
                 <li v-for="observacao in sensor.observacoes" :key="sensor.id">
