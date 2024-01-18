@@ -12,6 +12,7 @@ import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyConstraintViolationExcep
 import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyEntityNotFoundException;
 
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 @Stateless
@@ -75,9 +76,10 @@ public class ProdutoFisicoBean {
 
         encomenda.addProduto(produtoFisico);
         produtoCatalogo.addProduto(produtoFisico);
-
         if (!produtoCatalogo.getEmbalagensACriar().isEmpty()) {
+            produtoCatalogo.getEmbalagensACriar().sort(Comparator.comparingLong(TipoEmbalagemProduto::getTipoEmbalagem));
             for (TipoEmbalagemProduto embalagemACriar : produtoCatalogo.getEmbalagensACriar()) {
+
                 EmbalagemDeProduto embalagem = new EmbalagemDeProduto(embalagemACriar.getMaterial(),
                         embalagemACriar.getAltura(), embalagemACriar.getLargura(), embalagemACriar.getComprimento(),
                         embalagemACriar.getTipoEmbalagem());
