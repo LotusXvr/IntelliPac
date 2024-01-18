@@ -145,5 +145,18 @@ public class SensorService {
         }
     }
 
+    @POST
+    @Path("/{id}/gerarObservacao")
+    public Response gerarObservacao(@PathParam("id") long sensorId) {
+        try {
+            sensorBean.gerarObservacao(
+                    sensorId
+            );
+            return Response.status(Response.Status.OK).build();
+        } catch (Exception e) {
+            return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
+        }
+    }
+
 
 }
