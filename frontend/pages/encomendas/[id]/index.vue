@@ -29,11 +29,8 @@
                                 <div v-if="sensor.observacoes.length > 0">
                                     Ultima observação:
                                     <ul>
-                                        <li
-                                            v-for="observacao in sensor.observacoes"
-                                            :key="observacao.id"
-                                        >
-                                            {{ observacao.timestamp }} - {{ observacao.valor }}
+                                        <li>
+                                            {{ sensor.observacoes[0].timestamp }} - {{ sensor.observacoes[0].valor }} {{ sensor.unidade }}
                                         </li>
                                     </ul>
                                 </div>
@@ -67,8 +64,8 @@
                         <div v-if="sensor.observacoes.length > 0">
                             Ultima observação:
                             <ul>
-                                <li v-for="observacao in sensor.observacoes" :key="observacao.id">
-                                    {{ observacao.timestamp }} - {{ observacao.valor }}
+                                <li>
+                                    {{ sensor.observacoes[0].timestamp }} - {{ sensor.observacoes[0].valor }} {{ sensor.unidade }}
                                 </li>
                             </ul>
                         </div>

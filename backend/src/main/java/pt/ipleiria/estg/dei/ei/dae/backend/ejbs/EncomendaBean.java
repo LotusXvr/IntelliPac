@@ -16,6 +16,7 @@ import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyEntityNotFoundException;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Collections;
 import java.util.List;
 
 @Stateless
@@ -177,6 +178,7 @@ public class EncomendaBean {
                     List<Sensor> sensores = embalagemProduto.getSensores();
                     Hibernate.initialize(sensores);
                     for (Sensor sensor : sensores) {
+                        Collections.reverse(sensor.getObservacoes());
                         // apenas se carrega a ultima observação
                         // visto não ser necessário carregar todas as observações
                         // evitando demasiada carga no servidor
@@ -194,6 +196,7 @@ public class EncomendaBean {
                 Hibernate.initialize(sensores);
                 for (Sensor sensor : sensores) {
                     if (sensor.getObservacoes().size() > 0) {
+                        Collections.reverse(sensor.getObservacoes());
                         Observacao observacao = sensor.getObservacoes().get(sensor.getObservacoes().size() - 1);
                         Hibernate.initialize(observacao);
                     }
