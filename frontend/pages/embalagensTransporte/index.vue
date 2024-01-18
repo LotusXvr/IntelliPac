@@ -16,26 +16,30 @@
                 <th>actions</th>
             </tr>
             <tr v-for="embalagemDeTransporte in embalagensDeTransporte">
-                <td>{{ embalagemDeTransporte.id }}</td>
-                <td>{{ embalagemDeTransporte.material }}</td>
-                <td>{{ embalagemDeTransporte.altura }}</td>
-                <td>{{ embalagemDeTransporte.largura }}</td>
-                <td>{{ embalagemDeTransporte.comprimento }}</td>
-                <td>{{ estadoToString(embalagemDeTransporte.estado) }}</td>
-                <td> {{ embalagemDeTransporte.sensores.length }}</td>
-                <td>
+                <td class="center">{{ embalagemDeTransporte.id }}</td>
+                <td class="center">{{ embalagemDeTransporte.material }}</td>
+                <td class="center">{{ embalagemDeTransporte.altura }}</td>
+                <td class="center">{{ embalagemDeTransporte.largura }}</td>
+                <td class="center">{{ embalagemDeTransporte.comprimento }}</td>
+                <td class="center">{{ estadoToString(embalagemDeTransporte.estado) }}</td>
+                <td class="center"> {{ embalagemDeTransporte.sensores.length }}</td>
+                <td class="right">
                     <nuxt-link :to="`/embalagensTransporte/${embalagemDeTransporte.id}`">Detalhes</nuxt-link>
                     |
                     <nuxt-link :to="'/embalagensTransporte/edit/' + embalagemDeTransporte.id">Editar</nuxt-link>
                     |
                     <nuxt-link :to="`/embalagensTransporte/${embalagemDeTransporte.id}` + '/Sensores'">
                         Sensores</nuxt-link>
-                    |
-                    <button @click="patchEstado(embalagemDeTransporte.id)"
-                        v-if="hasEncomendas(embalagemDeTransporte) && embalagemDeTransporte.estado != 1">Enviar
-                        encomendas</button>
-                    |
-                    <button @click="deleteEncomenda(embalagemDeTransporte.id)">Excluir</button>
+                    <span v-if="hasEncomendas(embalagemDeTransporte) && embalagemDeTransporte.estado != 1">
+                        |
+                        <button @click="patchEstado(embalagemDeTransporte.id)">Enviar
+                            encomendas</button>
+                    </span>
+                    <span v-if="!hasEncomendas(embalagemDeTransporte)">
+                        |
+                        <button @click="deleteEncomenda(embalagemDeTransporte.id)">Excluir</button>
+                    </span>
+
                 </td>
             </tr>
         </table>
@@ -45,6 +49,15 @@
     <br />
     <nuxt-link to="/">Voltar à Home</nuxt-link>
 </template>
+<style>
+.center {
+    text-align: center;
+}
+
+.right {
+    text-align: right;
+}
+</style>
 <script setup>
 import Navbar from "~/layouts/nav-bar.vue"
 import { useAuthStore } from "~/store/auth-store"
