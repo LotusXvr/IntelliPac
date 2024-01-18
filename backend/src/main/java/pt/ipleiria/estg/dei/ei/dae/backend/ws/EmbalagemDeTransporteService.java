@@ -30,7 +30,8 @@ public class EmbalagemDeTransporteService {
                 embalagemDeTransporte.getMaterial(),
                 embalagemDeTransporte.getAltura(),
                 embalagemDeTransporte.getLargura(),
-                embalagemDeTransporte.getComprimento()
+                embalagemDeTransporte.getComprimento(),
+                embalagemDeTransporte.getEstado()
         );
     }
 
@@ -44,7 +45,8 @@ public class EmbalagemDeTransporteService {
                 embalagemDeTransporte.getMaterial(),
                 embalagemDeTransporte.getAltura(),
                 embalagemDeTransporte.getLargura(),
-                embalagemDeTransporte.getComprimento()
+                embalagemDeTransporte.getComprimento(),
+                embalagemDeTransporte.getEstado()
         );
 
         embalagemDeTransporteDTO.setSensores(sensorsToDTOs(embalagemDeTransporte.getSensores()));
@@ -111,7 +113,8 @@ public class EmbalagemDeTransporteService {
                 embalagemDeTransporteDTO.getMaterial(),
                 embalagemDeTransporteDTO.getAltura(),
                 embalagemDeTransporteDTO.getLargura(),
-                embalagemDeTransporteDTO.getComprimento()
+                embalagemDeTransporteDTO.getComprimento(),
+                embalagemDeTransporteDTO.getEstado()
         );
         return Response.status(Response.Status.CREATED).entity(toDTO(embalagemDeTransporte)).build();
     }
@@ -123,7 +126,7 @@ public class EmbalagemDeTransporteService {
         if (embalagemDeTransporte == null) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
-        embalagemDeTransporteBean.update(id, embalagemDeTransporteDTO.getMaterial(), embalagemDeTransporteDTO.getAltura(), embalagemDeTransporteDTO.getLargura(), embalagemDeTransporteDTO.getComprimento());
+        embalagemDeTransporteBean.update(id, embalagemDeTransporteDTO.getMaterial(), embalagemDeTransporteDTO.getAltura(), embalagemDeTransporteDTO.getLargura(), embalagemDeTransporteDTO.getComprimento(), embalagemDeTransporteDTO.getEstado());
         return Response.ok().build();
     }
 

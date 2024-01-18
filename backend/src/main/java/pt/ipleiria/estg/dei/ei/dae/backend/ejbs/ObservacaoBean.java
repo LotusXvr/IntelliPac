@@ -68,9 +68,7 @@ public class ObservacaoBean {
                 throw new IllegalArgumentException("Embalagem with id " + sensor.getEmbalagens().get(numeroEmbalagens-1).getId() + " not found.");
 
             if (sensor.getTipo().equals("Danificado") && (valor.equals("1") || valor.equals("true")) ) {
-                System.out.println("333: nigga entraste");
                 Encomenda encomenda = embalagemDeTransporte.getEncomendas().get(embalagemDeTransporte.getEncomendas().size() - 1);
-
                 encomendaBean.patchEstado(encomenda.getId(), "Danificada");
             }
         }

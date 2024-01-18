@@ -11,20 +11,21 @@ public class EmbalagemDeTransporteDTO {
     private long largura;
     private long comprimento;
     private List<EncomendaDTO> encomendas;
-
     private List<SensorDTO> sensores;
+    private int estado;
 
     public EmbalagemDeTransporteDTO() {
         this.encomendas = new ArrayList<>();
         this.sensores = new ArrayList<>();
     }
 
-    public EmbalagemDeTransporteDTO(long id, String material, long altura, long largura, long comprimento) {
+    public EmbalagemDeTransporteDTO(long id, String material, long altura, long largura, long comprimento, int estado) {
         this.id = id;
         this.material = material;
         this.altura = altura;
         this.largura = largura;
         this.comprimento = comprimento;
+        this.estado = estado;
         this.encomendas = new ArrayList<>();
         this.sensores = new ArrayList<>();
     }
@@ -83,5 +84,13 @@ public class EmbalagemDeTransporteDTO {
 
     public void setComprimento(long comprimento) {
         this.comprimento = comprimento;
+    }
+
+    public int getEstado() {
+        return estado;
+    }
+
+    public void setEstado(int estado) {
+        this.estado = estado;
     }
 }

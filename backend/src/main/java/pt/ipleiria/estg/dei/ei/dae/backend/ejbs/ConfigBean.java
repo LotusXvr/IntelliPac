@@ -51,13 +51,16 @@ public class ConfigBean {
         System.out.println("ConfigBean: PostConstruct");
 
         try {
+            //region <FabricantesDeProdutos>
             FabricanteDeProdutos fabricanteApple = fabricanteDeProdutosBean.create("Apple", "123", "Apple Silicon",
                     "apple@mail.pt");
             FabricanteDeProdutos fabricanteSamsung = fabricanteDeProdutosBean.create("Samsung", "123",
                     "Samsung Enterprise", "samsung@mail.pt");
             FabricanteDeProdutos fabricanteNacional = fabricanteDeProdutosBean.create("Nacional", "123", "É Nacional",
                     "nacional@mail.pt");
+            //endregion
 
+            //region <OperadoresDeLogistica>
             OperadorDeLogistica operadorAmazon = operadorDeLogisticaBean.create("Amazon", "123", "Valte",
                     "amazon@mail.pt");
             OperadorDeLogistica operadorEbay = operadorDeLogisticaBean.create("Ebay", "123", "Joao", "ebay@mail.pt");
@@ -66,7 +69,9 @@ public class ConfigBean {
             OperadorDeLogistica operadorPullBear = operadorDeLogisticaBean.create("Pull and Bear", "123", "Joao",
                     "pullandbear@mail.pt");
             OperadorDeLogistica operadorHM = operadorDeLogisticaBean.create("H&M", "123", "Joao", "hm@mail.pt");
+            //endregion
 
+            //region <Clientes>
             clienteBean.create("Emanuel", "123", "Emanuel Nunes", "emanuel@nunes.pt");
             clienteBean.create("Marco", "123", "Marco Oliveira", "marco@mail.pt");
             clienteBean.create("Joao", "123", "Joao Silva", "joao@mail.pt");
@@ -75,8 +80,9 @@ public class ConfigBean {
             clienteBean.create("Maria", "123", "Maria Ferreira", "maria@mail.pt");
             clienteBean.create("Ana", "123", "Ana João", "ana@mail.pt");
             clienteBean.create("Marta", "123", "Marta Silva", "marta@mail.pt");
+            //endregion
 
-            // Produtos
+            //region <Produtos>
             ProdutoCatalogoDTO produtoCatalogoDTOiPhone = new ProdutoCatalogoDTO();
             produtoCatalogoDTOiPhone.setNome("iPhone 15");
             produtoCatalogoDTOiPhone.setFabricanteUsername(fabricanteApple.getUsername());
@@ -112,8 +118,9 @@ public class ConfigBean {
             produtoCatalogoDTOFogao.setFabricanteUsername(fabricanteSamsung.getUsername());
             produtoCatalogoDTOFogao.setPeso(10);
             ProdutoCatalogo produtoCatalogoFogao = produtoCatalogoBean.create(produtoCatalogoDTOFogao);
+            //endregion
 
-            // Encomendas
+            //region <Encomendas>
             EncomendaDTO encomendaDTO = new EncomendaDTO();
             encomendaDTO.setConsumidorFinal("Emanuel");
             encomendaDTO.setOperadorLogistica(operadorAmazon.getUsername());
@@ -127,22 +134,25 @@ public class ConfigBean {
             Encomenda encomenda2 = encomendaBean.create(encomendaDTO);
             produtoFisicoBean.create(produtoCatalogoIphone.getId(), encomenda2.getId());
             produtoFisicoBean.create(produtoCatalogoArroz.getId(), encomenda2.getId());
+            //endregion
 
-            // Embalagens
+            //region <Embalagens>
             embalagemBean.create("Plastico", 150, 10, 40);
             embalagemBean.create("Cartao", 150, 10, 40);
             embalagemBean.create("Vidro", 150, 10, 40);
             embalagemBean.create("Metal", 150, 10, 40);
+            //endregion
 
-            // Sensores
+            //region <EmbalagensDeProduto>
             Sensor sensor1 = sensorBean.create("Temperatura", "ºC");
             sensorBean.create("Humidade", "%");
             sensorBean.create("Luminosidade", "LUX");
             sensorBean.create("Pressao", "hPa");
             sensorBean.create("Localizacao", "GPS");
             sensorBean.create("Danificado", "Boolean");
+            //endregion
 
-            // associar sensores a embalagens
+            //region <Associar sensor à Embalagem>
             embalagemBean.associateSensorToEmbalagem(3L, 1L);
             embalagemBean.associateSensorToEmbalagem(4L, 2L);
             embalagemBean.associateSensorToEmbalagem(2L, 3L);
@@ -151,20 +161,24 @@ public class ConfigBean {
             embalagemBean.associateSensorToEmbalagem(1L, 6L);
             embalagemBean.associateSensorToEmbalagem(2L, 1L);
             embalagemBean.associateSensorToEmbalagem(3L, 1L);
+            //endregion
 
-            // EmbalagensDeProduto
+            //region <Embalagens De Produto>
             EmbalagemDeProduto embalagemDeProdutoPlastico = embalagemDeProdutoBean.create("Plastico", 40, 100, 150, 1);
             EmbalagemDeProduto embalagemDeProdutoMetal = embalagemDeProdutoBean.create("Metal", 20, 50, 50, 2);
             EmbalagemDeProduto embalagemDeProdutoCartao = embalagemDeProdutoBean.create("Cartão", 10, 10, 40, 3);
             EmbalagemDeProduto embalagemDeProdutoVidro = embalagemDeProdutoBean.create("Vidro", 20, 20, 20, 2);
+            //endregion
 
+            //region <Embalagem de Transporte>
             EmbalagemDeTransporte embalagemDeTransporteCartao = embalagemDeTransporteBean.create("Cartão", 150, 150,
-                    150);
-            EmbalagemDeTransporte embalagemDeTransporteVidro = embalagemDeTransporteBean.create("Vidro", 200, 200, 200);
+                    150, 0);
+            EmbalagemDeTransporte embalagemDeTransporteVidro = embalagemDeTransporteBean.create("Vidro", 200, 200, 200, 0);
             EmbalagemDeTransporte embalagemDeTransportePlastico = embalagemDeTransporteBean.create("Plastico", 50, 50,
-                    50);
+                    50, 0);
             EmbalagemDeTransporte embalagemDeTransporteEcoPlastico = embalagemDeTransporteBean.create("EcoPlastico",
-                    5000, 5000, 500);
+                    5000, 5000, 500, 0);
+            //endregion
 
             // embalagemDeProdutoBean.associateSensorToEmbalagem(embalagemDeProdutoPlastico.getId(),
             // sensor1.getId());

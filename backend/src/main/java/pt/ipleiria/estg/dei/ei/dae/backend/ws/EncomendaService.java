@@ -66,7 +66,8 @@ public class EncomendaService {
                 embalagemDeTransporte.getMaterial(),
                 embalagemDeTransporte.getAltura(),
                 embalagemDeTransporte.getLargura(),
-                embalagemDeTransporte.getComprimento()
+                embalagemDeTransporte.getComprimento(),
+                embalagemDeTransporte.getEstado()
         );
         embalagemDeTransporteDTO.setSensores(sensoresToDTOs(embalagemDeTransporte.getSensores()));
         return embalagemDeTransporteDTO;
