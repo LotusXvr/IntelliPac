@@ -22,7 +22,7 @@
                     <option :disabled="estado === 'PERDIDA'" value="perdida">Perdida</option>
                 </select>
                 <br>
-                <span v-if="isGoingToMail" class="info"> Irá ser enviado um mail para {{ encomenda.consumidorFinal }}</span>
+                <span v-if="isGoingToMail" class="info"> {{ formFeedback.info }} {{ encomenda.consumidorFinal }} </span>
                 <br>
                 <span v-if="!isEstadoSelected" class="error"> ERRO: {{ formFeedback.estado }}</span>
             </div>
@@ -62,6 +62,7 @@ const encomendaForm = reactive({
 
 const formFeedback = reactive({
     estado: "",
+    info: "",
 })
 
 const fetchEncomenda = async () => {
@@ -94,8 +95,15 @@ const isFormValid = computed(() => {
 
 const isGoingToMail = computed(() => {
     if (encomendaForm.estado == "danificada" || encomendaForm.estado == "perdida") {
+        formFeedback.info = "O estado selecionado irá enviar um mail para "
         return true
     }
+    if (encomendaForm.estado == "entregue") {
+        formFeedback.info = "Irá ser enviado um mail para o operador e para "
+        return true
+    }
+
+    formFeedback.info = ""
     return false
 })
 

@@ -252,12 +252,14 @@ public class EncomendaBean {
             emailBean.send(encomenda.getConsumidorFinal().getEmail(), "Encomenda " + estado.toLowerCase(), "A sua encomenda foi " + estado.toLowerCase() + ".\n" +
                     "Obrigado por escolher a nossa empresa.");
 
+            emailBean.send(encomenda.getOperadorLogistica().getEmail(), "Embalagens de transporte disponíveis", "As embalagens de transporte da encomenda " + encomenda.getId() + " estão disponíveis para serem reutilizadas");
+
             if (encomenda.getEmbalagensTransporte().isEmpty()) {
                 throw new Exception("Encomenda não tem embalagens de transporte associadas");
             }
 
-
             List<EmbalagemDeTransporte> embalagensTransporte = encomenda.getEmbalagensTransporte();
+
             for (EmbalagemDeTransporte embalagemDeTransporte : embalagensTransporte) {
                 if (embalagemDeTransporte.getSensores().isEmpty()) {
                     continue;
