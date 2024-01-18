@@ -1,10 +1,10 @@
 package pt.ipleiria.estg.dei.ei.dae.backend.ejbs;
 
+import jakarta.ejb.EJB;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import pt.ipleiria.estg.dei.ei.dae.backend.entities.Observacao;
-import pt.ipleiria.estg.dei.ei.dae.backend.entities.Sensor;
+import pt.ipleiria.estg.dei.ei.dae.backend.entities.*;
 import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyEntityNotFoundException;
 
 import java.text.DateFormat;
@@ -23,6 +23,17 @@ public class ObservacaoBean {
     @PersistenceContext
     private EntityManager entityManager;
 
+    @EJB
+    private TipoSensorBean tipoSensorBean;
+
+    @EJB
+    private EmbalagemDeTransporteBean embalagemDeTransporteBean;
+
+    @EJB
+    private EmbalagemDeProdutoBean embalagemDeProdutoBean;
+
+    @EJB
+    private EncomendaBean encomendaBean;
 
     public Observacao find(Long id) throws MyEntityNotFoundException {
         Observacao observacao = entityManager.find(Observacao.class, id);
@@ -36,10 +47,33 @@ public class ObservacaoBean {
         return entityManager.createNamedQuery("getAllObservacao", Observacao.class).getResultList();
     }
 
-    public void create(String valor, long sensorId) {
+    public void create(String valor, long sensorId) throws Exception {
 
         Sensor sensor = entityManager.find(Sensor.class, sensorId);
         if (sensor == null) throw new IllegalArgumentException("Sensor with id " + sensorId + " not found.");
+
+        // verificar se o sensor está associado a uma embalagem de transporte ou de produto
+        int numeroEmbalagens = sensor.getEmbalagens().size(); // a ultima embalagem associada ao sensor
+
+        if (numeroEmbalagens > 0)
+        {
+            Embalagem embalagemDoSensor = sensor.getEmbalagens().get(numeroEmbalagens - 1);
+            EmbalagemDeTransporte embalagemDeTransporte = embalagemDeTransporteBean.find( embalagemDoSensor.getId() );
+            EmbalagemDeProduto embalagemDeProduto = null;
+            if (embalagemDeTransporte == null){
+                embalagemDeProduto = embalagemDeProdutoBean.find(embalagemDoSensor.getId());
+            }
+
+            if (embalagemDeTransporte == null && embalagemDeProduto == null)
+                throw new IllegalArgumentException("Embalagem with id " + sensor.getEmbalagens().get(numeroEmbalagens-1).getId() + " not found.");
+
+            if (sensor.getTipo().equals("Danificado") && (valor.equals("1") || valor.equals("true")) ) {
+                System.out.println("333: nigga entraste");
+                Encomenda encomenda = embalagemDeTransporte.getEncomendas().get(embalagemDeTransporte.getEncomendas().size() - 1);
+
+                encomendaBean.patchEstado(encomenda.getId(), "Danificada");
+            }
+        }
 
         Observacao observacao = new Observacao(getTimestamp(), valor, sensor);
         sensor.addObservacao(observacao);

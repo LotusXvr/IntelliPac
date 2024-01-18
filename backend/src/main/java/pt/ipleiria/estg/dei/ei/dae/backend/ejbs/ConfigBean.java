@@ -152,12 +152,6 @@ public class ConfigBean {
             embalagemBean.associateSensorToEmbalagem(2L, 1L);
             embalagemBean.associateSensorToEmbalagem(3L, 1L);
 
-            // Observacoes
-            observacaoBean.create("20", 1L);
-            observacaoBean.create("90", 2L);
-            observacaoBean.create("400", 3L);
-            observacaoBean.create("1000", 4L);
-
             // EmbalagensDeProduto
             EmbalagemDeProduto embalagemDeProdutoPlastico = embalagemDeProdutoBean.create("Plastico", 40, 100, 150, 1);
             EmbalagemDeProduto embalagemDeProdutoMetal = embalagemDeProdutoBean.create("Metal", 20, 50, 50, 2);
@@ -233,6 +227,12 @@ public class ConfigBean {
             encomendaDTOCereais.setOperadorLogistica(operadorContinente.getUsername());
             Encomenda encomendaCereais = encomendaBean.create(encomendaDTOCereais);
             produtoFisicoBean.create(produtoCatalogoCereais.getId(), encomendaCereais.getId());
+
+            // Observacoes
+            observacaoBean.create("20", 1L);
+            /*observacaoBean.create("90", 2L);
+            observacaoBean.create("400", 3L);
+            observacaoBean.create("1000", 4L);*/
 
         } catch (Exception e) {
             logger.severe(e.getMessage());
