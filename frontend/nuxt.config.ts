@@ -10,4 +10,5 @@ export default defineNuxtConfig({
         // . . .
         "@pinia/nuxt",
     ],
+    plugins: [{ src: "~/plugins/chart.js", mode: "client" }],
 })

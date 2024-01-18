@@ -17,9 +17,6 @@
             <input id="unidade" v-model="sensorForm.unidade" />
             <span class="error">{{ formFeedback.unidade }}</span>
             <br />
-            <label for="valor">Valor</label>
-            <input id="valor" v-model="sensorForm.valor" />
-            <span class="error">{{ formFeedback.valor }}</span>
             <br />
             <button type="submit" :disabled="!isFormValid">Save</button>
         </form>
@@ -45,15 +42,13 @@ const messages = ref([])
 const sensorForm = reactive({
     idSensor: null,
     tipo: null,
-    unidade: null,
-    valor: null,
+    unidade: null
 })
 
 const formFeedback = reactive({
     idSensor: "",
     tipo: "",
-    unidade: "",
-    valor: "",
+    unidade: ""
 })
 
 const fetchSensor = async () => {
