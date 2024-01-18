@@ -13,15 +13,18 @@
                 <span>{{ embalagem.id }} - {{ embalagem.material }}</span>
             </li>
         </ul>
+
+        
         <div v-if="sensor.observacoes.length > 0">
-            <p>Observações</p>
+            <h4>Observações</h4>
+            <canvas ref="chartEl"></canvas>
             <ul>
                 <li v-for="observacao in sensor.observacoes" :key="sensor.id">
                     ({{ observacao.timestamp }}) {{ observacao.valor }} {{ sensor.unidade }}
                 </li>
             </ul>
 
-            <canvas ref="chartEl"></canvas>
+            
         </div>
         <div v-else>
             <h4>Nenhuma observação registada</h4>
