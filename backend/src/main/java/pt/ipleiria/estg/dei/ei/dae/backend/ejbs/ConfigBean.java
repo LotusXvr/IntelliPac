@@ -190,8 +190,6 @@ public class ConfigBean {
             embalagemDeTransporteBean.addEncomendaToEmbalagem(embalagemDeTransporteCartao.getId(), encomenda1.getId());
             embalagemDeTransporteBean.addEncomendaToEmbalagem(embalagemDeTransporteVidro.getId(), encomenda2.getId());
 
-            // encomendaBean.patchEstado(encomenda2.getId(), "ENTREGUE");
-
             List<Long> tipos = new ArrayList<>(Arrays.asList(1L, 2L, 3L));
 
             List<String> materiais = new ArrayList<>(Arrays.asList("Plastico", "Metal", "Vidro", "Cartão"));
