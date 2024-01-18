@@ -54,7 +54,9 @@ const fetchSensor = async () => {
         sensor.value = response.value
         observacoes.value = response.value.observacoes
         // nas observacoes eu quero separar os timestamps e os valores, 1 para cada array
-        observacoes.value.forEach((observacao) => {
+        const maximoObservacoes = 50
+        const lastObservacoes = observacoes.value.slice(-maximoObservacoes);
+        lastObservacoes.value.forEach((observacao) => {
             observacoes_valores.value.push(observacao.valor)
             observacoes_timestamps.value.push(observacao.timestamp)
         })

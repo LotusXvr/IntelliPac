@@ -134,14 +134,22 @@ const estadoToString = (estado) => {
     }
 }
 
+let intervalId = ref(null) // Use ref for reactive storage of intervalId
+
 const on = ref(false)
+
 const toggleGerarObservacoesAutomaticas = async () => {
     on.value = !on.value
 
-    while (on.value) {
-        intervalId = setInterval(async () => {
+    // Check if intervalId is already defined before attempting to clear it
+    if (intervalId.value) {
+        clearInterval(intervalId.value)
+    }
+
+    if (on.value) {
+        intervalId.value = setInterval(async () => {
             if (!on.value) {
-                clearInterval(intervalId)
+                clearInterval(intervalId.value)
                 return
             }
 
@@ -152,9 +160,15 @@ const toggleGerarObservacoesAutomaticas = async () => {
             })
         }, 3000)
     }
-
-    clearInterval(intervalId)
 }
+
+// Watch for changes in on.value and clear the interval when it becomes false
+watch(on, (newValue) => {
+    if (!newValue && intervalId.value) {
+        clearInterval(intervalId.value)
+    }
+})
+
 watch(sensores, (newSensores) => {
     sensoresDisponiveis.value = newSensores.filter((sensor) => sensor.estado == 0)
     sensoresEmUso.value = newSensores.filter((sensor) => sensor.estado == 1)
