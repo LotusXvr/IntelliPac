@@ -1,6 +1,7 @@
 package pt.ipleiria.estg.dei.ei.dae.backend.ejbs;
 
 
+import jakarta.ejb.EJB;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -16,6 +17,9 @@ import java.util.List;
 public class EmbalagemDeTransporteBean {
     @PersistenceContext
     private EntityManager entityManager;
+
+    @EJB
+    private EncomendaBean encomendaBean;
 
     public EmbalagemDeTransporte create(String material, long altura, long largura, long comprimento, int estado) {
         EmbalagemDeTransporte embalagemDeTransporte = new EmbalagemDeTransporte(material, altura, largura, comprimento, estado);
@@ -119,6 +123,21 @@ public class EmbalagemDeTransporteBean {
         entityManager.merge(embalagemDeTransporte);
     }
 
+    public void patchEstado(long id, int estado) throws Exception {
+        EmbalagemDeTransporte embalagemDeTransporte = find(id);
+        if (embalagemDeTransporte == null) {
+            throw new MyEntityNotFoundException("Embalagem de transporte com id " + id + " não existe");
+        }
+        embalagemDeTransporte.setEstado(estado);
+
+        if (estado == 1) {
+            for (Encomenda encomenda : embalagemDeTransporte.getEncomendas()) {
+                encomendaBean.patchEstado(encomenda.getId(), "TRANSPORTE");
+            }
+        }
+
+        entityManager.merge(embalagemDeTransporte);
+    }
 
     public void removeEncomendaToEmbalagem(long idEmbalagem, long idEncomenda) throws MyEntityNotFoundException {
         EmbalagemDeTransporte embalagemDeTransporte = find(idEmbalagem);

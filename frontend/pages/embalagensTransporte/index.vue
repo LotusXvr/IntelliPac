@@ -31,6 +31,10 @@
                     <nuxt-link :to="`/embalagensTransporte/${embalagemDeTransporte.id}` + '/Sensores'">
                         Sensores</nuxt-link>
                     |
+                    <button @click="patchEstado(embalagemDeTransporte.id)"
+                        v-if="hasEncomendas(embalagemDeTransporte) && embalagemDeTransporte.estado != 1">Enviar
+                        encomendas</button>
+                    |
                     <button @click="deleteEncomenda(embalagemDeTransporte.id)">Excluir</button>
                 </td>
             </tr>
@@ -67,6 +71,29 @@ const deleteEncomenda = async (id) => {
     }
 }
 
+const patchEstado = async (id) => {
+    try {
+        const response = await fetch(`${api}/embalagensDeTransporte/${id}/estado`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                estado: 1,
+            }),
+        })
+        if (response.ok) {
+            refresh()
+        }
+    } catch (error) {
+        console.error(error)
+    }
+}
+
+const hasEncomendas = (embalagemDeTransporte) => {
+    return embalagemDeTransporte.encomendas.length > 0
+}
+
 const estadoToString = (estado) => {
     switch (estado) {
         case 0:
@@ -77,4 +104,5 @@ const estadoToString = (estado) => {
             return "Estado Inválido"
     }
 }
+
 </script>

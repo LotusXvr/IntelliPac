@@ -150,4 +150,11 @@ public class EmbalagemDeTransporteService {
         embalagemDeTransporteBean.removeSensorFromEmbalagem(id, sensorId);
         return Response.ok().build();
     }
+
+    @PATCH
+    @Path("{id}/estado")
+    public Response changeEstado(@PathParam("id") long id, EmbalagemDeTransporteDTO embalagemDeTransporteDTO) throws Exception {
+        embalagemDeTransporteBean.patchEstado(id, embalagemDeTransporteDTO.getEstado());
+        return Response.ok().build();
+    }
 }

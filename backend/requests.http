@@ -387,6 +387,14 @@ Content-Type: application/json
   "comprimento": 10
 }
 
+### POST removerSensor
+POST http://localhost:8080/intellipac/api/embalagensDeTransporte/9/removerSensor
+Content-Type: application/json
+
+{
+  "sensorId": 1
+}
+
 ### Update Embalagem De Transporte
 PUT http://localhost:8080/intellipac/api/embalagensDeTransporte/9
 Content-Type: application/json
@@ -396,6 +404,14 @@ Content-Type: application/json
   "largura": 10,
   "altura": 10,
   "comprimento": 10
+}
+
+### PATCH Embalagem de Transporte ESTADO
+PATCH http://localhost:8080/intellipac/api/embalagensDeTransporte/9/estado
+Content-Type: application/json
+
+{
+  "estado": 1
 }
 
 ### Eliminar Embalagem de Transporte
