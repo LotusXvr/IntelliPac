@@ -249,6 +249,9 @@ public class EncomendaBean {
         }
         if (estado.equals("ENTREGUE")) {
 
+            emailBean.send(encomenda.getConsumidorFinal().getEmail(), "Encomenda " + estado.toLowerCase(), "A sua encomenda foi " + estado.toLowerCase() + ".\n" +
+                    "Obrigado por escolher a nossa empresa.");
+
             if (encomenda.getEmbalagensTransporte().isEmpty()) {
                 throw new Exception("Encomenda não tem embalagens de transporte associadas");
             }
