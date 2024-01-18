@@ -49,6 +49,8 @@
                     <nuxt-link :to="'/observacoes/' + sensor.id + '/create'"
                         >Adicionar Observação</nuxt-link
                     >
+                    |
+                    <button @click="gerarObservacao(sensor.id)">Gerar Observação</button>
                 </td>
             </tr>
             <h4>Sensores de Produto</h4>
@@ -70,6 +72,8 @@
                     <nuxt-link :to="'/observacoes/' + sensor.id + '/create'"
                         >Adicionar Observação</nuxt-link
                     >
+                    |
+                    <button @click="gerarObservacao(sensor.id)">Gerar Observação</button>
                 </td>
             </tr>
         </table>
@@ -100,6 +104,19 @@ const deleteProduto = async (id) => {
     try {
         const response = await fetch(`${api}/sensores/${id}`, {
             method: "DELETE",
+        })
+        if (response.ok) {
+            refresh()
+        }
+    } catch (error) {
+        console.error(error)
+    }
+}
+
+const gerarObservacao = async (id) => {
+    try {
+        const response = await fetch(`${api}/sensores/${id}/gerarObservacao`, {
+            method: "POST",
         })
         if (response.ok) {
             refresh()

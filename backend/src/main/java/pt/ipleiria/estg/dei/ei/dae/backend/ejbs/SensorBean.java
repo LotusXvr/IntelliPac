@@ -1,5 +1,6 @@
 package pt.ipleiria.estg.dei.ei.dae.backend.ejbs;
 
+import jakarta.ejb.EJB;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -10,6 +11,8 @@ import java.util.List;
 
 @Stateless
 public class SensorBean {
+    @EJB
+    ObservacaoBean observacaoBean;
     @PersistenceContext
     private EntityManager entityManager;
 
@@ -86,4 +89,31 @@ public class SensorBean {
     }
 
 
+    public void gerarObservacao(long sensorId) throws Exception {
+        Sensor sensor = entityManager.find(Sensor.class, sensorId);
+        if (sensor == null) {
+            throw new IllegalArgumentException("Sensor with id " + sensorId + " not found.");
+        }
+
+        // Nesta função teremos de ver primeiro qual é o tipo do sensor
+        // Para depois poder gerar um valor aleatório dentro dos limites
+        // Danificado > 0 ou 1
+        // Temperatura > -50 a 200
+        // Vento > 0 a 100
+        // Humidade > 0 a 100
+        // Aceleração > 0 a 100
+        // Luminosidade > 0 a 100
+        // Pressão > 0 a 100
+        // Localização > 0 a 100
+        String valor;
+        if (sensor.getTipo().equals("Danificado")) {
+            valor = String.valueOf(Math.round(Math.random()));
+        } else if (sensor.getTipo().equals("Temperatura")) {
+            valor = String.valueOf(Math.round(Math.random() * 250 - 50));
+        } else {
+            valor = String.valueOf(Math.round(Math.random() * 101));
+        }
+
+        observacaoBean.create(valor, sensorId);
+    }
 }
