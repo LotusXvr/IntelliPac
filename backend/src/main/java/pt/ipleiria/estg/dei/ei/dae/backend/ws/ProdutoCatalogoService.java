@@ -9,11 +9,12 @@ import jakarta.ws.rs.core.SecurityContext;
 import pt.ipleiria.estg.dei.ei.dae.backend.dtos.ProdutoCatalogoDTO;
 import pt.ipleiria.estg.dei.ei.dae.backend.dtos.ProdutoFisicoDTO;
 import pt.ipleiria.estg.dei.ei.dae.backend.dtos.TipoEmbalagemDTO;
+import pt.ipleiria.estg.dei.ei.dae.backend.ejbs.ClienteBean;
+import pt.ipleiria.estg.dei.ei.dae.backend.ejbs.FabricanteDeProdutosBean;
 import pt.ipleiria.estg.dei.ei.dae.backend.ejbs.ProdutoCatalogoBean;
-import pt.ipleiria.estg.dei.ei.dae.backend.entities.ProdutoCatalogo;
-import pt.ipleiria.estg.dei.ei.dae.backend.entities.ProdutoFisico;
-import pt.ipleiria.estg.dei.ei.dae.backend.entities.TipoEmbalagemProduto;
+import pt.ipleiria.estg.dei.ei.dae.backend.entities.*;
 import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyConstraintViolationException;
+import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyEntityExistsException;
 import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyEntityNotFoundException;
 
 import java.util.List;
@@ -27,6 +28,11 @@ public class ProdutoCatalogoService {
     @EJB
     private ProdutoCatalogoBean produtoCatalogoBean;
 
+    @EJB
+    private FabricanteDeProdutosBean fabricanteDeProdutosBean;
+
+    @EJB
+    private ClienteBean clienteBean;
     @Context
     private SecurityContext securityContext;
 
@@ -153,8 +159,17 @@ public class ProdutoCatalogoService {
 
     @GET
     @Path("fabricante/{username}")
-    public List<ProdutoCatalogoDTO> getProdutosFromFabricante(@PathParam("username") String username) {
-        return toDTOs(produtoCatalogoBean.getProdutosCatalogoFromFabricante(username));
+    public List<ProdutoCatalogoDTO> getProdutosFromFabricante(@PathParam("username") String username) throws MyEntityExistsException {
+        Cliente cliente = clienteBean.find(username);
+        if(cliente != null){
+            return toDTOs(produtoCatalogoBean.getAllProductsCatalogo());
+        }
+        FabricanteDeProdutos fabricanteDeProdutos = fabricanteDeProdutosBean.find(username);
+        if(fabricanteDeProdutos != null){
+            return toDTOs(produtoCatalogoBean.getProdutosCatalogoFromFabricante(username));
+        }
+
+        throw new MyEntityExistsException("Operador de logistica nao pode ver os produtos");
     }
 
 }

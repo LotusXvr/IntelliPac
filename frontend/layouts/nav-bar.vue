@@ -4,7 +4,7 @@
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="navbar-nav custom-center">
                     <nuxt-link to="/" class="nav-link">Home</nuxt-link>
-                    <nuxt-link to="/produtosCatalogo"  v-if="user !== null && user.role == 'FabricanteDeProdutos'" class="nav-link">Produtos</nuxt-link>
+                    <nuxt-link to="/produtosCatalogo"  v-if="user !== null && user.role != 'OperadorDeLogistica'" class="nav-link">Produtos</nuxt-link>
                     <nuxt-link to="/encomendas" class="nav-link"
                         v-if="user !== null && user.role != 'FabricanteDeProdutos'">Encomendas</nuxt-link>
                     <nuxt-link to="/fabricantes" class="nav-link">Fabricantes</nuxt-link>
