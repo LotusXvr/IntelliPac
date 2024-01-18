@@ -14,7 +14,7 @@ import java.util.List;
         ),
         @NamedQuery(
                 name = "getAllProductsFisicoFromFabricante",
-                query = "SELECT p FROM ProdutoFisico p WHERE p.fabricante.username = :username AND (p.encomenda.estado = 'TRANSPORTE' OR p.encomenda.estado = 'PROCESSAMENTO') ORDER BY p.nomeProduto"
+                query = "SELECT p FROM ProdutoFisico p WHERE p.fabricante.username = :username AND (p.encomenda.estado = 'TRANSPORTE' OR p.encomenda.estado = 'PROCESSAMENTO' OR p.encomenda.estado = 'ENTREGUE') ORDER BY p.nomeProduto"
         )
 
 })

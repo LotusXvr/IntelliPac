@@ -4,7 +4,7 @@
     <div v-else>
         <h2>Produtos</h2>
         <div v-if="produtos.length === 0">
-            <p>Não existem produtos em transporte.</p>
+            <p>Não existem produtos fisicos em transporte ou entregues.</p>
         </div>
         <table v-else>
             <tr>
