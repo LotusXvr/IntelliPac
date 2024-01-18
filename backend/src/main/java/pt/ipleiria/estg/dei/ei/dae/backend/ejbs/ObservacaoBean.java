@@ -7,15 +7,9 @@ import jakarta.persistence.PersistenceContext;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.*;
 import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyEntityNotFoundException;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.List;
-import java.util.Locale;
 
 @Stateless
 public class ObservacaoBean {
@@ -35,6 +29,9 @@ public class ObservacaoBean {
     @EJB
     private EncomendaBean encomendaBean;
 
+    @EJB
+    private EmailBean emailBean;
+
     public Observacao find(Long id) throws MyEntityNotFoundException {
         Observacao observacao = entityManager.find(Observacao.class, id);
         if (observacao == null) {
@@ -52,26 +49,45 @@ public class ObservacaoBean {
         Sensor sensor = entityManager.find(Sensor.class, sensorId);
         if (sensor == null) throw new IllegalArgumentException("Sensor with id " + sensorId + " not found.");
 
-        // verificar se o sensor está associado a uma embalagem de transporte ou de produto
-        int numeroEmbalagens = sensor.getEmbalagens().size(); // a ultima embalagem associada ao sensor
+        if (sensor.getTipo().equals("Danificado") && (valor.equals("1") || valor.equals("true"))) {
 
-        if (numeroEmbalagens > 0)
-        {
+            // verificar se o sensor está associado a uma embalagem de transporte ou de produto
+            int numeroEmbalagens = sensor.getEmbalagens().size(); // a ultima embalagem associada ao sensor
+
+            if (numeroEmbalagens == 0) {
+                throw new IllegalArgumentException("Sensor with id " + sensorId + " not found.");
+            }
+
             Embalagem embalagemDoSensor = sensor.getEmbalagens().get(numeroEmbalagens - 1);
-            EmbalagemDeTransporte embalagemDeTransporte = embalagemDeTransporteBean.find( embalagemDoSensor.getId() );
+            EmbalagemDeTransporte embalagemDeTransporte = embalagemDeTransporteBean.find(embalagemDoSensor.getId());
             EmbalagemDeProduto embalagemDeProduto = null;
-            if (embalagemDeTransporte == null){
+
+            if (embalagemDeTransporte == null) {
                 embalagemDeProduto = embalagemDeProdutoBean.find(embalagemDoSensor.getId());
             }
 
             if (embalagemDeTransporte == null && embalagemDeProduto == null)
-                throw new IllegalArgumentException("Embalagem with id " + sensor.getEmbalagens().get(numeroEmbalagens-1).getId() + " not found.");
+                throw new IllegalArgumentException("Embalagem with id " + sensor.getEmbalagens().get(numeroEmbalagens - 1).getId() + " not found.");
 
-            if (sensor.getTipo().equals("Danificado") && (valor.equals("1") || valor.equals("true")) ) {
-                Encomenda encomenda = embalagemDeTransporte.getEncomendas().get(embalagemDeTransporte.getEncomendas().size() - 1);
+            if (embalagemDeProduto != null) {
+                EmbalagemDeProduto embalagemProdutoSensor = embalagemDeProdutoBean.find(sensor.getEmbalagens().get(numeroEmbalagens - 1).getId());
+
+                ProdutoFisico produto = embalagemProdutoSensor.getProdutos().get(embalagemProdutoSensor.getProdutos().size() - 1);
+                String emailOperadorLogistica = produto.getEncomenda().getOperadorLogistica().getEmail();
+
+                // Em caso de embalagem de produto, envia-se email ao operador de logistica a notificar
+                emailBean.send(emailOperadorLogistica, "Encomenda " + produto.getEncomenda().getId() + " possui um produto danificado", "A encomenda " + produto.getEncomenda().getId() + " possui o produto " + produto.getNomeProduto() + " danificado");
+                return;
+            }
+
+            for (Encomenda encomenda : embalagemDeTransporte.getEncomendas()) {
+                // Em caso de embalagem de transporte, altera-se o estado da encomenda para "Danificada"
+                // e notifica-se ambos o consumidor e o operador de logistica
                 encomendaBean.patchEstado(encomenda.getId(), "Danificada");
             }
+
         }
+
 
         Observacao observacao = new Observacao(getTimestamp(), valor, sensor);
         sensor.addObservacao(observacao);
