@@ -3,6 +3,10 @@
     <div v-if="error">Error: {{ error.message }}</div>
     <div v-else>
         <nuxt-link to="sensores/create">Criar novo Sensor</nuxt-link>
+        <button style="margin-left: 50px" @click="toggleGerarObservacoesAutomaticas">
+            Toggle Observacoes Automaticas
+        </button>
+        {{ on }}
         <h2>Sensores</h2>
         <table>
             <tr>
@@ -130,9 +134,30 @@ const estadoToString = (estado) => {
     }
 }
 
+const on = ref(false)
+const toggleGerarObservacoesAutomaticas = async () => {
+    on.value = !on.value
+
+    while (on.value) {
+        intervalId = setInterval(async () => {
+            if (!on.value) {
+                clearInterval(intervalId)
+                return
+            }
+
+            sensores.value.forEach(async (sensor) => {
+                if (sensor.estado == 1 || sensor.estado == 2) {
+                    await gerarObservacao(sensor.id)
+                }
+            })
+        }, 3000)
+    }
+
+    clearInterval(intervalId)
+}
 watch(sensores, (newSensores) => {
-  sensoresDisponiveis.value = newSensores.filter((sensor) => sensor.estado == 0);
-  sensoresEmUso.value = newSensores.filter((sensor) => sensor.estado == 1);
-  sensoresProduto.value = newSensores.filter((sensor) => sensor.estado == 2);
-});
+    sensoresDisponiveis.value = newSensores.filter((sensor) => sensor.estado == 0)
+    sensoresEmUso.value = newSensores.filter((sensor) => sensor.estado == 1)
+    sensoresProduto.value = newSensores.filter((sensor) => sensor.estado == 2)
+})
 </script>
