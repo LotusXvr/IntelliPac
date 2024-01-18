@@ -19,7 +19,7 @@
                 <td>{{ sensor.idSensor }}</td>
                 <td>{{ sensor.tipo }}</td>
                 <td>{{ sensor.unidade }}</td>
-                <td>{{ sensor.estado }}</td>
+                <td>{{ estadoToString(sensor.estado) }}</td>
                 <td>{{ sensor.embalagens.length }}</td>
                 <td>{{ sensor.observacoes.length }}</td>
                 <td>
@@ -35,7 +35,7 @@
                 <td>{{ sensor.idSensor }}</td>
                 <td>{{ sensor.tipo }}</td>
                 <td>{{ sensor.unidade }}</td>
-                <td>{{ sensor.estado }}</td>
+                <td>{{ estadoToString(sensor.estado) }}</td>
 
                 <td>{{ sensor.embalagens.length }}</td>
                 <td>{{ sensor.observacoes.length }}</td>
@@ -58,7 +58,7 @@
                 <td>{{ sensor.idSensor }}</td>
                 <td>{{ sensor.tipo }}</td>
                 <td>{{ sensor.unidade }}</td>
-                <td>{{ sensor.estado }}</td>
+                <td>{{ estadoToString(sensor.estado) }}</td>
 
                 <td>{{ sensor.embalagens.length }}</td>
                 <td>{{ sensor.observacoes.length }}</td>
@@ -116,6 +116,17 @@ const gerarObservacao = async (id) => {
         }
     } catch (error) {
         console.error(error)
+    }
+}
+
+const estadoToString = (estado) => {
+    switch (estado) {
+        case 0:
+            return "Disponivel"
+        case 1:
+            return "Em Uso"
+        case 2:
+            return "Em Produto"
     }
 }
 </script>
