@@ -21,7 +21,7 @@ Content-Type: application/json
 }
 
 ###
-PUT http://localhost:8080/intellipac/api/produtosCatalogo/12
+PUT http://localhost:8080/intellipac/api/produtosCatalogo/2
 Content-Type: application/json
 
 {
@@ -39,11 +39,11 @@ Content-Type: application/json
 }
 
 ###
-DELETE http://localhost:8080/intellipac/api/produtosCatalogo/12
+DELETE http://localhost:8080/intellipac/api/produtosCatalogo/2
 Accept: application/json
 
 ##### Detalhes de um produtoCatalogo
-GET http://localhost:8080/intellipac/api/produtosCatalogo/12
+GET http://localhost:8080/intellipac/api/produtosCatalogo/2
 Accept: application/json
 
 ##### Produtos Fisicos
@@ -110,7 +110,7 @@ DELETE http://localhost:8080/intellipac/api/fabricantes/Fabrica2
 Accept: application/json
 
 ###
-GET http://localhost:8080/intellipac/api/fabricantes/Fabrica1
+GET http://localhost:8080/intellipac/api/fabricantes/Apple
 Accept: application/json
 
 ### REQUEST JWT TOKEN
