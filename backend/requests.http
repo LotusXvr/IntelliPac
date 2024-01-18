@@ -352,7 +352,7 @@ DELETE http://localhost:8080/intellipac/api/embalagensDeProduto/8
 Content-Type: application/json
 
 ### Detalhes de uma embalagem de Produto
-GET http://localhost:8080/intellipac/api/embalagensDeProduto/15
+GET http://localhost:8080/intellipac/api/embalagensDeProduto/13
 Accept: application/json
 
 ### ------AUTENTICAÇAO DE UTILIZADOR------

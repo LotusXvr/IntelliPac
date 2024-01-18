@@ -74,7 +74,6 @@ public class EmbalagemDeProdutoService {
 
     private ProdutoFisicoDTO toDTO(ProdutoFisico produtoFisico) {
 
-        // TODO: verificar se este ficou sem problema
         return new ProdutoFisicoDTO(
                 produtoFisico.getId(),
                 produtoFisico.getNomeProduto(),

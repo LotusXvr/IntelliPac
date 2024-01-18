@@ -11,6 +11,7 @@ import pt.ipleiria.estg.dei.ei.dae.backend.entities.*;
 import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyConstraintViolationException;
 import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyEntityNotFoundException;
 
+import java.util.Collections;
 import java.util.List;
 
 @Stateless
@@ -141,7 +142,32 @@ public class ProdutoFisicoBean {
         ProdutoFisico produtoFisico = find(id);
         if (produtoFisico != null) {
             Hibernate.initialize(produtoFisico.getEmbalagensDeProduto());
+            for (EmbalagemDeProduto embalagemDeProduto: produtoFisico.getEmbalagensDeProduto()
+                 ) {
+                Hibernate.initialize(embalagemDeProduto.getSensores());
+                for (Sensor sensor:embalagemDeProduto.getSensores()
+                     ) {
+                    Collections.reverse(sensor.getObservacoes());
+                    Hibernate.initialize(sensor.getObservacoes());
+                }
+            }
         }
+
         return produtoFisico;
+    }
+
+    public List<ProdutoFisico> getAllProductsFromFabricante(String username) throws MyEntityNotFoundException {
+        FabricanteDeProdutos fabricanteDeProdutos = fabricanteDeProdutosBean.find(username);
+        if(fabricanteDeProdutos == null){
+            throw new MyEntityNotFoundException("Nao existe um fabricante com o username" + username);
+        }
+        List<ProdutoFisico> produtoFisicos = entityManager.createNamedQuery("getAllProductsFisicoFromFabricante", ProdutoFisico.class).setParameter("username", username).getResultList();
+
+        for (ProdutoFisico produtoFisico : produtoFisicos) {
+            Hibernate.initialize(produtoFisico.getEmbalagensDeProduto());
+        }
+
+        return produtoFisicos;
+
     }
 }

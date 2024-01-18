@@ -5,11 +5,11 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import pt.ipleiria.estg.dei.ei.dae.backend.dtos.EmbalagemDeProdutoDTO;
+import pt.ipleiria.estg.dei.ei.dae.backend.dtos.ObservacaoDTO;
 import pt.ipleiria.estg.dei.ei.dae.backend.dtos.ProdutoFisicoDTO;
+import pt.ipleiria.estg.dei.ei.dae.backend.dtos.SensorDTO;
 import pt.ipleiria.estg.dei.ei.dae.backend.ejbs.ProdutoFisicoBean;
-import pt.ipleiria.estg.dei.ei.dae.backend.entities.Embalagem;
-import pt.ipleiria.estg.dei.ei.dae.backend.entities.EmbalagemDeProduto;
-import pt.ipleiria.estg.dei.ei.dae.backend.entities.ProdutoFisico;
+import pt.ipleiria.estg.dei.ei.dae.backend.entities.*;
 import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyConstraintViolationException;
 import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyEntityExistsException;
 import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyEntityNotFoundException;
@@ -36,6 +36,8 @@ public class ProdutoFisicoService {
         return produtoFisicoDTO;
     }
 
+
+
     private ProdutoFisicoDTO toDTONoEmbalagens(ProdutoFisico produtoFisico) {
         return new ProdutoFisicoDTO(
                 produtoFisico.getId(),
@@ -48,7 +50,7 @@ public class ProdutoFisicoService {
     }
 
     private EmbalagemDeProdutoDTO toDTO(EmbalagemDeProduto embalagemDeProduto) {
-        return new EmbalagemDeProdutoDTO(
+        EmbalagemDeProdutoDTO embalagemDeProdutoDTO = new EmbalagemDeProdutoDTO(
                 embalagemDeProduto.getId(),
                 embalagemDeProduto.getMaterial(),
                 embalagemDeProduto.getTipoEmbalagem(),
@@ -56,6 +58,8 @@ public class ProdutoFisicoService {
                 embalagemDeProduto.getLargura(),
                 embalagemDeProduto.getComprimento()
         );
+        embalagemDeProdutoDTO.setSensores(sensoresToDTOs(embalagemDeProduto.getSensores()));
+        return embalagemDeProdutoDTO;
     }
 
     private List<EmbalagemDeProdutoDTO> embalagemToDTOs(List<EmbalagemDeProduto> embalagemDeProdutos) {
@@ -70,10 +74,47 @@ public class ProdutoFisicoService {
         return produtosFisicos.stream().map(this::toDTONoEmbalagens).collect(java.util.stream.Collectors.toList());
     }
 
+    private List<SensorDTO> sensoresToDTOs(List<Sensor> sensores) {
+        return sensores.stream().map(this::toDTO).collect(java.util.stream.Collectors.toList());
+    }
+
+    private SensorDTO toDTO(Sensor sensor) {
+        SensorDTO sensorDTO = new SensorDTO(
+                sensor.getId(),
+                sensor.getIdSensor(),
+                sensor.getTipo(),
+                sensor.getUnidade(),
+                sensor.getEstado()
+        );
+        sensorDTO.setObservacoes(observacoesToDTO(sensor.getObservacoes()));
+        return sensorDTO;
+    }
+    private List<ObservacaoDTO> observacoesToDTO(List<Observacao> observacoes) {
+        return observacoes.stream().map(this::toDTO).collect(java.util.stream.Collectors.toList());
+    }
+
+    private ObservacaoDTO toDTO(Observacao observacao) {
+        return new ObservacaoDTO(
+                observacao.getId(),
+                observacao.getTimestamp(),
+                observacao.getValor(),
+                observacao.getSensor().getIdSensor()
+        );
+    }
+
+
+
     @GET
     @Path("/")
     public List<ProdutoFisicoDTO> getAllProdutos() {
         return toDTOsNoEmbalagens(produtoFisicoBean.getAllProductsFisico());
+    }
+
+    @GET
+    @Path("fabricante/{username}")
+    public List<ProdutoFisicoDTO> getAllProdutosFromFabricante(@PathParam("username") String username) throws MyEntityNotFoundException {
+        List<ProdutoFisico> produtoFisicos = produtoFisicoBean.getAllProductsFromFabricante(username);
+        return toDTOs(produtoFisicos);
     }
 
     @GET
