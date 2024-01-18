@@ -148,7 +148,13 @@ public class EmbalagemDeTransporteBean {
         if (encomenda == null) {
             throw new MyEntityNotFoundException("Encomenda with id " + idEncomenda + " not found");
         }
+
         encomenda.removeEmbalagemTransporte(embalagemDeTransporte);
+
+        if (embalagemDeTransporte.getEncomendas().size() - 1 <= 0) {
+            embalagemDeTransporte.setEstado(0);
+        }
+
         entityManager.merge(embalagemDeTransporte);
     }
 
