@@ -11,6 +11,7 @@
                 <th>Altura(cm)</th>
                 <th>Largura(cm)</th>
                 <th>Comprimento(cm)</th>
+                <th>Estado</th>
                 <th>Sensores</th>
                 <th>actions</th>
             </tr>
@@ -20,19 +21,17 @@
                 <td>{{ embalagemDeTransporte.altura }}</td>
                 <td>{{ embalagemDeTransporte.largura }}</td>
                 <td>{{ embalagemDeTransporte.comprimento }}</td>
+                <td>{{ estadoToString(embalagemDeTransporte.estado) }}</td>
                 <td> {{ embalagemDeTransporte.sensores.length }}</td>
                 <td>
                     <nuxt-link :to="`/embalagensTransporte/${embalagemDeTransporte.id}`">Detalhes</nuxt-link>
                     |
-                    <nuxt-link
-                        :to="'/embalagensTransporte/edit/' + embalagemDeTransporte.id"
-                        >Editar</nuxt-link>
+                    <nuxt-link :to="'/embalagensTransporte/edit/' + embalagemDeTransporte.id">Editar</nuxt-link>
                     |
                     <nuxt-link :to="`/embalagensTransporte/${embalagemDeTransporte.id}` + '/Sensores'">
                         Sensores</nuxt-link>
                     |
                     <button @click="deleteEncomenda(embalagemDeTransporte.id)">Excluir</button>
-                    |
                 </td>
             </tr>
         </table>
@@ -65,6 +64,17 @@ const deleteEncomenda = async (id) => {
         }
     } catch (error) {
         console.error(error)
+    }
+}
+
+const estadoToString = (estado) => {
+    switch (estado) {
+        case 0:
+            return "Disponivel"
+        case 1:
+            return "Em Transporte"
+        default:
+            return "Estado Inválido"
     }
 }
 </script>

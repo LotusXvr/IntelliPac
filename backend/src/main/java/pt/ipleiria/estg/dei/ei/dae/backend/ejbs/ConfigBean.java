@@ -143,9 +143,9 @@ public class ConfigBean {
             embalagemBean.create("Metal", 150, 10, 40);
             //endregion
 
-            //region <EmbalagensDeProduto>
+            //region <Sensor>
             Sensor sensor1 = sensorBean.create("Temperatura", "ºC");
-            sensorBean.create("Humidade", "%");
+            Sensor sensor2 = sensorBean.create("Humidade", "%");
             sensorBean.create("Luminosidade", "LUX");
             sensorBean.create("Pressao", "hPa");
             sensorBean.create("Localizacao", "GPS");
@@ -186,11 +186,9 @@ public class ConfigBean {
             // produtoFisico1.getId());
             embalagemDeTransporteBean.associateSensorToEmbalagem(embalagemDeTransporteCartao.getId(), sensor1.getId());
             embalagemDeTransporteBean.removeSensorFromEmbalagem(embalagemDeTransporteCartao.getId(), sensor1.getId());
-            embalagemDeTransporteBean.associateSensorToEmbalagem(embalagemDeTransporteCartao.getId(), sensor1.getId());
+            embalagemDeTransporteBean.associateSensorToEmbalagem(embalagemDeTransporteCartao.getId(), sensor2.getId());
             embalagemDeTransporteBean.addEncomendaToEmbalagem(embalagemDeTransporteCartao.getId(), encomenda1.getId());
             embalagemDeTransporteBean.addEncomendaToEmbalagem(embalagemDeTransporteVidro.getId(), encomenda2.getId());
-
-            // encomendaBean.patchEstado(encomenda2.getId(), "ENTREGUE");
 
             List<Long> tipos = new ArrayList<>(Arrays.asList(1L, 2L, 3L));
 
@@ -244,9 +242,7 @@ public class ConfigBean {
 
             // Observacoes
             observacaoBean.create("20", 1L);
-            /*observacaoBean.create("90", 2L);
-            observacaoBean.create("400", 3L);
-            observacaoBean.create("1000", 4L);*/
+            observacaoBean.create("90", 2L);
 
         } catch (Exception e) {
             logger.severe(e.getMessage());
