@@ -85,6 +85,7 @@ public class ProdutoFisicoBean {
 
                 for (TipoSensor tipoSensor : embalagemACriar.getTipoSensor()) {
                     Sensor sensor = sensorBean.create(tipoSensor.getTipo(), tipoSensor.getUnidade());
+                    sensor.setEstado(2);
                     entityManager.persist(sensor);
                     embalagem.addSensor(sensor);
                 }
