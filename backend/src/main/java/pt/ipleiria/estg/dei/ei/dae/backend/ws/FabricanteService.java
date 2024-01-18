@@ -79,18 +79,20 @@ public class FabricanteService {
 
     @POST
     @Path("/")
-    public void createNewFabricante(FabricanteProdutoDTO fabricanteProdutoDTO) throws MyEntityExistsException {
+    public Response createNewFabricante(FabricanteProdutoDTO fabricanteProdutoDTO) throws MyEntityExistsException {
         if (fabricanteDeProdutosBean.exists(fabricanteProdutoDTO.getNome())) {
             throw new MyEntityExistsException("FabricanteDeProdutos with nomeFabricante '" + fabricanteProdutoDTO.getNome() + "' already exists");
         }
 
-        fabricanteDeProdutosBean.create(
+        FabricanteDeProdutos fabricante = fabricanteDeProdutosBean.create(
                 // String username, String password, String nome, String email
                 fabricanteProdutoDTO.getUsername(),
                 fabricanteProdutoDTO.getPassword(),
                 fabricanteProdutoDTO.getNome(),
                 fabricanteProdutoDTO.getEmail()
         );
+
+        return Response.status(Response.Status.CREATED).entity(toDTO(fabricante)).build();
     }
 
     @DELETE
@@ -101,11 +103,18 @@ public class FabricanteService {
 
     @PUT
     @Path("{username}")
-    public void updateFabricante(@PathParam("username") String username, FabricanteProdutoDTO fabricanteProdutoDTO) {
+    public Response updateFabricante(@PathParam("username") String username, FabricanteProdutoDTO fabricanteProdutoDTO) {
+
         FabricanteDeProdutos fabricanteDeProdutos = fabricanteDeProdutosBean.find(username);
-        fabricanteDeProdutos.setName(fabricanteProdutoDTO.getNome());
-        fabricanteDeProdutosBean.update(fabricanteDeProdutos);
+        if (fabricanteDeProdutos == null) {
+            throw new IllegalArgumentException("FabricanteDeProdutos with username '" + username + "' not found");
+        }
+
+        fabricanteDeProdutosBean.update(fabricanteDeProdutos, fabricanteProdutoDTO);
+
+        return Response.status(Response.Status.OK).entity("Fabricante updated successfully.").build();
     }
+
 
     @GET
     @Path("{username}")

@@ -6,9 +6,13 @@
       <label for="nome">Nome:</label>
       <input v-model.trim="fabricanteForm.nome" type="text" />
       <span v-if="fabricanteForm.nome !== null && !isNameValid" class="error">
-        ERRO: {{ formFeedback.nome }}</span
-      >
+        ERRO: {{ formFeedback.nome }}</span>
       <br />
+
+      <label for="email">Email: </label>
+      <input id="email" type="email" v-model="fabricanteForm.email" />
+      <span class="error" v-if="!isEmailValid">{{ formFeedback.email }}</span>
+      <br>
       <button type="submit" :disabled="!isFormValid">Save</button>
     </form>
     <nuxt-link to="/fabricantes">Voltar aos fabricantes</nuxt-link>
@@ -32,10 +36,12 @@ const messages = ref([]);
 
 const fabricanteForm = reactive({
   nome: null,
+  email: null,
 });
 
 const formFeedback = reactive({
   nome: "",
+  email: "",
 });
 
 const fetchFabricante = async () => {
@@ -46,6 +52,7 @@ const fetchFabricante = async () => {
     }
     fabricante.value = await response.json();
     fabricanteForm.nome = fabricante.value.nome;
+    fabricanteForm.email = fabricante.value.email;
   } catch (error) {
     messages.value.push(error.message);
   }
@@ -64,6 +71,22 @@ const isNameValid = computed(() => {
     return false;
   }
   formFeedback.nome = "";
+  return true;
+});
+
+const isEmailValid = computed(() => {
+  if (fabricanteForm.email === null) {
+    return false;
+  }
+  if (fabricanteForm.email.length < 3) {
+    formFeedback.email = "O email deve ter pelo menos 3 caracteres";
+    return false;
+  }
+  if (fabricanteForm.email.length > 20) {
+    formFeedback.email = "O email deve ter no máximo 20 caracteres";
+    return false;
+  }
+  formFeedback.email = "";
   return true;
 });
 

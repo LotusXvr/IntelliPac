@@ -7,6 +7,7 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
 import jakarta.validation.ConstraintViolationException;
 import org.hibernate.Hibernate;
+import pt.ipleiria.estg.dei.ei.dae.backend.dtos.FabricanteProdutoDTO;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.FabricanteDeProdutos;
 import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyEntityExistsException;
 import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyEntityNotFoundException;
@@ -58,7 +59,9 @@ public class FabricanteDeProdutosBean {
         return fabricanteDeProdutos;
     }
 
-    public void update(FabricanteDeProdutos fabricanteDeProdutos) {
+    public void update(FabricanteDeProdutos fabricanteDeProdutos ,FabricanteProdutoDTO fabricanteProdutoDTO) {
+        fabricanteDeProdutos.setName(fabricanteProdutoDTO.getNome());
+        fabricanteDeProdutos.setEmail(fabricanteProdutoDTO.getEmail());
         entityManager.merge(fabricanteDeProdutos);
     }
 

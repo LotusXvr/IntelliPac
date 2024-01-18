@@ -1,6 +1,8 @@
 <template>
   <div v-if="fabricante">
     <h2>Detalhes de {{ fabricante.nome }}</h2>
+    <p>Username: {{ fabricante.username }}</p>
+    <p>Email: {{ fabricante.email }}</p>
     <p>Produtos:</p>
     <ul>
       <li v-for="produto in fabricante.produtos" :key="produto.id">
