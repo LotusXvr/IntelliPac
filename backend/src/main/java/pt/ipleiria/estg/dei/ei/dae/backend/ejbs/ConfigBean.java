@@ -203,7 +203,14 @@ public class ConfigBean {
 
             TipoEmbalagemProduto tipoEmbalagem = tipoEmbalagemProdutoBean.create(2, "NeoPlastico", 50, 100, 100);
 
-            TipoSensor testeSensor = tipoSensorBean.create("Vento", "ºC");
+            TipoSensor testeSensor = tipoSensorBean.create("Vento", "KM/H");
+
+            TipoSensor tipoSensorCereaisTemperatura = tipoSensorBean.create("Temperatura", "ºC");
+            TipoSensor tipoSensorCereaisHumidade = tipoSensorBean.create("Humidade", "%");
+            TipoSensor tipoSensorAceleração = tipoSensorBean.create("Aceleração", "G");
+            TipoSensor tipoSensorLuminosidade = tipoSensorBean.create("Luminosidade", "LUX");
+            TipoSensor tipoSensorPressao = tipoSensorBean.create("Pressão", "hPa");
+            TipoSensor tipoSensorGPS = tipoSensorBean.create("Localização", "GPS");
 
             tipoEmbalagemProdutoBean.addTipoSensor(1, testeSensor.getId());
 
@@ -213,6 +220,19 @@ public class ConfigBean {
             produtoCatalogoBean.addTipoEmbalagem(5, produtoCatalogoArroz.getId());
 
             produtoFisicoBean.create(produtoCatalogoIphone.getId(), encomenda1.getId());
+
+            TipoEmbalagemProduto tipoEmbalagemCaixaCereais = tipoEmbalagemProdutoBean.create(1, "Caixa de Cereais", 25, 25, 25);
+            tipoEmbalagemProdutoBean.addTipoSensor(tipoEmbalagemCaixaCereais.getId(),tipoSensorCereaisHumidade.getId());
+            tipoEmbalagemProdutoBean.addTipoSensor(tipoEmbalagemCaixaCereais.getId(),tipoSensorCereaisTemperatura.getId());
+            tipoEmbalagemProdutoBean.addTipoSensor(tipoEmbalagem.getId(), testeSensor.getId());
+            produtoCatalogoBean.addTipoEmbalagem(tipoEmbalagemCaixaCereais.getId(),produtoCatalogoCereais.getId());
+            produtoCatalogoBean.addTipoEmbalagem(tipoEmbalagem.getId(),produtoCatalogoCereais.getId());
+
+            EncomendaDTO encomendaDTOCereais = new EncomendaDTO();
+            encomendaDTOCereais.setConsumidorFinal("Emanuel");
+            encomendaDTOCereais.setOperadorLogistica(operadorContinente.getUsername());
+            Encomenda encomendaCereais = encomendaBean.create(encomendaDTOCereais);
+            produtoFisicoBean.create(produtoCatalogoCereais.getId(), encomendaCereais.getId());
 
         } catch (Exception e) {
             logger.severe(e.getMessage());

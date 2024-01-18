@@ -1,17 +1,12 @@
 <template>
     <form @submit.prevent="create">
-        <label for="idSensor">id Sensor</label>
-        <input id="idSensor" v-model="sensorForm.idSensor" />
-        <span class="error">{{ formFeedback.idSensor }}</span>
-        <br />
         <label for="tipo">Tipo</label>
-        <select id="tipo" v-model="sensorForm.tipo">
-            <option v-for="tipo in tipos" :key="tipo" :value="tipo">{{ tipo }}</option>
+        <select id="tipo" v-model="sensorForm.tipo" @change="updateUnidades">
+            <option v-for="tipoSensor in tipoSensores" :key="tipoSensor.id">{{ tipoSensor.tipo }}</option>
         </select>
-        <span class="error">{{ tipo }}</span>
         <br />
         <label for="unidade">Unidade</label>
-        <input id="unidade" v-model="sensorForm.unidade" />
+        <input id="unidade" :disabled="true" v-model="sensorForm.unidade" />
         <span class="error">{{ formFeedback.unidade }}</span>
         <br />
         <span class="error">{{ formFeedback.valor }}</span>
@@ -28,13 +23,11 @@
 <script setup>
 import { ref, reactive, computed } from "vue"
 const sensorForm = reactive({
-    idSensor: null,
     tipo: null,
     unidade: null,
 })
 
 const formFeedback = reactive({
-    idSensor: "",
     tipo: "",
     unidade: "",
 })
@@ -59,5 +52,14 @@ async function create() {
     const { error } = await useFetch(`${api}/sensores`, requestOptions)
     if (!error.value) navigateTo("/sensores")
     message.value = error.value
+}
+
+const { data: tipoSensores } = await useFetch(`${api}/tipoSensor`)
+
+const updateUnidades = () =>{
+    if (Array.isArray(tipoSensores.value)) {
+        const sensorEncontrado = tipoSensores.value.find(sensor => sensor.tipo == sensorForm.tipo)
+        sensorForm.unidade = sensorEncontrado.unidade
+    }
 }
 </script>
