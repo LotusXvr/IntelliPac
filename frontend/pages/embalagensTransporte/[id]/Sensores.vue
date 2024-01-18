@@ -5,31 +5,31 @@
         <form @submit.prevent="addSensor">
             <label for="sensores">Sensores:</label>
             <select v-model="sensorForm.sensorId">
-                <option v-for="sensor in filteredSensores" :value="sensor.id">{{ sensor.tipo }}</option>
+                <option v-for="sensor in filteredSensores" :value="sensor.id">
+                    {{ sensor.tipo }}
+                </option>
             </select>
 
-            <span v-if="!isFormValid" class="error">
-                ERRO: Escolha o sensor a inserir</span
-            >
+            <span v-if="!isFormValid" class="error"> ERRO: Escolha o sensor a inserir</span>
             <br />
 
             <button type="submit" :disabled="!isFormValid">Save</button>
         </form>
         <nuxt-link to="/embalagensTransporte">Back to Embalagens de transporte</nuxt-link>
     </div>
-    <h2>Error messages:</h2>
-    {{ messages }}
 
     <div v-if="embalagem">
         <h2>Sensor Das Embalagens:</h2>
         <ul>
             <li v-for="sensor in embalagem.sensores" :key="sensor.idSensor">
                 {{ sensor.idSensor }} - {{ sensor.tipo }} ({{ sensor.unidade }})
-                <button @click="removerSensor(sensor.id)">Eliminar</button>
+                <button @click="removerSensor(sensor.id)">Remover</button>
             </li>
         </ul>
-        
     </div>
+
+    <h2>Error messages:</h2>
+    {{ messages }}
 </template>
 <style scoped>
 .error {
@@ -51,16 +51,16 @@ const formFeedback = reactive({
     sensorId: "",
 })
 
-const { data: embalagem,  refresh : refreshEmbalagem } = await useFetch(`${api}/embalagensDeTransporte/${id}`)
+const { data: embalagem, refresh: refreshEmbalagem } = await useFetch(
+    `${api}/embalagensDeTransporte/${id}`
+)
 
-
-const { data: sensores, refresh: refreshSensor} = await useFetch(`${api}/sensores`)
+const { data: sensores, refresh: refreshSensor } = await useFetch(`${api}/sensores`)
 
 const isFormValid = computed(() => {
     console.log(sensorForm.sensorId)
-    return sensorForm.sensorId !== null;
+    return sensorForm.sensorId !== null
 })
-
 
 const addSensor = async () => {
     try {
@@ -70,7 +70,10 @@ const addSensor = async () => {
             body: JSON.stringify(sensorForm.sensorId),
         }
 
-        const response = await fetch(`${api}/embalagensDeTransporte/${id}/adicionarSensor`, requestOptions)
+        const response = await fetch(
+            `${api}/embalagensDeTransporte/${id}/adicionarSensor`,
+            requestOptions
+        )
         if (!response.ok) {
             throw new Error(response.statusText)
         }
@@ -83,22 +86,22 @@ const addSensor = async () => {
 
 const filteredSensores = computed(() => {
     if (Array.isArray(sensores.value)) {
-        const uniqueSensorTipo = new Set();
-        return sensores.value.filter(sensor => {
-            for(const embalagemSensor of embalagem.value.sensores){
+        const uniqueSensorTipo = new Set()
+        return sensores.value.filter((sensor) => {
+            for (const embalagemSensor of embalagem.value.sensores) {
                 uniqueSensorTipo.add(embalagemSensor.tipo) //Nao podemos adicionar do mesmo tipo
             }
             if (sensor.estado === 0 && !uniqueSensorTipo.has(sensor.tipo)) {
-                uniqueSensorTipo.add(sensor.tipo); //Mostra apenas 1 de cada tipo
-                return true;
+                uniqueSensorTipo.add(sensor.tipo) //Mostra apenas 1 de cada tipo
+                return true
             }
-            return false;
-        });
+            return false
+        })
     } else {
         // Handle the case when sensores.value is not an array
-        return [];
+        return []
     }
-});
+})
 
 const removerSensor = async (idSensor) => {
     try {
@@ -108,7 +111,10 @@ const removerSensor = async (idSensor) => {
             body: JSON.stringify(idSensor),
         }
 
-        const response = await fetch(`${api}/embalagensDeTransporte/${id}/removerSensor`, requestOptions)
+        const response = await fetch(
+            `${api}/embalagensDeTransporte/${id}/removerSensor`,
+            requestOptions
+        )
         if (!response.ok) {
             throw new Error(response.statusText)
         }

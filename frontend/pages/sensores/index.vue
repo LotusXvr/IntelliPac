@@ -45,6 +45,10 @@
                     <nuxt-link :to="'/sensores/edit/' + sensor.id">Editar</nuxt-link>
                     |
                     <button @click="deleteProduto(sensor.id)">Excluir</button>
+                    |
+                    <nuxt-link :to="'/observacoes/' + sensor.id + '/create'"
+                        >Adicionar Observação</nuxt-link
+                    >
                 </td>
             </tr>
             <h4>Sensores de Produto</h4>
@@ -62,6 +66,10 @@
                     <nuxt-link :to="'/sensores/edit/' + sensor.id">Editar</nuxt-link>
                     |
                     <button @click="deleteProduto(sensor.id)">Excluir</button>
+                    |
+                    <nuxt-link :to="'/observacoes/' + sensor.id + '/create'"
+                        >Adicionar Observação</nuxt-link
+                    >
                 </td>
             </tr>
         </table>
