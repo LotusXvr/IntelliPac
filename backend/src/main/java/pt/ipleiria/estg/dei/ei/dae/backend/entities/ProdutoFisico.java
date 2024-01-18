@@ -44,8 +44,8 @@ public class ProdutoFisico extends Produto implements Serializable {
         embalagensDeProduto = new ArrayList<>();
     }
 
-    public ProdutoFisico(String nomeProduto, FabricanteDeProdutos fabricante, ProdutoCatalogo produtoCatalogo, Encomenda encomenda) {
-        super(nomeProduto, fabricante);
+    public ProdutoFisico(String nomeProduto, FabricanteDeProdutos fabricante, ProdutoCatalogo produtoCatalogo, Encomenda encomenda, long peso) {
+        super(nomeProduto, fabricante, peso);
         this.produtoCatalogo = produtoCatalogo;
         this.embalagensDeProduto = new ArrayList<>();
         this.encomenda = encomenda;

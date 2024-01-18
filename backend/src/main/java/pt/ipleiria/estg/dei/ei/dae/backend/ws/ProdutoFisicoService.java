@@ -29,7 +29,8 @@ public class ProdutoFisicoService {
                 produtoFisico.getNomeProduto(),
                 produtoFisico.getFabricante().getUsername(),
                 produtoFisico.getProdutoCatalogo().getId(),
-                produtoFisico.getEncomenda().getId()
+                produtoFisico.getEncomenda().getId(),
+                produtoFisico.getPeso()
         );
         produtoFisicoDTO.setEmbalagensDeProduto(embalagemToDTOs(produtoFisico.getEmbalagensDeProduto()));
         return produtoFisicoDTO;
@@ -41,7 +42,8 @@ public class ProdutoFisicoService {
                 produtoFisico.getNomeProduto(),
                 produtoFisico.getFabricante().getUsername(),
                 produtoFisico.getProdutoCatalogo().getId(),
-                produtoFisico.getEncomenda().getId()
+                produtoFisico.getEncomenda().getId(),
+                produtoFisico.getPeso()
         );
     }
 

@@ -25,7 +25,6 @@ public class ProdutoCatalogo extends Produto implements Serializable {
 
     @OneToMany(mappedBy = "produtoCatalogo")
     private List<ProdutoFisico> produtos;
-    private long peso;
     @ManyToMany
     @JoinTable(
             name = "produtoCatalogo_embalagem",
@@ -46,15 +45,13 @@ public class ProdutoCatalogo extends Produto implements Serializable {
     }
 
     public ProdutoCatalogo(String nomeProduto, FabricanteDeProdutos fabricante, long peso) {
-        super(nomeProduto, fabricante);
-        this.peso = peso;
+        super(nomeProduto, fabricante,peso);
         this.produtos = new ArrayList<>();
         this.embalagensACriar = new ArrayList<>();
     }
 
     public ProdutoCatalogo(String nomeProduto, FabricanteDeProdutos fabricante, long peso, List<TipoEmbalagemProduto> embalagensACriar) {
-        super(nomeProduto, fabricante);
-        this.peso = peso;
+        super(nomeProduto, fabricante, peso);
         this.produtos = new ArrayList<>();
         this.embalagensACriar = embalagensACriar;
     }
@@ -73,14 +70,6 @@ public class ProdutoCatalogo extends Produto implements Serializable {
 
     public void removeProduto(ProdutoFisico produto) {
         this.produtos.remove(produto);
-    }
-
-    public long getPeso() {
-        return peso;
-    }
-
-    public void setPeso(long peso) {
-        this.peso = peso;
     }
 
     public List<TipoEmbalagemProduto> getEmbalagensACriar() {

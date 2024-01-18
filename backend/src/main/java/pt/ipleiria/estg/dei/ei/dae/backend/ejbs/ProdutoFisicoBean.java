@@ -66,7 +66,7 @@ public class ProdutoFisicoBean {
         ProdutoFisico produtoFisico = null;
 
         try {
-            produtoFisico = new ProdutoFisico(produtoCatalogo.getNomeProduto(), fabricante, produtoCatalogo, encomenda);
+            produtoFisico = new ProdutoFisico(produtoCatalogo.getNomeProduto(), fabricante, produtoCatalogo, encomenda, produtoCatalogo.getPeso());
             entityManager.persist(produtoFisico);
         } catch (ConstraintViolationException e) {
             throw new MyConstraintViolationException(e);

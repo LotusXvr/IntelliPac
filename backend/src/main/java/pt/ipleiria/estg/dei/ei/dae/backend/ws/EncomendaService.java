@@ -79,7 +79,8 @@ public class EncomendaService {
                 produto.getNomeProduto(),
                 produto.getFabricante().getUsername(),
                 produto.getProdutoCatalogo().getId(),
-                produto.getEncomenda().getId()
+                produto.getEncomenda().getId(),
+                produto.getPeso()
         );
 
         produtoFisicoDTO.setEmbalagensDeProduto(embalagensDeProdutoToDTOs(produto.getEmbalagensDeProduto()));

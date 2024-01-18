@@ -129,7 +129,8 @@ public class ProdutoCatalogoService {
                 produtoFisico.getNomeProduto(),
                 produtoFisico.getFabricante().getUsername(),
                 produtoFisico.getProdutoCatalogo().getId(),
-                produtoFisico.getEncomenda().getId()
+                produtoFisico.getEncomenda().getId(),
+                produtoFisico.getPeso()
         );
     }
 

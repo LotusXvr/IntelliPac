@@ -19,13 +19,15 @@ public class Produto implements Serializable {
     @JoinColumn(name = "fabricante_id")
     private FabricanteDeProdutos fabricante;
 
+    private long peso;
 
     public Produto() {
     }
 
-    public Produto(String nomeProduto, FabricanteDeProdutos fabricante) {
+    public Produto(String nomeProduto, FabricanteDeProdutos fabricante, long peso) {
         this.nomeProduto = nomeProduto;
         this.fabricante = fabricante;
+        this.peso = peso;
     }
 
     public long getId() {
@@ -50,5 +52,13 @@ public class Produto implements Serializable {
 
     public void setFabricante(FabricanteDeProdutos fabricante) {
         this.fabricante = fabricante;
+    }
+
+    public long getPeso() {
+        return peso;
+    }
+
+    public void setPeso(long peso) {
+        this.peso = peso;
     }
 }

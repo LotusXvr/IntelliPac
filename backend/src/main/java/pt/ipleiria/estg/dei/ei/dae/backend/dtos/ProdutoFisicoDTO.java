@@ -6,6 +6,7 @@ import java.util.List;
 public class ProdutoFisicoDTO {
     private long id;
     private String nome;
+    private long peso;
     private String fabricanteUsername;
     private long produtoCatalogoId;
 
@@ -17,9 +18,10 @@ public class ProdutoFisicoDTO {
         this.embalagensDeProduto = new ArrayList<>();
     }
 
-    public ProdutoFisicoDTO(long id, String nome, String fabricanteUsername, long produtoCatalogoId, long encomendaId) {
+    public ProdutoFisicoDTO(long id, String nome,String fabricanteUsername, long produtoCatalogoId, long encomendaId, long peso) {
         this.id = id;
         this.nome = nome;
+        this.peso = peso;
         this.fabricanteUsername = fabricanteUsername;
         this.produtoCatalogoId = produtoCatalogoId;
         this.encomendaId = encomendaId;
@@ -80,5 +82,13 @@ public class ProdutoFisicoDTO {
 
     public void setEncomendaId(long encomendaId) {
         this.encomendaId = encomendaId;
+    }
+
+    public long getPeso() {
+        return peso;
+    }
+
+    public void setPeso(long peso) {
+        this.peso = peso;
     }
 }
