@@ -7,10 +7,14 @@
         <table>
             <tr>
                 <th>Nome</th>
+                <th>Username</th>
+                <th>Email</th>
                 <th>actions</th>
             </tr>
             <tr v-for="fabricante in fabricantes">
                 <td>{{ fabricante.nome }}</td>
+                <td>{{ fabricante.username }}</td>
+                <td>{{ fabricante.email }}</td>
                 <td>
                     <nuxt-link :to="`/fabricantes/${fabricante.username}`">Details</nuxt-link>
                     |

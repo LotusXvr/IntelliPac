@@ -90,15 +90,19 @@ POST http://localhost:8080/intellipac/api/fabricantes
 Content-Type: application/json
 
 {
-  "nomeFabricante": "Fabricante (POST)"
+  "nome": "Fabricante (POST)",
+  "username": "teste",
+  "password": "123",
+  "email": "post@mail.pt"
 }
 
 ###
-PUT http://localhost:8080/intellipac/api/fabricantes/Fabrica2
+PUT http://localhost:8080/intellipac/api/fabricantes/teste
 Content-Type: application/json
 
 {
-  "nomeFabricante": "Fabricante (PUT)"
+    "nome": "Fabricante (PUT)",
+    "email": "put@mail.pt"
 }
 
 ###
