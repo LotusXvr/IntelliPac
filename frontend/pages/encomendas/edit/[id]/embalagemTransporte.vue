@@ -49,12 +49,14 @@
 }
 </style>
 <script setup>
+import { useAuthStore } from "~/store/auth-store"
+const authStore = useAuthStore()
 const route = useRoute()
 const id = route.params.id
 const config = useRuntimeConfig()
 const api = config.public.API_URL
 
-const { data: embalagensTransporte } = await useFetch(`${api}/embalagensDeTransporte`)
+const { data: embalagensTransporte } = await useFetch(`${api}/embalagensDeTransporte`, { method: "GET", headers: {'Authorization': 'Bearer ' + authStore.token}})
 
 const encomenda = ref(null)
 const messages = ref([])
@@ -74,7 +76,7 @@ const construirTamanhoString = (comprimento, largura, altura) => {
 
 const fetchEncomenda = async () => {
     try {
-        const response = await fetch(`${api}/encomendas/${id}`)
+        const response = await fetch(`${api}/encomendas/${id}`, { method: "GET", headers: {'Authorization': 'Bearer ' + authStore.token}})
         if (!response.ok) {
             throw new Error(response.statusText)
         }
@@ -83,7 +85,6 @@ const fetchEncomenda = async () => {
         encomendaForm.embalagensTransporte = encomenda.value.embalagensTransporte.map(
             (embalagem) => embalagem.id
         )
-        console.log(encomendaForm.embalagensTransporte)
     } catch (error) {
         messages.value.push(error.message)
     }
@@ -115,7 +116,7 @@ const updateEncomenda = async () => {
 
         const requestOptions = {
             method: "PATCH",
-            headers: { "Content-Type": "application/json" },
+            headers: { "Content-Type": "application/json", 'Authorization': 'Bearer ' + authStore.token},
             body: JSON.stringify(requestBody),
         }
 

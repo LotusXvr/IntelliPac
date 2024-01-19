@@ -1,5 +1,6 @@
 package pt.ipleiria.estg.dei.ei.dae.backend.ws;
 
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.ejb.EJB;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
@@ -8,10 +9,12 @@ import pt.ipleiria.estg.dei.ei.dae.backend.dtos.EmbalagemDeProdutoDTO;
 import pt.ipleiria.estg.dei.ei.dae.backend.dtos.ProdutoFisicoDTO;
 import pt.ipleiria.estg.dei.ei.dae.backend.dtos.SensorDTO;
 import pt.ipleiria.estg.dei.ei.dae.backend.ejbs.EmbalagemDeProdutoBean;
+import pt.ipleiria.estg.dei.ei.dae.backend.entities.Cliente;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.EmbalagemDeProduto;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.ProdutoFisico;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.Sensor;
 import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyEntityNotFoundException;
+import pt.ipleiria.estg.dei.ei.dae.backend.security.Authenticated;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,6 +22,7 @@ import java.util.stream.Collectors;
 @Path("embalagensDeProduto")
 @Produces({MediaType.APPLICATION_JSON})
 @Consumes({MediaType.APPLICATION_JSON})
+@Authenticated
 public class EmbalagemDeProdutoService {
 
     @EJB
@@ -124,7 +128,11 @@ public class EmbalagemDeProdutoService {
 
     @DELETE
     @Path("{id}")
-    public Response deleteProdutoCatalogo(@PathParam("id") long id) throws MyEntityNotFoundException {
+    public Response deleteEmbalagemProduto(@PathParam("id") long id) throws MyEntityNotFoundException {
+        EmbalagemDeProduto embalagemDeProduto = embalagemDeProdutoBean.find(id);
+        if(embalagemDeProduto == null){
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
         embalagemDeProdutoBean.remove(id);
         return Response.ok().build();
     }

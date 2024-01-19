@@ -1,5 +1,6 @@
 package pt.ipleiria.estg.dei.ei.dae.backend.ws;
 
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.ejb.EJB;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
@@ -11,6 +12,7 @@ import pt.ipleiria.estg.dei.ei.dae.backend.ejbs.SensorBean;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.Embalagem;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.Observacao;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.Sensor;
+import pt.ipleiria.estg.dei.ei.dae.backend.security.Authenticated;
 
 import java.util.Collections;
 import java.util.List;
@@ -18,6 +20,8 @@ import java.util.List;
 @Path("sensores") // relative url web path for this service
 @Produces({MediaType.APPLICATION_JSON}) // injects header “Content-Type: application/json”
 @Consumes({MediaType.APPLICATION_JSON}) // injects header “Accept: application/json”
+@Authenticated
+@RolesAllowed({"OperadorDeLogistica", "FabricanteDeProdutos"})
 public class SensorService {
 
     @EJB
@@ -137,12 +141,12 @@ public class SensorService {
     @DELETE
     @Path("/{id}")
     public Response deleteSensor(@PathParam("id") long id) {
-        try {
-            sensorBean.remove(id);
-            return Response.status(Response.Status.OK).build();
-        } catch (Exception e) {
-            return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
+        Sensor sensor = sensorBean.find(id);
+        if(sensor == null){
+            return Response.status(Response.Status.NOT_FOUND).build();
         }
+        sensorBean.remove(id);
+        return Response.status(Response.Status.OK).build();
     }
 
     @POST

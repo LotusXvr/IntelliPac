@@ -87,6 +87,10 @@ public class OperadorService {
     @DELETE
     @Path("{username}")
     public Response deleteOperadorLogistica(@PathParam("username") String username) throws MyEntityNotFoundException {
+        OperadorDeLogistica operadorDeLogistica = operadorDeLogisticaBean.find(username);
+        if(operadorDeLogistica == null){
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
         operadorDeLogisticaBean.remove(username);
         return Response.ok().build();
     }

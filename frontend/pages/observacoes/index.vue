@@ -33,6 +33,8 @@
     <nuxt-link to="/">Voltar à Home</nuxt-link>
 </template>
 <script setup>
+import { useAuthStore } from "~/store/auth-store"
+const authStore = useAuthStore()
 import Navbar from "~/layouts/nav-bar.vue";
 const config = useRuntimeConfig()
 const api = config.public.API_URL
@@ -42,6 +44,7 @@ const deleteObservacao = async (id) => {
     try {
         const response = await fetch(`${api}/observacoes/${id}`, {
             method: "DELETE",
+            headers: {'Authorization': 'Bearer ' + authStore.token}
         })
         if (response.ok) {
             refresh()

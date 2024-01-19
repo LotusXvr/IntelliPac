@@ -47,6 +47,8 @@
 }
 </style>
 <script setup>
+import { useAuthStore } from "~/store/auth-store"
+const authStore = useAuthStore()
 const route = useRoute()
 const id = route.params.id
 const config = useRuntimeConfig()
@@ -67,7 +69,7 @@ const formFeedback = reactive({
 
 const fetchEncomenda = async () => {
     try {
-        const response = await fetch(`${api}/encomendas/${id}`)
+        const response = await fetch(`${api}/encomendas/${id}`, { method: "GET", headers: {'Authorization': 'Bearer ' + authStore.token}})
         if (!response.ok) {
             throw new Error(response.statusText)
         }
@@ -111,7 +113,7 @@ const updateEncomenda = async () => {
     try {
         const requestOptions = {
             method: "PATCH",
-            headers: { "Content-Type": "application/json" },
+            headers: { "Content-Type": "application/json", 'Authorization': 'Bearer ' + authStore.token },
             body: JSON.stringify(encomendaForm),
         }
 

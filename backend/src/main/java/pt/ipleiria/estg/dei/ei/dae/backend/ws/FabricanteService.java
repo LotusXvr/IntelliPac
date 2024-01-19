@@ -97,8 +97,13 @@ public class FabricanteService {
 
     @DELETE
     @Path("{username}")
-    public void deleteFabricante(@PathParam("username") String username) throws Exception {
+    public Response deleteFabricante(@PathParam("username") String username) throws Exception {
+        FabricanteDeProdutos fabricanteDeProdutos = fabricanteDeProdutosBean.find(username);
+        if(fabricanteDeProdutos == null){
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
         fabricanteDeProdutosBean.remove(username);
+        return Response.status(Response.Status.OK).build();
     }
 
     @PUT

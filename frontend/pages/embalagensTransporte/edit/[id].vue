@@ -41,6 +41,9 @@
 }
 </style>
 <script setup>
+import { useAuthStore } from "~/store/auth-store"
+const authUser = useAuthStore();
+
 const route = useRoute()
 const id = route.params.id
 const config = useRuntimeConfig()
@@ -130,7 +133,9 @@ const updateEmbalagem = async () => {
     try {
         const requestOptions = {
             method: "PUT",
-            headers: { "Content-Type": "application/json" },
+            headers: { "Content-Type": "application/json",
+            'Authorization': 'Bearer ' + authUser.token
+            },
             body: JSON.stringify(embalagemForm),
         }
         const response = await fetch(`${api}/embalagensDeTransporte/${id}`, requestOptions)

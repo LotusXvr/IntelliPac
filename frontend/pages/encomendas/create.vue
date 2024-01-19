@@ -73,9 +73,9 @@ const formFeedback = reactive({
 
 const config = useRuntimeConfig()
 const api = config.public.API_URL
-const { data: operadoresLogistica } = await useFetch(`${api}/operadores`)
-const { data: consumidoresFinais } = await useFetch(`${api}/clientes`)
-const { data: produtosCatalogo } = await useFetch(`${api}/produtosCatalogo`)
+const { data: operadoresLogistica } = await useFetch(`${api}/operadores`, { method: "GET", headers: {'Authorization': 'Bearer ' + authStore.token}})
+const { data: consumidoresFinais } = await useFetch(`${api}/clientes`, { method: "GET", headers: {'Authorization': 'Bearer ' + authStore.token}})
+const { data: produtosCatalogo } = await useFetch(`${api}/produtosCatalogo`, { method: "GET", headers: {'Authorization': 'Bearer ' + authStore.token}})
 const message = ref("")
 
 const tipoNumeroParaString = (tipo) => {

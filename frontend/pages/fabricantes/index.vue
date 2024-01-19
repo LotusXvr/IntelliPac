@@ -31,15 +31,17 @@
     <nuxt-link to="/">Voltar à Home</nuxt-link>
 </template>
 <script setup>
+import { useAuthStore } from "~/store/auth-store"
+const authStore = useAuthStore()
 import Navbar from "~/layouts/nav-bar.vue";
 const config = useRuntimeConfig()
 const api = config.public.API_URL
-const { data: fabricantes, error, refresh } = await useFetch(`${api}/fabricantes`)
+const { data: fabricantes, error, refresh } = await useFetch(`${api}/fabricantes`, { method: "GET", headers: {'Authorization': 'Bearer ' + authStore.token}})
 
 const deleteFabricante = async (username) => {
     try {
         const response = await fetch(`${api}/fabricantes/${username}`, {
-            method: "DELETE",
+            method: "DELETE",headers: {'Authorization': 'Bearer ' + authStore.token}
         })
         if (response.ok) {
             refresh()

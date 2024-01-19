@@ -1,5 +1,6 @@
 package pt.ipleiria.estg.dei.ei.dae.backend.ws;
 
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.ejb.EJB;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
@@ -13,12 +14,15 @@ import pt.ipleiria.estg.dei.ei.dae.backend.entities.*;
 import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyConstraintViolationException;
 import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyEntityExistsException;
 import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyEntityNotFoundException;
+import pt.ipleiria.estg.dei.ei.dae.backend.security.Authenticated;
 
 import java.util.List;
 
 @Path("produtosFisicos")
 @Produces({MediaType.APPLICATION_JSON})
 @Consumes({MediaType.APPLICATION_JSON})
+@Authenticated
+@RolesAllowed({"FabricanteDeProdutos"})
 public class ProdutoFisicoService {
     @EJB
     private ProdutoFisicoBean produtoFisicoBean;
@@ -102,8 +106,6 @@ public class ProdutoFisicoService {
         );
     }
 
-
-
     @GET
     @Path("/")
     public List<ProdutoFisicoDTO> getAllProdutos() {
@@ -140,13 +142,14 @@ public class ProdutoFisicoService {
 
     @DELETE
     @Path("{id}")
-    public Response deleteProdutoFisico(@PathParam("id") long id) {
-        try {
-            produtoFisicoBean.remove(id);
-            return Response.status(Response.Status.OK).build();
-        } catch (Exception e) {
-            return Response.status(Response.Status.BAD_REQUEST).entity("ERROR_DELETING_PRODUTOFISICO").build();
+    public Response deleteProdutoFisico(@PathParam("id") long id) throws MyEntityNotFoundException {
+        ProdutoFisico produtoFisico = produtoFisicoBean.find(id);
+        if(produtoFisico == null){
+            return Response.status(Response.Status.NOT_FOUND).build();
         }
+        produtoFisicoBean.remove(id);
+        return Response.status(Response.Status.OK).build();
+
     }
 
     @PUT

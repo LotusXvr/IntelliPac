@@ -25,6 +25,8 @@
 </style>
 <script setup>
 import { ref, reactive, computed } from "vue"
+import { useAuthStore } from "~/store/auth-store"
+const authUser = useAuthStore();
 const embalagemForm = reactive({
     material: null,
     altura : null,
@@ -95,7 +97,10 @@ async function create() {
 
     const requestOptions = {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          'Authorization': 'Bearer ' + authUser.token
+        },
         body: JSON.stringify(embalagemForm),
     }
 

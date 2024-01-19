@@ -33,6 +33,8 @@
 }
 </style>
 <script setup>
+import { useAuthStore } from "~/store/auth-store"
+const authStore = useAuthStore()
 const route = useRoute();
 const id = route.params.id;
 const config = useRuntimeConfig();
@@ -51,11 +53,11 @@ const formFeedback = reactive({
   sensorId: "",
 });
 
-const { data: sensores } = await useFetch(`${api}/sensores`);
+const { data: sensores } = await useFetch(`${api}/sensores`, { method: "GET", headers: {'Authorization': 'Bearer ' + authStore.token}});
 
 const fetchObservacoes = async () => {
   try {
-    const response = await fetch(`${api}/observacoes/${id}`);
+    const response = await fetch(`${api}/observacoes/${id}`, { method: "GET", headers: {'Authorization': 'Bearer ' + authStore.token}});
     if (!response.ok) {
       throw new Error(response.statusText);
     }
@@ -100,7 +102,7 @@ const updateObservacao = async () => {
   try {
     const requestOptions = {
       method: "PUT",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", 'Authorization': 'Bearer ' + authStore.token },
       body: JSON.stringify(observacaoForm),
     };
 

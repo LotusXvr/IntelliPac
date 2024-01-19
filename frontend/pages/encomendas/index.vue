@@ -53,12 +53,15 @@ const {
     data: encomendas,
     error,
     refresh,
-} = await useFetch(`${api}/encomendas/username/${user.username}`)
+} = await useFetch(`${api}/encomendas/username/${user.username}`, { method: "GET",
+  headers: {'Authorization': 'Bearer ' + authStore.token}
+})
 
 const deleteEncomenda = async (id) => {
     try {
         const response = await fetch(`${api}/encomendas/${id}`, {
             method: "DELETE",
+          headers: {'Authorization': 'Bearer ' + authStore.token}
         })
         if (response.ok) {
             refresh()
