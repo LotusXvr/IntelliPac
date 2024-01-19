@@ -39,12 +39,15 @@ const config = useRuntimeConfig()
 const authStore = useAuthStore()
 const { user } = authStore
 const api = config.public.API_URL
-const { data: produtos, error, refresh } = await useFetch(`${api}/produtosCatalogo/fabricante/${user.username}`)
+const { data: produtos, error, refresh } = await useFetch(`${api}/produtosCatalogo/fabricante/${user.username}`, { method: "GET", headers: {'Authorization': 'Bearer ' + authStore.token}})
 
 const deleteProduto = async (id) => {
     try {
         const response = await fetch(`${api}/produtosCatalogo/${id}`, {
             method: "DELETE",
+            headers: {
+                'Authorization': 'Bearer ' + authStore.token
+            }
         })
         if (response.ok) {
             refresh()
