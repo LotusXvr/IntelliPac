@@ -148,19 +148,24 @@ public class ConfigBean {
             Sensor sensor2 = sensorBean.create("Humidade", "%");
             sensorBean.create("Luminosidade", "LUX");
             sensorBean.create("Pressao", "hPa");
-            sensorBean.create("Localizacao", "GPS");
+            //sensorBean.create("Localizacao", "GPS");
             sensorBean.create("Danificado", "Boolean");
             //endregion
 
             //region <Associar sensor à Embalagem>
-            embalagemBean.associateSensorToEmbalagem(3L, 1L);
-            embalagemBean.associateSensorToEmbalagem(4L, 2L);
-            embalagemBean.associateSensorToEmbalagem(2L, 3L);
+            embalagemBean.associateSensorToEmbalagem(1L, 3L);
             embalagemBean.associateSensorToEmbalagem(1L, 4L);
             embalagemBean.associateSensorToEmbalagem(1L, 5L);
-            embalagemBean.associateSensorToEmbalagem(1L, 6L);
+
             embalagemBean.associateSensorToEmbalagem(2L, 1L);
+            embalagemBean.associateSensorToEmbalagem(2L, 3L);
+
             embalagemBean.associateSensorToEmbalagem(3L, 1L);
+            embalagemBean.associateSensorToEmbalagem(3L, 2L);
+
+
+            embalagemBean.associateSensorToEmbalagem(4L, 2L);
+
             //endregion
 
             //region <Embalagens De Produto>
@@ -211,12 +216,14 @@ public class ConfigBean {
 
             TipoSensor testeSensor = tipoSensorBean.create("Vento", "KM/H");
 
+            //region <Tipo Sensores>
             TipoSensor tipoSensorCereaisTemperatura = tipoSensorBean.create("Temperatura", "ºC");
             TipoSensor tipoSensorCereaisHumidade = tipoSensorBean.create("Humidade", "%");
             TipoSensor tipoSensorAceleração = tipoSensorBean.create("Aceleração", "G");
             TipoSensor tipoSensorLuminosidade = tipoSensorBean.create("Luminosidade", "LUX");
             TipoSensor tipoSensorPressao = tipoSensorBean.create("Pressão", "hPa");
             TipoSensor tipoSensorGPS = tipoSensorBean.create("Localização", "GPS");
+            //endregion
 
             tipoEmbalagemProdutoBean.addTipoSensor(1, testeSensor.getId());
 

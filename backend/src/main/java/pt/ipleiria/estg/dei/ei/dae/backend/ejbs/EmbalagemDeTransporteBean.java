@@ -21,9 +21,16 @@ public class EmbalagemDeTransporteBean {
     @EJB
     private EncomendaBean encomendaBean;
 
+    @EJB
+    private SensorBean sensorBean;
+
     public EmbalagemDeTransporte create(String material, long altura, long largura, long comprimento, int estado) {
         EmbalagemDeTransporte embalagemDeTransporte = new EmbalagemDeTransporte(material, altura, largura, comprimento, estado);
         entityManager.persist(embalagemDeTransporte);
+
+        Sensor sensor = sensorBean.create("Localização", "GPS");
+        embalagemDeTransporte.addSensor(sensor);
+
         return embalagemDeTransporte;
     }
 

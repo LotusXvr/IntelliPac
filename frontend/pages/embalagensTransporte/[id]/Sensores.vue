@@ -23,7 +23,7 @@
         <ul>
             <li v-for="sensor in embalagem.sensores" :key="sensor.idSensor">
                 {{ sensor.idSensor }} - {{ sensor.tipo }} ({{ sensor.unidade }})
-                <button @click="removerSensor(sensor.id)">Remover</button>
+                <button @click="removerSensor(sensor.id)" v-if="sensor.tipo != 'Localização'">Remover</button>
             </li>
         </ul>
     </div>
@@ -55,10 +55,10 @@ const formFeedback = reactive({
 })
 
 const { data: embalagem, refresh: refreshEmbalagem } = await useFetch(
-    `${api}/embalagensDeTransporte/${id}`, { method: "GET", headers: {'Authorization': 'Bearer ' + authUser.token}}
+    `${api}/embalagensDeTransporte/${id}`, { method: "GET", headers: { 'Authorization': 'Bearer ' + authUser.token } }
 )
 
-const { data: sensores, refresh: refreshSensor } = await useFetch(`${api}/sensores`, { method: "GET", headers: {'Authorization': 'Bearer ' + authUser.token}})
+const { data: sensores, refresh: refreshSensor } = await useFetch(`${api}/sensores`, { method: "GET", headers: { 'Authorization': 'Bearer ' + authUser.token } })
 
 const isFormValid = computed(() => {
     console.log(sensorForm.sensorId)
@@ -69,8 +69,10 @@ const addSensor = async () => {
     try {
         const requestOptions = {
             method: "POST",
-            headers: { "Content-Type": "application/json",
-              'Authorization': 'Bearer ' + authUser.token},
+            headers: {
+                "Content-Type": "application/json",
+                'Authorization': 'Bearer ' + authUser.token
+            },
             body: JSON.stringify(sensorForm.sensorId),
         }
 
@@ -111,8 +113,10 @@ const removerSensor = async (idSensor) => {
     try {
         const requestOptions = {
             method: "POST",
-            headers: { "Content-Type": "application/json",
-              'Authorization': 'Bearer ' + authUser.token},
+            headers: {
+                "Content-Type": "application/json",
+                'Authorization': 'Bearer ' + authUser.token
+            },
             body: JSON.stringify(idSensor),
         }
 
