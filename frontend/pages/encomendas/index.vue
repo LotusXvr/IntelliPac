@@ -2,7 +2,7 @@
     <Navbar />
     <div v-if="error">Error: {{ error.message }}</div>
     <div v-else>
-        <nuxt-link to="encomendas/create">Criar nova Encomenda</nuxt-link>
+        <nuxt-link to="encomendas/create" v-if="user.role == 'OperadorDeLogistica'">Criar nova Encomenda</nuxt-link>
         <h2>Encomendas</h2>
         <table>
             <tr>

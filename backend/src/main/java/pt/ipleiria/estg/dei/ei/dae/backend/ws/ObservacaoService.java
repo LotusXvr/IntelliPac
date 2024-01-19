@@ -1,5 +1,6 @@
 package pt.ipleiria.estg.dei.ei.dae.backend.ws;
 
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.ejb.EJB;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
@@ -10,6 +11,7 @@ import pt.ipleiria.estg.dei.ei.dae.backend.ejbs.ObservacaoBean;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.Observacao;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.Sensor;
 import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyEntityNotFoundException;
+import pt.ipleiria.estg.dei.ei.dae.backend.security.Authenticated;
 
 import java.util.List;
 
@@ -17,6 +19,8 @@ import java.util.List;
 @Produces({MediaType.APPLICATION_JSON}) // injects header “Content-Type: application/json”
 @Consumes({MediaType.APPLICATION_JSON})
 // injects header “Accept: application/json”
+@Authenticated
+@RolesAllowed({"OperadorDeLogistica", "FabricanteDeProdutos"})
 public class ObservacaoService {
 
     @EJB

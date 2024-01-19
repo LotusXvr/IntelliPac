@@ -144,7 +144,7 @@ async function create() {
 
     const requestOptions = {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", 'Authorization': 'Bearer ' + authStore.token },
         body: JSON.stringify(requestBody),
     }
 

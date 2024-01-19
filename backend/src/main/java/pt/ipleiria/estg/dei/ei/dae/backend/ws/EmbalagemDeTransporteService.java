@@ -91,7 +91,6 @@ public class EmbalagemDeTransporteService {
         return encomendas.stream().map(this::toDTO).collect(Collectors.toList());
     }
 
-
     @GET
     @Path("/")
     public List<EmbalagemDeTransporteDTO> getAll() {

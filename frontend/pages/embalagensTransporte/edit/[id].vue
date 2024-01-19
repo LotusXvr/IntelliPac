@@ -68,7 +68,7 @@ const formFeedback = reactive({
 
 const fetchEmbalagens = async () => {
     try {
-        const response = await fetch(`${api}/embalagensDeTransporte/${id}`)
+        const response = await fetch(`${api}/embalagensDeTransporte/${id}`, { method: "GET", headers: {'Authorization': 'Bearer ' + authUser.token}})
         if (!response.ok) {
             throw new Error(response.statusText)
         }
@@ -128,7 +128,6 @@ const isComprimentoValid = computed(() => {
 const isFormValid = computed(() => {
     return isMaterialValid.value && isAlturaValid.value && isLarguraValid.value && isComprimentoValid.value
 })
-
 const updateEmbalagem = async () => {
     try {
         const requestOptions = {

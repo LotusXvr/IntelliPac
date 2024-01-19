@@ -93,12 +93,13 @@ import { useAuthStore } from "~/store/auth-store"
 const authStore = useAuthStore()
 const config = useRuntimeConfig()
 const api = config.public.API_URL
-const { data: sensores, error, refresh } = await useFetch(`${api}/sensores`)
+const { data: sensores, error, refresh } = await useFetch(`${api}/sensores`, { method: "GET", headers: {'Authorization': 'Bearer ' + authStore.token}})
 
-const sensoresDisponiveis = ref(sensores.value.filter((sensor) => sensor.estado == 0))
-const sensoresEmUso = ref(sensores.value.filter((sensor) => sensor.estado == 1))
-const sensoresProduto = ref(sensores.value.filter((sensor) => sensor.estado == 2))
-
+if (sensores.value != null){
+  const sensoresDisponiveis = ref(sensores.value.filter((sensor) => sensor.estado == 0))
+  const sensoresEmUso = ref(sensores.value.filter((sensor) => sensor.estado == 1))
+  const sensoresProduto = ref(sensores.value.filter((sensor) => sensor.estado == 2))
+}
 const deleteProduto = async (id) => {
     try {
         const response = await fetch(`${api}/sensores/${id}`, {

@@ -50,6 +50,7 @@ Accept: application/json
 
 GET http://localhost:8080/intellipac/api/produtosFisicos
 Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJNYXJjbyIsImlhdCI6MTcwNTYyNjMzMSwiZXhwIjoxNzA1NjI5OTMxfQ.lcdjIuE_Vj0HAU5zz-RY2arTrDPU3FyAfDLm2HZvsJM6zHJZtPEvLsGHEpdux07H
 
 ###
 POST http://localhost:8080/intellipac/api/produtosFisicos
@@ -119,7 +120,7 @@ Content-Type: application/json
 Accept: application/json
 
 {
-  "username": "Fabrica1",
+  "username": "Apple",
   "password": "123"
 }
 
@@ -362,19 +363,20 @@ Content-Type: application/json
 Accept: application/json
 
 {
-  "username": "Fabrica1",
+  "username": "Marco",
   "password": "123"
 }
 
 ### GET AUTHENTICATED USER
 GET http://localhost:8080/intellipac/api/auth/user
 Accept: application/json
-Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJGYWJyaWNhMSIsImlhdCI6MTcwNTI1NTk0NywiZXhwIjoxNzA1MjU5NTQ3fQ.uiuIPdAsrwtZd0RVSxR2tofqZxh1Ls4Rb77vP693UzaWb-laqGCwX2jgfyQ5p_QJ
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJBcHBsZSIsImlhdCI6MTcwNTYyNjAzNCwiZXhwIjoxNzA1NjI5NjM0fQ.OVySgN64OGMC6SJsoTxLSTu4pYwh-WAvy-9QEk2wgGGBTaTilN47JIFZV_eTMmVp
 
 
 ### ------EMBALAGEM DE TRANSPORTE------
 GET http://localhost:8080/intellipac/api/embalagensDeTransporte
 Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJNYXJjbyIsImlhdCI6MTcwNTYyNjMzMSwiZXhwIjoxNzA1NjI5OTMxfQ.lcdjIuE_Vj0HAU5zz-RY2arTrDPU3FyAfDLm2HZvsJM6zHJZtPEvLsGHEpdux07H
 
 ### Criar Embalagem De Transporte
 POST http://localhost:8080/intellipac/api/embalagensDeTransporte
@@ -443,6 +445,7 @@ Accept: application/json
 ### Get
 GET http://localhost:8080/intellipac/api/encomendas/1
 Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJBbWF6b24iLCJpYXQiOjE3MDU2MjQ3MjIsImV4cCI6MTcwNTYyODMyMn0.DWxLq91Jh7lriaJdZ7PTUHRd5YrhGM6shcZRMENG1C8OCY8cYI0Z874fOXv7iGJ1
 
 ### GET SENSOR DETAILS
 GET http://localhost:8080/intellipac/api/sensores/1

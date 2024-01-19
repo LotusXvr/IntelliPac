@@ -69,14 +69,14 @@ const {
     data: embalagensDeTransporte,
     error,
     refresh,
-} = await useFetch(`${api}/embalagensDeTransporte`)
+} = await useFetch(`${api}/embalagensDeTransporte`, { method: "GET", headers: {'Authorization': 'Bearer ' + authStore.token}})
 
 const deleteEncomenda = async (id) => {
     try {
         const response = await fetch(`${api}/embalagensDeTransporte/${id}`, {
             method: "DELETE",
             headers : {
-              'Authorization': 'Bearer ' + token.value
+              'Authorization': 'Bearer ' + authStore.token
             },
         })
         if (response.ok) {

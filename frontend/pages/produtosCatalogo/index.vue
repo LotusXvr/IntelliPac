@@ -9,12 +9,14 @@
             <tr>
                 <th>Nome</th>
                 <th>Fabricante</th>
-                <th>actions</th>
+                <th>Peso</th>
+                <th v-if="user.role == 'FabricanteDeProdutos'">actions</th>
             </tr>
             <tr v-for=" produto  in  produtos ">
                 <td>{{ produto.nome }}</td>
                 <td>{{ produto.fabricanteUsername }}</td>
-                <td style="display: flex; align-items: center;">
+                <td>{{ produto.peso }}</td>
+                <td style="display: flex; align-items: center;" v-if="user.role == 'FabricanteDeProdutos'">
                     <nuxt-link :to="`/produtosCatalogo/${produto.id}`">Detalhes</nuxt-link>
                     <div
                         v-if="user !== null && user.role == 'FabricanteDeProdutos' && user.username == produto.fabricanteUsername">

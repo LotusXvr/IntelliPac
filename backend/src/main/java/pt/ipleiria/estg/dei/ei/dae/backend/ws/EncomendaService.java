@@ -177,7 +177,7 @@ public class EncomendaService {
     public Response getEncomendaById(@PathParam("id") long id) throws MyEntityNotFoundException {
         Encomenda encomenda = encomendaBean.getEncomendaById(id);
         var principal = securityContext.getUserPrincipal();
-        if(principal.getName().equals(encomenda.getConsumidorFinal()) || principal.getName().equals(encomenda.getOperadorLogistica())) {
+        if(principal.getName().equals(encomenda.getConsumidorFinal().getUsername()) || principal.getName().equals(encomenda.getOperadorLogistica().getUsername())) {
             return Response.status(Response.Status.OK).entity(toDTO(encomenda)).build();
         }
         return Response.status(Response.Status.FORBIDDEN).build();
