@@ -57,21 +57,10 @@ const formFeedback = reactive({
 })
 
 const { data: embalagem, refresh: refreshEmbalagem } = await useFetch(
-<<<<<<< Updated upstream
     `${api}/embalagensDeTransporte/${id}`, { method: "GET", headers: { 'Authorization': 'Bearer ' + authUser.token } }
 )
 
 const { data: sensores, refresh: refreshSensor } = await useFetch(`${api}/sensores`, { method: "GET", headers: { 'Authorization': 'Bearer ' + authUser.token } })
-=======
-    `${api}/embalagensDeTransporte/${id}`,
-    { method: "GET", headers: { Authorization: "Bearer " + authUser.token } }
-)
-
-const { data: sensores, refresh: refreshSensor } = await useFetch(`${api}/sensores`, {
-    method: "GET",
-    headers: { Authorization: "Bearer " + authUser.token },
-})
->>>>>>> Stashed changes
 
 const isFormValid = computed(() => {
     console.log(sensorForm.sensorId)
@@ -84,11 +73,7 @@ const addSensor = async () => {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-<<<<<<< Updated upstream
                 'Authorization': 'Bearer ' + authUser.token
-=======
-                Authorization: "Bearer " + authUser.token,
->>>>>>> Stashed changes
             },
             body: JSON.stringify(sensorForm.sensorId),
         }

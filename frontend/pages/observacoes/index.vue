@@ -44,11 +44,7 @@ const deleteObservacao = async (id) => {
     try {
         const response = await fetch(`${api}/observacoes/${id}`, {
             method: "DELETE",
-<<<<<<< Updated upstream
             headers: { 'Authorization': 'Bearer ' + authStore.token }
-=======
-            headers: { Authorization: "Bearer " + authStore.token },
->>>>>>> Stashed changes
         })
         if (response.ok) {
             refresh()
