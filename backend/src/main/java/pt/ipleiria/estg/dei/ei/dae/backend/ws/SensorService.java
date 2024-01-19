@@ -141,12 +141,16 @@ public class SensorService {
     @DELETE
     @Path("/{id}")
     public Response deleteSensor(@PathParam("id") long id) {
-        Sensor sensor = sensorBean.find(id);
-        if(sensor == null){
-            return Response.status(Response.Status.NOT_FOUND).build();
+        try {
+            Sensor sensor = sensorBean.find(id);
+            if (sensor == null) {
+                return Response.status(Response.Status.NOT_FOUND).build();
+            }
+            sensorBean.remove(id);
+            return Response.status(Response.Status.OK).build();
+        } catch (Exception e) {
+            return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
         }
-        sensorBean.remove(id);
-        return Response.status(Response.Status.OK).build();
     }
 
     @POST

@@ -81,11 +81,16 @@ public class SensorBean {
     }
 
     public void remove(long id) {
-        Sensor sensor = entityManager.find(Sensor.class, id);
-        if (sensor == null) {
-            throw new IllegalArgumentException("Sensor with id " + id + " not found.");
+        try {
+
+            Sensor sensor = entityManager.find(Sensor.class, id);
+            if (sensor == null) {
+                throw new IllegalArgumentException("Sensor with id " + id + " not found.");
+            }
+            entityManager.remove(sensor);
+        } catch (Exception e) {
+            System.out.println("O sensor já se encontra associado a uma embalagem");
         }
-        entityManager.remove(sensor);
     }
 
 

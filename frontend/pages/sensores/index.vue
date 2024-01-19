@@ -81,6 +81,8 @@
     <br />
     <button @click.prevent="refreshData">Refresh Data</button> <br />
     <br />
+    <h2>Error messages:</h2>
+    {{ messages }}
     <nuxt-link to="/">Voltar à Home</nuxt-link>
 </template>
 <script setup>
@@ -90,6 +92,7 @@ import { useAuthStore } from "~/store/auth-store"
 const authStore = useAuthStore()
 const config = useRuntimeConfig()
 const api = config.public.API_URL
+const messages = ref([])
 const { data: sensores, error, refresh } = await useFetch(`${api}/sensores`, { method: "GET", headers: { 'Authorization': 'Bearer ' + authStore.token } })
 
 const sensoresDisponiveis = ref(sensores.value.filter((sensor) => sensor.estado == 0))
@@ -109,7 +112,7 @@ const deleteProduto = async (id) => {
             refresh()
         }
     } catch (error) {
-        console.error(error)
+        messages.value.push(error.message)
     }
 }
 
@@ -125,7 +128,7 @@ const gerarObservacao = async (id) => {
             refresh()
         }
     } catch (error) {
-        console.error(error)
+        messages.value.push(error.message)
     }
 }
 

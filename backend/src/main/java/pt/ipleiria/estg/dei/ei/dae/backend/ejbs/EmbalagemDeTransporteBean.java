@@ -29,6 +29,7 @@ public class EmbalagemDeTransporteBean {
         entityManager.persist(embalagemDeTransporte);
 
         Sensor sensor = sensorBean.create("Localização", "GPS");
+        sensor.setEstado(1);
         embalagemDeTransporte.addSensor(sensor);
 
         return embalagemDeTransporte;

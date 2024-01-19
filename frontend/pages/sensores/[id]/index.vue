@@ -1,5 +1,5 @@
 <template>
-    <Narbar />
+    <Navbar />
     <div v-if="sensor">
         <h2>Detalhes de {{ sensor.idSensor }} {{ sensor.tipo }}</h2>
 
@@ -22,7 +22,8 @@
             <canvas ref="chartEl"></canvas>
             <ul>
                 <li v-for="observacao in sensor.observacoes" :key="sensor.id">
-                    ({{ observacao.timestamp }}) {{ observacao.valor }} {{ sensor.unidade }}
+                    ({{ observacao.timestamp }}) {{ observacao.valor }} {{ sensor.unidade }} - 
+                    <nuxt-link :to="`/observacoes/${observacao.id}`">Detalhes</nuxt-link>
                 </li>
             </ul>
         </div>
@@ -48,8 +49,16 @@ const observacoes_valores = ref([])
 const observacoes_timestamps = ref([])
 import Chart from "chart.js/auto"
 
+const refreshDetails = () => {
+    fetchSensor()
+}
+
 const fetchSensor = async () => {
     try {
+        sensor.value = null
+        observacoes.value = []
+        observacoes_valores.value = []
+        observacoes_timestamps.value = []
         const { data: response } = await useFetch(`${api}/sensores/${id}`, { method: "GET", headers: {'Authorization': 'Bearer ' + authStore.token}})
         if (!response) {
             console.log(response)
@@ -110,7 +119,7 @@ const gerarObservacao = async (id) => {
             }
         })
         if (response.status == 200) {
-            refresh()
+            refreshDetails()
         }
     } catch (error) {
         console.error(error)
