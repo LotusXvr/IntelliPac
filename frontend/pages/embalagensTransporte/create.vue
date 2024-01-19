@@ -1,4 +1,5 @@
 <template>
+    <Navbar />
     <form @submit.prevent="create">
         <label for="material">Material: </label>
         <input id="material" v-model="embalagemForm.material" />
@@ -24,21 +25,22 @@
 }
 </style>
 <script setup>
+import Navbar from "~/layouts/nav-bar.vue"
 import { ref, reactive, computed } from "vue"
 import { useAuthStore } from "~/store/auth-store"
-const authUser = useAuthStore();
+const authUser = useAuthStore()
 const embalagemForm = reactive({
     material: null,
-    altura : null,
-    largura : null,
-    comprimento : null
+    altura: null,
+    largura: null,
+    comprimento: null,
 })
 
 const formFeedback = reactive({
     material: "",
-    altura : "",
-    largura : "",
-    comprimento : ""
+    altura: "",
+    largura: "",
+    comprimento: "",
 })
 
 const config = useRuntimeConfig()
@@ -63,33 +65,46 @@ const isMaterialValid = computed(() => {
 
 const isAlturaValid = computed(() => {
     if (embalagemForm.altura !== null && !isNaN(embalagemForm.altura) && embalagemForm.altura > 0) {
-        formFeedback.altura = "";
-        return true;
+        formFeedback.altura = ""
+        return true
     }
     formFeedback.altura = "A altura tem de ser maior que 0"
-    return false;
+    return false
 })
 
 const isLarguraValid = computed(() => {
-    if (embalagemForm.largura !== null && !isNaN(embalagemForm.largura) && embalagemForm.largura > 0) {
-        formFeedback.largura = "";
-        return true;
+    if (
+        embalagemForm.largura !== null &&
+        !isNaN(embalagemForm.largura) &&
+        embalagemForm.largura > 0
+    ) {
+        formFeedback.largura = ""
+        return true
     }
     formFeedback.largura = "A largura tem de ser maior que 0"
-    return false;
+    return false
 })
 
 const isComprimentoValid = computed(() => {
-    if (embalagemForm.comprimento !== null && !isNaN(embalagemForm.comprimento) && embalagemForm.comprimento > 0) {
-        formFeedback.comprimento = "";
-        return true;
+    if (
+        embalagemForm.comprimento !== null &&
+        !isNaN(embalagemForm.comprimento) &&
+        embalagemForm.comprimento > 0
+    ) {
+        formFeedback.comprimento = ""
+        return true
     }
     formFeedback.comprimento = "O comprimento tem de ser maior que 0"
-    return false;
+    return false
 })
 
 const isFormValid = computed(() => {
-    return isMaterialValid.value && isAlturaValid.value && isLarguraValid.value && isComprimentoValid.value
+    return (
+        isMaterialValid.value &&
+        isAlturaValid.value &&
+        isLarguraValid.value &&
+        isComprimentoValid.value
+    )
 })
 
 async function create() {
@@ -98,8 +113,8 @@ async function create() {
     const requestOptions = {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
-          'Authorization': 'Bearer ' + authUser.token
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + authUser.token,
         },
         body: JSON.stringify(embalagemForm),
     }

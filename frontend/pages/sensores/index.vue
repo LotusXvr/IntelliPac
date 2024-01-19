@@ -97,6 +97,15 @@ const sensoresEmUso = ref(sensores.value.filter((sensor) => sensor.estado == 1))
 const sensoresProduto = ref(sensores.value.filter((sensor) => sensor.estado == 2))
 
 
+<<<<<<< Updated upstream
+=======
+if (sensores.value != null){
+  const sensoresDisponiveis = ref(sensores.value.filter((sensor) => sensor.estado == 0))
+  const sensoresEmUso = ref(sensores.value.filter((sensor) => sensor.estado == 1))
+  const sensoresProduto = ref(sensores.value.filter((sensor) => sensor.estado == 2))
+}
+
+>>>>>>> Stashed changes
 const deleteProduto = async (id) => {
     try {
         const response = await fetch(`${api}/sensores/${id}`, {

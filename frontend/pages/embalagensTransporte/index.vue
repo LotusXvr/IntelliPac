@@ -22,24 +22,36 @@
                 <td class="center">{{ embalagemDeTransporte.largura }}</td>
                 <td class="center">{{ embalagemDeTransporte.comprimento }}</td>
                 <td class="center">{{ estadoToString(embalagemDeTransporte.estado) }}</td>
-                <td class="center"> {{ embalagemDeTransporte.sensores.length }}</td>
+                <td class="center">{{ embalagemDeTransporte.sensores.length }}</td>
                 <td class="right">
-                    <nuxt-link :to="`/embalagensTransporte/${embalagemDeTransporte.id}`">Detalhes</nuxt-link>
+                    <nuxt-link :to="`/embalagensTransporte/${embalagemDeTransporte.id}`"
+                        >Detalhes</nuxt-link
+                    >
                     |
-                    <nuxt-link :to="'/embalagensTransporte/edit/' + embalagemDeTransporte.id">Editar</nuxt-link>
+                    <nuxt-link :to="'/embalagensTransporte/edit/' + embalagemDeTransporte.id"
+                        >Editar</nuxt-link
+                    >
                     |
-                    <nuxt-link :to="`/embalagensTransporte/${embalagemDeTransporte.id}` + '/Sensores'">
-                        Sensores</nuxt-link>
-                    <span v-if="hasEncomendas(embalagemDeTransporte) && embalagemDeTransporte.estado != 1">
+                    <nuxt-link
+                        :to="`/embalagensTransporte/${embalagemDeTransporte.id}` + '/Sensores'"
+                    >
+                        Sensores</nuxt-link
+                    >
+                    <span
+                        v-if="
+                            hasEncomendas(embalagemDeTransporte) &&
+                            embalagemDeTransporte.estado != 1
+                        "
+                    >
                         |
-                        <button @click="patchEstado(embalagemDeTransporte.id)">Enviar
-                            encomendas</button>
+                        <button @click="patchEstado(embalagemDeTransporte.id)">
+                            Enviar encomendas
+                        </button>
                     </span>
                     <span v-if="!hasEncomendas(embalagemDeTransporte)">
                         |
                         <button @click="deleteEncomenda(embalagemDeTransporte.id)">Excluir</button>
                     </span>
-
                 </td>
             </tr>
         </table>
@@ -69,14 +81,17 @@ const {
     data: embalagensDeTransporte,
     error,
     refresh,
-} = await useFetch(`${api}/embalagensDeTransporte`, { method: "GET", headers: {'Authorization': 'Bearer ' + authStore.token}})
+} = await useFetch(`${api}/embalagensDeTransporte`, {
+    method: "GET",
+    headers: { Authorization: "Bearer " + authStore.token },
+})
 
 const deleteEncomenda = async (id) => {
     try {
         const response = await fetch(`${api}/embalagensDeTransporte/${id}`, {
             method: "DELETE",
-            headers : {
-              'Authorization': 'Bearer ' + authStore.token
+            headers: {
+                Authorization: "Bearer " + authStore.token,
             },
         })
         if (response.ok) {
@@ -93,7 +108,7 @@ const patchEstado = async (id) => {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json",
-                'Authorization': 'Bearer ' + token.value
+                Authorization: "Bearer " + token.value,
             },
             body: JSON.stringify({
                 estado: 1,
@@ -121,5 +136,4 @@ const estadoToString = (estado) => {
             return "Estado Inválido"
     }
 }
-
 </script>

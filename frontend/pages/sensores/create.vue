@@ -1,4 +1,5 @@
 <template>
+    <Navbar/>
     <form @submit.prevent="create">
         <label for="tipo">Tipo</label>
         <select id="tipo" v-model="sensorForm.tipo" @change="updateUnidades">
@@ -21,6 +22,7 @@
 }
 </style>
 <script setup>
+import Navbar from "~/layouts/nav-bar.vue"
 import { ref, reactive, computed } from "vue"
 import { useAuthStore } from "~/store/auth-store"
 const authStore = useAuthStore()

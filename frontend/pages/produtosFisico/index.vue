@@ -14,12 +14,12 @@
                 <th>Peso</th>
                 <th>actions</th>
             </tr>
-            <tr v-for=" produto  in  produtos ">
-                <td> {{ produto.id }}</td>
+            <tr v-for="produto in produtos">
+                <td>{{ produto.id }}</td>
                 <td>{{ produto.nome }}</td>
                 <td>{{ produto.fabricanteUsername }}</td>
                 <td>{{ produto.peso }}</td>
-                <td style="display: flex; align-items: center;">
+                <td style="display: flex; align-items: center">
                     <nuxt-link :to="`/produtosFisico/${produto.id}`">Detalhes</nuxt-link>
                 </td>
             </tr>
@@ -32,12 +32,17 @@
 </template>
 <script setup>
 import { useAuthStore } from "../store/auth-store.js"
-import Navbar from "~/layouts/nav-bar.vue";
+import Navbar from "~/layouts/nav-bar.vue"
 const config = useRuntimeConfig()
 const authStore = useAuthStore()
 const { user } = authStore
 const api = config.public.API_URL
-const { data: produtos, error, refresh } = await useFetch(`${api}/produtosFisicos/fabricante/${user.username}`, { method: "GET", headers: {'Authorization': 'Bearer ' + authStore.token}})
-
-
+const {
+    data: produtos,
+    error,
+    refresh,
+} = await useFetch(`${api}/produtosFisicos/fabricante/${user.username}`, {
+    method: "GET",
+    headers: { Authorization: "Bearer " + authStore.token },
+})
 </script>

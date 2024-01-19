@@ -1,7 +1,6 @@
 <template>
+    <Navbar />
     <form @submit.prevent="create">
-        <Navbar />
-
         <label for="username">Nome: </label>
         <input id="username" v-model="produtoForm.nome" />
         <span class="error" v-if="!isNameValid"> ERRO: {{ formFeedback.nome }} </span>
@@ -14,9 +13,15 @@
         Primárias:
         <span v-for="embalagem in tiposEmbalagemPrimaria">
             <br />
-            <input type="checkbox" :value="embalagem.id" v-model="produtoForm.embalagensACriar" :disabled="isTipoEmbalagemPrimariaSelected &&
-                !produtoForm.embalagensACriar.includes(embalagem.id)
-                " />
+            <input
+                type="checkbox"
+                :value="embalagem.id"
+                v-model="produtoForm.embalagensACriar"
+                :disabled="
+                    isTipoEmbalagemPrimariaSelected &&
+                    !produtoForm.embalagensACriar.includes(embalagem.id)
+                "
+            />
             {{ embalagem.material }} -
             {{ construirTamanhoString(embalagem.comprimento, embalagem.largura, embalagem.altura) }}
         </span>
@@ -29,9 +34,15 @@
         Secundárias:
         <span v-for="embalagem in tiposEmbalagemSecundaria">
             <br />
-            <input type="checkbox" :value="embalagem.id" v-model="produtoForm.embalagensACriar" :disabled="isTipoEmbalagemSecundariaSelected &&
-                !produtoForm.embalagensACriar.includes(embalagem.id)
-                " />
+            <input
+                type="checkbox"
+                :value="embalagem.id"
+                v-model="produtoForm.embalagensACriar"
+                :disabled="
+                    isTipoEmbalagemSecundariaSelected &&
+                    !produtoForm.embalagensACriar.includes(embalagem.id)
+                "
+            />
             {{ embalagem.material }} -
             {{ construirTamanhoString(embalagem.comprimento, embalagem.largura, embalagem.altura) }}
         </span>
@@ -40,9 +51,15 @@
         Terciárias:
         <span v-for="embalagem in tiposEmbalagemTercearia">
             <br />
-            <input type="checkbox" :value="embalagem.id" v-model="produtoForm.embalagensACriar" :disabled="isTipoEmbalagemTerceariaSelected &&
-                !produtoForm.embalagensACriar.includes(embalagem.id)
-                " />
+            <input
+                type="checkbox"
+                :value="embalagem.id"
+                v-model="produtoForm.embalagensACriar"
+                :disabled="
+                    isTipoEmbalagemTerceariaSelected &&
+                    !produtoForm.embalagensACriar.includes(embalagem.id)
+                "
+            />
             {{ embalagem.material }} -
             {{ construirTamanhoString(embalagem.comprimento, embalagem.largura, embalagem.altura) }}
         </span>
@@ -84,7 +101,10 @@ const config = useRuntimeConfig()
 const api = config.public.API_URL
 const message = ref("")
 
-const { data: embalagensACriar } = await useFetch(`${api}/tipoEmbalagens`, { method: "GET", headers: {'Authorization': 'Bearer ' + authStore.token}})
+const { data: embalagensACriar } = await useFetch(`${api}/tipoEmbalagens`, {
+    method: "GET",
+    headers: { Authorization: "Bearer " + authStore.token },
+})
 
 const tiposEmbalagemPrimaria = computed(() => {
     return embalagensACriar.value.filter((embalagem) => embalagem.tipo == 1)
@@ -156,7 +176,12 @@ const isEmbalagemSelected = computed(() => {
 })
 
 const isFormValid = computed(() => {
-    return isNameValid.value && isPesoValid.value && produtoForm.embalagensACriar.length > 0 && isEmbalagemSelected.value
+    return (
+        isNameValid.value &&
+        isPesoValid.value &&
+        produtoForm.embalagensACriar.length > 0 &&
+        isEmbalagemSelected.value
+    )
 })
 
 const tipoNumeroParaString = (tipo) => {
@@ -186,9 +211,9 @@ async function create() {
 
     const requestOptions = {
         method: "POST",
-        headers: { 
+        headers: {
             "Content-Type": "application/json",
-            'Authorization': 'Bearer ' + authStore.token
+            Authorization: "Bearer " + authStore.token,
         },
         body: JSON.stringify(requestBody),
     }

@@ -1,4 +1,5 @@
 <template>
+    <Navbar />
     <div v-if="encomenda">
         <h2>Detalhes de encomenda #{{ encomenda.id }}</h2>
         <p>Cliente: {{ encomenda.consumidorFinal }}</p>
@@ -30,13 +31,12 @@
                                     Ultima observação:
                                     <ul>
                                         <li>
-                                            {{ sensor.observacoes[0].timestamp }} - {{ sensor.observacoes[0].valor }} {{ sensor.unidade }}
+                                            {{ sensor.observacoes[0].timestamp }} -
+                                            {{ sensor.observacoes[0].valor }} {{ sensor.unidade }}
                                         </li>
                                     </ul>
                                 </div>
-                                <div v-else>
-                                    Nenhuma observação registada
-                                </div>
+                                <div v-else>Nenhuma observação registada</div>
                             </li>
                         </ul>
                     </li>
@@ -65,10 +65,10 @@
                             Ultima observação:
                             <ul>
                                 <li>
-                                    {{ sensor.observacoes[0].timestamp }} - {{ sensor.observacoes[0].valor }} {{ sensor.unidade }}
+                                    {{ sensor.observacoes[0].timestamp }} -
+                                    {{ sensor.observacoes[0].valor }} {{ sensor.unidade }}
                                 </li>
                             </ul>
-                            
                         </div>
                         <div v-else>
                             <h4>Ainda nenhuma observação registada</h4>
@@ -86,13 +86,17 @@
     {{ messages }}
 </template>
 <script setup>
+import Navbar from "~/layouts/nav-bar.vue"
 import { useAuthStore } from "~/store/auth-store"
 const authStore = useAuthStore()
 const route = useRoute()
 const id = route.params.id
 const config = useRuntimeConfig()
 const api = config.public.API_URL
-const { data: encomenda, error: proErr } = await useFetch(`${api}/encomendas/${id}`, { method: "GET", headers: {'Authorization': 'Bearer ' + authStore.token}})
+const { data: encomenda, error: proErr } = await useFetch(`${api}/encomendas/${id}`, {
+    method: "GET",
+    headers: { Authorization: "Bearer " + authStore.token },
+})
 const messages = ref([])
 if (proErr.value) messages.value.push(proErr.value)
 

@@ -1,4 +1,5 @@
 <template>
+    <Navbar />
     <div v-if="embalagem">
         <h2>Detalhes de {{ embalagem.id }} {{ embalagem.material }}</h2>
         <p>Id: {{ embalagem.id }}</p>
@@ -15,6 +16,7 @@
     {{ messages }}
 </template>
 <script setup>
+import Navbar from "~/layouts/nav-bar.vue"
 const route = useRoute()
 const id = route.params.id
 const config = useRuntimeConfig()

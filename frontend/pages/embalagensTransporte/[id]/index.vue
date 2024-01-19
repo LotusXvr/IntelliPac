@@ -1,4 +1,5 @@
 <template>
+    <Navbar />
     <div v-if="embalagemDeTransporte">
         <h2>Detalhes de {{ embalagemDeTransporte.id }} {{ embalagemDeTransporte.material }}</h2>
         <p>Id: {{ embalagemDeTransporte.id }}</p>
@@ -11,9 +12,8 @@
             <li v-for="encomenda in embalagemDeTransporte.encomendas" :key="encomenda.id">
                 <p>Id: {{ encomenda.id }}</p>
                 <p>Consumidor Final: {{ encomenda.consumidorFinal }}</p>
-                <p>Data da encomenda: {{encomenda.dataEncomenda }} </p>
-                <p>Estado: {{encomenda.estado}}</p>
-
+                <p>Data da encomenda: {{ encomenda.dataEncomenda }}</p>
+                <p>Estado: {{ encomenda.estado }}</p>
             </li>
         </ul>
         <p>Sensores:</p>
@@ -28,17 +28,18 @@
     {{ messages }}
 </template>
 <script setup>
+import Navbar from "~/layouts/nav-bar.vue"
 import { useAuthStore } from "~/store/auth-store"
-const authUser = useAuthStore();
+const authUser = useAuthStore()
 
 const route = useRoute()
 const id = route.params.id
 const config = useRuntimeConfig()
 const api = config.public.API_URL
-const { data: embalagemDeTransporte, error: proErr } = await useFetch(`${api}/embalagensDeTransporte/${id}`,
-    { method: "GET",
-      headers: {'Authorization': 'Bearer ' + authUser.token}
-    })
+const { data: embalagemDeTransporte, error: proErr } = await useFetch(
+    `${api}/embalagensDeTransporte/${id}`,
+    { method: "GET", headers: { Authorization: "Bearer " + authUser.token } }
+)
 const messages = ref([])
 if (proErr.value) messages.value.push(proErr.value)
 </script>

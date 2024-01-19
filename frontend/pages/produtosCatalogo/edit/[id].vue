@@ -1,4 +1,5 @@
 <template>
+  <Navbar />
   <div v-if="produto">
     <h2 v-once>Editar produto - {{ produto.nome }}</h2>
 
@@ -55,10 +56,11 @@
 }
 </style>
 <script setup>
+import Navbar from "../layouts/nav-bar.vue"
 import { useAuthStore } from "../store/auth-store.js"
 
-const auhtStore = useAuthStore()
-const { user } = auhtStore
+const authStore = useAuthStore()
+const { user } = authStore
 const route = useRoute();
 const id = route.params.id;
 const config = useRuntimeConfig();

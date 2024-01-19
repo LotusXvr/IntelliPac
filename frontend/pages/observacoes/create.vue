@@ -1,4 +1,5 @@
 <template>
+    <Navbar />
     <form @submit.prevent="create">
         <label for="valor">Valor: </label>
         <input id="valor" v-model="observacaoForm.valor" />
@@ -13,7 +14,8 @@
                 </option>
             </select>
             <span v-if="observacaoForm.sensorId !== null && !isSensorValid" class="error">
-                ERRO: {{ formFeedback.sensorId }}</span>
+                ERRO: {{ formFeedback.sensorId }}</span
+            >
         </div>
 
         <br />
@@ -27,6 +29,7 @@
 }
 </style>
 <script setup>
+import Navbar from "~/layouts/nav-bar.vue"
 import { useAuthStore } from "~/store/auth-store"
 const authStore = useAuthStore()
 import { ref, reactive, computed } from "vue"
@@ -42,7 +45,10 @@ const formFeedback = reactive({
 
 const config = useRuntimeConfig()
 const api = config.public.API_URL
-const { data: sensores } = await useFetch(`${api}/sensores`, { method: "GET", headers: {'Authorization': 'Bearer ' + authStore.token}})
+const { data: sensores } = await useFetch(`${api}/sensores`, {
+    method: "GET",
+    headers: { Authorization: "Bearer " + authStore.token },
+})
 const message = ref("")
 
 const isValorValid = computed(() => {
@@ -83,7 +89,7 @@ async function create() {
 
     const requestOptions = {
         method: "POST",
-        headers: { "Content-Type": "application/json", 'Authorization': 'Bearer ' + authStore.token },
+        headers: { "Content-Type": "application/json", Authorization: "Bearer " + authStore.token },
         body: JSON.stringify(observacaoForm),
     }
 

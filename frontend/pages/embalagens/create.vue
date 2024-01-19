@@ -1,9 +1,10 @@
 <template>
+    <Navbar />
     <form @submit.prevent="create">
         <label for="material">Material: </label>
         <input id="material" v-model="embalagemForm.material" />
         <span class="error" v-if="!isMaterialValid">{{ formFeedback.material }}</span>
-        <br>
+        <br />
 
         <label for="comprimento">Comprimento: </label>
         <input id="comprimento" v-model="embalagemForm.comprimento" />
@@ -19,9 +20,8 @@
         <input id="altura" v-model="embalagemForm.altura" />
         <span class="error" v-if="!isAlturaValid">{{ formFeedback.altura }}</span>
 
-        <br>
+        <br />
         <button type="submit" :disabled="!isFormValid">Criar embalagem</button>
-
     </form>
     {{ message }}
 </template>
@@ -31,6 +31,7 @@
 }
 </style>
 <script setup>
+import Navbar from "~/layouts/nav-bar.vue"
 import { ref, reactive, computed } from "vue"
 const embalagemForm = reactive({
     material: null,
@@ -116,7 +117,12 @@ const isAlturaValid = computed(() => {
 })
 
 const isFormValid = computed(() => {
-    return isMaterialValid.value && isComprimentoValid.value && isLarguraValid.value && isAlturaValid.value
+    return (
+        isMaterialValid.value &&
+        isComprimentoValid.value &&
+        isLarguraValid.value &&
+        isAlturaValid.value
+    )
 })
 
 async function create() {

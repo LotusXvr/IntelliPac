@@ -35,7 +35,7 @@
 <script setup>
 import { useAuthStore } from "~/store/auth-store"
 const authStore = useAuthStore()
-import Navbar from "~/layouts/nav-bar.vue";
+import Navbar from "~/layouts/nav-bar.vue"
 const config = useRuntimeConfig()
 const api = config.public.API_URL
 const { data: observacoes, error, refresh } = await useFetch(`${api}/observacoes`, { method: "GET", headers: { 'Authorization': 'Bearer ' + authStore.token } })
@@ -44,7 +44,11 @@ const deleteObservacao = async (id) => {
     try {
         const response = await fetch(`${api}/observacoes/${id}`, {
             method: "DELETE",
+<<<<<<< Updated upstream
             headers: { 'Authorization': 'Bearer ' + authStore.token }
+=======
+            headers: { Authorization: "Bearer " + authStore.token },
+>>>>>>> Stashed changes
         })
         if (response.ok) {
             refresh()

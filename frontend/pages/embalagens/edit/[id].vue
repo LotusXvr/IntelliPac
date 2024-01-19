@@ -37,6 +37,7 @@
 }
 </style>
 <script setup>
+import Navbar from "~/layouts/nav-bar.vue"
 const route = useRoute()
 const id = route.params.id
 const config = useRuntimeConfig()

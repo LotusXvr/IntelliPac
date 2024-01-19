@@ -5,12 +5,19 @@
             Consumidor Final:
             <select v-model="encomendaForm.consumidorFinal">
                 <option value="">--- Please select Consumidor Final ---</option>
-                <option v-for="consumidorFinal in consumidoresFinais" :value="consumidorFinal.username">
+                <option
+                    v-for="consumidorFinal in consumidoresFinais"
+                    :value="consumidorFinal.username"
+                >
                     {{ consumidorFinal.name }}
                 </option>
             </select>
-            <span v-if="encomendaForm.consumidorFinal !== null && !isConsumidorFinalValid" class="error">
-                ERRO: {{ formFeedback.consumidorFinal }}</span>
+            <span
+                v-if="encomendaForm.consumidorFinal !== null && !isConsumidorFinalValid"
+                class="error"
+            >
+                ERRO: {{ formFeedback.consumidorFinal }}</span
+            >
         </div>
         <br />
         <div>
@@ -28,15 +35,24 @@
         <div>
             Produtos:
             <p v-for="produto in produtosCatalogo">
-                <input type="checkbox" :value="produto.id" v-model="encomendaForm.produtosCatalogo" />
+                <input
+                    type="checkbox"
+                    :value="produto.id"
+                    v-model="encomendaForm.produtosCatalogo"
+                />
                 {{ produto.nome }}
-            <ul> Embalagens:
-                <li v-for="embalagem in produto.embalagensACriar">{{ tipoNumeroParaString(embalagem.tipo) }}: {{
-                    embalagem.material }}</li>
-            </ul>
+                <span
+                    ><ul>
+                        Embalagens:
+                        <li v-for="embalagem in produto.embalagensACriar">
+                            {{ tipoNumeroParaString(embalagem.tipo) }}: {{ embalagem.material }}
+                        </li>
+                    </ul>
+                </span>
             </p>
             <span v-if="!isProdutoSelected" class="error">
-                ERRO: {{ formFeedback.produtosCatalogo }}</span>
+                ERRO: {{ formFeedback.produtosCatalogo }}</span
+            >
         </div>
         <br />
 
@@ -73,9 +89,18 @@ const formFeedback = reactive({
 
 const config = useRuntimeConfig()
 const api = config.public.API_URL
-const { data: operadoresLogistica } = await useFetch(`${api}/operadores`, { method: "GET", headers: {'Authorization': 'Bearer ' + authStore.token}})
-const { data: consumidoresFinais } = await useFetch(`${api}/clientes`, { method: "GET", headers: {'Authorization': 'Bearer ' + authStore.token}})
-const { data: produtosCatalogo } = await useFetch(`${api}/produtosCatalogo`, { method: "GET", headers: {'Authorization': 'Bearer ' + authStore.token}})
+const { data: operadoresLogistica } = await useFetch(`${api}/operadores`, {
+    method: "GET",
+    headers: { Authorization: "Bearer " + authStore.token },
+})
+const { data: consumidoresFinais } = await useFetch(`${api}/clientes`, {
+    method: "GET",
+    headers: { Authorization: "Bearer " + authStore.token },
+})
+const { data: produtosCatalogo } = await useFetch(`${api}/produtosCatalogo`, {
+    method: "GET",
+    headers: { Authorization: "Bearer " + authStore.token },
+})
 const message = ref("")
 
 const tipoNumeroParaString = (tipo) => {
@@ -122,10 +147,7 @@ const isProdutoSelected = computed(() => {
 })
 
 const isFormValid = computed(() => {
-    return (
-        isConsumidorSelected.value &&
-        isProdutoSelected.value
-    )
+    return isConsumidorSelected.value && isProdutoSelected.value
 })
 
 async function create() {
@@ -144,7 +166,7 @@ async function create() {
 
     const requestOptions = {
         method: "POST",
-        headers: { "Content-Type": "application/json", 'Authorization': 'Bearer ' + authStore.token },
+        headers: { "Content-Type": "application/json", Authorization: "Bearer " + authStore.token },
         body: JSON.stringify(requestBody),
     }
 

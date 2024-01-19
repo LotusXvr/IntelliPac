@@ -1,4 +1,5 @@
 <template>
+    <Navbar />
     <div v-if="sensor">
         <form @submit.prevent="create">
             <label for="valor">Valor: </label>
@@ -21,6 +22,7 @@
 }
 </style>
 <script setup>
+import Navbar from "~/layouts/nav-bar.vue"
 import { useAuthStore } from "~/store/auth-store"
 const authStore = useAuthStore()
 import { ref, reactive, computed } from "vue"
@@ -43,7 +45,10 @@ const sensor = ref(null)
 
 const fetchSensor = async () => {
     try {
-        const { data: response } = await useFetch(`${api}/sensores/${id}`, { method: "GET", headers: {'Authorization': 'Bearer ' + authStore.token}})
+        const { data: response } = await useFetch(`${api}/sensores/${id}`, {
+            method: "GET",
+            headers: { Authorization: "Bearer " + authStore.token },
+        })
         if (!response) {
             console.log(response)
             throw new Error(response.statusText)
@@ -85,7 +90,7 @@ async function create() {
 
     const requestOptions = {
         method: "POST",
-        headers: { "Content-Type": "application/json", 'Authorization': 'Bearer ' + authStore.token },
+        headers: { "Content-Type": "application/json", Authorization: "Bearer " + authStore.token },
         body: JSON.stringify(observacaoForm),
     }
 

@@ -1,4 +1,5 @@
 <template>
+    <Narbar />
     <div v-if="sensor">
         <h2>Detalhes de {{ sensor.idSensor }} {{ sensor.tipo }}</h2>
 
@@ -34,6 +35,7 @@
     {{ messages }}
 </template>
 <script setup>
+import Navbar from "~/layouts/nav-bar.vue"
 import { useAuthStore } from "~/store/auth-store"
 const authStore = useAuthStore()
 const route = useRoute()

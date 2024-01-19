@@ -1,4 +1,5 @@
 <template>
+    <Navbar/>
     <div v-if="sensor">
         <h2 v-once>Editar sensor - {{ sensor.idSensor }} {{ sensor.tipo }}</h2>
 
@@ -31,6 +32,7 @@
 }
 </style>
 <script setup>
+import Navbar from "~/layouts/nav-bar.vue"
 const route = useRoute()
 const id = route.params.id
 const config = useRuntimeConfig()

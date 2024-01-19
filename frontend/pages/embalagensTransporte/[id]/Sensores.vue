@@ -1,4 +1,5 @@
 <template>
+    <Navbar />
     <div v-if="embalagem">
         <h2 v-once>Adicionar Sensor a embalagem - {{ embalagem.id }} {{ embalagem.material }}</h2>
 
@@ -37,8 +38,9 @@
 }
 </style>
 <script setup>
+import Navbar from "~/layouts/nav-bar.vue"
 import { useAuthStore } from "~/store/auth-store"
-const authUser = useAuthStore();
+const authUser = useAuthStore()
 
 const route = useRoute()
 const id = route.params.id
@@ -55,10 +57,21 @@ const formFeedback = reactive({
 })
 
 const { data: embalagem, refresh: refreshEmbalagem } = await useFetch(
+<<<<<<< Updated upstream
     `${api}/embalagensDeTransporte/${id}`, { method: "GET", headers: { 'Authorization': 'Bearer ' + authUser.token } }
 )
 
 const { data: sensores, refresh: refreshSensor } = await useFetch(`${api}/sensores`, { method: "GET", headers: { 'Authorization': 'Bearer ' + authUser.token } })
+=======
+    `${api}/embalagensDeTransporte/${id}`,
+    { method: "GET", headers: { Authorization: "Bearer " + authUser.token } }
+)
+
+const { data: sensores, refresh: refreshSensor } = await useFetch(`${api}/sensores`, {
+    method: "GET",
+    headers: { Authorization: "Bearer " + authUser.token },
+})
+>>>>>>> Stashed changes
 
 const isFormValid = computed(() => {
     console.log(sensorForm.sensorId)
@@ -71,7 +84,11 @@ const addSensor = async () => {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
+<<<<<<< Updated upstream
                 'Authorization': 'Bearer ' + authUser.token
+=======
+                Authorization: "Bearer " + authUser.token,
+>>>>>>> Stashed changes
             },
             body: JSON.stringify(sensorForm.sensorId),
         }
@@ -115,7 +132,11 @@ const removerSensor = async (idSensor) => {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
+<<<<<<< Updated upstream
                 'Authorization': 'Bearer ' + authUser.token
+=======
+                Authorization: "Bearer " + authUser.token,
+>>>>>>> Stashed changes
             },
             body: JSON.stringify(idSensor),
         }

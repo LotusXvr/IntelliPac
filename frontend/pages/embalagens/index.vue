@@ -12,7 +12,7 @@
             </tr>
             <tr v-for="embalagem in embalagens">
                 <td>{{ embalagem.material }}</td>
-                <td>{{ embalagem.comprimento }}x{{ embalagem.largura }}x{{ embalagem.altura }} </td>
+                <td>{{ embalagem.comprimento }}x{{ embalagem.largura }}x{{ embalagem.altura }}</td>
 
                 <td>
                     <nuxt-link :to="`/embalagens/${embalagem.id}`">Detalhes</nuxt-link>
@@ -30,7 +30,7 @@
     <nuxt-link to="/">Voltar à Home</nuxt-link>
 </template>
 <script setup>
-import Navbar from "~/layouts/nav-bar.vue";
+import Navbar from "~/layouts/nav-bar.vue"
 const config = useRuntimeConfig()
 const api = config.public.API_URL
 const { data: embalagens, error, refresh } = await useFetch(`${api}/embalagens`)
