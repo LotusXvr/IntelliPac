@@ -24,25 +24,15 @@
                 <td class="center">{{ estadoToString(embalagemDeTransporte.estado) }}</td>
                 <td class="center">{{ embalagemDeTransporte.sensores.length }}</td>
                 <td class="right">
-                    <nuxt-link :to="`/embalagensTransporte/${embalagemDeTransporte.id}`"
-                        >Detalhes</nuxt-link
-                    >
+                    <nuxt-link :to="`/embalagensTransporte/${embalagemDeTransporte.id}`">Detalhes</nuxt-link>
                     |
-                    <nuxt-link :to="'/embalagensTransporte/edit/' + embalagemDeTransporte.id"
-                        >Editar</nuxt-link
-                    >
+                    <nuxt-link :to="'/embalagensTransporte/edit/' + embalagemDeTransporte.id">Editar</nuxt-link>
                     |
-                    <nuxt-link
-                        :to="`/embalagensTransporte/${embalagemDeTransporte.id}` + '/Sensores'"
-                    >
-                        Sensores</nuxt-link
-                    >
-                    <span
-                        v-if="
-                            hasEncomendas(embalagemDeTransporte) &&
-                            embalagemDeTransporte.estado != 1
-                        "
-                    >
+                    <nuxt-link :to="`/embalagensTransporte/${embalagemDeTransporte.id}` + '/Sensores'">
+                        Sensores</nuxt-link>
+                    <span v-if="hasEncomendas(embalagemDeTransporte) &&
+                        embalagemDeTransporte.estado != 1
+                        ">
                         |
                         <button @click="patchEstado(embalagemDeTransporte.id)">
                             Enviar encomendas
@@ -108,7 +98,7 @@ const patchEstado = async (id) => {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json",
-                Authorization: "Bearer " + token.value,
+                Authorization: "Bearer " + authStore.token,
             },
             body: JSON.stringify({
                 estado: 1,
