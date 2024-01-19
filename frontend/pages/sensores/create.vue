@@ -22,6 +22,8 @@
 </style>
 <script setup>
 import { ref, reactive, computed } from "vue"
+import { useAuthStore } from "~/store/auth-store"
+const authStore = useAuthStore()
 const sensorForm = reactive({
     tipo: null,
     unidade: null,
@@ -45,7 +47,10 @@ const tipos = ["Temperatura", "Humidade", "Luminosidade", "Pressão"]
 async function create() {
     const requestOptions = {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { 
+            "Content-Type": "application/json",
+            'Authorization': 'Bearer ' + authStore.token
+        },
         body: JSON.stringify(sensorForm),
     }
 
@@ -54,7 +59,7 @@ async function create() {
     message.value = error.value
 }
 
-const { data: tipoSensores } = await useFetch(`${api}/tipoSensor`)
+const { data: tipoSensores } = await useFetch(`${api}/tipoSensor`, { method: "GET", headers: {'Authorization': 'Bearer ' + authStore.token}})
 
 const updateUnidades = () =>{
     if (Array.isArray(tipoSensores.value)) {

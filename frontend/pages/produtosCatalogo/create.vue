@@ -84,7 +84,7 @@ const config = useRuntimeConfig()
 const api = config.public.API_URL
 const message = ref("")
 
-const { data: embalagensACriar } = await useFetch(`${api}/tipoEmbalagens`)
+const { data: embalagensACriar } = await useFetch(`${api}/tipoEmbalagens`, { method: "GET", headers: {'Authorization': 'Bearer ' + authStore.token}})
 
 const tiposEmbalagemPrimaria = computed(() => {
     return embalagensACriar.value.filter((embalagem) => embalagem.tipo == 1)
@@ -186,7 +186,10 @@ async function create() {
 
     const requestOptions = {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { 
+            "Content-Type": "application/json",
+            'Authorization': 'Bearer ' + authStore.token
+        },
         body: JSON.stringify(requestBody),
     }
 

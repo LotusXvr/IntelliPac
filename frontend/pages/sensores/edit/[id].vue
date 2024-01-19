@@ -53,7 +53,7 @@ const formFeedback = reactive({
 
 const fetchSensor = async () => {
     try {
-        const response = await fetch(`${api}/sensores/${id}`)
+        const response = await fetch(`${api}/sensores/${id}`, { method: "GET", headers: {'Authorization': 'Bearer ' + authStore.token}})
         if (!response.ok) {
             throw new Error(response.statusText)
         }
@@ -77,7 +77,10 @@ const updateSensor = async () => {
     try {
         const requestOptions = {
             method: "PUT",
-            headers: { "Content-Type": "application/json" },
+            headers: { 
+                "Content-Type": "application/json",
+                'Authorization': 'Bearer ' + authStore.token
+                     },
             body: JSON.stringify(sensorForm),
         }
 

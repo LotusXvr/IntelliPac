@@ -34,6 +34,8 @@
     {{ messages }}
 </template>
 <script setup>
+import { useAuthStore } from "~/store/auth-store"
+const authStore = useAuthStore()
 const route = useRoute()
 const id = route.params.id
 const config = useRuntimeConfig()
@@ -46,7 +48,7 @@ import Chart from "chart.js/auto"
 
 const fetchSensor = async () => {
     try {
-        const { data: response } = await useFetch(`${api}/sensores/${id}`)
+        const { data: response } = await useFetch(`${api}/sensores/${id}`, { method: "GET", headers: {'Authorization': 'Bearer ' + authStore.token}})
         if (!response) {
             console.log(response)
             throw new Error(response.statusText)
@@ -101,6 +103,9 @@ const gerarObservacao = async (id) => {
     try {
         const response = await fetch(`${api}/sensores/${id}/gerarObservacao`, {
             method: "POST",
+            headers : {
+                'Authorization': 'Bearer ' + authStore.token
+            }
         })
         if (response.status == 200) {
             refresh()

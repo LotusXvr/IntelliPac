@@ -85,6 +85,8 @@
 </template>
 <script setup>
 import Navbar from "~/layouts/nav-bar.vue"
+import { useAuthStore } from "~/store/auth-store"
+const authStore = useAuthStore()
 const config = useRuntimeConfig()
 const api = config.public.API_URL
 const { data: sensores, error, refresh } = await useFetch(`${api}/sensores`)
@@ -97,6 +99,9 @@ const deleteProduto = async (id) => {
     try {
         const response = await fetch(`${api}/sensores/${id}`, {
             method: "DELETE",
+            headers: {
+                'Authorization':  'Bearer ' + authStore.token
+            },
         })
         if (response.ok) {
             refresh()
@@ -110,6 +115,9 @@ const gerarObservacao = async (id) => {
     try {
         const response = await fetch(`${api}/sensores/${id}/gerarObservacao`, {
             method: "POST",
+            headers : {
+                'Authorization':  'Bearer ' + authStore.token
+            }
         })
         if (response.status == 200) {
             refresh()
