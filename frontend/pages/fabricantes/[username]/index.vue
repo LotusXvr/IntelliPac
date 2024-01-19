@@ -15,12 +15,14 @@
   {{ messages }}
 </template>
 <script setup>
+import { useAuthStore } from "~/store/auth-store"
+const authStore = useAuthStore()
 const route = useRoute();
 const username = route.params.username;
 const config = useRuntimeConfig();
 const api = config.public.API_URL;
 const { data: fabricante, error: fabricanteErr } = await useFetch(
-  `${api}/fabricantes/${username}`
+  `${api}/fabricantes/${username}`, { method: "GET", headers: {'Authorization': 'Bearer ' + authStore.token}}
 );
 const messages = ref([]);
 if (fabricanteErr.value) messages.value.push(fabricanteErr.value);

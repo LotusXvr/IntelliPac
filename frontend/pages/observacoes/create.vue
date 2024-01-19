@@ -27,6 +27,8 @@
 }
 </style>
 <script setup>
+import { useAuthStore } from "~/store/auth-store"
+const authStore = useAuthStore()
 import { ref, reactive, computed } from "vue"
 const observacaoForm = reactive({
     valor: null,
@@ -40,7 +42,7 @@ const formFeedback = reactive({
 
 const config = useRuntimeConfig()
 const api = config.public.API_URL
-const { data: sensores } = await useFetch(`${api}/sensores`)
+const { data: sensores } = await useFetch(`${api}/sensores`, { method: "GET", headers: {'Authorization': 'Bearer ' + authStore.token}})
 const message = ref("")
 
 const isValorValid = computed(() => {
@@ -77,12 +79,11 @@ const isFormValid = computed(() => {
 })
 
 async function create() {
-    console.log(observacaoForm)
     observacaoForm.sensorId = observacaoForm.sensorId
 
     const requestOptions = {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", 'Authorization': 'Bearer ' + authStore.token },
         body: JSON.stringify(observacaoForm),
     }
 

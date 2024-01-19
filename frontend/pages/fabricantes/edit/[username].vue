@@ -26,6 +26,8 @@
 }
 </style>
 <script setup>
+import { useAuthStore } from "~/store/auth-store"
+const authStore = useAuthStore()
 const route = useRoute();
 const username = route.params.username;
 const config = useRuntimeConfig();
@@ -46,7 +48,7 @@ const formFeedback = reactive({
 
 const fetchFabricante = async () => {
   try {
-    const response = await fetch(`${api}/fabricantes/${username}`);
+    const response = await fetch(`${api}/fabricantes/${username}`, { method: "GET", headers: {'Authorization': 'Bearer ' + authStore.token}});
     if (!response.ok) {
       throw new Error(response.statusText);
     }
@@ -98,7 +100,7 @@ const updateFabricante = async () => {
   try {
     const requestOptions = {
       method: "PUT",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", 'Authorization': 'Bearer ' + authStore.token },
       body: JSON.stringify(fabricanteForm),
     };
 

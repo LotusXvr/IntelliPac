@@ -28,11 +28,17 @@
     {{ messages }}
 </template>
 <script setup>
+import { useAuthStore } from "~/store/auth-store"
+const authUser = useAuthStore();
+
 const route = useRoute()
 const id = route.params.id
 const config = useRuntimeConfig()
 const api = config.public.API_URL
-const { data: embalagemDeTransporte, error: proErr } = await useFetch(`${api}/embalagensDeTransporte/${id}`)
+const { data: embalagemDeTransporte, error: proErr } = await useFetch(`${api}/embalagensDeTransporte/${id}`,
+    { method: "GET",
+      headers: {'Authorization': 'Bearer ' + authUser.token}
+    })
 const messages = ref([])
 if (proErr.value) messages.value.push(proErr.value)
 </script>

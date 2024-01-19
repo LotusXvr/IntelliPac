@@ -37,6 +37,9 @@
 }
 </style>
 <script setup>
+import { useAuthStore } from "~/store/auth-store"
+const authUser = useAuthStore();
+
 const route = useRoute()
 const id = route.params.id
 const config = useRuntimeConfig()
@@ -52,10 +55,10 @@ const formFeedback = reactive({
 })
 
 const { data: embalagem, refresh: refreshEmbalagem } = await useFetch(
-    `${api}/embalagensDeTransporte/${id}`
+    `${api}/embalagensDeTransporte/${id}`, { method: "GET", headers: {'Authorization': 'Bearer ' + authUser.token}}
 )
 
-const { data: sensores, refresh: refreshSensor } = await useFetch(`${api}/sensores`)
+const { data: sensores, refresh: refreshSensor } = await useFetch(`${api}/sensores`, { method: "GET", headers: {'Authorization': 'Bearer ' + authUser.token}})
 
 const isFormValid = computed(() => {
     console.log(sensorForm.sensorId)
@@ -66,7 +69,8 @@ const addSensor = async () => {
     try {
         const requestOptions = {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: { "Content-Type": "application/json",
+              'Authorization': 'Bearer ' + authUser.token},
             body: JSON.stringify(sensorForm.sensorId),
         }
 
@@ -107,7 +111,8 @@ const removerSensor = async (idSensor) => {
     try {
         const requestOptions = {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: { "Content-Type": "application/json",
+              'Authorization': 'Bearer ' + authUser.token},
             body: JSON.stringify(idSensor),
         }
 

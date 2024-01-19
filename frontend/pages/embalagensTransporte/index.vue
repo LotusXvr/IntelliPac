@@ -62,7 +62,7 @@
 import Navbar from "~/layouts/nav-bar.vue"
 import { useAuthStore } from "~/store/auth-store"
 const authStore = useAuthStore()
-const { user } = authStore
+const { user, token } = authStore
 const config = useRuntimeConfig()
 const api = config.public.API_URL
 const {
@@ -75,6 +75,9 @@ const deleteEncomenda = async (id) => {
     try {
         const response = await fetch(`${api}/embalagensDeTransporte/${id}`, {
             method: "DELETE",
+            headers : {
+              'Authorization': 'Bearer ' + token.value
+            },
         })
         if (response.ok) {
             refresh()
@@ -90,6 +93,7 @@ const patchEstado = async (id) => {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json",
+                'Authorization': 'Bearer ' + token.value
             },
             body: JSON.stringify({
                 estado: 1,

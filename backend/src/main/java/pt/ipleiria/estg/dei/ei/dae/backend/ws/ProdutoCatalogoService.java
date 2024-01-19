@@ -1,5 +1,6 @@
 package pt.ipleiria.estg.dei.ei.dae.backend.ws;
 
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.ejb.EJB;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Context;
@@ -16,6 +17,7 @@ import pt.ipleiria.estg.dei.ei.dae.backend.entities.*;
 import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyConstraintViolationException;
 import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyEntityExistsException;
 import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyEntityNotFoundException;
+import pt.ipleiria.estg.dei.ei.dae.backend.security.Authenticated;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,6 +25,7 @@ import java.util.stream.Collectors;
 @Path("produtosCatalogo")
 @Produces({MediaType.APPLICATION_JSON})
 @Consumes({MediaType.APPLICATION_JSON})
+@Authenticated
 public class ProdutoCatalogoService {
 
     @EJB
@@ -83,22 +86,30 @@ public class ProdutoCatalogoService {
 
     @GET // means: to call this endpoint, we need to use the HTTP GET method
     @Path("/") // means: the relative url path is “/api/students/”
+    @RolesAllowed({"Cliente", "OperadorDeLogistica"})
     public List<ProdutoCatalogoDTO> getAllProdutosCatalogo() {
         return toDTOs(produtoCatalogoBean.getAllProductsCatalogo());
     }
-
+    @RolesAllowed({"FabricanteDeProdutos"})
     @POST
     @Path("/")
-    public Response create(ProdutoCatalogoDTO produtoCatalogoDTO)
-            throws Exception {
+    public Response create(ProdutoCatalogoDTO produtoCatalogoDTO) throws Exception {
+        var principal = securityContext.getUserPrincipal();
+        if(!principal.getName().equals(produtoCatalogoDTO.getFabricanteUsername())){
+            return Response.status(Response.Status.FORBIDDEN).build();
+        }
         ProdutoCatalogo produtoCatalogo = produtoCatalogoBean.create(produtoCatalogoDTO);
         return Response.status(Response.Status.CREATED).entity(toDTONoProdutos(produtoCatalogo)).build();
     }
-
+    @RolesAllowed({"FabricanteDeProdutos"})
     @PUT
     @Path("{id}")
     public Response updateProdutoCatalogo(@PathParam("id") long id, ProdutoCatalogoDTO produtoCatalogoDTO) throws MyEntityNotFoundException, MyConstraintViolationException {
         var produtoCatalogo = produtoCatalogoBean.find(id);
+        var principal = securityContext.getUserPrincipal();
+        if(!principal.getName().equals(produtoCatalogoDTO.getFabricanteUsername())){
+            return Response.status(Response.Status.FORBIDDEN).build();
+        }
         if (produtoCatalogo != null) {
             produtoCatalogoBean.update(id, produtoCatalogoDTO);
             return Response.ok().build();
@@ -108,11 +119,15 @@ public class ProdutoCatalogoService {
                 .build();
     }
 
+    @RolesAllowed({"FabricanteDeProdutos"})
     @GET
     @Path("{id}")
     public Response getProdutoCatalogoDetails(@PathParam("id") long id) {
-
         ProdutoCatalogo produtoCatalogo = produtoCatalogoBean.getProdutoCatalogoWithProdutos(id);
+        var principal = securityContext.getUserPrincipal();
+        if(!principal.getName().equals(produtoCatalogo.getFabricante().getUsername())){
+            return Response.status(Response.Status.FORBIDDEN).build();
+        }
 
         if (produtoCatalogo != null) {
             return Response.ok(toDTO(produtoCatalogo)).build();
@@ -137,31 +152,49 @@ public class ProdutoCatalogoService {
     public List<ProdutoFisicoDTO> produtosFisicosToDTOs(List<ProdutoFisico> produtoFisico) {
         return produtoFisico.stream().map(this::toDTONoProdutos).collect(Collectors.toList());
     }
-
+    @RolesAllowed({"FabricanteDeProdutos"})
     @GET
     @Path("{id}/produtos")
     public Response getProdutoCatalogoProdutosFisicos(@PathParam("id") long id) {
         var produto = produtoCatalogoBean.getProdutoCatalogoWithProdutos(id);
-        if (produto != null) {
-            var dtos = produtosFisicosToDTOs(produto.getProdutos());
-            return Response.ok(dtos).build();
+
+        var principal = securityContext.getUserPrincipal();
+
+        if(produto == null){
+            return Response.status(Response.Status.NOT_FOUND).entity("ERROR_FINDING_PRODUTOCATALOGO").build();
         }
-        return Response.status(Response.Status.NOT_FOUND)
-                .entity("ERROR_FINDING_PRODUTOCATALOGO")
-                .build();
+        if(!principal.getName().equals(produto.getFabricante().getUsername())){
+            return Response.status(Response.Status.FORBIDDEN).build();
+        }
+        var dtos = produtosFisicosToDTOs(produto.getProdutos());
+        return Response.ok(dtos).build();
     }
 
+    @RolesAllowed({"FabricanteDeProdutos"})
     @DELETE
     @Path("{id}")
     public Response deleteProdutoCatalogo(@PathParam("id") long id) throws MyEntityNotFoundException {
+        var produto = produtoCatalogoBean.find(id);
+        if(produto == null){
+            return Response.status(Response.Status.NOT_FOUND).entity("ERROR_FINDING_PRODUTOCATALOGO").build();
+        }
+
+        var principal = securityContext.getUserPrincipal();
+        if(!principal.getName().equals(produto.getFabricante().getUsername())) {
+            return Response.status(Response.Status.FORBIDDEN).build();
+        }
         produtoCatalogoBean.remove(id);
         return Response.ok().build();
     }
-
+    @RolesAllowed({"FabricanteDeProdutos", "Cliente"})
     @GET
     @Path("fabricante/{username}")
-    public List<ProdutoCatalogoDTO> getProdutosFromFabricante(@PathParam("username") String username) throws MyEntityExistsException {
+    public List<ProdutoCatalogoDTO> getProdutosFromFabricante(@PathParam("username") String username) throws Exception {
         Cliente cliente = clienteBean.find(username);
+        var principal = securityContext.getUserPrincipal();
+        if(!principal.getName().equals(username)){
+            throw new Exception("Não pode aceder aos produtos");
+        }
         if(cliente != null){
             return toDTOs(produtoCatalogoBean.getAllProductsCatalogo());
         }

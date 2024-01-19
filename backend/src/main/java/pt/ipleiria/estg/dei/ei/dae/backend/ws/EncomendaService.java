@@ -1,5 +1,6 @@
 package pt.ipleiria.estg.dei.ei.dae.backend.ws;
 
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.ejb.EJB;
 import jakarta.validation.ConstraintViolationException;
 import jakarta.ws.rs.*;
@@ -14,6 +15,7 @@ import pt.ipleiria.estg.dei.ei.dae.backend.ejbs.OperadorDeLogisticaBean;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.*;
 import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyConstraintViolationException;
 import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyEntityNotFoundException;
+import pt.ipleiria.estg.dei.ei.dae.backend.security.Authenticated;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,6 +23,7 @@ import java.util.stream.Collectors;
 @Path("encomendas")
 @Produces({MediaType.APPLICATION_JSON})
 @Consumes({MediaType.APPLICATION_JSON})
+@Authenticated
 public class EncomendaService {
 
     @EJB
@@ -142,6 +145,7 @@ public class EncomendaService {
 
 
     // getAllEncomendas
+    @RolesAllowed({"OperadorDeLogistica"})
     @GET
     @Path("/")
     public List<EncomendaDTO> getAllEncomendas() {
@@ -149,6 +153,7 @@ public class EncomendaService {
     }
 
     // getEncomendasByCliente
+    @RolesAllowed({"OperadorDeLogistica", "Cliente"})
     @GET
     @Path("/username/{username}")
     public List<EncomendaDTO> getEncomendasByUsername(@PathParam("username") String username) throws MyEntityNotFoundException {
@@ -166,11 +171,16 @@ public class EncomendaService {
     }
 
     // getEncomendaById
+    @RolesAllowed({"OperadorDeLogistica", "Cliente"})
     @GET
     @Path("/{id}")
     public Response getEncomendaById(@PathParam("id") long id) throws MyEntityNotFoundException {
         Encomenda encomenda = encomendaBean.getEncomendaById(id);
-        return Response.status(Response.Status.OK).entity(toDTO(encomenda)).build();
+        var principal = securityContext.getUserPrincipal();
+        if(principal.getName().equals(encomenda.getConsumidorFinal()) || principal.getName().equals(encomenda.getOperadorLogistica())) {
+            return Response.status(Response.Status.OK).entity(toDTO(encomenda)).build();
+        }
+        return Response.status(Response.Status.FORBIDDEN).build();
     }
 
     // get encomendas by estado
@@ -197,17 +207,21 @@ public class EncomendaService {
     @DELETE
     @Path("{id}")
     public Response deleteEncomenda(@PathParam("id") long id) throws MyEntityNotFoundException {
+        Encomenda encomenda = encomendaBean.find(id);
+        if(encomenda == null){
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
         encomendaBean.remove(id);
         return Response.status(Response.Status.OK).build();
     }
-
+    @RolesAllowed({"OperadorDeLogistica"})
     @PATCH
     @Path("{id}/estado")
     public Response patchEncomendaEstado(@PathParam("id") long id, EncomendaDTO encomendaDTO) throws Exception {
         encomendaBean.patchEstado(id, encomendaDTO.getEstado());
         return Response.status(Response.Status.OK).entity("Estado alterado para " + encomendaDTO.getEstado() + " com sucesso").build();
     }
-
+    @RolesAllowed({"OperadorDeLogistica"})
     @PATCH
     @Path("{id}/embalagensDeTransporte")
     public Response patchEncomendaEmbalagensTransporte(@PathParam("id") long id, EncomendaDTO encomendaDTO) throws MyEntityNotFoundException {

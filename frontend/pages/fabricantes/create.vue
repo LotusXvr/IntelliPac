@@ -32,6 +32,8 @@
 }
 </style>
 <script setup>
+import { useAuthStore } from "~/store/auth-store"
+const authStore = useAuthStore()
 import Navbar from "~/layouts/nav-bar.vue";
 import { ref, reactive, computed } from "vue";
 const fabricanteForm = reactive({
@@ -124,7 +126,7 @@ const isFormValid = computed(() => {
 async function create() {
   const requestOptions = {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: { "Content-Type": "application/json", 'Authorization': 'Bearer ' + authStore.token },
     body: JSON.stringify(fabricanteForm),
   };
 

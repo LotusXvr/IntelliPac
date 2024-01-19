@@ -75,6 +75,10 @@ public class ClienteService {
     @DELETE
     @Path("{username}")
     public Response deleteCliente(@PathParam("username") String username) throws MyEntityNotFoundException {
+        Cliente cliente = clienteBean.find(username);
+        if(cliente == null){
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
         clienteBean.remove(username);
         return Response.ok().build();
     }
