@@ -12,7 +12,7 @@
                     <nuxt-link to="/embalagensTransporte" class="nav-link" v-if="user !==null && user.role == 'OperadorDeLogistica'">
                         Embalagens Transporte</nuxt-link>
                     <nuxt-link to="/sensores" class="nav-link" v-if="user !== null && user.role != 'Cliente'" >Sensores</nuxt-link>
-                    <nuxt-link to="/observacoes" class="nav-link">Observações</nuxt-link>
+                    <nuxt-link to="/observacoes" class="nav-link" v-if="user !== null && user.role != 'Cliente'">Observações</nuxt-link>
                     <!-- <nuxt-link to="/auth-test" class="nav-link">Test</nuxt-link> -->
                     <nuxt-link v-if="user === null" to="/auth/login" class="nav-link">Login</nuxt-link>
                     <a href="/" v-if="user !== null" class="nav-link">Logout
