@@ -223,6 +223,7 @@ public class ConfigBean {
             TipoSensor tipoSensorLuminosidade = tipoSensorBean.create("Luminosidade", "LUX");
             TipoSensor tipoSensorPressao = tipoSensorBean.create("Pressão", "hPa");
             TipoSensor tipoSensorGPS = tipoSensorBean.create("Localização", "GPS");
+            TipoSensor tipoSensorQuantidade = tipoSensorBean.create("Quantidade", "%");
             //endregion
 
             tipoEmbalagemProdutoBean.addTipoSensor(1, testeSensor.getId());

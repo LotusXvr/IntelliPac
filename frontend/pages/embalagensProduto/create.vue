@@ -5,7 +5,13 @@
         <input id="material" v-model="embalagemForm.material" />
         <span class="error" v-if="!isMaterialValid">{{ formFeedback.material }}</span>
         <br />
-
+        <label for="tipo">Tipo De Embalagem: </label>
+        <select id="tipo" v-model="embalagemForm.tipo">
+            <option value="1">Primaria</option>
+            <option value="2">Secundaria</option>
+            <option value="3">Terciaria</option>
+        </select>
+        <br />
         <label for="comprimento">Comprimento: </label>
         <input id="comprimento" v-model="embalagemForm.comprimento" />
         <span class="error" v-if="!isComprimentoValid"> {{ formFeedback.comprimento }}</span>
@@ -32,9 +38,13 @@
 </style>
 <script setup>
 import Navbar from "~/layouts/nav-bar.vue"
+import { useAuthStore } from "~/store/auth-store"
 import { ref, reactive, computed } from "vue"
+
+const authStore = useAuthStore()
 const embalagemForm = reactive({
     material: null,
+    tipo: null,
     comprimento: null,
     largura: null,
     altura: null,
@@ -42,6 +52,7 @@ const embalagemForm = reactive({
 
 const formFeedback = reactive({
     material: "",
+    tipo: "",
     comprimento: "",
     largura: "",
     altura: "",
@@ -116,26 +127,36 @@ const isAlturaValid = computed(() => {
     return true
 })
 
+const isTipoValid = computed(() => {
+    if (embalagemForm.tipo === null || embalagemForm.tipo<1 || embalagemForm.tipo>3) {
+        return false
+    }
+    return true
+})
+
 const isFormValid = computed(() => {
     return (
         isMaterialValid.value &&
         isComprimentoValid.value &&
         isLarguraValid.value &&
-        isAlturaValid.value
+        isAlturaValid.value &&
+        isTipoValid.value
     )
 })
 
 async function create() {
-    console.log(embalagemForm)
 
     const requestOptions = {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { 
+            "Content-Type": "application/json",
+            'Authorization': 'Bearer ' + authStore.token
+        },
         body: JSON.stringify(embalagemForm),
     }
 
-    const { error } = await useFetch(`${api}/embalagens`, requestOptions)
-    if (!error.value) navigateTo("/embalagens")
+    const { error } = await useFetch(`${api}/tipoEmbalagens`, requestOptions)
+    if (!error.value) navigateTo("/embalagensProduto")
     message.value = error.value
 }
 </script>

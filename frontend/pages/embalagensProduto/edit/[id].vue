@@ -3,12 +3,18 @@
         <h2 v-once>Editar embalagem - {{ embalagem.material }}</h2>
 
         <form @submit.prevent="updateEmbalagem">
-            <label for="material">Material:</label>
+            <label for="material">Material: </label>
             <input v-model.trim="embalagemForm.material" type="text" />
             <span v-if="embalagemForm.material !== null && !isMaterialValid" class="error">
                 ERRO: {{ formFeedback.material }}</span>
             <br>
-
+            <label for="tipo">Tipo De Embalagem: </label>
+            <select id="tipo" v-model="embalagemForm.tipo">
+                <option value="1">Primaria</option>
+                <option value="2">Secundaria</option>
+                <option value="3">Terciaria</option>
+            </select>
+            <br />
             <label for="comprimento">Comprimento: </label>
             <input id="comprimento" v-model.trim="embalagemForm.comprimento" />
             <span class="error" v-if="!isComprimentoValid"> {{ formFeedback.comprimento }}</span>
@@ -26,7 +32,7 @@
             <br>
             <button type="submit" :disabled="!isFormValid">Save</button>
         </form>
-        <nuxt-link to="/embalagens">Back to Embalagens</nuxt-link>
+        <nuxt-link to="/embalagensProduto">Back to Tipo Embalagens</nuxt-link>
     </div>
     <h2>Error messages:</h2>
     {{ messages }}
@@ -38,6 +44,8 @@
 </style>
 <script setup>
 import Navbar from "~/layouts/nav-bar.vue"
+import { useAuthStore } from "~/store/auth-store"
+const authStore = useAuthStore()
 const route = useRoute()
 const id = route.params.id
 const config = useRuntimeConfig()
@@ -48,6 +56,7 @@ const messages = ref([])
 
 const embalagemForm = reactive({
     material: null,
+    tipo: null,
     comprimento: null,
     largura: null,
     altura: null,
@@ -55,6 +64,7 @@ const embalagemForm = reactive({
 
 const formFeedback = reactive({
     material: "",
+    tipo: "",
     comprimento: "",
     largura: "",
     altura: "",
@@ -62,11 +72,12 @@ const formFeedback = reactive({
 
 const fetchEmbalagens = async () => {
     try {
-        const response = await fetch(`${api}/embalagens/${id}`)
+        const response = await fetch(`${api}/tipoEmbalagens/${id}`)
         if (!response.ok) {
             throw new Error(response.statusText)
         }
         embalagem.value = await response.json()
+        embalagemForm.tipo = embalagem.value.tipo
         embalagemForm.material = embalagem.value.material
         embalagemForm.comprimento = embalagem.value.comprimento
         embalagemForm.largura = embalagem.value.largura
@@ -142,23 +153,33 @@ const isAlturaValid = computed(() => {
     return true
 })
 
+const isTipoValid = computed(() => {
+    if (embalagemForm.tipo === null || embalagemForm.tipo<1 || embalagemForm.tipo>3) {
+        return false
+    }
+    return true
+})
+
 const isFormValid = computed(() => {
-    return isMaterialValid.value && isComprimentoValid.value && isLarguraValid.value && isAlturaValid.value
+    return isMaterialValid.value && isComprimentoValid.value && isLarguraValid.value && isAlturaValid.value && isTipoValid.value
 })
 
 const updateEmbalagem = async () => {
     try {
         const requestOptions = {
             method: "PUT",
-            headers: { "Content-Type": "application/json" },
+            headers: { 
+                "Content-Type": "application/json",
+                'Authorization': 'Bearer ' + authStore.token
+            },
             body: JSON.stringify(embalagemForm),
         }
 
-        const response = await fetch(`${api}/embalagens/${id}`, requestOptions)
+        const response = await fetch(`${api}/tipoEmbalagens/${id}`, requestOptions)
         if (!response.ok) {
             throw new Error(response.statusText)
         }
-        navigateTo("/embalagens")
+        navigateTo("/embalagensProduto")
     } catch (error) {
         messages.value.push(error.message)
     }

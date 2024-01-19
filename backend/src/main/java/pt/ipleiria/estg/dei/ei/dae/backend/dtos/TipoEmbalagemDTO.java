@@ -1,5 +1,8 @@
 package pt.ipleiria.estg.dei.ei.dae.backend.dtos;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class TipoEmbalagemDTO {
 
     private long id;
@@ -10,7 +13,10 @@ public class TipoEmbalagemDTO {
     private long largura;
     private long comprimento;
 
+    private List<TipoSensorDTO> sensoresDTO;
+
     public TipoEmbalagemDTO() {
+        this.sensoresDTO = new ArrayList<>();
     }
 
     public TipoEmbalagemDTO(long id, long tipo, String material, long altura, long largura, long comprimento) {
@@ -20,6 +26,7 @@ public class TipoEmbalagemDTO {
         this.altura = altura;
         this.largura = largura;
         this.comprimento = comprimento;
+        this.sensoresDTO = new ArrayList<>();
     }
 
     public long getTipo() {
@@ -68,6 +75,14 @@ public class TipoEmbalagemDTO {
 
     public void setComprimento(long comprimento) {
         this.comprimento = comprimento;
+    }
+
+    public List<TipoSensorDTO> getSensoresDTO() {
+        return sensoresDTO;
+    }
+
+    public void setSensoresDTO(List<TipoSensorDTO> sensoresDTO) {
+        this.sensoresDTO = sensoresDTO;
     }
 }
 
