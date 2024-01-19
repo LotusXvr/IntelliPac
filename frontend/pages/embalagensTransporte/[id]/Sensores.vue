@@ -117,11 +117,7 @@ const removerSensor = async (idSensor) => {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-<<<<<<< Updated upstream
                 'Authorization': 'Bearer ' + authUser.token
-=======
-                Authorization: "Bearer " + authUser.token,
->>>>>>> Stashed changes
             },
             body: JSON.stringify(idSensor),
         }
