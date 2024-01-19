@@ -38,13 +38,13 @@ const authStore = useAuthStore()
 import Navbar from "~/layouts/nav-bar.vue";
 const config = useRuntimeConfig()
 const api = config.public.API_URL
-const { data: observacoes, error, refresh } = await useFetch(`${api}/observacoes`)
+const { data: observacoes, error, refresh } = await useFetch(`${api}/observacoes`, { method: "GET", headers: { 'Authorization': 'Bearer ' + authStore.token } })
 
 const deleteObservacao = async (id) => {
     try {
         const response = await fetch(`${api}/observacoes/${id}`, {
             method: "DELETE",
-            headers: {'Authorization': 'Bearer ' + authStore.token}
+            headers: { 'Authorization': 'Bearer ' + authStore.token }
         })
         if (response.ok) {
             refresh()

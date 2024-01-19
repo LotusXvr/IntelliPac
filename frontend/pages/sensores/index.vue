@@ -50,9 +50,7 @@
                     |
                     <button @click="deleteProduto(sensor.id)">Excluir</button>
                     |
-                    <nuxt-link :to="'/observacoes/' + sensor.id + '/create'"
-                        >Adicionar Observação</nuxt-link
-                    >
+                    <nuxt-link :to="'/observacoes/' + sensor.id + '/create'">Adicionar Observação</nuxt-link>
                     |
                     <button @click="gerarObservacao(sensor.id)">Gerar Observação</button>
                 </td>
@@ -73,9 +71,7 @@
                     |
                     <button @click="deleteProduto(sensor.id)">Excluir</button>
                     |
-                    <nuxt-link :to="'/observacoes/' + sensor.id + '/create'"
-                        >Adicionar Observação</nuxt-link
-                    >
+                    <nuxt-link :to="'/observacoes/' + sensor.id + '/create'">Adicionar Observação</nuxt-link>
                     |
                     <button @click="gerarObservacao(sensor.id)">Gerar Observação</button>
                 </td>
@@ -90,22 +86,23 @@
 <script setup>
 import Navbar from "~/layouts/nav-bar.vue"
 import { useAuthStore } from "~/store/auth-store"
+
 const authStore = useAuthStore()
 const config = useRuntimeConfig()
 const api = config.public.API_URL
-const { data: sensores, error, refresh } = await useFetch(`${api}/sensores`, { method: "GET", headers: {'Authorization': 'Bearer ' + authStore.token}})
+const { data: sensores, error, refresh } = await useFetch(`${api}/sensores`, { method: "GET", headers: { 'Authorization': 'Bearer ' + authStore.token } })
 
-if (sensores.value != null){
-  const sensoresDisponiveis = ref(sensores.value.filter((sensor) => sensor.estado == 0))
-  const sensoresEmUso = ref(sensores.value.filter((sensor) => sensor.estado == 1))
-  const sensoresProduto = ref(sensores.value.filter((sensor) => sensor.estado == 2))
-}
+const sensoresDisponiveis = ref(sensores.value.filter((sensor) => sensor.estado == 0))
+const sensoresEmUso = ref(sensores.value.filter((sensor) => sensor.estado == 1))
+const sensoresProduto = ref(sensores.value.filter((sensor) => sensor.estado == 2))
+
+
 const deleteProduto = async (id) => {
     try {
         const response = await fetch(`${api}/sensores/${id}`, {
             method: "DELETE",
             headers: {
-                'Authorization':  'Bearer ' + authStore.token
+                'Authorization': 'Bearer ' + authStore.token
             },
         })
         if (response.ok) {
@@ -120,8 +117,8 @@ const gerarObservacao = async (id) => {
     try {
         const response = await fetch(`${api}/sensores/${id}/gerarObservacao`, {
             method: "POST",
-            headers : {
-                'Authorization':  'Bearer ' + authStore.token
+            headers: {
+                'Authorization': 'Bearer ' + authStore.token
             }
         })
         if (response.status == 200) {

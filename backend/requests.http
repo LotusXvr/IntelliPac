@@ -173,11 +173,14 @@ Accept: application/json
 
 ### GET SENSORES
 GET http://localhost:8080/intellipac/api/sensores
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJBcHBsZSIsImlhdCI6MTcwNTY2MDY1NywiZXhwIjoxNzA1NjY0MjU3fQ.3Lq18jEAIzuKJdyTH0tM5gsRFiTemDIk7QqcdZ8KZDc5N7C-UIOziZzQk-vu__u5
 Accept: application/json
 
 ### GET SENSOR DETAILS
 GET http://localhost:8080/intellipac/api/sensores/7
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJBcHBsZSIsImlhdCI6MTcwNTY2MDY1NywiZXhwIjoxNzA1NjY0MjU3fQ.3Lq18jEAIzuKJdyTH0tM5gsRFiTemDIk7QqcdZ8KZDc5N7C-UIOziZzQk-vu__u5
 Accept: application/json
+
 
 ### POST SENSORES
 POST http://localhost:8080/intellipac/api/sensores
@@ -450,6 +453,8 @@ Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJBbWF6b24iLCJpYXQiOjE3MDU2M
 ### GET SENSOR DETAILS
 GET http://localhost:8080/intellipac/api/sensores/1
 Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJBbWF6b24iLCJpYXQiOjE3MDU2MjQ3MjIsImV4cCI6MTcwNTYyODMyMn0.DWxLq91Jh7lriaJdZ7PTUHRd5YrhGM6shcZRMENG1C8OCY8cYI0Z874fOXv7iGJ1
+
 
 ### Update estado encomenda
 PATCH http://localhost:8080/intellipac/api/encomendas/1/estado
