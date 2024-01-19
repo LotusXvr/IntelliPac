@@ -38,6 +38,9 @@ public class EncomendaBean {
     @EJB
     private EmailBean emailBean;
 
+    @EJB
+    private ObservacaoBean observacaoBean;
+
     public Encomenda create(EncomendaDTO encomendaDTO) throws Exception {
 
         var cliente = clienteBean.find(encomendaDTO.getConsumidorFinal());
@@ -241,7 +244,7 @@ public class EncomendaBean {
             throw new IllegalArgumentException("Estado inválido (Estado tem de ser pendente, processamento, transporte, entrega, cancelada, devolvida, danificada ou perdida)");
         }
 
-        if (estado.equals("DANIFICADA") || estado.equals("PERDIDA")) {
+        if (estado.equals("PERDIDA")) {
             // Enviar email ao cliente a informar que a encomenda foi extraviada
             emailBean.send(encomenda.getConsumidorFinal().getEmail(), "Encomenda " + estado.toLowerCase(), "A sua encomenda foi " + estado.toLowerCase() + ".\n" +
                     "Por favor, contacte o operador de logistica para mais informacoes.");
@@ -270,9 +273,14 @@ public class EncomendaBean {
 
                 List<Sensor> sensores = embalagemDeTransporte.getSensores();
                 for (Sensor sensor : sensores) {
-
                     lastId += 1;
                     sensor.setIdSensor(lastId);
+                    List<Observacao> observacoes = sensor.getObservacoes();
+                    while (!observacoes.isEmpty()) {
+                        Observacao observacao = observacoes.get(observacoes.size() - 1);
+                        observacaoBean.remove(observacao.getId());
+                        observacoes.remove(observacao);
+                    }
                 }
 
                 embalagemDeTransporteBean.removeEncomendaToEmbalagem(embalagemDeTransporte.getId(), encomenda.getId());

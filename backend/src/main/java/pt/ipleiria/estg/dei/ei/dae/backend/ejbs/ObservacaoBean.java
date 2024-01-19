@@ -60,9 +60,11 @@ public class ObservacaoBean {
         if (sensor.getTipo().equals("Danificado") && valor.equals("1")) {
             sendEmail(sensor, valor);
 
-            EmbalagemDeTransporte embalagemDeTransporte = embalagemDeTransporteBean.find(sensor.getEmbalagens().get(sensor.getEmbalagens().size() - 1).getId());
-            for (Encomenda encomenda : embalagemDeTransporte.getEncomendas()) {
-                encomendaBean.patchEstado(encomenda.getId(), "Danificada");
+            if (checkTypeOfEmbalagem(sensor, sensor.getEmbalagens().size()) == 1) {
+                EmbalagemDeTransporte embalagemDeTransporte = embalagemDeTransporteBean.find(sensor.getEmbalagens().get(sensor.getEmbalagens().size() - 1).getId());
+                for (Encomenda encomenda : embalagemDeTransporte.getEncomendas()) {
+                    encomendaBean.patchEstado(encomenda.getId(), "Danificada");
+                }
             }
         }
 
@@ -85,23 +87,33 @@ public class ObservacaoBean {
 
             ProdutoFisico produto = embalagemProdutoSensor.getProdutos().get(embalagemProdutoSensor.getProdutos().size() - 1);
             String emailConsumidor = produto.getEncomenda().getConsumidorFinal().getEmail();
+            String emailOperadorLogistica = produto.getEncomenda().getOperadorLogistica().getEmail();
 
-            // Em caso de embalagem de produto, envia-se email ao consumidor a notificar
-            emailBean.send(emailConsumidor, "Encomenda " + produto.getEncomenda().getId() + " possui um produto com " + sensor.getTipo() + " fora do intervalo", "A encomenda " + produto.getEncomenda().getId() + " possui o produto " + produto.getNomeProduto() + " com " + sensor.getTipo() + " fora do intervalo favorável" + " (" + valor + " " + sensor.getUnidade() + ")");
-
-            Observacao observacao = new Observacao(getTimestamp(), valor, sensor);
-            sensor.addObservacao(observacao);
-
-            entityManager.persist(observacao);
+            if (!sensor.getTipo().equals("Danificado")) {
+                emailBean.send(emailConsumidor, "Encomenda " + produto.getEncomenda().getId() + " possui um produto com " + sensor.getTipo() + " fora do intervalo", "A encomenda " + produto.getEncomenda().getId() + " possui o produto " + produto.getNomeProduto() + " com " + sensor.getTipo() + " fora do intervalo favoravel" + " (" + valor + " " + sensor.getUnidade() + ")");
+                emailBean.send(emailOperadorLogistica, "Encomenda " + produto.getEncomenda().getId() + " possui um produto com " + sensor.getTipo() + " fora do intervalo", "A encomenda " + produto.getEncomenda().getId() + " possui o produto " + produto.getNomeProduto() + " com " + sensor.getTipo() + " fora do intervalo favoravel" + " (" + valor + " " + sensor.getUnidade() + ")");
+            } else {
+                emailBean.send(emailConsumidor, "Encomenda " + produto.getEncomenda().getId() + " possui um produto danificado", "A encomenda " + produto.getEncomenda().getId() + " possui o produto " + produto.getNomeProduto() + " danificado");
+                emailBean.send(emailOperadorLogistica, "Encomenda " + produto.getEncomenda().getId() + " possui um produto danificado", "A encomenda " + produto.getEncomenda().getId() + " possui o produto " + produto.getNomeProduto() + " danificado");
+            }
 
             return;
         }
 
-        EmbalagemDeTransporte embalagemDeTransporte = embalagemDeTransporteBean.find(sensor.getEmbalagens().get(numeroEmbalagens - 1).getId());
-        for (Encomenda encomenda : embalagemDeTransporte.getEncomendas()) {
-            // Em caso de embalagem de transporte, altera-se o estado da encomenda para "Danificada"
-            // e notifica-se ambos o consumidor e o operador de logistica
-            emailBean.send(encomenda.getConsumidorFinal().getEmail(), "Encomenda " + encomenda.getId() + " está com " + sensor.getTipo() + " fora do intervalo", "A encomenda " + encomenda.getId() + " está com " + sensor.getTipo() + " fora do intervalo favorável" + " (" + valor + " " + sensor.getUnidade() + ")");
+        if (embalagem == 1) {
+            EmbalagemDeTransporte embalagemDeTransporte = embalagemDeTransporteBean.find(sensor.getEmbalagens().get(numeroEmbalagens - 1).getId());
+            for (Encomenda encomenda : embalagemDeTransporte.getEncomendas()) {
+                // Em caso de embalagem de transporte, altera-se o estado da encomenda para "Danificada"
+                // e notifica-se ambos o consumidor e o operador de logistica
+                if (!sensor.getTipo().equals("Danificado")) {
+                    emailBean.send(encomenda.getConsumidorFinal().getEmail(), "Encomenda " + encomenda.getId() + " possui um produto com " + sensor.getTipo() + " fora do intervalo", "A encomenda " + encomenda.getId() + " possui a embalagem " + embalagemDeTransporte.getMaterial() + " com " + sensor.getTipo() + " fora do intervalo favoravel" + " (" + valor + " " + sensor.getUnidade() + ")");
+                    emailBean.send(encomenda.getOperadorLogistica().getEmail(), "Encomenda " + encomenda.getId() + " possui um produto com " + sensor.getTipo() + " fora do intervalo", "A encomenda " + encomenda.getId() + " possui a embalagem " + embalagemDeTransporte.getMaterial() + " com " + sensor.getTipo() + " fora do intervalo favoravel" + " (" + valor + " " + sensor.getUnidade() + ")");
+                } else {
+
+                    emailBean.send(encomenda.getConsumidorFinal().getEmail(), "Encomenda " + encomenda.getId() + " está com a embalagem " + embalagemDeTransporte.getMaterial() + "danificada", "A encomenda " + encomenda.getId() + " está com a embalagem " + embalagemDeTransporte.getMaterial() + " danificada, ficando assim a sua encomenda também danificada");
+                    emailBean.send(encomenda.getOperadorLogistica().getEmail(), "Encomenda " + encomenda.getId() + " está com a embalagem " + embalagemDeTransporte.getMaterial() + "danificada", "A encomenda " + encomenda.getId() + " está com a embalagem " + embalagemDeTransporte.getMaterial() + " danificada, ficando assim a sua encomenda também danificada");
+                }
+            }
         }
     }
 
@@ -116,6 +128,7 @@ public class ObservacaoBean {
         EmbalagemDeProduto embalagemDeProduto = null;
 
         if (embalagemDeTransporte != null) {
+            // Embalagem TRANSPORTE
             return 1;
         }
 
@@ -124,6 +137,7 @@ public class ObservacaoBean {
         if (embalagemDeProduto == null)
             throw new IllegalArgumentException("Embalagem with id " + sensor.getEmbalagens().get(numeroEmbalagens - 1).getId() + " not found.");
 
+        // Embalagem PRODUTO
         return 2;
     }
 
