@@ -84,7 +84,7 @@ const formFeedback = reactive({
 
 const { data: embalagensACriar } = await useFetch(`${api}/tipoEmbalagens`, {
   method: "GET",
-  headers: { "Authorization": "Bearer " + auhtStore.token }
+  headers: { "Authorization": "Bearer " + authStore.token }
 })
 
 const tiposEmbalagemPrimaria = computed(() => {
@@ -135,7 +135,7 @@ const tipoNumeroParaString = (tipo) => {
 
 const fetchProduto = async () => {
   try {
-    const response = await fetch(`${api}/produtosCatalogo/${id}`, { method: "GET", headers: { 'Authorization': 'Bearer ' + auhtStore.token } });
+    const response = await fetch(`${api}/produtosCatalogo/${id}`, { method: "GET", headers: { 'Authorization': 'Bearer ' + authStore.token } });
     if (!response.ok) {
       throw new Error(response.statusText);
     }
@@ -210,7 +210,7 @@ const updateProduto = async () => {
       method: "PUT",
       headers: { 
         "Content-Type": "application/json",
-        'Authorization': 'Bearer ' + auhtStore.token
+        'Authorization': 'Bearer ' + authStore.token
      },
       body: JSON.stringify(requestBody),
     };
