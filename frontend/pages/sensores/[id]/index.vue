@@ -22,7 +22,7 @@
             <canvas ref="chartEl"></canvas>
             <ul>
                 <li v-for="observacao in sensor.observacoes" :key="sensor.id">
-                    ({{ observacao.timestamp }}) {{ observacao.valor }} {{ sensor.unidade }} - 
+                    ({{ observacao.timestamp }}) {{ observacao.valor }} {{ sensor.unidade }} -
                     <nuxt-link :to="`/observacoes/${observacao.id}`">Detalhes</nuxt-link>
                 </li>
             </ul>
@@ -59,7 +59,7 @@ const fetchSensor = async () => {
         observacoes.value = []
         observacoes_valores.value = []
         observacoes_timestamps.value = []
-        const { data: response } = await useFetch(`${api}/sensores/${id}`, { method: "GET", headers: {'Authorization': 'Bearer ' + authStore.token}})
+        const { data: response } = await useFetch(`${api}/sensores/${id}`, { method: "GET", headers: { 'Authorization': 'Bearer ' + authStore.token } })
         if (!response) {
             console.log(response)
             throw new Error(response.statusText)
@@ -114,7 +114,7 @@ const gerarObservacao = async (id) => {
     try {
         const response = await fetch(`${api}/sensores/${id}/gerarObservacao`, {
             method: "POST",
-            headers : {
+            headers: {
                 'Authorization': 'Bearer ' + authStore.token
             }
         })

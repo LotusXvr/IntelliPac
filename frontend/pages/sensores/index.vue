@@ -48,8 +48,11 @@
                     |
                     <nuxt-link :to="'/sensores/edit/' + sensor.id">Editar</nuxt-link>
                     |
-                    <button @click="deleteProduto(sensor.id)">Excluir</button>
-                    |
+                    <span v-if="!hasEmbalagens(sensor)">
+                        <button @click="deleteProduto(sensor.id)">Excluir</button>
+                        |
+                    </span>
+
                     <nuxt-link :to="'/observacoes/' + sensor.id + '/create'">Adicionar Observação</nuxt-link>
                     |
                     <button @click="gerarObservacao(sensor.id)">Gerar Observação</button>
@@ -99,6 +102,13 @@ const sensoresDisponiveis = ref(sensores.value.filter((sensor) => sensor.estado 
 const sensoresEmUso = ref(sensores.value.filter((sensor) => sensor.estado == 1))
 const sensoresProduto = ref(sensores.value.filter((sensor) => sensor.estado == 2))
 
+const hasEmbalagens = (sensor) => {
+    console.log(sensor.id + " " + sensor.embalagens.length)
+    if (sensor.embalagens.length > 0) {
+        return true
+    }
+    return false
+}
 
 const deleteProduto = async (id) => {
     try {
