@@ -1,7 +1,7 @@
 <template>
     <Navbar />
     <div v-if="operador">
-        <h2>Detalhes de {{ operador.nome }}</h2>
+        <h2>Detalhes de {{ operador.name }}</h2>
         <p>Username: {{ operador.username }}</p>
         <p>Email: {{ operador.email }}</p>
         <p>Encomendas:</p>

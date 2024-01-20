@@ -85,7 +85,12 @@ public class ProdutoFisicoBean {
                         embalagemACriar.getAltura(), embalagemACriar.getLargura(), embalagemACriar.getComprimento(),
                         embalagemACriar.getTipoEmbalagem());
                 entityManager.persist(embalagem);
-                embalagemDeProdutoBean.addEmbalagemToProduto(embalagem.getId(), produtoFisico.getId());
+                try {
+                    embalagemDeProdutoBean.addEmbalagemToProduto(embalagem.getId(), produtoFisico.getId());
+                }
+                catch (Exception e){
+                    throw new Exception(e.getMessage());
+                }
 
                 for (TipoSensor tipoSensor : embalagemACriar.getTipoSensor()) {
                     Sensor sensor = sensorBean.create(tipoSensor.getTipo(), tipoSensor.getUnidade());

@@ -94,10 +94,6 @@ const isEmailValid = computed(() => {
         formFeedback.email = "ERRO: O email deve ter pelo menos 3 caracteres"
         return false
     }
-    if (clienteForm.email.length > 20) {
-        formFeedback.email = "ERRO: O email deve ter no máximo 20 caracteres"
-        return false
-    }
     formFeedback.email = ""
     return true
 })

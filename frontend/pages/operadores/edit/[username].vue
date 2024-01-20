@@ -7,8 +7,7 @@
             <label for="name">Nome:</label>
             <input v-model.trim="operadorForm.name" type="text" />
             <span v-if="operadorForm.name !== null && !isNameValid" class="error">
-                ERRO: {{ formFeedback.name }}</span
-            >
+                ERRO: {{ formFeedback.name }}</span>
             <br />
 
             <label for="email">Email: </label>
@@ -88,10 +87,6 @@ const isEmailValid = computed(() => {
     }
     if (operadorForm.email.length < 3) {
         formFeedback.email = "O email deve ter pelo menos 3 caracteres"
-        return false
-    }
-    if (operadorForm.email.length > 20) {
-        formFeedback.email = "O email deve ter no máximo 20 caracteres"
         return false
     }
     formFeedback.email = ""

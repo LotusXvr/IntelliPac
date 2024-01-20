@@ -22,11 +22,12 @@
                         <ul>
                             <li v-for="sensor in embalagem.sensores" :key="sensor.id">
                                 {{ sensor.tipo }} - {{ sensor.unidade }}
-                                <br />
-                                <nuxt-link :to="`/sensores/${sensor.id}`"
-                                    >Ver mais detalhes</nuxt-link
-                                >
-                                <br />
+                                <span v-if="authStore.user.role != 'Cliente'">
+                                    <br />
+                                    <nuxt-link :to="`/sensores/${sensor.id}`">Ver mais
+                                        detalhes</nuxt-link>
+                                </span>
+                                <br>
                                 <div v-if="sensor.observacoes.length > 0">
                                     Ultima observação:
                                     <ul>
@@ -46,11 +47,8 @@
 
         <p v-if="encomenda.embalagensTransporte.length > 0">Embalagens Transporte:</p>
         <ul>
-            <li
-                v-if="encomenda.embalagensTransporte.length > 0"
-                v-for="embalagens in encomenda.embalagensTransporte"
-                :key="embalagens.id"
-            >
+            <li v-if="encomenda.embalagensTransporte.length > 0" v-for="embalagens in encomenda.embalagensTransporte"
+                :key="embalagens.id">
                 Material:
                 {{ embalagens.material }}
                 <br />
@@ -58,8 +56,12 @@
                 <ul>
                     <li v-for="sensor in embalagens.sensores" :key="sensor.id">
                         {{ sensor.tipo }} - {{ sensor.unidade }}
-                        <br />
-                        <nuxt-link :to="`/sensores/${sensor.id}`">Ver mais detalhes</nuxt-link>
+                        <span v-if="authStore.user.role != 'Cliente'">
+                            <br />
+                            <nuxt-link :to="`/sensores/${sensor.id}`">Ver mais
+                                detalhes</nuxt-link>
+                        </span>
+
                         <br />
                         <div v-if="sensor.observacoes.length > 0">
                             Ultima observação:

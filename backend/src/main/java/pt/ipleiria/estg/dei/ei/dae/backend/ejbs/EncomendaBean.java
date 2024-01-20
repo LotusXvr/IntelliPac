@@ -61,19 +61,25 @@ public class EncomendaBean {
             encomenda = new Encomenda(cliente, getTimestamp(), operadorDeLogistica, "PENDENTE");
             entityManager.persist(encomenda);
             ProdutoFisico produtoFisico = null;
-            // Adicione lógica para associar os produtosCatalogo à encomenda
+
             if (encomendaDTO.getProdutos() == null) {
+                entityManager.remove(encomenda);
                 throw new MyConstraintViolationException(new ConstraintViolationException("A encomenda necessita ter pelo menos um produto", null));
             }
             for (ProdutoFisicoDTO produtoDTO : encomendaDTO.getProdutos()) {
                 ProdutoCatalogo produtoCatalogo = entityManager.find(ProdutoCatalogo.class, produtoDTO.getProdutoCatalogoId());
                 if (produtoCatalogo == null) {
+                    entityManager.remove(encomenda);
                     throw new MyEntityNotFoundException("ProdutoCatalogo com id " + produtoDTO.getProdutoCatalogoId() + " não existe");
                 }
 
                 FabricanteDeProdutos fabricanteDeProdutos = entityManager.find(FabricanteDeProdutos.class, produtoCatalogo.getFabricante().getUsername());
 
-                // Agora, em vez de usar o DTO diretamente, crie uma instância de ProdutoFisico e persista-a
+                if (fabricanteDeProdutos == null) {
+                    entityManager.remove(encomenda);
+                    throw new MyEntityNotFoundException("Fabricante com username " + produtoCatalogo.getFabricante().getUsername() + " não existe");
+                }
+
                 produtoFisico = produtoFisicoBean.create(produtoCatalogo.getId(), encomenda.getId());
                 entityManager.persist(produtoFisico);
 
@@ -82,12 +88,14 @@ public class EncomendaBean {
             }
 
             if (encomendaDTO.getEmbalagensTransporte() == null) {
+                entityManager.remove(encomenda);
                 throw new MyConstraintViolationException(new ConstraintViolationException("A encomenda necessita ter pelo menos uma embalagem", null));
             }
             // Adicione lógica para associar as embalagensDeTransporte à encomenda
             for (EmbalagemDeTransporteDTO embalagemDTO : encomendaDTO.getEmbalagensTransporte()) {
                 embalagemTransporte = entityManager.find(EmbalagemDeTransporte.class, embalagemDTO.getId());
                 if (embalagemTransporte == null) {
+                    entityManager.remove(encomenda);
                     throw new MyEntityNotFoundException("EmbalagemDeTransporte com id " + embalagemDTO.getId() + " não existe");
                 }
 
@@ -97,8 +105,9 @@ public class EncomendaBean {
             }
 
             entityManager.persist(encomenda);
-        } catch (ConstraintViolationException e) {
-            throw new MyConstraintViolationException(e);
+        } catch (Exception e) {
+            entityManager.remove(encomenda);
+            throw new Exception(e.getMessage());
         }
 
         cliente.addEncomenda(encomenda);

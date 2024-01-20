@@ -93,11 +93,11 @@ public class EmbalagemDeProdutoBean {
         if (produtoFisico == null) {
             throw new MyEntityNotFoundException("Produto with id " + idProduto + " not found");
         }
-        if (embalagemDeProduto.getTipoEmbalagem() != 1 && produtoFisico.getEmbalagensDeProduto().size() == 0) {
+        if (embalagemDeProduto.getTipoEmbalagem() != 1 && produtoFisico.getEmbalagensDeProduto().isEmpty()) {
             throw new Exception("O produto não tem embalagem primária");
         }
 
-        if (embalagemDeProduto.getTipoEmbalagem() == 1 && produtoFisico.getEmbalagensDeProduto().size() == 0) {
+        if (embalagemDeProduto.getTipoEmbalagem() == 1 && produtoFisico.getEmbalagensDeProduto().isEmpty()) {
             produtoFisico.addEmbalagem(embalagemDeProduto);
             entityManager.merge(embalagemDeProduto);
             return;
@@ -125,11 +125,11 @@ public class EmbalagemDeProdutoBean {
         if (produtoCatalogo == null) {
             throw new MyEntityNotFoundException("Produto with id " + idProduto + " not found");
         }
-        if (embalagemACriar.getTipoEmbalagem() != 1 && produtoCatalogo.getEmbalagensACriar().size() == 0) {
+        if (embalagemACriar.getTipoEmbalagem() != 1 && produtoCatalogo.getEmbalagensACriar().isEmpty()) {
             throw new Exception("O produto não tem embalagem primária");
         }
 
-        if (embalagemACriar.getTipoEmbalagem() == 1 && produtoCatalogo.getEmbalagensACriar().size() == 0) {
+        if (embalagemACriar.getTipoEmbalagem() == 1 && produtoCatalogo.getEmbalagensACriar().isEmpty()) {
             produtoCatalogo.addEmbalagemACriar(embalagemACriar);
             entityManager.merge(embalagemACriar);
             return;

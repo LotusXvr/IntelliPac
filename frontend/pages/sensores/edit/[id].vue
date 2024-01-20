@@ -1,21 +1,18 @@
 <template>
-    <Navbar/>
+    <Navbar />
     <div v-if="sensor">
         <h2 v-once>Editar sensor - {{ sensor.idSensor }} {{ sensor.tipo }}</h2>
 
         <form @submit.prevent="updateSensor">
-            <label for="idSensor">id Sensor</label>
-            <input id="idSensor" v-model="sensorForm.idSensor" type="number" />
-            <span class="error">{{ formFeedback.idSensor }}</span>
-            <br />
             <label for="tipo">Tipo</label>
-            <select id="tipo" v-model="sensorForm.tipo">
-                <option v-for="tipo in tipos" :key="tipo" :value="tipo">{{ tipo }}</option>
+            <select id="tipo" v-model="sensorForm.tipo" @change="updateUnidades">
+                <option v-for="tipoSensor in tipoSensores" :key="tipoSensor.id">{{ tipoSensor.tipo }}
+                </option>
             </select>
-            <span class="error">{{ tipo }}</span>
+            <span class="error">{{ formFeedback.tipo }}</span>
             <br />
             <label for="unidade">Unidade</label>
-            <input id="unidade" v-model="sensorForm.unidade" />
+            <input id="unidade" :disabled="true" v-model="sensorForm.unidade" />
             <span class="error">{{ formFeedback.unidade }}</span>
             <br />
             <br />
@@ -37,7 +34,9 @@ const route = useRoute()
 const id = route.params.id
 const config = useRuntimeConfig()
 const api = config.public.API_URL
+import { useAuthStore } from "~/store/auth-store"
 
+const authStore = useAuthStore()
 const sensor = ref(null)
 const messages = ref([])
 
@@ -48,14 +47,13 @@ const sensorForm = reactive({
 })
 
 const formFeedback = reactive({
-    idSensor: "",
     tipo: "",
     unidade: ""
 })
 
 const fetchSensor = async () => {
     try {
-        const response = await fetch(`${api}/sensores/${id}`, { method: "GET", headers: {'Authorization': 'Bearer ' + authStore.token}})
+        const response = await fetch(`${api}/sensores/${id}`, { method: "GET", headers: { 'Authorization': 'Bearer ' + authStore.token } })
         if (!response.ok) {
             throw new Error(response.statusText)
         }
@@ -69,8 +67,6 @@ const fetchSensor = async () => {
     }
 }
 
-
-
 const isFormValid = computed(() => {
     return true
 })
@@ -79,10 +75,10 @@ const updateSensor = async () => {
     try {
         const requestOptions = {
             method: "PUT",
-            headers: { 
+            headers: {
                 "Content-Type": "application/json",
                 'Authorization': 'Bearer ' + authStore.token
-                     },
+            },
             body: JSON.stringify(sensorForm),
         }
 
@@ -96,8 +92,14 @@ const updateSensor = async () => {
     }
 }
 
+const { data: tipoSensores } = await useFetch(`${api}/tipoSensor`, { method: "GET", headers: { 'Authorization': 'Bearer ' + authStore.token } })
 
-const tipos = ["Temperatura", "Humidade", "Luminosidade", "Pressão"]
+const updateUnidades = () => {
+    if (Array.isArray(tipoSensores.value)) {
+        const sensorEncontrado = tipoSensores.value.find(sensor => sensor.tipo == sensorForm.tipo)
+        sensorForm.unidade = sensorEncontrado.unidade
+    }
+}
 
 fetchSensor()
 </script>

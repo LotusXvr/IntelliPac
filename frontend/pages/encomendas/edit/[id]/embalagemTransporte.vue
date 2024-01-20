@@ -9,11 +9,8 @@
                 <div v-for="embalagem in embalagensTransporte">
                     <br />
                     <div>
-                        <input
-                            type="checkbox"
-                            :value="embalagem.id"
-                            v-model="encomendaForm.embalagensTransporte"
-                        />
+                        <input type="checkbox" :value="embalagem.id" v-model="encomendaForm.embalagensTransporte"
+                            :disabled="embalagem.estado == 1" />
                         {{ embalagem.material }} -
                         {{
                             construirTamanhoString(
@@ -32,8 +29,7 @@
                 </div>
                 <br />
                 <span v-if="!isEmbalagemSelected" class="error">
-                    ERRO: {{ formFeedback.embalagensTransporte }}</span
-                >
+                    ERRO: {{ formFeedback.embalagensTransporte }}</span>
             </div>
             <br />
             <br />

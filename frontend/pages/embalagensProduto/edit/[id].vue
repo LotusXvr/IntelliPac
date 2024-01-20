@@ -1,4 +1,5 @@
 <template>
+    <Navbar />
     <div v-if="embalagem">
         <h2 v-once>Editar embalagem - {{ embalagem.material }}</h2>
 
@@ -72,7 +73,8 @@ const formFeedback = reactive({
 
 const fetchEmbalagens = async () => {
     try {
-        const response = await fetch(`${api}/tipoEmbalagens/${id}`)
+        const response = await fetch(`${api}/tipoEmbalagens/${id}`, { method: "GET", headers: { 'Authorization': 'Bearer ' + authStore.token } }
+        )
         if (!response.ok) {
             throw new Error(response.statusText)
         }
@@ -154,7 +156,7 @@ const isAlturaValid = computed(() => {
 })
 
 const isTipoValid = computed(() => {
-    if (embalagemForm.tipo === null || embalagemForm.tipo<1 || embalagemForm.tipo>3) {
+    if (embalagemForm.tipo === null || embalagemForm.tipo < 1 || embalagemForm.tipo > 3) {
         return false
     }
     return true
@@ -166,9 +168,10 @@ const isFormValid = computed(() => {
 
 const updateEmbalagem = async () => {
     try {
+        console.log(authStore.token)
         const requestOptions = {
             method: "PUT",
-            headers: { 
+            headers: {
                 "Content-Type": "application/json",
                 'Authorization': 'Bearer ' + authStore.token
             },

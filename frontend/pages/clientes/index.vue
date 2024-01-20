@@ -12,7 +12,7 @@
                 <th>actions</th>
             </tr>
             <tr v-for="cliente in clientes">
-                <td>{{ cliente.nome }}</td>
+                <td>{{ cliente.name }}</td>
                 <td>{{ cliente.username }}</td>
                 <td>{{ cliente.email }}</td>
                 <td>

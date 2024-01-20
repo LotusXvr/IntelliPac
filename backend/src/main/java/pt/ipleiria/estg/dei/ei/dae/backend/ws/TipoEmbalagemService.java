@@ -77,7 +77,6 @@ public class TipoEmbalagemService {
     }
 
 
-
     @GET
     @Path("/")
     public List<TipoEmbalagemDTO> getAllTipoEmbalagem() {
