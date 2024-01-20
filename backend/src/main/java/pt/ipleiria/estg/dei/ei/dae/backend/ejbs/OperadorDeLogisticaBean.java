@@ -7,6 +7,8 @@ import jakarta.persistence.LockModeType;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
 import jakarta.validation.ConstraintViolationException;
+import org.hibernate.Hibernate;
+import org.hibernate.cfg.beanvalidation.HibernateTraversableResolver;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.OperadorDeLogistica;
 import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyConstraintViolationException;
 import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyEntityExistsException;
@@ -63,7 +65,7 @@ public class OperadorDeLogisticaBean {
 
     }
 
-    public void update(String username, String password, String name, String email) throws MyEntityNotFoundException {
+    public void update(String username, String name, String email) throws MyEntityNotFoundException {
         OperadorDeLogistica operadorDeLogistica = entityManager.find(OperadorDeLogistica.class, username);
         if (operadorDeLogistica == null) {
             throw new MyEntityNotFoundException(
@@ -71,8 +73,19 @@ public class OperadorDeLogisticaBean {
             );
         }
         entityManager.lock(operadorDeLogistica, LockModeType.OPTIMISTIC);
-        operadorDeLogistica.setPassword(password);
         operadorDeLogistica.setName(name);
         operadorDeLogistica.setEmail(email);
+        entityManager.merge(operadorDeLogistica);
+    }
+
+    public OperadorDeLogistica getOperadorWithEncomendas(String username) throws MyEntityNotFoundException {
+        OperadorDeLogistica operadorDeLogistica = find(username);
+        if (operadorDeLogistica == null) {
+            throw new MyEntityNotFoundException(
+                    "Operador de Logística with username '" + username + "' not found"
+            );
+        }
+        Hibernate.initialize(operadorDeLogistica.getEncomendas());
+        return operadorDeLogistica;
     }
 }

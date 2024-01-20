@@ -7,7 +7,9 @@
                     <nuxt-link to="/produtosCatalogo" v-if="user !== null && user.role != 'OperadorDeLogistica'" class="nav-link">Produtos</nuxt-link>
                     <nuxt-link to="/produtosFisico" v-if="user !== null && user.role == 'FabricanteDeProdutos'" class="nav-link">Produtos Fisicos</nuxt-link>
                     <nuxt-link to="/encomendas" class="nav-link" v-if="user !== null && user.role != 'FabricanteDeProdutos'">Encomendas</nuxt-link>
-                    <nuxt-link to="/fabricantes" class="nav-link">Fabricantes</nuxt-link>
+                    <nuxt-link to="/fabricantes" class="nav-link" v-if="user === null">Fabricantes</nuxt-link>
+                    <nuxt-link to="/clientes" class="nav-link" v-if="user === null">Clientes</nuxt-link>
+                    <nuxt-link to="/operadores" class="nav-link" v-if="user === null">Operadores</nuxt-link>
                     <nuxt-link to="/embalagensProduto" class="nav-link" v-if="user !==null && user.role == 'FabricanteDeProdutos'">Tipo Embalagens De Produto</nuxt-link>
                     <nuxt-link to="/embalagensTransporte" class="nav-link" v-if="user !==null && user.role == 'OperadorDeLogistica'">
                         Embalagens Transporte</nuxt-link>

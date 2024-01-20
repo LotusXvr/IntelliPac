@@ -7,6 +7,7 @@ import jakarta.persistence.LockModeType;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
 import jakarta.validation.ConstraintViolationException;
+import org.hibernate.Hibernate;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.Cliente;
 import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyConstraintViolationException;
 import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyEntityExistsException;
@@ -67,7 +68,7 @@ public class ClienteBean {
         entityManager.remove(cliente);
     }
 
-    public void update(String username, String password, String name, String email) throws MyEntityNotFoundException {
+    public void update(String username, String name, String email) throws MyEntityNotFoundException {
         Cliente cliente = entityManager.find(Cliente.class, username);
         if (cliente == null) {
             throw new MyEntityNotFoundException(
@@ -75,8 +76,17 @@ public class ClienteBean {
             );
         }
         entityManager.lock(cliente, LockModeType.OPTIMISTIC);
-        cliente.setPassword(password);
         cliente.setName(name);
         cliente.setEmail(email);
+        entityManager.merge(cliente);
+    }
+
+    public Cliente getClienteWithDetails(String username) throws MyEntityNotFoundException {
+        Cliente cliente = find(username);
+        if(cliente == null){
+            throw new MyEntityNotFoundException("Cliente com o username "+ username + " não existe");
+        }
+        Hibernate.initialize(cliente.getEncomendas());
+        return cliente;
     }
 }

@@ -7,8 +7,10 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.SecurityContext;
 import pt.ipleiria.estg.dei.ei.dae.backend.dtos.ClienteDTO;
+import pt.ipleiria.estg.dei.ei.dae.backend.dtos.EncomendaDTO;
 import pt.ipleiria.estg.dei.ei.dae.backend.ejbs.ClienteBean;
 import pt.ipleiria.estg.dei.ei.dae.backend.entities.Cliente;
+import pt.ipleiria.estg.dei.ei.dae.backend.entities.Encomenda;
 import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyConstraintViolationException;
 import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyEntityExistsException;
 import pt.ipleiria.estg.dei.ei.dae.backend.exceptions.MyEntityNotFoundException;
@@ -28,6 +30,32 @@ public class ClienteService {
     private SecurityContext securityContext;
 
     private ClienteDTO toDTO(Cliente cliente) {
+        ClienteDTO clienteDTO = new ClienteDTO(
+                cliente.getUsername(),
+                cliente.getPassword(),
+                cliente.getName(),
+                cliente.getEmail()
+        );
+        clienteDTO.setEncomendas(encomendaToDTOs(cliente.getEncomendas()));
+        return clienteDTO;
+    }
+    private List<ClienteDTO> toDTOs(List<Cliente> clientes) {
+        return clientes.stream().map(this::toDTO).collect(Collectors.toList());
+    }
+
+    private EncomendaDTO toDTO(Encomenda encomenda) {
+        return new EncomendaDTO(
+                encomenda.getId(),
+                encomenda.getConsumidorFinal().getUsername(),
+                encomenda.getDataEncomenda(),
+                encomenda.getOperadorLogistica().getUsername(),
+                encomenda.getEstado());
+    }
+    private List<EncomendaDTO> encomendaToDTOs(List<Encomenda> encomendas) {
+        return encomendas.stream().map(this::toDTO).collect(Collectors.toList());
+    }
+
+    private ClienteDTO toDTONoEncomenda(Cliente cliente) {
         return new ClienteDTO(
                 cliente.getUsername(),
                 cliente.getPassword(),
@@ -35,14 +63,14 @@ public class ClienteService {
                 cliente.getEmail()
         );
     }
-    private List<ClienteDTO> toDTOs(List<Cliente> clientes) {
-        return clientes.stream().map(this::toDTO).collect(Collectors.toList());
+    private List<ClienteDTO> toDTOsNoEncomenda(List<Cliente> clientes) {
+        return clientes.stream().map(this::toDTONoEncomenda).collect(Collectors.toList());
     }
 
     @GET
     @Path("/")
     public List<ClienteDTO> getAllClientes() {
-        return toDTOs(clienteBean.getAll());
+        return toDTOsNoEncomenda(clienteBean.getAll());
     }
 
     @POST
@@ -62,8 +90,8 @@ public class ClienteService {
 
     @GET
     @Path("{username}")
-    public Response getClienteDetails(@PathParam("username") String username) {
-        Cliente cliente = clienteBean.find(username);
+    public Response getClienteDetails(@PathParam("username") String username) throws MyEntityNotFoundException {
+        Cliente cliente = clienteBean.getClienteWithDetails(username);
         if (cliente != null) {
             return Response.ok(toDTO(cliente)).build();
         }
@@ -91,7 +119,7 @@ public class ClienteService {
         if (cliente == null) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
-        clienteBean.update(username, clienteDTO.getPassword(), clienteDTO.getName(), clienteDTO.getEmail());
+        clienteBean.update(username,clienteDTO.getName(), clienteDTO.getEmail());
         return Response.ok().build();
     }
 }

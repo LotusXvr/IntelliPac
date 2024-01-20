@@ -1,6 +1,8 @@
 package pt.ipleiria.estg.dei.ei.dae.backend.dtos;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class OperadorDeLogisticaDTO implements Serializable {
     private String username;
@@ -8,7 +10,10 @@ public class OperadorDeLogisticaDTO implements Serializable {
     private String name;
     private String email;
 
+    private List<EncomendaDTO> encomendas;
+
     public OperadorDeLogisticaDTO() {
+        this.encomendas = new ArrayList<>();
     }
 
     public OperadorDeLogisticaDTO(String username, String password, String name, String email) {
@@ -16,6 +21,7 @@ public class OperadorDeLogisticaDTO implements Serializable {
         this.password = password;
         this.name = name;
         this.email = email;
+        this.encomendas = new ArrayList<>();
     }
 
     public String getUsername() {
@@ -48,5 +54,13 @@ public class OperadorDeLogisticaDTO implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public List<EncomendaDTO> getEncomendas() {
+        return encomendas;
+    }
+
+    public void setEncomendas(List<EncomendaDTO> encomendas) {
+        this.encomendas = encomendas;
     }
 }
