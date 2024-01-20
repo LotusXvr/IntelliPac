@@ -58,6 +58,9 @@ public class EmbalagemDeTransporteBean {
         if (embalagemDeTransporte == null) {
             throw new MyEntityNotFoundException("Embalagem de transporte com id " + id + " não existe");
         }
+        if(embalagemDeTransporte.getEncomendas().size() != 0){
+            throw new MyEntityNotFoundException("Embalagem de transporte com o username " + id + " não pode ser eliminado pois tem encomendas");
+        }
         entityManager.remove(embalagemDeTransporte);
     }
 

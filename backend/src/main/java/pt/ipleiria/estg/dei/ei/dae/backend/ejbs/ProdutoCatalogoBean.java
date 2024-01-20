@@ -125,6 +125,9 @@ public class ProdutoCatalogoBean {
         if (produtoCatalogo == null) {
             throw new MyEntityNotFoundException("Produto catálogo com id " + id + " não existe");
         }
+        if (produtoCatalogo.getProdutos().size() != 0){
+            throw new MyEntityNotFoundException("Produto catalogo não pode ser eliminado pois existem produtos fisicos associados");
+        }
         entityManager.remove(produtoCatalogo);
     }
 

@@ -65,6 +65,9 @@ public class ClienteBean {
                     "Cliente with username '" + username + "' not found"
             );
         }
+        if(cliente.getEncomendas().size() != 0){
+            throw new MyEntityNotFoundException("Cliente com o username " + username + " não pode ser eliminado pois tem encomendas");
+        }
         entityManager.remove(cliente);
     }
 

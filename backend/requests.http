@@ -192,8 +192,10 @@ Content-Type: application/json
 }
 
 ### DELETE SENSORES
-DELETE http://localhost:8080/intellipac/api/sensores/8
+DELETE http://localhost:8080/intellipac/api/sensores/6
 Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJBcHBsZSIsImlhdCI6MTcwNTc3MzE0NSwiZXhwIjoxNzA1Nzc2NzQ1fQ.ZKWntVvrcmwLlyNQfJX6mWgFAxzOFuNt09Zg1V1L-h46_FLb7muuJgNZq4JcFmae
+
 
 ### UPDATE SENSORES
 PUT http://localhost:8080/intellipac/api/sensores/1

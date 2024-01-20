@@ -80,17 +80,20 @@ public class SensorBean {
         entityManager.merge(sensor);
     }
 
-    public void remove(long id) {
-        try {
+    public void remove(long id) throws Exception {
 
             Sensor sensor = entityManager.find(Sensor.class, id);
             if (sensor == null) {
-                throw new IllegalArgumentException("Sensor with id " + id + " not found.");
+                throw new Exception("Sensor with id " + id + " not found.");
+            }
+            if (sensor.getObservacoes().size() != 0){
+                throw new Exception("Sensor nao pode ser eliminado pois tem observações");
+            }
+            if (sensor.getEmbalagens().size() != 0){
+                throw new Exception("Sensor nao pode ser eliminado pois tem embalagens com esse sensor");
             }
             entityManager.remove(sensor);
-        } catch (Exception e) {
-            System.out.println("O sensor já se encontra associado a uma embalagem");
-        }
+
     }
 
 

@@ -61,6 +61,9 @@ public class OperadorDeLogisticaBean {
                     "Operador de Logística with username '" + username + "' not found"
             );
         }
+        if (operadorDeLogistica.getEncomendas().size() > 0) {
+            throw new MyEntityNotFoundException("Nao pode eliminar operador pois este tem encomendas");
+        }
         entityManager.remove(operadorDeLogistica);
 
     }
