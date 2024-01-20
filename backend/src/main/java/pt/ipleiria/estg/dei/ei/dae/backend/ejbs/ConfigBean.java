@@ -236,11 +236,11 @@ public class ConfigBean {
             produtoFisicoBean.create(produtoCatalogoIphone.getId(), encomenda1.getId());
 
             TipoEmbalagemProduto tipoEmbalagemCaixaCereais = tipoEmbalagemProdutoBean.create(1, "Caixa de Cereais", 25, 25, 25);
-            tipoEmbalagemProdutoBean.addTipoSensor(tipoEmbalagemCaixaCereais.getId(),tipoSensorCereaisHumidade.getId());
-            tipoEmbalagemProdutoBean.addTipoSensor(tipoEmbalagemCaixaCereais.getId(),tipoSensorCereaisTemperatura.getId());
+            tipoEmbalagemProdutoBean.addTipoSensor(tipoEmbalagemCaixaCereais.getId(), tipoSensorCereaisHumidade.getId());
+            tipoEmbalagemProdutoBean.addTipoSensor(tipoEmbalagemCaixaCereais.getId(), tipoSensorCereaisTemperatura.getId());
             tipoEmbalagemProdutoBean.addTipoSensor(tipoEmbalagem.getId(), testeSensor.getId());
-            produtoCatalogoBean.addTipoEmbalagem(tipoEmbalagemCaixaCereais.getId(),produtoCatalogoCereais.getId());
-            produtoCatalogoBean.addTipoEmbalagem(tipoEmbalagem.getId(),produtoCatalogoCereais.getId());
+            produtoCatalogoBean.addTipoEmbalagem(tipoEmbalagemCaixaCereais.getId(), produtoCatalogoCereais.getId());
+            produtoCatalogoBean.addTipoEmbalagem(tipoEmbalagem.getId(), produtoCatalogoCereais.getId());
 
             EncomendaDTO encomendaDTOCereais = new EncomendaDTO();
             encomendaDTOCereais.setConsumidorFinal("Emanuel");
@@ -250,7 +250,6 @@ public class ConfigBean {
 
             // Observacoes
             observacaoBean.create("20", 1L);
-            observacaoBean.create("90", 2L);
 
         } catch (Exception e) {
             logger.severe(e.getMessage());
