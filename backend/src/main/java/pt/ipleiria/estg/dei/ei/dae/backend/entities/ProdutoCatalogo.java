@@ -23,7 +23,7 @@ public class ProdutoCatalogo extends Produto implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @OneToMany(mappedBy = "produtoCatalogo")
+    @OneToMany(mappedBy = "produtoCatalogo", fetch = FetchType.LAZY)
     private List<ProdutoFisico> produtos;
     @ManyToMany
     @JoinTable(

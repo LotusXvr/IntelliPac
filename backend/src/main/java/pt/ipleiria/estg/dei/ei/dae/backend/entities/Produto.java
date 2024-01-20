@@ -7,7 +7,7 @@ import jakarta.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @Entity
-public class Produto implements Serializable {
+public class Produto extends Versionable implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

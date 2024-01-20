@@ -4,6 +4,7 @@ package pt.ipleiria.estg.dei.ei.dae.backend.ejbs;
 import jakarta.ejb.EJB;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.LockModeType;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
 import jakarta.validation.ConstraintViolationException;
@@ -92,6 +93,8 @@ public class ProdutoCatalogoBean {
             if (fabricante == null) {
                 throw new MyEntityNotFoundException("Fabricante com id " + produtoCatalogoDTO.getFabricanteUsername() + " não existe");
             }
+
+            entityManager.lock(produtoCatalogo, LockModeType.OPTIMISTIC);
 
             produtoCatalogo.setNomeProduto(produtoCatalogoDTO.getNome());
             produtoCatalogo.setFabricante(fabricante);

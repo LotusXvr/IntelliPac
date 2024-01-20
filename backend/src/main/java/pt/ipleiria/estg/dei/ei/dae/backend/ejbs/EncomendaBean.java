@@ -4,6 +4,7 @@ package pt.ipleiria.estg.dei.ei.dae.backend.ejbs;
 import jakarta.ejb.EJB;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.LockModeType;
 import jakarta.persistence.PersistenceContext;
 import jakarta.validation.ConstraintViolationException;
 import org.hibernate.Hibernate;
@@ -295,10 +296,10 @@ public class EncomendaBean {
             }
 
         }
+        entityManager.lock(encomenda, LockModeType.OPTIMISTIC);
         encomenda.setEstado(estado);
         entityManager.merge(encomenda);
     }
-
 
     public boolean estadoValido(String estado) {
         if (estado == null) {
@@ -336,6 +337,8 @@ public class EncomendaBean {
             encomenda.addEmbalagemTransporte(embalagem);
             embalagem.addEncomenda(encomenda);
         }
+
+        entityManager.lock(encomenda, LockModeType.OPTIMISTIC);
 
         encomenda.setEstado("PROCESSAMENTO");
         entityManager.merge(encomenda);

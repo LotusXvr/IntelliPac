@@ -22,7 +22,7 @@ import java.util.Objects;
                 query = "SELECT e FROM Encomenda e WHERE e.estado = :estado"
         )
 })
-public class Encomenda {
+public class Encomenda extends Versionable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -44,6 +44,7 @@ public class Encomenda {
     )
     private List<EmbalagemDeTransporte> embalagensTransporte;
 
+    // orphanRemoval = true -> se removermos um produto de uma encomenda, o produto é removido da base de dados
     @OneToMany(mappedBy = "encomenda", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ProdutoFisico> produtos;
 

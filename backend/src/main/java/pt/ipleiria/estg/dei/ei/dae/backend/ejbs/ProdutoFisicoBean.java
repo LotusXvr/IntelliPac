@@ -3,6 +3,7 @@ package pt.ipleiria.estg.dei.ei.dae.backend.ejbs;
 import jakarta.ejb.EJB;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.LockModeType;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
 import jakarta.validation.ConstraintViolationException;
@@ -119,6 +120,8 @@ public class ProdutoFisicoBean {
         if (produtoCatalogo == null) {
             throw new MyEntityNotFoundException("Produto catálogo com id " + produtoCatalogo.getId() + " não existe");
         }
+
+        entityManager.lock(produtoFisico, LockModeType.OPTIMISTIC);
 
         produtoFisico.setProdutoCatalogo(produtoCatalogo);
         produtoFisico.setNomeProduto(nomeProduto);
