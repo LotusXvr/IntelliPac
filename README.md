@@ -1,2 +1,2 @@
 # IntelliPac
- Projeto de DAE 😙🤙🏽
+ Projeto de Desenvolvimento de Aplicações distribuídas
